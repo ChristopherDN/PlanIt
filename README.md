@@ -39,6 +39,48 @@ To use PlanIt, follow these steps:
 Fill in the provided URL in your browser.
 ```
 
+
+## How to host this project on your own Heruko account 
+
+If you are allready setup with GitHub and Heruko accounts skip this first section and and jump to "Host to Heruko Guide".
+
+* You need to have your own Github Account
+--> If you dont have an account sign up for free by following in this link: https://www.wikihow.com/Create-an-Account-on-GitHub
+* You need to have your own Heruko account.
+--> If you dont have an account sign up for free by following this link: https://signup.heroku.com
+* You need to clone this git repository named PlanIt and insert into a new repository on your own Github account.
+--> If you havent done that before follow this guide.https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository
+
+
+Host to Heruko guide: 
+
+1. Sign into Heruko and your Dashboard should look like this ( I allready have six apps, so just ignore that:-D ).
+<img width="1430" alt="Heruko guide 1  step" src="https://user-images.githubusercontent.com/82437282/143500437-d3216145-eba3-4639-883a-05fbceba55f7.png">
+
+2. Choose " New " then --> " create new app " in the upper right corner.
+<img width="1428" alt="Heruko guide 2  step" src="https://user-images.githubusercontent.com/82437282/143500731-9d9835b7-fff7-457f-8cb0-f69848eb2b97.png">
+
+3. Provide a name for your app and your location and press " create app".
+<img width="1438" alt="Heruko guide 3  step" src="https://user-images.githubusercontent.com/82437282/143500898-4cdafb53-fdcf-4464-a9b4-35deb567fb0d.png">
+
+
+4. You created your app and you should get this picture. Press " connect to Github "
+<img width="1431" alt="Heruko guide 4  step" src="https://user-images.githubusercontent.com/82437282/143501095-478e0caa-4aa6-4b3b-b414-6b957b218477.png">
+
+5. Search for the Github repository you want to host ( Must be correct spelled ) and press " connect " and you will get this picture.
+<img width="1429" alt="Heruko guide 5  step" src="https://user-images.githubusercontent.com/82437282/143503076-52429ebc-06e9-4964-968a-564fc65610a3.png">
+
+6. Make sure to choose the " main " branch ( sometimes called master ) and press "deploy branch ". Heruko will do some behind the scenes stuff and build your website:
+<img width="1435" alt="Heruko guide 7  step" src="https://user-images.githubusercontent.com/82437282/143502001-456eb8f8-be79-41fe-ad98-a16048259591.png">
+
+7. Press the " view button " 
+<img width="1433" alt="Heruko guide 8  step" src="https://user-images.githubusercontent.com/82437282/143502342-735e307f-fbd2-411f-a809-98d6efaa0b30.png">
+
+Voila Your project are succesfully hosted and Heruko will display in your browser and you will get an URL that looks something like this: 
+https://herukotestguide.herokuapp.com
+
+
+
 ## Contributing to PlanIt
 
 <!--- If your README is long or you have some specific process or steps you want contributors to follow, consider creating a separate CONTRIBUTING.md file--->
