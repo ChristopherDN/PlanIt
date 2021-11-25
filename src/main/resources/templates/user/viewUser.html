@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!-- @author Kasper -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="main_style.css"/>
+    <title>Employee Profile</title>
+</head>
+<th:block th:include="/includes/header :: header"></th:block>
+<body>
+<div id="container" style="text-align: left">
+    <div id="bio-left" style="float: left">
+        <a class="back-button" href="/listUser">&#11013;</a>
+        <h1 style="font-size: 50px"><span th:text="${user.first_name}"></span>&nbsp;&nbsp;<span th:text="${user.last_name}"></span></h1>
+        <hr class="rounded">
+        <p>
+            Email: <span th:text="${user.e_mail}"></span>
+
+        <form action="/updateUserRole" th:if="${session.user.getIs_admin() == 1}" method="POST">
+            <input th:if="${user.getIs_admin() == 0}" type="checkbox" name="is_admin" value="1">
+            <input th:if="${user.getIs_admin() == 1}" type="checkbox" checked="checked" name="is_admin" value="1">
+            <label>Admin</label>
+            <input type="hidden" name="user_id" th:value="${user.user_id}">
+        <div>
+            <button type="submit" class="submit-button">Update Role</button>
+        </div>
+        </form>
+        <p>
+        <form action="/resetUserPassword" method="POST" th:if="${session.user.getIs_admin() == 1}">
+            <input type="hidden" name="user_id" th:value="${user.user_id}">
+        <div>
+            <button type="submit" class="submit-button">Reset Password</button>
+        </div>
+        </form>
+    </div>
+    <div id="bio-right" style="float: right">
+        <a th:if="${session.user.getIs_admin() == 1}" th:href="@{/deleteUser?id={id}(id=${user.user_id})}">Delete User</a>
+        <br>
+        <img class="pb" th:src="*{'data:image/jpeg;base64,' + user.byteArrayAs64String()}">
+    </div>
+    <table class="list-table">
+        <thead>
+        <tr>
+            <th>Projects</th>
+            <th>Kick Off</th>
+            <th>Deadline</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="project : ${projects}">
+            <td th:text="${project.project_name}"></td>
+            <td th:text="${project.kickoff}"></td>
+            <td th:text="${project.deadline}"></td>
+            <td><a th:href="@{/viewProject?id={id}(id=${project.project_id})}">View Project</a></td>
+        </tr>
+        <tr>
+            <td colspan="4">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<th:block th:include="/includes/footer :: footer"></th:block>
+</html>
