@@ -13,17 +13,6 @@ public class User {
     this.password = password;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-
-
-
   @Override
   public String toString() {
     return name + " Email: " + email + "Password: " + password;

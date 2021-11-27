@@ -1,8 +1,9 @@
 package now.planit.Data.Repo;
 
 
-import now.PlanIt.Data.Utility.DBManager;
-import now.PlanIt.Domain.Models.Project;
+
+import now.planit.Data.Utility.DBManager;
+import now.planit.Domain.Models.Project;
 import org.springframework.stereotype.Controller;
 
 import java.sql.Connection;
@@ -44,7 +45,7 @@ public class RepoProject{
     }
     return rs;
   }
-
+/*
   public ArrayList<Project> resultsetToArray(ResultSet rs) {
     try {
       products.clear();
@@ -56,7 +57,7 @@ public class RepoProject{
     }
     return products;
   }
-
+*/
   public int rsToId(ResultSet rs){
     try {
       userid = 0;

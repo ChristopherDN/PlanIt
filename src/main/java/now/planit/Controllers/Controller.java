@@ -1,8 +1,7 @@
 package now.planit.Controllers;
 
-
-import now.PlanIt.Domain.Models.User;
-import now.PlanIt.Domain.Services.UserService;
+import now.planit.Domain.Models.User;
+import now.planit.Domain.Services.UserService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,9 +43,9 @@ public class Controller {
 
   @PostMapping("/frontpage")
   public String validateLogin(WebRequest request, HttpSession session, Model model) {
-    user = userService.validateLogin(
-        request.getParameter("user"),
-        request.getParameter("password"));
+    //user = userService.validateLogin(
+        //request.getParameter("user"),
+        //request.getParameter("password"));
 
     //Set Session to user, validate user is not null.
     if (session.getAttribute("user") == null) {

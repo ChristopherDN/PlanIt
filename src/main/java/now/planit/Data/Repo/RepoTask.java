@@ -1,9 +1,8 @@
 package now.planit.Data.Repo;
 
 
-import now.PlanIt.Data.Utility.DBManager;
-import now.PlanIt.Domain.Models.Task;
-import now.PlanIt.Domain.Models.User;
+import now.planit.Data.Utility.DBManager;
+import now.planit.Domain.Models.Task;
 import org.springframework.stereotype.Controller;
 
 import java.sql.Connection;
@@ -45,7 +44,7 @@ public class RepoTask {
     return rs;
   }
 
-  public ArrayList<Task> rsToArray(ResultSet rs) {
+  /*public ArrayList<Task> rsToArray(ResultSet rs) {
     try {
       tasks.clear();
       while (rs.next()) {
@@ -56,7 +55,7 @@ public class RepoTask {
     }
     return tasks;
   }
-
+*/
 
   public int rsToId(ResultSet rs){
     try {
@@ -71,7 +70,7 @@ public class RepoTask {
   }
 
 
-  public void createWishlist(User user, String event) {
+  /*public void createWishlist(User user, String event) {
     userid = rsToId(load("select id from wishlist.users where name = '" + user.getName() + "'"));
     query("insert into wishlist.wishlist(event, userid) values('"+ event + "' , '" + userid + "')");
   }
@@ -87,7 +86,7 @@ public class RepoTask {
   public int setGetWishlist(User user, String event) {
     userid = rsToId(load("select id from wishlist.users where name = '" + user.getName() + "'"));
     return rsToId(load("select id from wishlist.wishlist where userid =" + userid +  " and event ='" + event + "'"));
-  }
+  }*/
 }
 
 

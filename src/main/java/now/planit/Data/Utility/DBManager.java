@@ -12,9 +12,13 @@ public class DBManager {
 
     public static Connection getConnection(){
         if (connection != null) return connection;
+        url = "jdbc:mysql://localhost:3306";
+        user = "Roed";
+        password = "Fvx7m47bvf4gepx";
+        /*
             url = System.getenv("url");//properties.getProperty("url");
             user = System.getenv("user");//properties.getProperty("user");
-            password = System.getenv("password");//properties.getProperty("password");
+            password = System.getenv("password");//properties.getProperty("password");*/
         try {
             connection = DriverManager.getConnection(url,user, password);
         } catch (SQLException e) {
