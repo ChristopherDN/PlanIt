@@ -1,55 +1,18 @@
 <!DOCTYPE html>
-<!-- @author Adam -->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="main_style.css"/>
-    <script src="popups.js"></script>
-    <title>Create Project</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="javascript.js"></script>
+    <title>Index</title>
 </head>
 <th:block th:include="/htmlFragment/header :: header"></th:block>
+<Body>
 
-<!-- date context exception -->
-<td th:if="${DateContextException}">
-    <script th:inline="javascript">
-        submit_alert([[${DateContextException}]]);
-    </script>
-</td>
-<!-- date context exception -->
-
-<body>
-<div id="container">
-    <div id="bio-left" style="float: left">
-        <a class="back-button" href="/listProject">&#11013;</a>
-    </div>
-    <div id="input-form">
-        <form action="/createProject" method="POST">
-            <p>Project Name
-            <p><input type="text" name="pName" class="form-control" required>
-            <p><select class="form-control" name="cId" required>
-                <option value="">Select Customer</option>
-                <option th:each="customer : ${customers}"
-                        th:value="${customer.customer_id}"
-                        th:text="${customer.name}"></option>
-            </select>
-            <p><select class="form-control" name="pLId" required>
-                <option value="">Select Project Manager</option>
-                <option th:each="user : ${users}"
-                        th:value="${user.user_id}"
-                        th:text="${user.first_name}+' '+ ${user.last_name}+' '+${user.e_mail}"></option>
-            </select>
-            <p>Kick-off
-            <p><input type="date" class="form-control" name="kickOff" required>
-            <p>Deadline
-            <p><input type="date" class="form-control" name="deadline" required>
-            <div class="button">
-                <input type="Submit" class="submit-button" value="  Create!  ">
-            </div>
-            <br>
-            <br>
-        </form>
-    </div>
-</div>
 </body>
-<th:block th:include="/htmlFragment/footer :: footer"></th:block>
+
+</div>
+<div id="footer">
+    <th:block th:include="/htmlFragment/footer :: footer"></th:block>
+</div>
 </html>

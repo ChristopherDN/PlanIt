@@ -6,10 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-
 import javax.servlet.http.HttpSession;
 
 @org.springframework.stereotype.Controller
+
+
 public class Controller {
   UserService userService = new UserService();
   User user;
@@ -32,7 +33,7 @@ public class Controller {
     return "createUser";
   }
 
-  //@PostMapping("/register")
+  @PostMapping("/register")
   public String register(WebRequest request) {
     userService.registerUser(
         request.getParameter("name"),
@@ -40,6 +41,7 @@ public class Controller {
         request.getParameter("password"));
     return "login";
   }
+
 
   @PostMapping("/frontpage")
   public String validateLogin(WebRequest request, HttpSession session, Model model) {
@@ -66,11 +68,6 @@ public class Controller {
   }
   //these are just endpoints ready to be used
 
-  @GetMapping("/contact")
-  public String contact() {
-    return "contact";
-  }
-
 
   @GetMapping("/about")
   public String about() {
@@ -79,9 +76,14 @@ public class Controller {
 
 
 
-@GetMapping("/register")
-public String register() {
+  @GetMapping("/register")
+  public String register() {
   return "register/register";
 }
+
+
+
+
+
 
 }
