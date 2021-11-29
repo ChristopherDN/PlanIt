@@ -45,11 +45,11 @@ public class Controller {
 
   @PostMapping("/frontpage")
   public String validateLogin(WebRequest request, HttpSession session, Model model) {
-    //user = userService.validateLogin(
-        //request.getParameter("user"),
-        //request.getParameter("password"));
+    user = userService.validateLogin(
+        request.getParameter("user"),
+        request.getParameter("password"));
 
-    //Set Session to user, validate user is not null.
+      //Set Session to user, validate user is not null.
     if (session.getAttribute("user") == null) {
       if (user != null) {
         model.addAttribute("user", user);

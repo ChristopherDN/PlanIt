@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- @author Adam -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="main_style.css"/>
+    <title>Create Task</title>
+</head>
+<th:block th:include="/includes/header :: header"></th:block>
+<body>
+<div id="container">
+    <div id="bio-left" style="float: left">
+        <a class="back-button" th:href="@{/viewProject?id={id}(id=${project.project_id})}">&#11013;</a>
+    </div>
+    <div id="input-form">
+        <form th:action="@{/createTaskPost?id={id}(id=${project.project_id})}" method="POST">
+            <p>Task Name
+            <p><input type="text" class="form-control" name="taskName" required>
+            <p>Description
+            <p><input type="text" class="form-control" name="taskDesc" required>
+            <p>Task Manager
+            <p><select class="form-control" name="taskLeader">
+                <option th:value="${null}">Select Task Manager</option>
+                <option th:each="participant : ${participants}"
+                        th:value="${participant.user_id}"
+                        th:text="${participant.first_name}+' '+ ${participant.last_name}+' '+${participant.e_mail}"></option>
+            </select>
+            <p>Kick-off
+            <p><input type="date" class="form-control" name="kickoff" required>
+            <p>Deadline
+            <p><input type="date" class="form-control" name="deadline" required>
+                            <div class="button">
+                <input type="Submit" class="submit-button" value="  Create!  ">
+            </div>
+            <br>
+            <br>
+        </form>
+    </div>
+</div>
+</body>
+<th:block th:include="/includes/footer :: footer"></th:block>
+</html>

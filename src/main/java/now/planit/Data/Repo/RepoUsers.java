@@ -18,9 +18,7 @@ public class RepoUsers {
   ResultSet rs;
   User user;
   String sql;
-  ArrayList<String> statements = new ArrayList<>();
-
-
+  ArrayList<String> statements = new ArrayList<>(); // AddParam ikke Statements
 
 
   public void query(String sqlCommand) {
@@ -47,7 +45,7 @@ public class RepoUsers {
     return rs;
   }
 
-  public User rsToUser(ResultSet rs) {
+  public User getUser(ResultSet rs) {
     try {
       user = null;
       while (rs.next()) {
@@ -59,19 +57,13 @@ public class RepoUsers {
     return user;
   }
 
-  public User validateLogin(String n, String p) {
-    return rsToUser(load("SELECT name, email, password FROM wishlist.users WHERE name = '" + n + "' AND password = '" + p + "'"));
-  }
-
-  public void newQuery(String sqlCommand, ArrayList<String> list){
+  public void newQuery(String sqlCommand, ArrayList<String> list) {
     try {
       connection = DBManager.getConnection();
-      PreparedStatement ps = connection.prepareStatement(sqlCommand);
-      System.out.println(sqlCommand);
+      ps = connection.prepareStatement(sqlCommand);
+      ps.clearParameters();
       for (int i = 0; i < list.size(); i++) {
-        System.out.println(i+1);
-        ps.setString(i+1, list.get(i));
-        System.out.println(list.get(i));
+        ps.setString(i + 1, list.get(i));
       }
       ps.execute();
     } catch (SQLException e) {
@@ -79,25 +71,35 @@ public class RepoUsers {
     }
   }
 
-  public void newLoad(String sqlCommand, ArrayList<String> list){
+  public ResultSet newLoad(String sqlCommand, ArrayList<String> list) {
     try {
       Connection connection = DBManager.getConnection();
-      PreparedStatement ps = connection.prepareStatement(sqlCommand);
+      ps = connection.prepareStatement(sqlCommand);
+      //ps.clearParameters();
       for (int i = 0; i < list.size(); i++) {
-        ps.setString(i+1, list.get(i));
+        ps.setString(i + 1, list.get(i));
       }
-      rs = ps.executeQuery(sqlCommand);
+      rs = ps.executeQuery();
     } catch (SQLException e) {
       e.printStackTrace();
     }
+    return rs;
   }
 
   public void registerUser(String name, String email, String password) {
-    String sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
+    sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     statements.clear();
     statements.add(name);
     statements.add(email);
     statements.add(password);
     newQuery(sql, statements);
+  }
+
+  public User validateLogin(String email, String password) {
+    sql = "SELECT username, email, password FROM PlanIt.Users WHERE email = ? AND password = ?";
+    statements.clear();
+    statements.add(email);
+    statements.add(password);
+    return getUser(newLoad(sql, statements));
   }
 }
