@@ -93,7 +93,7 @@ public class RepoUsers {
   }
 
   public void registerUser(String name, String email, String password) {
-    String sql = "insert into management.Users(username, email, password) values(?,?,?)";
+    String sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     statements.clear();
     statements.add(name);
     statements.add(email);
