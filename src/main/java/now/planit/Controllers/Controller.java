@@ -27,9 +27,9 @@ public class Controller {
     return "login/login";
   }
 
-  @GetMapping("/createUser")
+  @GetMapping("/registeruser")
   public String createUser() {
-    return "createUser";
+    return "register/register";
   }
 
   //@PostMapping("/register")
