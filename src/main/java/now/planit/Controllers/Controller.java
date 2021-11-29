@@ -32,7 +32,7 @@ public class Controller {
     return "createUser";
   }
 
-  @PostMapping("/register")
+  //@PostMapping("/register")
   public String register(WebRequest request) {
     userService.registerUser(
         request.getParameter("name"),
@@ -70,7 +70,11 @@ public class Controller {
   public String contact() {
     return "contact";
   }
+
+
+@GetMapping("/register")
+public String register() {
+  return "register";
 }
 
-
-
+}
