@@ -2,14 +2,17 @@
 
 <!--- These are examples. See https://shields.io for others or to customize this set of shields. You might want to include dependencies, project status and licence info here --->
 
+
 The project name are PlanIt. It is a web application, that enables users to do project calculation. The user will be able to create a user profile and then login. Once logged in the user can create his own project, add a timeline for the project and create task and subtasks to fullfill the project. The application will then perform calculations to provide the user with information about the estimated time and price for the project. The core is to give the user an overview on the created project and present it by using an Interface. 
 
-Our application are mainly build in Java with the Spring Framework, Maven and connected to a Database. It is currently uploaded to Github, hosted on Heruko and uses a AWS Database. 
+Our application are mainly build in Java with the Spring Framework, Maven and connected to a Database. It is currently uploaded to Github, hosted on Heruko and uses a AWS Database ( Heroku is a platform as a service (PaaS), that enables developers to build, run, and operate applications entirely in the cloud.
+Guide for cloning this project and hosting your own version on Heruko is provided in the end of this README file ).
 
 The application can be accessed directly from a web browser by providing the correct URL.
 
-Heroku is a platform as a service (PaaS), that enables developers to build, run, and operate applications entirely in the cloud.
-Guide for cloning this project and hosting your own version on Heruko is provided in the end of this README file.
+Note: If you are a developer and knows how to handle SQL scripts, this application comes with two prepared SQL script, a DDL and DML. Please read " ##developer installing " below for instructions on how to run the scripts, set up the database structure and the testdata for your own local developer enviroment.
+
+
 
 ## Prerequisites
 
@@ -21,6 +24,11 @@ Before you begin running this program, ensure you have meet these basic requirem
 * You are connection to the Internet and have a browser installed.
 * You have read this README file.
 
+Developer install ekstra prerequisites:
+* You have version control installed ( GIT ).
+* You Have en Editor installed like IntelliJ or Eclipse.
+
+
 ## Installing
 
 To install PlanIt, follow these steps:
@@ -31,12 +39,30 @@ Linux, windows and macOS:
 No installation requirements, but must meet the prerequisites as listed above. 
 ```
 
+## Developer Installing
+
+To install PlanIt with autocreating the database and testdata using SQL scripts, follow these steps:
+
+1. Clone this Github repository to your local computer.
+2. Open the project in your prefered editor ( this guide is with IntelliJ ).
+3. Connect your local database opening the " application properties " and fill in the required informations:
+etc: 
+url=jdbc:mysql://localhost:3306/PlanIt?serverTimezone=UTC 
+user=<Yourname>
+password=<Yourpassword>
+server.port=8080 ( optional, because default port is 8080 )
+4. Run the DDL and DML script. ( The DDL script will create your database, schema, constraints, users, tables etc.. The DML script will create the testdata like  inserting, update or delete records ). Your can run the script in your MYSQL workbench by opening the script, and press the " execute all " button. You can also run the script in your editor like IntelliJ in your query console.
+5. Once the script has created the database with testdata you can run the Spring application in your editor and then fill in this adress http://localhost:8080 in your browser to run the web application with your own local Database.
+6. Enjoy!
+
+  
 ## Using
 
 To use PlanIt, follow these steps:
 
 ```
 Fill in the provided URL in your browser.
+
 ```
 
 
