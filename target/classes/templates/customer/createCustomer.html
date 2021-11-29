@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="main_style.css"/>
+    <title>Create Customer</title>
+</head>
+<th:block th:include="/includes/header :: header"></th:block>
+<body>
+<div id="container">
+    <div id="bio-left" style="float: left">
+        <a class="back-button" href="/listCustomer">&#11013;</a>
+    </div>
+    <div id="input-form">
+        <form action="/createCustomer" method="POST">
+            <h3>Welcome to creation of new customer!</h3>
+            <p>Please proceed to fill in the customer information...</p>
+            <br>
+            Customer Name
+            <p><input type="text" class="form-control" name="comName" placeholder="Company name" required>
+            <p>Customer Contact
+            <p><input type="text" class="form-control" name="conName" placeholder="Name" required>
+            <p><input type="email" class="form-control" name="conEmail" placeholder="E-mail" required>
+            <p><input type="tel" class="form-control" name="tel" placeholder="Phone number" required>
+            <div class="button">
+                <input type="Submit" class="submit-button" value="  Create!  ">
+            </div>
+            <p>
+        </form>
+    </div>
+</div>
+</body>
+<th:block th:include="/includes/footer :: footer"></th:block>
+</html>

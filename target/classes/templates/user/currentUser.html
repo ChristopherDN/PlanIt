@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- @author Kasper -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="main_style.css"/>
+    <title>My Profile</title>
+</head>
+<th:block th:include="/includes/header :: header"></th:block>
+<body>
+<div id="container" style="text-align: left">
+    <div id="bio-left" style="float: left">
+        <h1 style="font-size: 50px"><span th:text="${session.user.first_name}"></span>&nbsp;<span
+                th:text="${session.user.last_name}"></span></h1>
+        <hr class="rounded">
+        Email: <span th:text="${session.user.e_mail}"></span>
+        <p>
+    </div>
+    <div id="bio-right" style="float: right">
+        <a style="text-align: right" th:href="@{/editUser?id={id}(id=${session.user.user_id})}">Edit My Info</a>
+        <br>
+        <img class="pb" th:src="*{'data:image/jpeg;base64,' + session.user.byteArrayAs64String()}">
+        <br>
+    </div>
+    <table class="list-table">
+        <thead>
+        <tr>
+            <th>Projects</th>
+            <th>Kick Off</th>
+            <th>Deadline</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="project : ${userProjectList}">
+            <td th:text="${project.project_name}"></td>
+            <td th:text="${project.kickoff}"></td>
+            <td th:text="${project.deadline}"></td>
+            <td><a th:href="@{/viewProject?id={id}(id=${project.project_id})}">View Project</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<th:block th:include="/includes/footer :: footer"></th:block>
+</html>

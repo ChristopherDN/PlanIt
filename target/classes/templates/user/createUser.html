@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- @author Adam and Rasmus-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="main_style.css"/>
+    <title>Create User</title>
+</head>
+<th:block th:include="/includes/headerNotLoggedIn :: header"></th:block>
+<body>
+<div id="container">
+    <div id="bio-left" style="float: left">
+        <a class="back-button" href="/">⬅</a>
+    </div>
+    <div id="input-form">
+        <form action="/createUser" method="POST">
+            <h3>Welcome to creation of your account!</h3>
+            <p>Please proceed to fill in your information...</p>
+            <br>
+            Email
+            <p><input type="email" class="form-control" name="email" required>
+            <p>Password
+            <p><input type="password" class="form-control" name="password" required>
+            <p>Fornavn
+            <p><input type="text" class="form-control" name="firstName" required>
+            <p>Efternavn
+            <p><input type="text" class="form-control" name="lastName" required>
+            <div class="button">
+                <input type="Submit" class="submit-button" value="  Create!  ">
+            </div>
+            <p>
+        </form>
+        <a href="/"><input type="Submit" class="submit-button" value="  Back to login  "></a>
+    </div>
+</div>
+</body>
+<th:block th:include="/includes/footer :: footer"></th:block>
+</html>
