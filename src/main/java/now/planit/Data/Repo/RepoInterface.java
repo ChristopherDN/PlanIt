@@ -1,11 +1,20 @@
 package now.planit.Data.Repo;
 
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public interface RepoInterface {
 
-    void query(String sql);
-    ResultSet load(String sql);
-    Object results(ResultSet resultSet);
+  PreparedStatement checkConnection(String SqlCommand);
+  PreparedStatement setString(ArrayList<String> parameters);
+  void query(String sqlCommand, ArrayList<String> parameters);
+  ResultSet load(String sqlCommand, ArrayList<String> parameters);
+
+
+  //usable??
+  void dbInput(String a, String b, String c, String d, String e);
+
+
 }
