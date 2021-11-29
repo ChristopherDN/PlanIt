@@ -6,20 +6,23 @@
     <script src="javascript.js"></script>
     <title>Login</title>
 </head>
-<th:block th:include="/htmlFragment/header :: header"></th:block>
+<th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
 <body>
 <div id="container">
     <div id="input-form">
-
         <form action="/login" method="POST">
-            <h2>Welcome to the Project Management Tool</h2>
+            <h2>Welcome to the PlanIt the project management tool</h2>
             <br>
-            <p> Email
-            <p><input type="email" class="form-control" name="mail" required>
-            <p> Password
-            <p><input type="password" class="form-control" name="password" required>
-            <p>
+            <label>Email: </label>
+            <br>
+            <input type="email" class="form-control" name="mail" required>
+            <br>
+            <label>Password: </label>
+            <br>
+            <input type="password" class="form-control" name="password" required>
+            <br>
             <div class="button">
+            <br>
                 <input type="Submit" class="submit-button" value="  Log in!  ">
             </div>
         </form>
@@ -29,8 +32,6 @@
                 <input type="Submit" class="submit-button" value="  Create new user  ">
             </a>
             <br>
-            <br>
-            <a href="/forgot"><input type="Submit" class="submit-button" value="  I forgot my password...  "></a>
     </div>
 </div>
 </body>
