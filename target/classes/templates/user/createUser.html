@@ -3,17 +3,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="main_style.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
     <title>Create User</title>
 </head>
-<th:block th:include="/includes/headerNotLoggedIn :: header"></th:block>
+<th:block th:include="/htmlFragment/headerNotLoggedIn :: header"></th:block>
 <body>
 <div id="container">
     <div id="bio-left" style="float: left">
         <a class="back-button" href="/">⬅</a>
     </div>
     <div id="input-form">
-        <form action="/createUser" method="POST">
+        <form action="/registeruser" method="POST">
             <h3>Welcome to creation of your account!</h3>
             <p>Please proceed to fill in your information...</p>
             <br>
@@ -34,5 +34,5 @@
     </div>
 </div>
 </body>
-<th:block th:include="/includes/footer :: footer"></th:block>
+<th:block th:include="/htmlFragment/footer :: footer"></th:block>
 </html>

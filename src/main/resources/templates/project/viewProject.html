@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="main_style.css"/>
     <title th:text="${project.project_name}"></title>
 </head>
-<th:block th:include="/includes/header :: header"></th:block>
+<th:block th:include="/htmlFragment/header :: header"></th:block>
 <body>
 <div id="container" style="text-align: left">
 
@@ -157,5 +157,5 @@
     </table>
 </div>
 </body>
-<th:block th:include="/includes/footer :: footer"></th:block>
+<th:block th:include="/htmlFragment/footer :: footer"></th:block>
 </html>
