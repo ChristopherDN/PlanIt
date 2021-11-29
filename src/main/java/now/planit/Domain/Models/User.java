@@ -2,9 +2,9 @@ package now.planit.Domain.Models;
 
 
 public class User {
-  private String name;
-  private String email;
-  private String password;
+  private final String name;
+  private final String email;
+  private final String password;
 
 
   public User(String name, String email, String password) {
