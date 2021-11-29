@@ -6,14 +6,14 @@
     <script src="javascript.js"></script>
     <title>Index</title>
 </head>
-<th:block th:include="/htmlStandard/header :: header"></th:block>
+<th:block th:include="/htmlFragment/header :: header"></th:block>
 
 <Body>
 <div id="container">
 <h1>Create user </h1>
 <p>Please fill out your info </p>
 <br>
-<form method="post" th:action="@{/register}">
+<form method="post" th:action="@{/templates/register}">
     <label>Name: </label>
     <br>
     <input type th:name="name">
@@ -37,7 +37,9 @@
 </body>
 
 </div>
-<th:block th:include="/htmlStandard/footer :: footer"></th:block>
+<div id="footer">
+<th:block th:include="/htmlFragment/footer :: footer"></th:block>
+</div>
 </html>
 <!-- <div id="container">
         <div id="bio-left" style="float: left">

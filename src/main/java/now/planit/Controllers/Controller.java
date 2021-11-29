@@ -24,7 +24,7 @@ public class Controller {
 
   @GetMapping("/login")
   public String login() {
-    return "login";
+    return "login/login";
   }
 
   @GetMapping("/createUser")
@@ -72,9 +72,16 @@ public class Controller {
   }
 
 
+  @GetMapping("/about")
+  public String about() {
+    return "info/about";
+  }
+
+
+
 @GetMapping("/register")
 public String register() {
-  return "register";
+  return "register/register";
 }
 
 }
