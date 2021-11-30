@@ -30,10 +30,8 @@ public class Controller {
     return "login/login";
   }
 
-  @GetMapping("/registeruser")
-  public String createUser() {
-    return "register/register";
-  }
+
+
 
 
   //these are just endpoints ready to be used
@@ -43,14 +41,5 @@ public class Controller {
   public String about() {
     return "info/about";
   }
-
-
-
-
-
-
-
-
-
 
 }

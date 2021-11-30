@@ -3,7 +3,6 @@ package now.planit.Data.Repo;
 
 
 import now.planit.Data.Utility.DBManager;
-import now.planit.Domain.Models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +16,6 @@ public class RepoProject implements RepoInterface{
   Connection connection;
   PreparedStatement ps;
   ResultSet rs;
-  User user;
   String sql;
   ArrayList<String> parameters = new ArrayList<>();
 
@@ -34,7 +32,7 @@ public class RepoProject implements RepoInterface{
   }
 
   @Override
-  public PreparedStatement setString(ArrayList<String> parameters) {
+  public PreparedStatement setParameters(ArrayList<String> parameters) {
     try {
     for (int i = 0; i < parameters.size(); i++) {
         ps.setString(i + 1, parameters.get(i));
@@ -49,7 +47,7 @@ public class RepoProject implements RepoInterface{
   public void query(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);
-      setString(parameters).execute();
+      setParameters(parameters).execute();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -59,7 +57,7 @@ public class RepoProject implements RepoInterface{
   public ResultSet load(String sqlCommand, ArrayList<String> parameters) {
     try {
      ps = checkConnection(sqlCommand);
-      rs = setString(parameters).executeQuery();
+      rs = setParameters(parameters).executeQuery();
     } catch (SQLException e) {
       e.printStackTrace();
     }
