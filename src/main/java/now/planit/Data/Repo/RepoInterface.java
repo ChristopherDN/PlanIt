@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public interface RepoInterface {
 
-  PreparedStatement checkConnection(String SqlCommand);
-  PreparedStatement setString(ArrayList<String> parameters);
+  PreparedStatement checkConnection(String sqlCommand);
+  PreparedStatement setParameters(ArrayList<String> parameters);
   void query(String sqlCommand, ArrayList<String> parameters);
   ResultSet load(String sqlCommand, ArrayList<String> parameters);
 

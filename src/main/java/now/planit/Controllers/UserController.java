@@ -16,8 +16,8 @@ public class UserController {
   UserService userService = new UserService();
   User user;
 
-  @GetMapping("/register")
-  public String register() {
+  @GetMapping("/registerUser")
+  public String createUser() {
     return "register/register";
   }
 
@@ -27,7 +27,7 @@ public class UserController {
         request.getParameter("name"),
         request.getParameter("email"),
         request.getParameter("password"));
-    return "login";
+    return "login/login";
   }
 
   @PostMapping("/frontpage")
