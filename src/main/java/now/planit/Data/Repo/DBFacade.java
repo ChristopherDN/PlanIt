@@ -57,7 +57,7 @@ public class DBFacade {
 
 
 
-  public ArrayList<Project>getProjecks(User user) {
+  public ArrayList<Project>getProjects(User user) {
     userId = repoUsers.getUserId(user);
     return repoProject.getProjects(userId);
   }

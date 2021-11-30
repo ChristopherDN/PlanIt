@@ -8,15 +8,14 @@
 <th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
 <body>
 <div id="container">
-      <a class="back-button" th:href="@{/viewProject?id={id}(id=${project.project_id})}">;</a>
  </div>
  <div id="input-form">
-    <form th:action="@{/createTask?id={id}(id=${project.project_id})}" method="POST">
+    <form th:action="@{/createTask?id={id}(id=${project.getProjectName})}" method="POST">
           <p>Task Name
           <p><input type="text" class="form-control" name="taskName" required>
           <p>Description
           <p><input type="text" class="form-control" name="taskDesc" required></p>
-          
+
             <p>Kick-off
             <p><input type="date" class="form-control" name="kickoff" required>
             <p>Deadline
