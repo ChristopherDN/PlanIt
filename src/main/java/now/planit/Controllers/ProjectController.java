@@ -1,16 +1,13 @@
 package now.planit.Controllers;
 
-import now.planit.Data.Repo.RepoProject;
 import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.User;
+import now.planit.Domain.Services.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 
@@ -18,43 +15,39 @@ import java.util.ArrayList;
 public class ProjectController {
 
     User user;
-    Project project = new Project( "test1", "idag", "imorgen", "1000");
-    //Test Arraylist + hardcoded values
+    Project project;
     ArrayList<Project> projectArrayList = new ArrayList<>();
     String name = "Chris";
+    ProjectService projectService = new ProjectService();
 
-    @GetMapping("/createproject")
-    public String createproject(Model model) {
-        //Test Arraylist
-        System.out.println(project);
-        projectArrayList.add(project);
+    @GetMapping("/myProjects")
+    public String myProjects(Model model) {
         model.addAttribute("loopList", projectArrayList );
         model.addAttribute("project", project);
         model.addAttribute("username", name);
-        return "project/createproject";
+        return "project/myProjects";
     }
 
-    @GetMapping("/frontpage")
-    public String showWishlists(Model model, HttpSession session) {
-        user = (User) session.getAttribute("user");
 
-        return "frontpage";
+    @PostMapping("/createProject")
+    public String createProject(WebRequest request, Model model) {
+        String name1 = request.getParameter("name");
+        String start = request.getParameter("start");
+        String finish = request.getParameter("finish");
+        int budget = Integer.parseInt(request.getParameter("budget"));
+        user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        projectService.createProject(name1, start, finish, budget, user);
+        model.addAttribute("loopList", projectArrayList );
+        return "redirect:/myProjects";
     }
 
-    @PostMapping("/createWishlist")
-    public String createWishlist(WebRequest request, HttpSession session) {
-        String event = request.getParameter("event");
-        user = (User) session.getAttribute("user");
-        //wishlistService.createWishlist(user, event);
-        return "redirect:/frontpage";
+    /*
+    @GetMapping("/update/{id}")
+    public String deleteProduct(@PathVariable(value = "id") String id, Model model) {
+        System.out.println();
+        return "redirect:/myprojects";
     }
-
-    @GetMapping("/removeWishlist/{id}")
-    public String deleteWishList(@PathVariable(value = "id") String id) {
-        //wishlistService.deleteWishlist(user, id);
-        return "redirect:/frontpage";
-    }
-
+    */
 
 
 

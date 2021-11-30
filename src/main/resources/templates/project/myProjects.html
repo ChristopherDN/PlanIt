@@ -23,7 +23,7 @@
         <th>Update project</th>
     </tr>
     <tr>
-        <form  action="/createproject" method="post">
+        <form action="/createProject" method="post">
             <td></td>
             <td><input type="text" name="name"></td>
             <td><input type="date" name="start"></td>
@@ -35,12 +35,14 @@
 
     <tr id="tr1" th:border="1" th:each="project : ${loopList}">
         <td></td>
-        <td th:text="${name}"></td>
-        <td th:text="${start}"></td>
-        <td th:text="${finish}"></td>
-        <td th:text="${budget}"></td>
-        <td><input type="submit" class="like" value="Update Project"></td>
-
+        <td th:text="${project.getName()}"></td>
+        <td th:text="${project.getStart()}"></td>
+        <td th:text="${project.getFinish()}"></td>
+        <td th:text="${project.getBudget}"></td>
+        <td><form th:action="@{/update/{id}(id=${project.getName()})}" th:object="${project}">
+            <button type="submit">Update project</button>
+        </form>
+        </td>
     </tr>
 </table>
 </center>

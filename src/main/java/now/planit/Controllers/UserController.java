@@ -46,7 +46,7 @@ public class UserController {
       if (user != null) {
         model.addAttribute("user", user);
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        return "redirect:/loggedin";
+        return "redirect:/myProjects";
       }
     }
     return "login/login";
