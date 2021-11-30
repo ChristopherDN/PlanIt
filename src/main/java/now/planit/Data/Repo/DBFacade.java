@@ -6,14 +6,11 @@ import now.planit.Domain.Models.User;
  * @author Christopher
  */
 public class DBFacade {
-
-  int userId;
-  RepoProject repoProject = new RepoProject() {
-  };
+  RepoProject repoProject = new RepoProject();
   RepoUsers repoUsers = new RepoUsers();
 
-  //Skal Implementere Interface her, så den bliver brugt......
 
+  //UserREPO
   public void registerUser(String name, String email, String password){
     repoUsers.registerUser(name, email, password);
 
@@ -23,8 +20,22 @@ public class DBFacade {
     return repoUsers.validateLogin(email, password);
   }
 
+  public int getUserId(User user){
+    return repoUsers.getUserId(user);
+  }
+
+
+  //ProjectREPO
+
     public void createProject(String name1, String start, String finish, int budget, User user) {
-      userId = repoUsers.getUserId(user);
-      repoProject.createProject(name1, start, finish, budget, userId);
+      repoProject.createProject(name1, start, finish, budget, getUserId(user));
     }
+
+    //TaskREPO
+
+
+
+  //SUbTASKREPO
+
+
 }

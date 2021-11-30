@@ -64,12 +64,7 @@ public class RepoProject implements RepoInterface{
     return rs;
   }
 
-  @Override
-  public void dbInput(String a, String b, String c, String d, String e) {
-  }
-
   public void createProject(String projectName, String start, String finish, int budget, int userId) {
-
     sql = "insert into PlanIt.Projects(name, start, finish, budget, User_id) values(?,?,?,?,?) ";
     parameters.clear();
     parameters.add(projectName);
@@ -78,6 +73,5 @@ public class RepoProject implements RepoInterface{
     parameters.add(String.valueOf(budget));
     parameters.add(String.valueOf(userId));
     query(sql, parameters);
-
   }
 }
