@@ -2,48 +2,21 @@ package now.planit.Data.Repo;
 
 import now.planit.Data.Utility.DBManager;
 import now.planit.Domain.Models.User;
-import org.springframework.stereotype.Controller;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-@Controller
+
 public class RepoUsers {
   Connection connection;
   PreparedStatement ps;
-  boolean bol;
   ResultSet rs;
   User user;
   String sql;
-  ArrayList<String> statements = new ArrayList<>(); // AddParam ikke Statements
+  ArrayList<String> parameters = new ArrayList<>(); // AddParam ikke Statements
 
-
-  public void query(String sqlCommand) {
-    try {
-      connection = DBManager.getConnection();
-      ps = connection.prepareStatement(sqlCommand);
-
-      bol = ps.execute();
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-    }
-  }
-
-  public ResultSet load(String sqlCommand) {
-    try {
-      connection = DBManager.getConnection();
-      ps = connection.prepareStatement(sqlCommand);
-      rs = ps.executeQuery();
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-//throw new ExceptionService(ex.getMessage())
-      //Chose not to use ExceptionService, and instead catch as early as possible.
-    }
-    return rs;
-  }
 
   public User getUser(ResultSet rs) {
     try {
@@ -61,7 +34,7 @@ public class RepoUsers {
     try {
       connection = DBManager.getConnection();
       ps = connection.prepareStatement(sqlCommand);
-      ps.clearParameters();
+      //ps.clearParameters(); Er det her nødvendigt?
       for (int i = 0; i < list.size(); i++) {
         ps.setString(i + 1, list.get(i));
       }
@@ -75,7 +48,7 @@ public class RepoUsers {
     try {
       Connection connection = DBManager.getConnection();
       ps = connection.prepareStatement(sqlCommand);
-      //ps.clearParameters();
+      //ps.clearParameters(); Er det her nødvendigt?
       for (int i = 0; i < list.size(); i++) {
         ps.setString(i + 1, list.get(i));
       }
@@ -88,18 +61,18 @@ public class RepoUsers {
 
   public void registerUser(String name, String email, String password) {
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
-    statements.clear();
-    statements.add(name);
-    statements.add(email);
-    statements.add(password);
-    newQuery(sql, statements);
+    parameters.clear();
+    parameters.add(name);
+    parameters.add(email);
+    parameters.add(password);
+    newQuery(sql, parameters);
   }
 
   public User validateLogin(String email, String password) {
     sql = "SELECT username, email, password FROM PlanIt.Users WHERE email = ? AND password = ?";
-    statements.clear();
-    statements.add(email);
-    statements.add(password);
-    return getUser(newLoad(sql, statements));
+    parameters.clear();
+    parameters.add(email);
+    parameters.add(password);
+    return getUser(newLoad(sql, parameters));
   }
 }

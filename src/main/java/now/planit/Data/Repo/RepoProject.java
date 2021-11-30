@@ -3,8 +3,7 @@ package now.planit.Data.Repo;
 
 
 import now.planit.Data.Utility.DBManager;
-import now.planit.Domain.Models.Project;
-import org.springframework.stereotype.Controller;
+import now.planit.Domain.Models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,61 +12,61 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-@Controller
-public class RepoProject{
+
+public class RepoProject implements RepoInterface{
   Connection connection;
   PreparedStatement ps;
-  boolean bol;
   ResultSet rs;
-  ArrayList<Project> products = new ArrayList<>();
-  int userid;
+  User user;
+  String sql;
+  ArrayList<String> parameters = new ArrayList<>();
 
 
-  public void query(String sqlCommand) {
+  @Override
+  public PreparedStatement checkConnection(String sqlCommand) {
     try {
       connection = DBManager.getConnection();
       ps = connection.prepareStatement(sqlCommand);
-      bol = ps.execute();
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return ps;
+  }
+
+  @Override
+  public PreparedStatement setString(ArrayList<String> parameters) {
+    try {
+    for (int i = 0; i < parameters.size(); i++) {
+        ps.setString(i + 1, parameters.get(i));
+    }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return ps;
+  }
+
+  @Override
+  public void query(String sqlCommand, ArrayList<String> parameters) {
+    try {
+      ps = checkConnection(sqlCommand);
+      setString(parameters).execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 
-  public ResultSet load(String sqlCommand)  {
+  @Override
+  public ResultSet load(String sqlCommand, ArrayList<String> parameters) {
     try {
-      connection = DBManager.getConnection();
-      ps = connection.prepareStatement(sqlCommand);
-      rs = ps.executeQuery();
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-      //throw new ExceptionService(ex.getMessage());
-      //Chose not to use ExceptionService, and instead catch as early as possible.
+     ps = checkConnection(sqlCommand);
+      rs = setString(parameters).executeQuery();
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
     return rs;
   }
-/*
-  public ArrayList<Project> resultsetToArray(ResultSet rs) {
-    try {
-      products.clear();
-      while (rs.next()) {
-        products.add(new Project(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4)));
-      }
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-    }
-    return products;
-  }
-*/
-  public int rsToId(ResultSet rs){
-    try {
-      userid = 0;
-      while (rs.next()) {
-        userid = rs.getInt(1);
-      }
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-    }
-    return userid;
-  }
 
+  @Override
+  public void dbInput(String a, String b, String c, String d, String e) {
+  }
 }
