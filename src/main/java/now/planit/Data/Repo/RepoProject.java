@@ -18,6 +18,7 @@ public class RepoProject implements RepoInterface{
   ResultSet rs;
   String sql;
   ArrayList<String> parameters = new ArrayList<>();
+  int projectId;
 
 
   @Override
@@ -64,6 +65,17 @@ public class RepoProject implements RepoInterface{
     return rs;
   }
 
+  public int getId(ResultSet rs){
+    try {
+      while (rs.next()) {
+        projectId = rs.getInt(1);
+      }
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+    return projectId;
+  }
+
   public void createProject(String projectName, String start, String finish, int budget, int userId) {
     sql = "insert into PlanIt.Projects(name, start, finish, budget, User_id) values(?,?,?,?,?) ";
     parameters.clear();
@@ -74,4 +86,12 @@ public class RepoProject implements RepoInterface{
     parameters.add(String.valueOf(userId));
     query(sql, parameters);
   }
+
+    public int getProjectId(String projectName, int userId) {
+    sql ="select id from PlanIt.Projects where name = ? and user_id = ?";
+    parameters.clear();
+    parameters.add(projectName);
+    parameters.add(String.valueOf(userId));
+    return getId(load(sql,parameters));
+    }
 }

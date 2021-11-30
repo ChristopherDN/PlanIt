@@ -12,81 +12,82 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-@Controller
-public class RepoTask {
+
+public class RepoTask implements RepoInterface{
   Connection connection;
   PreparedStatement ps;
   boolean bol;
   ResultSet rs;
+  ArrayList<String> parameters = new ArrayList<>();
+  String sql;
   ArrayList<Task> tasks = new ArrayList<>();
-  int userid;
 
-  public void query(String sqlCommand) {
+
+  @Override
+  public PreparedStatement checkConnection(String sqlCommand) {
     try {
       connection = DBManager.getConnection();
       ps = connection.prepareStatement(sqlCommand);
-      bol = ps.execute();
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return ps;
+  }
+
+  @Override
+  public PreparedStatement setParameters(ArrayList<String> parameters) {
+    try {
+      for (int i = 0; i < parameters.size(); i++) {
+        ps.setString(i + 1, parameters.get(i));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return ps;
+  }
+
+  @Override
+  public void query(String sqlCommand, ArrayList<String> parameters) {
+    try {
+      ps = checkConnection(sqlCommand);
+      setParameters(parameters).execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 
-  public ResultSet load(String sqlCommand)  {
+  @Override
+  public ResultSet load(String sqlCommand, ArrayList<String> parameters) {
     try {
-      connection = DBManager.getConnection();
-      ps = connection.prepareStatement(sqlCommand);
-      rs = ps.executeQuery();
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-      //throw new ExceptionService(ex.getMessage());
-      //Chose not to use ExceptionService, and instead catch as early as possible.
+      ps = checkConnection(sqlCommand);
+      rs = setParameters(parameters).executeQuery();
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
     return rs;
   }
 
-  /*public ArrayList<Task> rsToArray(ResultSet rs) {
+  public ArrayList<Task> loadTasks(ResultSet rs){
     try {
       tasks.clear();
       while (rs.next()) {
-        tasks.add(new Task(rs.getString(1)));
+        tasks.add(new Task(rs.getString(1), rs.getString(2),
+                rs.getString(3), rs.getString(4)));
+
       }
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
     }
     return tasks;
   }
-*/
 
-  public int rsToId(ResultSet rs){
-    try {
-      userid = 0;
-      while (rs.next()) {
-        userid = rs.getInt(1);
-      }
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-    }
-    return userid;
+  public ArrayList<Task> getTasks(int projectId){
+    sql ="select name, start, finish, budget from PlanIt.Tasks where " +
+            "project_Id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(projectId));
+    return loadTasks(load(sql,parameters));
   }
-
-
-  /*public void createWishlist(User user, String event) {
-    userid = rsToId(load("select id from wishlist.users where name = '" + user.getName() + "'"));
-    query("insert into wishlist.wishlist(event, userid) values('"+ event + "' , '" + userid + "')");
-  }
-
-  public void deleteWishlist(User user, String event) {
-    query("delete from wishlist.wishlist where event = '" + event + "' and userid = " + rsToId(load("select id from wishlist.users where name = '" + user.getName() + "'")));
-  }
-
-  public ArrayList<Task> loadWishlists(User user) {
-    return rsToArray(load("select event from wishlist.wishlist where userid =" + rsToId(load("select id from wishlist.users where name = '" + user.getName() + "'"))));
-  }
-
-  public int setGetWishlist(User user, String event) {
-    userid = rsToId(load("select id from wishlist.users where name = '" + user.getName() + "'"));
-    return rsToId(load("select id from wishlist.wishlist where userid =" + userid +  " and event ='" + event + "'"));
-  }*/
 }
 
 
