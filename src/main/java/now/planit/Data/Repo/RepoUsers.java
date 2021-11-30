@@ -15,7 +15,7 @@ public class RepoUsers implements RepoInterface {
   ResultSet rs;
   User user;
   String sql;
-  ArrayList<String> parameters = new ArrayList<>(); // AddParam ikke Statements
+  ArrayList<String> parameters = new ArrayList<>();
   int userId;
 
   @Override
@@ -62,52 +62,27 @@ public class RepoUsers implements RepoInterface {
     return rs;
   }
 
-  @Override
-  public void dbInput(String a, String b, String c, String d, String e) {
-
+  public int getId(ResultSet rs){
+    try {
+      while (rs.next()) {
+        userId = rs.getInt(1);
+      }
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+    return userId;
   }
-
 
   public User getUser(ResultSet rs) {
     try {
       user = null;
       while (rs.next()) {
         user = new User(rs.getString(1), rs.getString(2), rs.getString(3));
-        System.out.println("får vi oprettet en user??" + user);
       }
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
     }
     return user;
-  }
-
-  public void newQuery(String sqlCommand, ArrayList<String> list) {
-    try {
-      connection = DBManager.getConnection();
-      ps = connection.prepareStatement(sqlCommand);
-      //ps.clearParameters(); Er det her nødvendigt?
-      for (int i = 0; i < list.size(); i++) {
-        ps.setString(i + 1, list.get(i));
-      }
-      ps.execute();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public ResultSet newLoad(String sqlCommand, ArrayList<String> list) {
-    try {
-      Connection connection = DBManager.getConnection();
-      ps = connection.prepareStatement(sqlCommand);
-      //ps.clearParameters(); Er det her nødvendigt?
-      for (int i = 0; i < list.size(); i++) {
-        ps.setString(i + 1, list.get(i));
-      }
-      rs = ps.executeQuery();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return rs;
   }
 
   public void registerUser(String name, String email, String password) {
@@ -134,21 +109,5 @@ public class RepoUsers implements RepoInterface {
     parameters.add(user.getEmail());
     parameters.add(user.getPassword());
     return getId(load(sql, parameters));
-
   }
-
-  public int getId(ResultSet rs){
-    try {
-      while (rs.next()) {
-        userId = rs.getInt(1);
-        System.out.println("får vi oprettet en user??" + user);
-      }
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-    }
-    return userId;
-
-
-  }
-
 }

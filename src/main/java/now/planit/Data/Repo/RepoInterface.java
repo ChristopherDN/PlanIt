@@ -13,8 +13,5 @@ public interface RepoInterface {
   ResultSet load(String sqlCommand, ArrayList<String> parameters);
 
 
-  //usable??
-  void dbInput(String a, String b, String c, String d, String e);
-
 
 }
