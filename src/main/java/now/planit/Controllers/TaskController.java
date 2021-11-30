@@ -17,18 +17,18 @@ public class TaskController {
   TaskService taskService = new TaskService();
   ArrayList<Task> tasks = new ArrayList();
 
+  @GetMapping("/createTask")
+  public String createTasks() {
+    return "/project/createTask";
+  }
+
   @GetMapping("/update/{id}")
   public String updateProject(@PathVariable(value = "id") String id, WebRequest request, Model model) {
-    System.out.println("Kommer den her ind?????");
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     model.addAttribute("tasks", tasks);
     tasks = taskService.getTasks(id, user);
     return "redirect:/createTask";
   }
 
-  @GetMapping("/createTask")
-  public String createTasks() {
-    System.out.println("Kommer den ind i GetMapping?");
-    return "/project/createTask";
-  }
+
 }
