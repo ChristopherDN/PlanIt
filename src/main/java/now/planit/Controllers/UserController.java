@@ -21,9 +21,9 @@ public class UserController {
     return "register/register";
   }
 
-  @GetMapping("/loggedin")
+  @GetMapping("/logged")
   public String loggedIn() {
-    return "login/loggedin";
+    return "login/logged";
   }
 
   @PostMapping("/register")
