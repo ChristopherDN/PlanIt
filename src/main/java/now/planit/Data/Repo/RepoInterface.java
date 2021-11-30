@@ -9,7 +9,7 @@ public interface RepoInterface {
 
   PreparedStatement checkConnection(String sqlCommand);
   PreparedStatement setParameters(ArrayList<String> parameters);
-  void query(String sqlCommand, ArrayList<String> parameters);
+  void save(String sqlCommand, ArrayList<String> parameters);
   ResultSet load(String sqlCommand, ArrayList<String> parameters);
 
 

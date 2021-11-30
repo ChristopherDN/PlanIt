@@ -47,8 +47,7 @@ public class DBFacade {
 
   //TaskREPO
   public ArrayList<Task> getTasks(String projectName, User user) {
-    repoTask.getTasks(getProjectId(projectName,getUserId(user)));
-
+   return repoTask.getTasks(getProjectId(projectName,getUserId(user)));
   }
 
 

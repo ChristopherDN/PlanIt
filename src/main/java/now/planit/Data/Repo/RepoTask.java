@@ -47,7 +47,7 @@ public class RepoTask implements RepoInterface{
   }
 
   @Override
-  public void query(String sqlCommand, ArrayList<String> parameters) {
+  public void save(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);
       setParameters(parameters).execute();

@@ -20,6 +20,7 @@ ArrayList<Task> tasks = new ArrayList();
     @GetMapping("/update/{id}")
     public String deleteProduct(@PathVariable(value = "id") String id, WebRequest request) {
         user = (User)request.getAttribute("user",WebRequest.SCOPE_SESSION);
+
         tasks = taskService.getTasks(id, user);
         return "redirect:/updateProject";
     }

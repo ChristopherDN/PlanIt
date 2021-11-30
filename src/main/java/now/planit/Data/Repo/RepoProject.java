@@ -49,7 +49,7 @@ public class RepoProject implements RepoInterface{
   }
 
   @Override
-  public void query(String sqlCommand, ArrayList<String> parameters) {
+  public void save(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);
       setParameters(parameters).execute();
@@ -81,7 +81,6 @@ public class RepoProject implements RepoInterface{
   }
 
   public void createProject(String projectName, String start, String finish, int budget, int userId) {
-
     sql = "insert into PlanIt.Projects(name, start, finish, budget, User_id) values(?,?,?,?,?) ";
     parameters.clear();
     parameters.add(projectName);
@@ -89,7 +88,8 @@ public class RepoProject implements RepoInterface{
     parameters.add(finish);
     parameters.add(String.valueOf(budget));
     parameters.add(String.valueOf(userId));
-    query(sql, parameters);
+    save(sql, parameters);
+  }
 
     public int getProjectId(String projectName, int userId) {
     sql ="select id from PlanIt.Projects where name = ? and user_id = ?";
@@ -99,7 +99,7 @@ public class RepoProject implements RepoInterface{
     return getId(load(sql,parameters));
 
     }
-  }
+}
 
   public ArrayList<Project> getProjects(int userId) {
 

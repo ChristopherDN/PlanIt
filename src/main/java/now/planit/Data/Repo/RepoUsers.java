@@ -42,7 +42,7 @@ public class RepoUsers implements RepoInterface {
   }
 
   @Override
-  public void query(String sqlCommand, ArrayList<String> parameters) {
+  public void save(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);
       setParameters(parameters).execute();
@@ -91,7 +91,7 @@ public class RepoUsers implements RepoInterface {
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
-    query(sql, parameters);
+    save(sql, parameters);
   }
 
   public User validateLogin(String email, String password) {
