@@ -2,47 +2,58 @@ package now.planit.Domain.Models;
 
 
 public class Project {
-  private String projectName;
-  private String startDate;
-  private String finishDate;
-  private String budget;
+  private String name;
+  private String start;
+  private String finish;
+  private int budget;
 
-  public Project(String name, String startDate, String finishDate, String budget) {
-    this.projectName = name;
-    this.startDate = startDate;
-    this.finishDate = finishDate;
+  public Project( String name, String start, String finish, int budget) {
+
+    this.name = name;
+    this.start = start;
+    this.finish = finish;
     this.budget = budget;
   }
 
   public String getName() {
-    return projectName;
+    return name;
   }
 
   public void setName(String name) {
-    this.projectName = name;
+    this.name = name;
   }
 
-  public String getStartDate() {
-    return startDate;
+  public String getStart() {
+    return start;
   }
 
-  public void setStartDate(String startDate) {
-    this.startDate = startDate;
+  public void setStart(String start) {
+    this.start = start;
   }
 
-  public String getFinishDate() {
-    return finishDate;
+  public String getFinish() {
+    return finish;
   }
 
-  public void setFinishDate(String finishDate) {
-    this.finishDate = finishDate;
+  public void setFinish(String finish) {
+    this.finish = finish;
   }
 
-  public String getBudget() {
+  public int getBudget() {
     return budget;
   }
 
-  public void setBudget(String budget) {
+  public void setBudget(int budget) {
     this.budget = budget;
+  }
+
+  @Override
+  public String toString() {
+    return "Project{" +
+            ", name='" + name + '\'' +
+            ", start='" + start + '\'' +
+            ", finish='" + finish + '\'' +
+            ", budget='" + budget + '\'' +
+            '}';
   }
 }

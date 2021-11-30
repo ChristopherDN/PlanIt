@@ -23,17 +23,13 @@ public class Controller {
     return "index";
   }
 
-
-
   @GetMapping("/login")
   public String login() {
     return "login/login";
   }
 
-  @GetMapping("/registeruser")
-  public String createUser() {
-    return "register/register";
-  }
+
+
 
 
   //these are just endpoints ready to be used
@@ -43,14 +39,5 @@ public class Controller {
   public String about() {
     return "info/about";
   }
-
-
-
-
-
-
-
-
-
 
 }

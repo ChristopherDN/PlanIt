@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="javascript.js"></script>
+    <title>Index</title>
+</head>
+
+<th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
+
+<Body>
+<center>
+    <h1>Welcome <p th:text="${username}"></p> <br>Here are your projects!!!<br> </h1>
+
+<table style = "margin-top: 20px;">
+    <tr>
+        <th>Project Number:</th>
+        <th>Project Name</th>
+        <th>Start</th>
+        <th>Finish</th>
+        <th>Estimated budget</th>
+        <th>Update project</th>
+    </tr>
+    <tr>
+        <form action="/createProject" method="post">
+            <td></td>
+            <td><input type="text" name="name"></td>
+            <td><input type="date" name="start"></td>
+            <td><input type="date" name="finish"></td>
+            <td><input type="text" name="budget"></td>
+            <td><input type="submit" class="like" value="Add Project"></td>
+        </form>
+    </tr>
+
+    <tr id="tr1" th:border="1" th:each="project : ${loopList}">
+        <td></td>
+        <td th:text="${project.getName()}"></td>
+        <td th:text="${project.getStart()}"></td>
+        <td th:text="${project.getFinish()}"></td>
+        <td th:text="${project.getBudget}"></td>
+        <td><form th:action="@{/update/{id}(id=${project.getName()})}" th:object="${project}">
+            <button type="submit">Update project</button>
+        </form>
+        </td>
+    </tr>
+</table>
+</center>
+
+</body>
+
+</div>
+<div id="footer">
+    <th:block th:include="/htmlFragment/footer :: footer"></th:block>
+</div>
+</html>
