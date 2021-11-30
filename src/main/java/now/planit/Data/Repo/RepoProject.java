@@ -45,7 +45,7 @@ public class RepoProject implements RepoInterface{
   }
 
   @Override
-  public void query(String sqlCommand, ArrayList<String> parameters) {
+  public void save(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);
       setParameters(parameters).execute();
@@ -84,7 +84,7 @@ public class RepoProject implements RepoInterface{
     parameters.add(finish);
     parameters.add(String.valueOf(budget));
     parameters.add(String.valueOf(userId));
-    query(sql, parameters);
+    save(sql, parameters);
   }
 
     public int getProjectId(String projectName, int userId) {
