@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -17,13 +19,16 @@ public class ProjectController {
 
     User user;
     Project project;
-    ArrayList<Project> projectArrayList = new ArrayList<>();
-    String name = "Chris";
     ProjectService projectService = new ProjectService();
+    ArrayList<Project> projects = new ArrayList<>();
+    String name = "Chris";
+
 
     @GetMapping("/myProjects")
-    public String myProjects(Model model) {
-        model.addAttribute("loopList", projectArrayList );
+    public String myProjects(Model model, WebRequest request) {
+        user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        projects = projectService.getProjects(user);
+        model.addAttribute("loopList", projects);
         model.addAttribute("project", project);
         model.addAttribute("username", name);
         return "project/myProjects";
@@ -38,8 +43,9 @@ public class ProjectController {
         int budget = Integer.parseInt(request.getParameter("budget"));
         user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         projectService.createProject(name1, start, finish, budget, user);
-        model.addAttribute("loopList", projectArrayList );
+        model.addAttribute("loopList", projects);
         return "redirect:/myProjects";
     }
+
 
 }

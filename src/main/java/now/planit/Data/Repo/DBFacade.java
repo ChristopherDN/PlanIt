@@ -1,8 +1,14 @@
 package now.planit.Data.Repo;
 
+import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
 
+import java.util.ArrayList;
+
+/**
+ * @author Christopher
+ */
 import java.util.ArrayList;
 
 public class DBFacade {
@@ -48,5 +54,11 @@ public class DBFacade {
 
   //SUbTASKREPO
 
+
+
+  public ArrayList<Project>getProjecks(User user) {
+    userId = repoUsers.getUserId(user);
+    return repoProject.getProjects(userId);
+  }
 
 }

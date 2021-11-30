@@ -3,6 +3,8 @@ package now.planit.Data.Repo;
 
 
 import now.planit.Data.Utility.DBManager;
+import now.planit.Domain.Models.Project;
+import now.planit.Domain.Models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +20,8 @@ public class RepoProject implements RepoInterface{
   ResultSet rs;
   String sql;
   ArrayList<String> parameters = new ArrayList<>();
+  ArrayList<Project> projects = new ArrayList<>();
+  Project project;
   int projectId;
 
 
@@ -94,4 +98,33 @@ public class RepoProject implements RepoInterface{
     parameters.add(String.valueOf(userId));
     return getId(load(sql,parameters));
     }
+}
+
+  public ArrayList<Project> getProjects(int userId) {
+
+      sql = "Select id from PlanIt.Users where email = ? AND password = ?";
+      parameters.clear();
+      parameters.add(project.getName());
+      parameters.add(project.getStart());
+      parameters.add(project.getFinish());
+      parameters.add(String.valueOf(project.getBudget()));
+      return loadProjects(load(sql, parameters));
+
+    }
+
+  public ArrayList<Project> loadProjects(ResultSet rs) {
+    try {
+      projects.clear();
+      while (rs.next()) {
+        projects.add(new Project(rs.getString(1), rs.getString(2),
+                rs.getString(3), rs.getInt(4)));
+      }
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+    return projects;
+  }
+
+
+
 }
