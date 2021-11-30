@@ -15,6 +15,7 @@ public class DBFacade {
   RepoProject repoProject = new RepoProject();
   RepoUsers repoUsers = new RepoUsers();
   RepoTask repoTask = new RepoTask();
+  int userId;
 
 
   //UserREPO
