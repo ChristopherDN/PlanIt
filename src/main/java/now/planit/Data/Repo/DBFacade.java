@@ -20,4 +20,8 @@ public class DBFacade {
   public User validateLogin(String email, String password){
     return repoUsers.validateLogin(email, password);
   }
+
+    public void createProject(String name1, String start, String finish, int budget) {
+
+    }
 }
