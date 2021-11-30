@@ -16,6 +16,7 @@ public class RepoUsers implements RepoInterface {
   User user;
   String sql;
   ArrayList<String> parameters = new ArrayList<>(); // AddParam ikke Statements
+  int userId;
 
   @Override
   public PreparedStatement checkConnection(String sqlCommand) {
@@ -126,5 +127,28 @@ public class RepoUsers implements RepoInterface {
    return getUser(load(sql, parameters));
   }
 
+
+  public int getUserId(User user) {
+    sql = "Select id from PlanIt.Users where email = ? AND password = ?";
+    parameters.clear();
+    parameters.add(user.getEmail());
+    parameters.add(user.getPassword());
+    return getId(load(sql, parameters));
+
+  }
+
+  public int getId(ResultSet rs){
+    try {
+      while (rs.next()) {
+        userId = rs.getInt(1);
+        System.out.println("får vi oprettet en user??" + user);
+      }
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+    return userId;
+
+
+  }
 
 }

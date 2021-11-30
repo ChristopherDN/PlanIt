@@ -22,7 +22,6 @@ public class ProjectController {
 
     @GetMapping("/myProjects")
     public String myProjects(Model model) {
-
         model.addAttribute("loopList", projectArrayList );
         model.addAttribute("project", project);
         model.addAttribute("username", name);
@@ -36,7 +35,8 @@ public class ProjectController {
         String start = request.getParameter("start");
         String finish = request.getParameter("finish");
         int budget = Integer.parseInt(request.getParameter("budget"));
-        projectService.createProject(name1, start, finish, budget);
+        user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        projectService.createProject(name1, start, finish, budget, user);
         model.addAttribute("loopList", projectArrayList );
         return "redirect:/myProjects";
     }

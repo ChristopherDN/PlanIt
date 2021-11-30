@@ -6,7 +6,9 @@ import now.planit.Domain.Models.User;
  * @author Christopher
  */
 public class DBFacade {
-  RepoInterface repoProject = new RepoProject() {
+
+  int userId;
+  RepoProject repoProject = new RepoProject() {
   };
   RepoUsers repoUsers = new RepoUsers();
 
@@ -21,7 +23,8 @@ public class DBFacade {
     return repoUsers.validateLogin(email, password);
   }
 
-    public void createProject(String name1, String start, String finish, int budget) {
-
+    public void createProject(String name1, String start, String finish, int budget, User user) {
+      userId = repoUsers.getUserId(user);
+      repoProject.createProject(name1, start, finish, budget, userId);
     }
 }

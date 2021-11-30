@@ -18,7 +18,15 @@ public class User {
     return name + " Email: " + email + "Password: " + password;
   }
 
+  public String getName() {
+    return name;
+  }
 
+  public String getEmail() {
+    return email;
+  }
 
-
+  public String getPassword() {
+    return password;
+  }
 }
