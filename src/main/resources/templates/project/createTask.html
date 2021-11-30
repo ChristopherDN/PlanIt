@@ -8,7 +8,6 @@
 <th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
 <body>
 <div id="container">
-      <a class="back-button" th:href="@{/viewProject?id={id}(id=${project.project_id})}">;</a>
  </div>
  <div id="input-form">
     <form th:action="@{/createTask?id={id}(id=${project.getProjectName})}" method="POST">

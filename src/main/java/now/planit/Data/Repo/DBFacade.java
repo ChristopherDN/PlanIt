@@ -1,6 +1,9 @@
 package now.planit.Data.Repo;
 
+import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
+
+import java.util.ArrayList;
 
 /**
  * @author Christopher
@@ -26,5 +29,9 @@ public class DBFacade {
     public void createProject(String name1, String start, String finish, int budget, User user) {
       userId = repoUsers.getUserId(user);
       repoProject.createProject(name1, start, finish, budget, userId);
+    }
+
+    public ArrayList<Task> getTasks(String projectName, User user) {
+
     }
 }
