@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>Login Successful</title>
+</head>
+<th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
+<body>
+<div id="container">
+    <h1>Login Successful!</h1>
+    <a href="/listProject"> To Project List </a>
+</div>
+</body>
+<th:block th:include="/htmlFragment/footer :: footer"></th:block>
+</html>
