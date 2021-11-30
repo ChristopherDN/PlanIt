@@ -72,6 +72,7 @@ public class RepoUsers implements RepoInterface {
       user = null;
       while (rs.next()) {
         user = new User(rs.getString(1), rs.getString(2), rs.getString(3));
+        System.out.println("får vi oprettet en user??" + user);
       }
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
@@ -122,9 +123,7 @@ public class RepoUsers implements RepoInterface {
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
-   user = getUser(load(sql, parameters));
-    System.out.println(user);
-   return user;
+   return getUser(load(sql, parameters));
   }
 
 

@@ -21,6 +21,11 @@ public class UserController {
     return "register/register";
   }
 
+  @GetMapping("/loggedin")
+  public String loggedIn() {
+    return "login/loggedin";
+  }
+
   @PostMapping("/register")
   public String register(WebRequest request) {
     userService.registerUser(
@@ -30,10 +35,10 @@ public class UserController {
     return "login/login";
   }
 
-  @PostMapping("/frontpage")
+  @PostMapping("/validateLogin")
   public String validateLogin(WebRequest request, HttpSession session, Model model) {
     user = userService.validateLogin(
-        request.getParameter("user"),
+        request.getParameter("mail"),
         request.getParameter("password"));
 
     //Set Session to user, validate user is not null.
@@ -41,10 +46,10 @@ public class UserController {
       if (user != null) {
         model.addAttribute("user", user);
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        return "redirect:/frontpage";
+        return "redirect:/loggedin";
       }
     }
-    return "login";
+    return "login/login";
   }
 
   @GetMapping("/logout")
