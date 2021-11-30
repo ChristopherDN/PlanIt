@@ -1,6 +1,4 @@
 package now.planit.Controllers;
-
-import now.planit.Domain.Services.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpSession;
 

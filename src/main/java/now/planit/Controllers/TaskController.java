@@ -26,6 +26,7 @@ public class TaskController {
   public String updateProject(@PathVariable(value = "id") String id, WebRequest request, Model model) {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     model.addAttribute("tasks", tasks);
+    model.addAttribute("userName", user.getName());
     tasks = taskService.getTasks(id, user);
     return "redirect:/createTask";
   }

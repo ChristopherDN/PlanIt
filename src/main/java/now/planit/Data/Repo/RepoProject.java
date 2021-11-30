@@ -1,73 +1,19 @@
 package now.planit.Data.Repo;
 
-
-
-import now.planit.Data.Utility.DBManager;
 import now.planit.Domain.Models.Project;
-import now.planit.Domain.Models.User;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 
 
-public class RepoProject implements RepoInterface{
-  Connection connection;
-  PreparedStatement ps;
-  ResultSet rs;
+public class RepoProject {
+  DBMapper dbMapper = new DBMapper();
   String sql;
   ArrayList<String> parameters = new ArrayList<>();
   ArrayList<Project> projects = new ArrayList<>();
-  Project project;
   int projectId;
 
-
-  @Override
-  public PreparedStatement checkConnection(String sqlCommand) {
-    try {
-      connection = DBManager.getConnection();
-      ps = connection.prepareStatement(sqlCommand);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return ps;
-  }
-
-  @Override
-  public PreparedStatement setParameters(ArrayList<String> parameters) {
-    try {
-    for (int i = 0; i < parameters.size(); i++) {
-        ps.setString(i + 1, parameters.get(i));
-    }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return ps;
-  }
-
-  @Override
-  public void save(String sqlCommand, ArrayList<String> parameters) {
-    try {
-      ps = checkConnection(sqlCommand);
-      setParameters(parameters).execute();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
-
-  @Override
-  public ResultSet load(String sqlCommand, ArrayList<String> parameters) {
-    try {
-     ps = checkConnection(sqlCommand);
-      rs = setParameters(parameters).executeQuery();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return rs;
-  }
 
   public int getId(ResultSet rs){
     try {
@@ -101,7 +47,7 @@ public class RepoProject implements RepoInterface{
     parameters.add(finish);
     parameters.add(String.valueOf(budget));
     parameters.add(String.valueOf(userId));
-    save(sql, parameters);
+    dbMapper.save(sql, parameters);
   }
 
     public int getProjectId(String projectName, int userId) {
@@ -109,16 +55,15 @@ public class RepoProject implements RepoInterface{
     parameters.clear();
     parameters.add(projectName);
     parameters.add(String.valueOf(userId));
-    return getId(load(sql,parameters));
+    return getId(dbMapper.load(sql,parameters));
 
     }
-
 
   public ArrayList<Project> getProjects(int userId) {
       sql = "select name, start, finish, budget from PlanIt.Projects where User_id = ? ";
       parameters.clear();
       parameters.add(String.valueOf(userId));
-      return loadProjects(load(sql, parameters));
+      return loadProjects(dbMapper.load(sql, parameters));
 
     }
 
