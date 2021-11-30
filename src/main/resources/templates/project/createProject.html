@@ -6,8 +6,44 @@
     <script src="javascript.js"></script>
     <title>Index</title>
 </head>
-<th:block th:include="/htmlFragment/header :: header"></th:block>
+
+<th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
+
 <Body>
+<center>
+    <h1>Welcome <p th:text="${username}"></p> <br>Here are your projects!!!<br> </h1>
+
+<table style = "margin-top: 20px;">
+    <tr>
+        <th>Project Number:</th>
+        <th>Project Name</th>
+        <th>Start</th>
+        <th>Finish</th>
+        <th>Estimated budget</th>
+        <th>Update project</th>
+    </tr>
+    <tr>
+        <form  action="/createproject" method="post">
+            <td></td>
+            <td><input type="text" name="name"></td>
+            <td><input type="date" name="start"></td>
+            <td><input type="date" name="finish"></td>
+            <td><input type="text" name="budget"></td>
+            <td><input type="submit" class="like" value="Add Project"></td>
+        </form>
+    </tr>
+
+    <tr id="tr1" th:border="1" th:each="project : ${loopList}">
+        <td></td>
+        <td th:text="${name}"></td>
+        <td th:text="${start}"></td>
+        <td th:text="${finish}"></td>
+        <td th:text="${budget}"></td>
+        <td><input type="submit" class="like" value="Update Project"></td>
+
+    </tr>
+</table>
+</center>
 
 </body>
 
