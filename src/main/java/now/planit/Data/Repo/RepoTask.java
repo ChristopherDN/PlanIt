@@ -82,8 +82,7 @@ public class RepoTask implements RepoInterface{
   }
 
   public ArrayList<Task> getTasks(int projectId){
-    sql ="select name, start, finish, budget from PlanIt.Tasks where " +
-            "project_Id = ?";
+    sql ="select name, start, finish, budget from PlanIt.Tasks where project_Id = ?";
     parameters.clear();
     parameters.add(String.valueOf(projectId));
     return loadTasks(load(sql,parameters));

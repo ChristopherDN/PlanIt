@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 
 public class Controller {
-  UserService userService = new UserService();
 
 
   @GetMapping("/")

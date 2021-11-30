@@ -5,30 +5,43 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <title>Create Task</title>
 </head>
+
 <th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
 <body>
-<div id="container">
-      <a class="back-button" th:href="@{/viewProject?id={id}(id=${project.project_id})}">;</a>
- </div>
- <div id="input-form">
-    <form th:action="@{/createTask?id={id}(id=${project.project_id})}" method="POST">
-          <p>Task Name
-          <p><input type="text" class="form-control" name="taskName" required>
-          <p>Description
-          <p><input type="text" class="form-control" name="taskDesc" required></p>
-          
-            <p>Kick-off
-            <p><input type="date" class="form-control" name="kickoff" required>
-            <p>Deadline
-            <p><input type="date" class="form-control" name="deadline" required>
-                            <div class="button">
-                <input type="Submit" class="submit-button" value="  Create!  ">
-            </div>
-            <br>
-            <br>
+<h1>Welcome <p th:text="${username}"></p> <br>Here are your projects!!!<br> </h1>
+
+<table style = "margin-top: 20px;">
+    <tr>
+        <th>Project Number:</th>
+        <th>Project Name</th>
+        <th>Start</th>
+        <th>Finish</th>
+        <th>Estimated budget</th>
+        <th>Update project</th>
+    </tr>
+    <tr>
+        <form action="/createProject" method="post">
+            <td></td>
+            <td><input type="text" name="name"></td>
+            <td><input type="date" name="start"></td>
+            <td><input type="date" name="finish"></td>
+            <td><input type="text" name="budget"></td>
+            <td><input type="submit" class="like" value="Add Project"></td>
         </form>
-    </div>
-</div>
+    </tr>
+
+    <tr id="tr1" th:border="1" th:each="task : ${tasks}">
+        <td></td>
+        <td th:text="${task.getName()}"></td>
+        <td th:text="${task.getStart()}"></td>
+        <td th:text="${task.getFinish()}"></td>
+        <td th:text="${task.getBudget}"></td>
+        <td><form th:action="@{/update/{id}(id=${task.getName()})}" th:object="${task}">
+            <button type="submit">Update project</button>
+        </form>
+        </td>
+    </tr>
+</table>
 </body>
 <th:block th:include="/htmlFragment/footer :: footer"></th:block>
 </html>

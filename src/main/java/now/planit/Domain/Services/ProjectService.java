@@ -16,7 +16,7 @@ public class ProjectService{
     }
 
     public ArrayList<Project> getProjects(User user) {
-        return dbFacade.getProjecks(user);
+        return dbFacade.getProjects(user);
     }
 
 

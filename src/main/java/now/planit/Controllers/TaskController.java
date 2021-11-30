@@ -13,17 +13,22 @@ import java.util.ArrayList;
 
 @Controller
 public class TaskController {
-User user;
-TaskService taskService = new TaskService();
-ArrayList<Task> tasks = new ArrayList();
+  User user;
+  TaskService taskService = new TaskService();
+  ArrayList<Task> tasks = new ArrayList();
 
-    @GetMapping("/update/{id}")
-    public String deleteProduct(@PathVariable(value = "id") String id, WebRequest request) {
-        user = (User)request.getAttribute("user",WebRequest.SCOPE_SESSION);
+  @GetMapping("/update/{id}")
+  public String updateProject(@PathVariable(value = "id") String id, WebRequest request, Model model) {
+    System.out.println("Kommer den her ind?????");
+    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+    model.addAttribute("tasks", tasks);
+    tasks = taskService.getTasks(id, user);
+    return "redirect:/createTask";
+  }
 
-        tasks = taskService.getTasks(id, user);
-        return "redirect:/updateProject";
-    }
-
-
+  @GetMapping("/createTask")
+  public String createTasks() {
+    System.out.println("Kommer den ind i GetMapping?");
+    return "/project/createTask";
+  }
 }

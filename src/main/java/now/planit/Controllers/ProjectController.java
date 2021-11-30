@@ -30,7 +30,7 @@ public class ProjectController {
         projects = projectService.getProjects(user);
         model.addAttribute("loopList", projects);
         model.addAttribute("project", project);
-        model.addAttribute("username", name);
+        model.addAttribute("username", user.getName());
         return "project/myProjects";
     }
 
