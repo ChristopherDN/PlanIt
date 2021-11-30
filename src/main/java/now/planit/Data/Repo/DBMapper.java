@@ -17,7 +17,7 @@ public class DBMapper {
   PreparedStatement ps;
   ResultSet rs;
 
-
+//Check connection with DBManager
   public PreparedStatement checkConnection(String sqlCommand) {
     try {
       connection = DBManager.getConnection();
@@ -28,6 +28,7 @@ public class DBMapper {
     return ps;
   }
 
+  //Loads Parameters into Prepared statement
   public PreparedStatement setParameters(ArrayList<String> parameters) {
     try {
       for (int i = 0; i < parameters.size(); i++) {
@@ -39,6 +40,7 @@ public class DBMapper {
     return ps;
   }
 
+  //Used to do something on the Database, Save or delete.
   public void save(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);
@@ -48,6 +50,7 @@ public class DBMapper {
     }
   }
 
+  //Used to recieve something from the database, will always return ResultSet.
   public ResultSet load(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);

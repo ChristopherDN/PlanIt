@@ -14,7 +14,7 @@ public class RepoProject {
   ArrayList<Project> projects = new ArrayList<>();
   int projectId;
 
-
+//Manipulate ResultSet to data we can use.
   public int getId(ResultSet rs){
     try {
       while (rs.next()) {
@@ -39,6 +39,8 @@ public class RepoProject {
     return projects;
   }
 
+
+  //DB do something
   public void createProject(String projectName, String start, String finish, int budget, int userId) {
     sql = "insert into PlanIt.Projects(name, start, finish, budget, User_id) values(?,?,?,?,?) ";
     parameters.clear();
@@ -64,8 +66,5 @@ public class RepoProject {
       parameters.clear();
       parameters.add(String.valueOf(userId));
       return loadProjects(dbMapper.load(sql, parameters));
-
     }
-
-
 }

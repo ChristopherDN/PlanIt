@@ -13,6 +13,7 @@ public class RepoTask {
   String sql;
   ArrayList<Task> tasks = new ArrayList<>();
 
+  //Manipulate Resultset to data we can use
   public ArrayList<Task> loadTasks(ResultSet rs){
     try {
       tasks.clear();
@@ -27,6 +28,7 @@ public class RepoTask {
     return tasks;
   }
 
+  //Db Do something.
   public ArrayList<Task> getTasks(int projectId){
     sql ="select name, start, finish, budget from PlanIt.Tasks where project_Id = ?";
     parameters.clear();

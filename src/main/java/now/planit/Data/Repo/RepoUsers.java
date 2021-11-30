@@ -13,6 +13,7 @@ public class RepoUsers {
   ArrayList<String> parameters = new ArrayList<>();
   int userId;
 
+  //Manipulate ResultSet to other type of data
   public int getId(ResultSet rs){
     try {
       while (rs.next()) {
@@ -36,6 +37,8 @@ public class RepoUsers {
     return user;
   }
 
+
+  //Do Something to Database
   public void registerUser(String name, String email, String password) {
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     parameters.clear();
