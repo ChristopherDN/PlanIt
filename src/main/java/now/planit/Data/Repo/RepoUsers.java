@@ -1,67 +1,19 @@
 package now.planit.Data.Repo;
 
-import now.planit.Data.Utility.DBManager;
 import now.planit.Domain.Models.User;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class RepoUsers implements RepoInterface {
-  Connection connection;
-  PreparedStatement ps;
-  ResultSet rs;
+public class RepoUsers {
+  DBMapper dbMapper = new DBMapper();
   User user;
   String sql;
   ArrayList<String> parameters = new ArrayList<>();
   int userId;
 
-  @Override
-  public PreparedStatement checkConnection(String sqlCommand) {
-    try {
-      connection = DBManager.getConnection();
-      ps = connection.prepareStatement(sqlCommand);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return ps;
-  }
-
-  @Override
-  public PreparedStatement setParameters(ArrayList<String> parameters) {
-    try {
-      for (int i = 0; i < parameters.size(); i++) {
-        ps.setString(i + 1, parameters.get(i));
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return ps;
-  }
-
-  @Override
-  public void save(String sqlCommand, ArrayList<String> parameters) {
-    try {
-      ps = checkConnection(sqlCommand);
-      setParameters(parameters).execute();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
-
-  @Override
-  public ResultSet load(String sqlCommand, ArrayList<String> parameters) {
-    try {
-      ps = checkConnection(sqlCommand);
-      rs = setParameters(parameters).executeQuery();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    return rs;
-  }
-
+  //Manipulate ResultSet to other type of data
   public int getId(ResultSet rs){
     try {
       while (rs.next()) {
@@ -85,13 +37,15 @@ public class RepoUsers implements RepoInterface {
     return user;
   }
 
+
+  //Do Something to Database
   public void registerUser(String name, String email, String password) {
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     parameters.clear();
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
-    save(sql, parameters);
+    dbMapper.save(sql, parameters);
   }
 
   public User validateLogin(String email, String password) {
@@ -99,7 +53,7 @@ public class RepoUsers implements RepoInterface {
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
-   return getUser(load(sql, parameters));
+   return getUser(dbMapper.load(sql, parameters));
   }
 
 
@@ -108,6 +62,6 @@ public class RepoUsers implements RepoInterface {
     parameters.clear();
     parameters.add(user.getEmail());
     parameters.add(user.getPassword());
-    return getId(load(sql, parameters));
+    return getId(dbMapper.load(sql, parameters));
   }
 }

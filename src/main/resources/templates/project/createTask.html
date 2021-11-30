@@ -8,25 +8,25 @@
 
 <th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
 <body>
-<h1>Welcome <p th:text="${username}"></p> <br>Here are your projects!!!<br> </h1>
+<h1>Welcome <p th:text="${userName}"></p> <br>Here are your Tasks!<br> </h1>
 
 <table style = "margin-top: 20px;">
     <tr>
-        <th>Project Number:</th>
-        <th>Project Name</th>
+        <th>Task Number:</th>
+        <th>Task Name</th>
         <th>Start</th>
         <th>Finish</th>
         <th>Estimated budget</th>
-        <th>Update project</th>
+        <th>Update Task</th>
     </tr>
     <tr>
         <form action="/createProject" method="post">
             <td></td>
-            <td><input type="text" name="name"></td>
+            <td><input type="text" name="Task"></td>
             <td><input type="date" name="start"></td>
             <td><input type="date" name="finish"></td>
             <td><input type="text" name="budget"></td>
-            <td><input type="submit" class="like" value="Add Project"></td>
+            <td><input type="submit" class="like" value="Add Task"></td>
         </form>
     </tr>
 
