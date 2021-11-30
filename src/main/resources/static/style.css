@@ -1,3 +1,31 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+#tr1:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#table1 {
+    counter-reset: rowNumber;
+}
+table #tr1 {
+    counter-increment: rowNumber;
+}
+table #tr1 td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+
 html {
     margin: 0px;
     padding: 0px;
