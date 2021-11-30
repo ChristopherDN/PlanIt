@@ -1,4 +1,6 @@
 package now.planit.Domain.Services;
 
-public class ProjectService{
-}
+public class ProjectService {
+
+    }
+
