@@ -120,20 +120,12 @@ footer {
 #container {
     background-color: #ffffff;
     padding: 50px;
-    width: 900px;
+    width: 975px;
     min-height: 68vh;
     margin: auto;
     text-align: center;
 }
 
-#bio-left {
-    max-width: 400px;
-
-}
-
-#bio-right {
-    max-width: 400px;
-}
 
 #input-form {
     font-size: 20px;
@@ -144,7 +136,7 @@ footer {
     padding: 50px;
 }
 
-.form-control {
+.form-manager {
     font-size: 15px;
     border-radius: 4px;
     border: 1px solid #AAAAAA;
