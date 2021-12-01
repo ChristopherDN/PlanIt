@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
@@ -18,8 +19,10 @@ public class TaskController {
   ArrayList<Task> tasks = new ArrayList();
 
   @GetMapping("/createTask")
-  public String createTasks(Model model) {
+  public String createTasks(WebRequest request, Model model) {
+    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     model.addAttribute("userName", user.getName());
+    model.addAttribute("tasks", tasks);
     return "/project/createTask";
   }
 
@@ -30,6 +33,16 @@ public class TaskController {
     model.addAttribute("userName", user.getName());
     tasks = taskService.getTasks(id, user);
     return "redirect:/createTask";
+  }
+
+  @PostMapping("/createTask")
+  public String createTask(WebRequest request, Model model) {
+    //taskService.createTask(request.getParameter("name"),
+            request.getParameter("start"),
+            request.getParameter("finish"),
+            Integer.parseInt(request.getParameter("budget")), user);
+    model.addAttribute("loopList", tasks);
+    return "redirect:/myProjects";
   }
 
 

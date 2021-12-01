@@ -33,11 +33,11 @@
 
     <tr id="tr1" th:border="1" th:each="task : ${tasks}">
         <td></td>
-        <td th:text="${task.getName()}"></td>
-        <td th:text="${task.getStart()}"></td>
-        <td th:text="${task.getFinish()}"></td>
-        <td th:text="${task.getBudget}"></td>
-        <td><form th:action="@{/update/{id}(id=${task.getName()})}" th:object="${task}">
+        <td th:text="${task.getTaskName()}"></td>
+        <td th:text="${task.getStartDate()}"></td>
+        <td th:text="${task.getFinishDate()}"></td>
+        <td th:text="${task.getCost()}"></td>
+        <td><form th:action="@{/update/{id}(id=${task.getTaskName()})}" th:object="${task}">
             <button type="submit">Update project</button>
         </form>
         </td>
