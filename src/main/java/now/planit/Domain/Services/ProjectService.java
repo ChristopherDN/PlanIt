@@ -20,4 +20,7 @@ public class ProjectService{
     }
 
 
+  public void deleteProject(String projectName, User user) {
+      dbFacade.deleteProject(projectName, user);
+  }
 }
