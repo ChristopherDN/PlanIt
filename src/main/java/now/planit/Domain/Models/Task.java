@@ -1,7 +1,7 @@
 package now.planit.Domain.Models;
 
 
-public class Task {
+public class Subtask {
   private String taskName;
   private String startDate;
   private String finishDate;

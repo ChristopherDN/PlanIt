@@ -14,6 +14,7 @@ public class DBFacade {
   RepoProject repoProject = new RepoProject();
   RepoUsers repoUsers = new RepoUsers();
   RepoTask repoTask = new RepoTask();
+  RepoSubtask repoSubtask = new RepoSubtask();
   int userId;
 
 
@@ -59,6 +60,12 @@ public class DBFacade {
   public void createTask(String taskName, String startDate, String finishDate, int cost, String projectName, User user) {
     repoTask.createTask(taskName, startDate, finishDate, cost, getProjectId(projectName, getUserId(user)));
   }
+
+  public ArrayList<Subtask> getSubtask(String taskName, User user) {
+    return repoSubtask.getSubtasks(getProjectId(taskName, getUserId(user)));
+
+  }
+
 
   //SUbTASKREPO
 

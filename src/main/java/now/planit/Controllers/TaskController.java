@@ -1,6 +1,5 @@
 package now.planit.Controllers;
 
-import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.TaskService;
 import org.springframework.stereotype.Controller;
