@@ -59,6 +59,20 @@ public class UserController {
     return "redirect:/";
   }
 
+  @GetMapping("/myPage")
+  public String myPage(Model model){
+    model.addAttribute("user", user);
+    return "login/myPage";
+  }
+
+  @PostMapping("/updateUser")
+  public String updateUser(WebRequest request){
+    String name = request.getParameter("name");
+    String email = request.getParameter("email");
+    System.out.println(name + " " + email);
+    return "redirect:/myPage";
+  }
+
 
 }
 
