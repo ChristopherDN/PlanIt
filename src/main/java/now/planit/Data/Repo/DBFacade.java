@@ -56,6 +56,10 @@ public class DBFacade {
   }
 
 
+  public void createTask(String taskName, String startDate, String finishDate, int cost, String projectName, User user) {
+    repoTask.createTask(taskName, startDate, finishDate, cost, getProjectId(projectName, getUserId(user)));
+  }
+
   //SUbTASKREPO
 
 

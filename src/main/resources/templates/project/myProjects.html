@@ -10,7 +10,8 @@
 <th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
 
 <Body>
-<center>
+<div id="container">
+    <div id="input-form">
     <h1>Welcome <p th:text="${userName}"></p> <br>Here are your projects!!!<br> </h1>
 
 <table style = "margin-top: 20px;">
@@ -25,10 +26,10 @@
     <tr>
         <form action="/createProject" method="post">
             <td></td>
-            <td><input type="text" name="name"></td>
-            <td><input type="date" name="start"></td>
-            <td><input type="date" name="finish"></td>
-            <td><input type="text" name="budget"></td>
+            <td><input type="text" name="name" required></td>
+            <td><input type="date" name="start" required></td>
+            <td><input type="date" name="finish" required></td>
+            <td><input type="text" name="budget" required></td>
             <td><input type="submit" class="like" value="Add Project"></td>
         </form>
     </tr>
@@ -45,8 +46,8 @@
         </td>
     </tr>
 </table>
-</center>
-
+</div>
+</div>
 </body>
 
 </div>

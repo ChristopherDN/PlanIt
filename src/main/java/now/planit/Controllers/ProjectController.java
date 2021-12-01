@@ -38,6 +38,7 @@ public class ProjectController {
             request.getParameter("finish"),
             Integer.parseInt(request.getParameter("budget")), user);
         model.addAttribute("loopList", projects);
+        //model.addAttribute("userName", user.getName());
         return "redirect:/myProjects";
     }
 
