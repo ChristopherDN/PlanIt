@@ -5,9 +5,9 @@ public class Task {
   private String taskName;
   private String startDate;
   private String finishDate;
-  private String cost;
+  private int cost;
 
-  public Task(String taskName, String startDate, String finishDate, String cost) {
+  public Task(String taskName, String startDate, String finishDate, int cost) {
     this.taskName = taskName;
     this.startDate = startDate;
     this.finishDate = finishDate;
@@ -38,11 +38,11 @@ public class Task {
     this.finishDate = finishDate;
   }
 
-  public String getCost() {
+  public int getCost() {
     return cost;
   }
 
-  public void setCost(String cost) {
+  public void setCost(int cost) {
     this.cost = cost;
   }
 }

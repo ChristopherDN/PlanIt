@@ -19,7 +19,7 @@ public class RepoTask {
       tasks.clear();
       while (rs.next()) {
         tasks.add(new Task(rs.getString(1), rs.getString(2),
-                rs.getString(3), rs.getString(4)));
+                rs.getString(3), rs.getInt(4)));
 
       }
     } catch (SQLException ex) {
