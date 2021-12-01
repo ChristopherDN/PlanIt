@@ -12,15 +12,19 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
 
+
+
 @Controller
 public class TaskController {
   User user;
   TaskService taskService = new TaskService();
   ArrayList<Task> tasks = new ArrayList();
+  String projectName;
 
   @GetMapping("/createTask")
   public String createTasks(WebRequest request, Model model) {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+    tasks = taskService.getTasks(projectName, user);
     model.addAttribute("userName", user.getName());
     model.addAttribute("tasks", tasks);
     return "/project/createTask";
@@ -29,20 +33,24 @@ public class TaskController {
   @GetMapping("/update/{id}")
   public String updateProject(@PathVariable(value = "id") String id, WebRequest request, Model model) {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+    System.out.println("get" + user);
+    projectName = id;
     model.addAttribute("tasks", tasks);
     model.addAttribute("userName", user.getName());
     tasks = taskService.getTasks(id, user);
     return "redirect:/createTask";
   }
 
-  @PostMapping("/createTask")
+  @PostMapping("/createTaskParam")
   public String createTask(WebRequest request, Model model) {
-    //taskService.createTask(request.getParameter("name"),
-            request.getParameter("start"),
-            request.getParameter("finish"),
-            Integer.parseInt(request.getParameter("budget")), user);
-    model.addAttribute("loopList", tasks);
-    return "redirect:/myProjects";
+    System.out.println("post" + user);
+    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+    model.addAttribute("userName", user.getName());
+    taskService.createTask(request.getParameter("taskName"),
+            request.getParameter("startDate"),
+            request.getParameter("finishDate"),
+            Integer.parseInt(request.getParameter("cost")), projectName, user);
+    return "redirect:/createTask";
   }
 
 

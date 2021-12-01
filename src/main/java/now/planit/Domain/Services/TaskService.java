@@ -13,8 +13,13 @@ public class TaskService {
         return dbFacade.getTasks(projectName, user);
     }
 
-
-    public void createTaks(String projectName, String start, String finish, int budget, User user) {
-        dbFacade.createProject(projectName, start, finish,budget, user);
+    public void createTask(String taskName, String startDate, String finishDate, int cost, String projectName, User user) {
+        System.out.println("1" +taskName);
+        System.out.println("2" +startDate);
+        System.out.println("3" +finishDate);
+        System.out.println("4" +cost);
+        System.out.println("5" +projectName);
+        System.out.println("6" +user);
+        dbFacade.createTask(taskName, startDate, finishDate, cost, projectName, user);
     }
 }

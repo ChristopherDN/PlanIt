@@ -21,12 +21,12 @@
         <th>Update Task</th>
     </tr>
     <tr>
-        <form action="/createProject" method="post">
+        <form action="/createTaskParam" method="post">
             <td></td>
-            <td><input type="text" name="Task"></td>
-            <td><input type="date" name="start"></td>
-            <td><input type="date" name="finish"></td>
-            <td><input type="text" name="budget"></td>
+            <td><input type="text" name="taskName"></td>
+            <td><input type="date" name="startDate"></td>
+            <td><input type="date" name="finishDate"></td>
+            <td><input type="text" name="cost"></td>
             <td><input type="submit" class="like" value="Add Task"></td>
         </form>
     </tr>
@@ -38,7 +38,7 @@
         <td th:text="${task.getFinishDate()}"></td>
         <td th:text="${task.getCost()}"></td>
         <td><form th:action="@{/update/{id}(id=${task.getTaskName()})}" th:object="${task}">
-            <button type="submit">Update project</button>
+            <button type="submit">Add subtask</button>
         </form>
         </td>
     </tr>
