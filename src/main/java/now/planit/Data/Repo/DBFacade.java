@@ -9,7 +9,6 @@ import java.util.ArrayList;
 /**
  * @author Christopher
  */
-import java.util.ArrayList;
 
 public class DBFacade {
   RepoProject repoProject = new RepoProject();
@@ -50,6 +49,10 @@ public class DBFacade {
   //TaskREPO
   public ArrayList<Task> getTasks(String projectName, User user) {
     return repoTask.getTasks(getProjectId(projectName, getUserId(user)));
+  }
+
+  public void deleteProject(String projectName, User user) {
+    repoProject.deleteProject(getProjectId(projectName, getUserId(user)), getUserId(user));
   }
 
 
