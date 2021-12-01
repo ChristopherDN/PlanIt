@@ -30,7 +30,7 @@ public class RepoTask {
 
   //Db Do something.
   public ArrayList<Task> getTasks(int projectId){
-    sql ="select name, start, finish, budget from PlanIt.Tasks where project_Id = ?";
+    sql ="select name, start, finish, cost from PlanIt.Tasks where project_Id = ?";
     parameters.clear();
     parameters.add(String.valueOf(projectId));
     return loadTasks(dbMapper.load(sql,parameters));
