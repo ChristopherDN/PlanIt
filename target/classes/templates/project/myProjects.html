@@ -10,7 +10,8 @@
 <th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
 
 <Body>
-<center>
+<div id="container">
+    <div id="input-form">
     <h1>Welcome <p th:text="${userName}"></p> <br>Here are your projects!!!<br> </h1>
 
 <table style = "margin-top: 20px;">
@@ -45,8 +46,8 @@
         </td>
     </tr>
 </table>
-</center>
-
+</div>
+</div>
 </body>
 
 </div>

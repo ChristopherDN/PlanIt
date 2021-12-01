@@ -67,9 +67,12 @@ public class UserController {
 
   @PostMapping("/updateUser")
   public String updateUser(WebRequest request){
-    String name = request.getParameter("name");
-    String email = request.getParameter("email");
-    System.out.println(name + " " + email);
+    //Mangler noget for at sikre at Navn og email opdatere på siden MyPage, når man har ændret det.
+   /* user = (User) request.getAttribute("user", WebRequest.SCOPE_REQUEST);
+    model.addAttribute("user", user);*/
+    userService.editName(request.getParameter("name"), user);
+    userService.editMail(request.getParameter("email"), user);
+    userService.changePassword(request.getParameter("password"), user);
     return "redirect:/myPage";
   }
 
