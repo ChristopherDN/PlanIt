@@ -14,5 +14,7 @@ public class TaskService {
     }
 
 
-
+    public void createTaks(String projectName, String start, String finish, int budget, User user) {
+        dbFacade.createProject(projectName, start, finish,budget, user);
+    }
 }

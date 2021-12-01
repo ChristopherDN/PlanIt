@@ -19,7 +19,7 @@ public class RepoTask {
       tasks.clear();
       while (rs.next()) {
         tasks.add(new Task(rs.getString(1), rs.getString(2),
-                rs.getString(3), rs.getString(4)));
+                rs.getString(3), rs.getInt(4)));
 
       }
     } catch (SQLException ex) {
@@ -30,7 +30,7 @@ public class RepoTask {
 
   //Db Do something.
   public ArrayList<Task> getTasks(int projectId){
-    sql ="select name, start, finish, budget from PlanIt.Tasks where project_Id = ?";
+    sql ="select name, start, finish, cost from PlanIt.Tasks where project_Id = ?";
     parameters.clear();
     parameters.add(String.valueOf(projectId));
     return loadTasks(dbMapper.load(sql,parameters));
