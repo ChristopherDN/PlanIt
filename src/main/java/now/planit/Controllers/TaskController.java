@@ -18,7 +18,8 @@ public class TaskController {
   ArrayList<Task> tasks = new ArrayList();
 
   @GetMapping("/createTask")
-  public String createTasks() {
+  public String createTasks(Model model) {
+    model.addAttribute("userName", user.getName());
     return "/project/createTask";
   }
 
