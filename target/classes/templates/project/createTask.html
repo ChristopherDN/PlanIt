@@ -38,6 +38,8 @@
         <td th:text="${task.getStartDate()}"></td>
         <td th:text="${task.getFinishDate()}"></td>
         <td th:text="${task.getCost()}"></td>
+    <tr id="tr2" th:border="1" th:each="subtask : ${subtasks}">
+</tr>
         <td><form th:action="@{/update/{id}(id=${task.getTaskName()})}" th:object="${task}">
             <button type="submit">Add subtask</button>
         </form>

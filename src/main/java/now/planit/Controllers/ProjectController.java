@@ -26,7 +26,7 @@ public class ProjectController {
         model.addAttribute("loopList", projects);
        // model.addAttribute("project", project); Den her er ikke nødvendig. Den kender til den igennem ArrayListen med Projects :)
         model.addAttribute("userName", user.getName());
-        return "project/myProjects";
+        return "project/project";// endpoint change
     }
 
 

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project</title>
+<body>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .collapsible {
+      background-color: #777;
+      color: white;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .active, .collapsible:hover {
+      background-color: #555;
+    }
+
+    .content {
+      padding: 0 18px;
+      display: none;
+      overflow: hidden;
+      background-color: #f1f1f1;
+    }
+  </style>
+
+
+<h2>Project</h2>
+
+<p>A Collapsible:</p>
+<button type="button" class="collapsible">Project</button>
+  <table style = "margin-top: 20px;">
+      <tr>
+          <th>Project Number:</th>
+          <th>Project Name</th>
+          <th>Start</th>
+          <th>Finish</th>
+          <th>Estimated budget</th>
+          <th>Update project</th>
+      </tr>
+      <tr>
+          <form action="/createProject" method="post">
+              <td></td>
+              <td><input type="text" name="name" required></td>
+              <td><input type="date" name="start" required></td>
+              <td><input type="date" name="finish" required></td>
+              <td><input type="text" name="budget" required></td>
+              <td><input type="submit" class="like" value="Add Project"></td>
+          </form>
+      </tr>
+
+      <tr id="tr1" th:border="1" th:each="project : ${loopList}">
+          <td></td>
+          <td th:text="${project.getName()}"></td>
+          <td th:text="${project.getStart()}"></td>
+          <td th:text="${project.getFinish()}"></td>
+          <td th:text="${project.getBudget}"></td>
+          <td><form th:action="@{/update/{id}(id=${project.getName()})}" th:object="${project}">
+              <button type="submit">Update project</button>
+          </form>
+          </td>
+      </tr>
+  </table>
+<div class="content">
+    <button type="button" class="collapsible">Task</button>
+    <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div></div>
+
+<p>Collapsible Set:</p>
+<button type="button" class="collapsible">Open Section 1</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<button type="button" class="collapsible">Open Section 2</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<button type="button" class="collapsible">Open Section 3</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
+</body>
+</html>

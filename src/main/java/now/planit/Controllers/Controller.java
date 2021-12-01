@@ -30,4 +30,10 @@ public class Controller {
     return "info/about";
   }
 
+
+  @GetMapping("/project")
+  public String project() {
+    return "project/project";
+  }
+
 }

@@ -13,7 +13,7 @@ public class SubtaskService {
         return dbFacade.getSubtask(taskName, user);
     }
 
-    public void createTask(String subtaskName, String startDate, String finishDate, int cost, String taskName, User user) {
+    public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, String taskName, User user) {
         dbFacade.createTask(subtaskName, startDate, finishDate, cost, taskName, user);
     }
 }
