@@ -60,6 +60,24 @@ public class UserController {
     return "redirect:/";
   }
 
+  @GetMapping("/myPage")
+  public String myPage(Model model) {
+    model.addAttribute("user", user);
+    return "login/myPage";
+  }
+
+  @PostMapping("/updateUser")
+  public String updateUser(WebRequest request, Model model) {
+    //Mangler noget for at sikre at Navn og email opdatere på siden MyPage, når man har ændret det.
+    //user = (User) request.getAttribute("user", WebRequest.SCOPE_REQUEST); Den her crasher programmet
+
+    userService.editName(request.getParameter("name"), user);
+    userService.editMail(request.getParameter("email"), user);
+    userService.changePassword(request.getParameter("password"), user);
+    model.addAttribute("user", user);
+    return "redirect:/myPage";
+  }
+
 
 }
 

@@ -1,8 +1,6 @@
 package now.planit.Data.Repo;
 
 import now.planit.Data.Utility.DBManager;
-import now.planit.Domain.Models.Project;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
