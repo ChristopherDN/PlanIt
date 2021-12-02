@@ -77,8 +77,38 @@
 <p>Collapsible Set:</p>
 <button type="button" class="collapsible">Open Section 1</button>
 <div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
+    <table style = "margin-top: 20px;">
+        <tr>
+            <th>Project Number:</th>
+            <th>Project Name</th>
+            <th>Start</th>
+            <th>Finish</th>
+            <th>Estimated budget</th>
+            <th>Update project</th>
+        </tr>
+        <tr>
+            <form action="/createProject" method="post">
+                <td></td>
+                <td><input type="text" name="name" required></td>
+                <td><input type="date" name="start" required></td>
+                <td><input type="date" name="finish" required></td>
+                <td><input type="text" name="budget" required></td>
+                <td><input type="submit" class="like" value="Add Project"></td>
+            </form>
+        </tr>
+
+        <tr id="tr1" th:border="1" th:each="project : ${loopList}">
+            <td></td>
+            <td th:text="${project.getName()}"></td>
+            <td th:text="${project.getStart()}"></td>
+            <td th:text="${project.getFinish()}"></td>
+            <td th:text="${project.getBudget}"></td>
+            <td><form th:action="@{/update/{id}(id=${project.getName()})}" th:object="${project}">
+                <button type="submit">Update project</button>
+            </form>
+            </td>
+        </tr>
+    </table></div>
 <button type="button" class="collapsible">Open Section 2</button>
 <div class="content">
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
