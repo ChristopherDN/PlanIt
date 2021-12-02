@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>Create Task</title>
+</head>
+
+<th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
+<body>
+<center>
+    <h1>Welcome <p th:text="${userName}"></p> <br>Here are your subtasks!<br> </h1>
+
+    <table style = "margin-top: 20px;">
+        <tr>
+            <th>Task Number:</th>
+            <th>Task Name</th>
+            <th>Start</th>
+            <th>Finish</th>
+            <th>Estimated budget</th>
+            <th></th>
+        </tr>
+        <tr>
+            <form action="/createSubtaskParam" method="post">
+                <td></td>
+                <td><input type="text" name="subtaskName"></td>
+                <td><input type="date" name="startDate"></td>
+                <td><input type="date" name="finishDate"></td>
+                <td><input type="text" name="cost"></td>
+                <td><input type="submit" class="like" value="Add Subtask"></td>
+            </form>
+        </tr>
+
+        <tr id="tr1" th:border="1" th:each="subtask : ${subtasks}">
+            <td></td>
+            <td th:text="${subtask.getSubtaskName()}"></td>
+            <td th:text="${subtask.getStartDate()}"></td>
+            <td th:text="${subtask.getFinishDate()}"></td>
+            <td th:text="${subtask.getCost()}"></td>
+            <td><form>
+                <button type="submit">Remove subtask</button>
+            </form>
+            </td>
+        </tr>
+    </table>
+</center>
+</body>
+<th:block th:include="/htmlFragment/footer :: footer"></th:block>
+</html>

@@ -1,6 +1,7 @@
 package now.planit.Controllers;
 
 import now.planit.Domain.Models.User;
+import now.planit.Domain.Services.ExceptionService;
 import now.planit.Domain.Services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String register(WebRequest request) {
+  public String register(WebRequest request) throws ExceptionService {
     userService.registerUser(
         request.getParameter("name"),
         request.getParameter("email"),

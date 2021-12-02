@@ -12,6 +12,7 @@ public class RepoTask {
   ArrayList<String> parameters = new ArrayList<>();
   String sql;
   ArrayList<Task> tasks = new ArrayList<>();
+  int taskId;
 
   //Manipulate Resultset to data we can use
   public ArrayList<Task> loadTasks(ResultSet rs){
@@ -27,6 +28,17 @@ public class RepoTask {
     }
     return tasks;
   }
+
+    public int getId(ResultSet rs){
+        try {
+            while (rs.next()) {
+                taskId = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return taskId;
+    }
 
   //Db Do something.
   public ArrayList<Task> getTasks(int projectId){
@@ -47,6 +59,15 @@ public class RepoTask {
       parameters.add(String.valueOf(projectId));
       dbMapper.save(sql,parameters);
   }
+
+    public int getTaskId(String taskName, int projectId) {
+        sql ="select id from PlanIt.Tasks where name = ? and project_id = ?";
+        parameters.clear();
+        parameters.add(taskName);
+        parameters.add(String.valueOf(projectId));
+        return getId(dbMapper.load(sql,parameters));
+
+    }
 }
 
 

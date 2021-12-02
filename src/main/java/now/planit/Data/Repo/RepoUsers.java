@@ -1,6 +1,8 @@
 package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.User;
+import now.planit.Domain.Services.ExceptionService;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -39,13 +41,28 @@ public class RepoUsers {
 
 
   //Do Something to Database
-  public void registerUser(String name, String email, String password) {
+  public void registerUser(String name, String email, String password) throws ExceptionService {
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     parameters.clear();
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
     dbMapper.save(sql, parameters);
+    /* Eksempel på Exception
+    try{
+      dbMapper.save(sql, parameters);
+    }catch(ExceptionService e){
+
+      try{
+        dbMapper.save(sql, parameters);
+      }catch(ExceptionService e){
+        throw new Exception("Database unavailable");
+
+      }
+    }
+
+     */
+
   }
 
   public User validateLogin(String email, String password) {

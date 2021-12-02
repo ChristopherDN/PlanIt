@@ -1,8 +1,10 @@
 package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.Project;
+import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
+import now.planit.Domain.Services.ExceptionService;
 
 import java.util.ArrayList;
 
@@ -14,11 +16,12 @@ public class DBFacade {
   RepoProject repoProject = new RepoProject();
   RepoUsers repoUsers = new RepoUsers();
   RepoTask repoTask = new RepoTask();
+  RepoSubtask repoSubtask = new RepoSubtask();
   int userId;
 
 
   //UserREPO
-  public void registerUser(String name, String email, String password) {
+  public void registerUser(String name, String email, String password) throws ExceptionService {
     repoUsers.registerUser(name, email, password);
 
   }
@@ -51,6 +54,11 @@ public class DBFacade {
     return repoTask.getTasks(getProjectId(projectName, getUserId(user)));
   }
 
+  public int getTaskId(String taskName, int userId) {
+    return repoTask.getTaskId(taskName, userId);
+  }
+
+
   public void deleteProject(String projectName, User user) {
     repoProject.deleteProject(getProjectId(projectName, getUserId(user)), getUserId(user));
   }
@@ -59,6 +67,16 @@ public class DBFacade {
   public void createTask(String taskName, String startDate, String finishDate, int cost, String projectName, User user) {
     repoTask.createTask(taskName, startDate, finishDate, cost, getProjectId(projectName, getUserId(user)));
   }
+
+  public ArrayList<Subtask> getSubtask(String taskName, User user) {
+    return repoSubtask.getSubtasks(getTaskId(taskName, getUserId(user)));
+
+  }
+
+  public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, String taskName, User user) {
+    repoSubtask.createSubtask(subtaskName, startDate, finishDate, cost, getTaskId(taskName, getUserId(user)));
+  }
+
 
   //SUbTASKREPO
 

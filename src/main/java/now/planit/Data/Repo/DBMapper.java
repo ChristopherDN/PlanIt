@@ -46,6 +46,7 @@ public class DBMapper {
       ps = checkConnection(sqlCommand);
       setParameters(parameters).execute();
     } catch (SQLException e) {
+      //Eksempel : throw new exceptionsService("Database unavailable");
       e.printStackTrace();
     }
   }
