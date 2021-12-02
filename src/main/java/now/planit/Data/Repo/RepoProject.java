@@ -70,9 +70,10 @@ public class RepoProject {
 
 
   public void deleteProject(int projectId, int userId) {
-    sql = "delete from PlanIt.Projects where  id = ? and User_id = ?";
+    sql = "delete from PlanIt.Projects where id = ? and User_id = ?";
     parameters.clear();
     parameters.add(String.valueOf(projectId));
     parameters.add(String.valueOf(userId));
+    dbMapper.save(sql, parameters);
   }
 }
