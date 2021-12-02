@@ -7,9 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * @author Christopher
- */
+
 public class RepoSubtask {
     DBMapper dbMapper = new DBMapper();
     ArrayList<String> parameters = new ArrayList<>();
@@ -62,11 +60,11 @@ public class RepoSubtask {
         parameters.add(String.valueOf(taskId));
         dbMapper.save(sql,parameters);
     }
-    public int getSubtaskId(String subtaskName, int projectId) {
-        sql ="select id from PlanIt.Subtasks where name = ? and project_id = ?";
+    public int getSubtaskId(String subtaskName, int taskId) {
+        sql ="select id from PlanIt.Subtasks where name = ? and task_id = ?";
         parameters.clear();
         parameters.add(subtaskName);
-        parameters.add(String.valueOf(projectId));
+        parameters.add(String.valueOf(taskId));
         return getId(dbMapper.load(sql,parameters));
     }
 
