@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Project</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="javascript.js"></script>
+    <title>Index</title>
+</head>
+
+<th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
 <body>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +19,7 @@
       padding: 18px;
       width: 100%;
       border: none;
-      text-align: left;
+      text-align: center;
       outline: none;
       font-size: 15px;
     }
@@ -25,68 +30,75 @@
 
     .content {
       padding: 0 18px;
+        width: 100%;
       display: none;
       overflow: hidden;
       background-color: #f1f1f1;
     }
+
+    .collapsible:after {
+        content: '\02795'; /* Unicode character for "plus" sign (+) */
+        font-size: 13px;
+        color: white;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\2796"; /* Unicode character for "minus" sign (-) */
+    }
   </style>
 
 
-<h2>Project</h2>
+  <!-- onsubmit="click" Project loop 1  -->
+  <div th:border="1" th:each="project : ${loopList}">
+      <form method="post" th:action="@{/chooseProject/{id}(id=${project.getName()})}" th:object="${project}"   >
+          <!-- måske en nested form -->
+          <!-- måske kan script passe info til metode-->
+  <button type="button" onclick="click"   class="collapsible"><p th:text="${project.getName()}"></p></button>
+          <input type="hidden" name="id" th:value="${project.getName()}" required>
 
-<p>A Collapsible:</p>
-<button type="button" class="collapsible">Project</button>
-  <table style = "margin-top: 20px;">
-      <tr>
-          <th>Project Number:</th>
-          <th>Project Name</th>
-          <th>Start</th>
-          <th>Finish</th>
-          <th>Estimated budget</th>
-          <th>Update project</th>
-      </tr>
-      <tr>
-          <form action="/createProject" method="post">
-              <td></td>
-              <td><input type="text" name="name" required></td>
-              <td><input type="date" name="start" required></td>
-              <td><input type="date" name="finish" required></td>
-              <td><input type="text" name="budget" required></td>
-              <td><input type="submit" class="like" value="Add Project"></td>
-          </form>
-      </tr>
 
-      <tr id="tr1" th:border="1" th:each="project : ${loopList}">
-          <td></td>
-          <td th:text="${project.getName()}"></td>
-          <td th:text="${project.getStart()}"></td>
-          <td th:text="${project.getFinish()}"></td>
-          <td th:text="${project.getBudget}"></td>
-          <td><form th:action="@{/update/{id}(id=${project.getName()})}" th:object="${project}">
-              <button type="submit">Update project</button>
-          </form>
-          </td>
-      </tr>
-  </table>
-<div class="content">
-    <button type="button" class="collapsible">Task</button>
-    <div class="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div></div>
+          <div class="content">
+      <span> Project start: <span th:text="${project.getStart()}"></span></span>
+      <br>
+      <span> Project end: <span th:text="${project.getFinish()}"></span></span>
+      <br>
+      <span> Estimated budget: <span th:text="${project.getBudget()}"></span></span>
 
-<p>Collapsible Set:</p>
-<button type="button" class="collapsible">Open Section 1</button>
-<div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-<button type="button" class="collapsible">Open Section 2</button>
-<div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-<button type="button" class="collapsible">Open Section 3</button>
-<div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
+      <!-- Task loop 2-->
+      <div th:border="1" th:each="task : ${tasks}">
+          <form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
+          <button type="button" class="collapsible"><p th:text="${task.getTaskName()}"></p></button>
+          <div class="content">
+              <span> Task start: <span th:text="${task.getStartDate()}"></span></span>
+              <br>
+              <span> Task end: <span th:text="${task.getFinishDate()}"></span></span>
+              <br>
+              <span> Estimated cost: <span th:text="${task.getCost()}"></span></span>
+
+
+              <!-- SubTask loop 3-->
+              <div th:border="1" th:each="subtask : ${subtasks}">
+                  <button type="button" class="collapsible"><p th:text="${subtask.getSubtaskName()}"></p></button>
+                  <div class="content">
+                      <span> Subtask start: <span th:text="${subtask.getStartDate()}"></span></span>
+                      <br>
+                      <span> Subtask end: <span th:text="${project.getFinish()}"></span></span>
+                      <br>
+                      <span> Estimated cost: <span th:text="${project.getBudget()}"></span></span>
+                  </div></div></div></form></div></div></form></div>
+  <!-- Hvis vi bruger Button, kan vi ikke køre den form, hvis vi bruger submit, kan vi godt bruge form, som sender id videre.
+   men så har den svært ved at komme tilbage på siden /endpoint. 3-->
+
+  <!-- Hvis vi skal køre det på den her måde (hvilket ser ret nice ud) så skal
+  vi ændre i vores flow i vores Controllere. Alle metoder skal nok laves om og klasserne skal merges en smule.-->
+
+  <!-- Vi skal generelt tænke flowet anderledes, da "alt" data skal være tilgængelig fra start og der skal være
+  mulighed for at tilføje mere data, hvilket er ret ligetil. -->
+
+
+
 
 <script>
   var coll = document.getElementsByClassName("collapsible");
@@ -108,4 +120,7 @@
 </body>
 </html>
 </body>
+<div id="footer">
+    <th:block th:include="/htmlFragment/footer :: footer"></th:block>
+</div>
 </html>
