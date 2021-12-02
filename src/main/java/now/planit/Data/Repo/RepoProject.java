@@ -42,7 +42,7 @@ public class RepoProject {
 
   //DB do something
   public void createProject(String projectName, String start, String finish, int budget, int userId) {
-    sql = "insert into PlanIt.Projects(name, start, finish, cost, User_id) values(?,?,?,?,?) ";
+    sql = "insert into PlanIt.Projects(name, start, finish, budget, User_id) values(?,?,?,?,?) ";
     parameters.clear();
     parameters.add(projectName);
     parameters.add(start);
@@ -61,7 +61,7 @@ public class RepoProject {
     }
 
   public ArrayList<Project> getProjects(int userId) {
-      sql = "select name, start, finish, cost from PlanIt.Projects where User_id = ? ";
+      sql = "select name, start, finish, budget from PlanIt.Projects where User_id = ? ";
       parameters.clear();
       parameters.add(String.valueOf(userId));
       return loadProjects(dbMapper.load(sql, parameters));
