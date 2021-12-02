@@ -43,9 +43,8 @@ public class RepoSubtask {
         return subtaskId;
     }
 
-    //Db Do something.
+    //Db Do something. TODO FIX DEN HER, TASKID som den modtager er altid 5
     public ArrayList<Subtask> getSubtasks(int taskId){
-        System.out.println(taskId);
         sql ="select name, start, finish, cost from PlanIt.Subtasks where task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
@@ -57,8 +56,8 @@ public class RepoSubtask {
         sql="insert into PlanIt.Subtasks (name, start, finish, cost, task_id) values (?, ?, ?, ?, ?)";
         parameters.clear();
         parameters.add(subtaskName);
-        parameters.add(startDate);
-        parameters.add(finishDate);
+        parameters.add(String.valueOf(startDate));
+        parameters.add(String.valueOf(finishDate));
         parameters.add(String.valueOf(cost));
         parameters.add(String.valueOf(taskId));
         dbMapper.save(sql,parameters);

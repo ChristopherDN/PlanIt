@@ -38,7 +38,6 @@ public class SubtaskController {
         return "redirect:/createSubtask";
     }
 
-
     //Endpoint that stores parameters from task and pass them down to the service.
     @PostMapping("/createSubtaskParam")
     public String createSubtask(WebRequest request, Model model) {
