@@ -16,4 +16,8 @@ public class SubtaskService {
     public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, String taskName, User user) {
         dbFacade.createSubtask(subtaskName, startDate, finishDate, cost, taskName, user);
     }
+
+    public void deleteTask(String subtaskName, User user) {
+        dbFacade.deleteSubtask(subtaskName, user);
+    }
 }

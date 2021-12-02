@@ -76,7 +76,15 @@ public class RepoTask {
     parameters.add(String.valueOf(projectId));
     dbMapper.save(sql, parameters);
   }
+
+  public int getTaskId2(int subtaskId, int projectId) {
+    sql ="select id from PlanIt.Tasks where id = ? and project_id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(subtaskId));
+    parameters.add(String.valueOf(projectId));
+    return getId(dbMapper.load(sql,parameters));
   }
+}
 
 
 
