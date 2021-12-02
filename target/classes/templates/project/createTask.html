@@ -18,6 +18,8 @@
         <th>Start</th>
         <th>Finish</th>
         <th>Estimated budget</th>
+        <th>Update task</th>
+        <th>Delete</th>
         <th></th>
     </tr>
     <tr>
@@ -28,6 +30,7 @@
             <td><input type="date" name="finishDate"></td>
             <td><input type="text" name="cost"></td>
             <td><input type="submit" class="like" value="Add Task"></td>
+            <td><input type="reset" class="like" value="Reset"></td>
         </form>
     </tr>
 
@@ -39,6 +42,10 @@
         <td th:text="${task.getCost()}"></td>
         <td><form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
             <button type="submit">Add subtask</button>
+        </form>
+        </td>
+        <td><form th:action="@{/removeTask/{id}(id=${task.getTaskName()})}" th:object="${task}">
+            <button type="submit">Delete</button>
         </form>
         </td>
     </tr>
