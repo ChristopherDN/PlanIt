@@ -33,7 +33,7 @@ public class RepoSubtask {
 
     //Db Do something.
     public ArrayList<Subtask> getSubtasks(int taskId){
-        sql ="select name, start, finish, cost from PlanIt.Subtasks where id = ?";
+        sql ="select name, start, finish, cost from PlanIt.Subtasks where task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
         return loadSubtasks(dbMapper.load(sql,parameters));

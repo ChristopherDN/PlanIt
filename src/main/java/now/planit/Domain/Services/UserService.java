@@ -22,17 +22,21 @@ public class UserService {
     */
    return dbFacade.validateLogin(email, password);
   }
-
-
-  public void editName(String name, User user) {
-    dbFacade.editName(name, user);
+  public void editName(String newName, User user) {
+    if (!newName.equals(user.getName()) && !newName.equals("")){
+      dbFacade.editName(newName, user);
+    }
   }
 
-  public void editMail(String email, User user) {
-    dbFacade.editMail(email, user);
+  public void editMail(String newEmail, User user) {
+    if (!newEmail.equals(user.getName()) && !newEmail.equals("")){
+      dbFacade.editMail(newEmail, user);
+    }
   }
 
-  public void changePassword(String password, User user) {
-    dbFacade.changePassword(password, user);
+  public void changePassword(String newPassword, User user) {
+    if (!newPassword.equals(user.getName()) && !newPassword.equals("")) {
+      dbFacade.changePassword(newPassword, user);
+    }
   }
 }

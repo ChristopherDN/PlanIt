@@ -23,7 +23,6 @@ public class DBFacade {
   //UserREPO
   public void registerUser(String name, String email, String password) {
     repoUsers.registerUser(name, email, password);
-
   }
 
   public User validateLogin(String email, String password) {
@@ -47,7 +46,6 @@ public class DBFacade {
   }
 
 
-
   //ProjectREPO
 
   public void createProject(String name1, String start, String finish, int budget, User user) {
@@ -58,10 +56,17 @@ public class DBFacade {
     return repoProject.getProjectId(projectName, userId);
   }
 
+  public int getProjectId2(int taskId, int userId) {
+    return repoProject.getProjectId2(taskId, userId);
+  }
+
   public ArrayList<Project> getProjects(User user) {
     return repoProject.getProjects(repoUsers.getUserId(user));
   }
 
+  public void deleteProject(String projectName, User user) {
+    repoProject.deleteProject(getProjectId(projectName, getUserId(user)), getUserId(user));
+  }
 
   //TaskREPO
   public ArrayList<Task> getTasks(String projectName, User user) {
@@ -72,15 +77,15 @@ public class DBFacade {
     return repoTask.getTaskId(taskName, userId);
   }
 
-
-  public void deleteProject(String projectName, User user) {
-    repoProject.deleteProject(getProjectId(projectName, getUserId(user)), getUserId(user));
-  }
-
-
   public void createTask(String taskName, String startDate, String finishDate, int cost, String projectName, User user) {
     repoTask.createTask(taskName, startDate, finishDate, cost, getProjectId(projectName, getUserId(user)));
   }
+
+  public void deleteTask(String taskName, User user) {
+    repoTask.deleteTask(getTaskId(taskName, getUserId(user)), getProjectId2(getTaskId(taskName, getUserId(user)), getUserId(user)));
+  }
+
+  //SUbTASKREPO
 
   public ArrayList<Subtask> getSubtask(String taskName, User user) {
     return repoSubtask.getSubtasks(getTaskId(taskName, getUserId(user)));
@@ -91,10 +96,6 @@ public class DBFacade {
     repoSubtask.createSubtask(subtaskName, startDate, finishDate, cost, getTaskId(taskName, getUserId(user)));
   }
 
-
-
-
-  //SUbTASKREPO
 
 
 }

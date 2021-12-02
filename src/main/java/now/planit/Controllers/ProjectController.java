@@ -49,11 +49,11 @@ public class ProjectController {
         return "redirect:/myProjects";
     }
 
-    @GetMapping("/remove/{id}")
-    public String deleteProduct(@PathVariable(value = "id") String id, Model model) {
+    @GetMapping("/removeProject/{id}")
+    public String deleteProject(@PathVariable(value = "id") String id, Model model) {
         projectService.deleteProject(id, user);
         projects = projectService.getProjects(user);
         model.addAttribute("loopList", projects);
-        return "redirect:/addproduct";
+        return "redirect:/myProjects";
     }
 }

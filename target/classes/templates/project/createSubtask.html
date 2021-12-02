@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <title>Create Task</title>
+    <title>Create Subtask</title>
 </head>
 
 <th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
@@ -13,8 +13,8 @@
 
     <table style = "margin-top: 20px;">
         <tr>
-            <th>subtask Number:</th>
-            <th>Task Name</th>
+            <th>Subtask Number:</th>
+            <th>Subtask Name</th>
             <th>Start</th>
             <th>Finish</th>
             <th>Estimated budget</th>
@@ -37,8 +37,8 @@
             <td th:text="${subtask.getStartDate()}"></td>
             <td th:text="${subtask.getFinishDate()}"></td>
             <td th:text="${subtask.getCost()}"></td>
-            <td><form th:action="@{/rerun/{id}(id=${subtask.getSubtaskName()})}" th:object="${subtasks}">
-            <button type="submit">Remove subtask</button>
+            <td><form>
+                <button type="submit">Remove subtask</button>
             </form>
             </td>
         </tr>

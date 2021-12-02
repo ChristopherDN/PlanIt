@@ -68,6 +68,15 @@ public class RepoTask {
         return getId(dbMapper.load(sql,parameters));
 
     }
-}
+
+  public void deleteTask(int taskId, int projectId) {
+    sql = "delete from PlanIt.Tasks where id = ? and project_id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(taskId));
+    parameters.add(String.valueOf(projectId));
+    dbMapper.save(sql, parameters);
+  }
+  }
+
 
 
