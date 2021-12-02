@@ -28,7 +28,7 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String register(WebRequest request) throws ExceptionService {
+  public String register(WebRequest request) {
     userService.registerUser(
         request.getParameter("name"),
         request.getParameter("email"),

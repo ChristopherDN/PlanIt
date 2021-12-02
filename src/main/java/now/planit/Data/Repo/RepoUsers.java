@@ -41,7 +41,7 @@ public class RepoUsers {
 
 
   //Do Something to Database
-  public void registerUser(String name, String email, String password) throws ExceptionService {
+  public void registerUser(String name, String email, String password) {
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     parameters.clear();
     parameters.add(name);
