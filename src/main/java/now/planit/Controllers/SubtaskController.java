@@ -50,6 +50,7 @@ public class SubtaskController {
                         request.getParameter("finishDate"),
                         Integer.parseInt(request.getParameter("cost")),
                         taskName, user);
+        System.out.println(taskName);
         return "redirect:/createSubtask";
     }
 
