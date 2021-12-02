@@ -7,7 +7,7 @@ public class UserService {
   DBFacade dbFacade = new DBFacade();
 
 
-  public void registerUser(String name, String email, String password) throws ExceptionService {
+  public void registerUser(String name, String email, String password)  {
     dbFacade.registerUser(name, email, password);
   }
 
@@ -24,4 +24,15 @@ public class UserService {
   }
 
 
+  public void editName(String name, User user) {
+    dbFacade.editName(name, user);
+  }
+
+  public void editMail(String email, User user) {
+    dbFacade.editMail(email, user);
+  }
+
+  public void changePassword(String password, User user) {
+    dbFacade.changePassword(password, user);
+  }
 }

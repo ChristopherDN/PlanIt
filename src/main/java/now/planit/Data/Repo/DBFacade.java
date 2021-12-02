@@ -21,7 +21,7 @@ public class DBFacade {
 
 
   //UserREPO
-  public void registerUser(String name, String email, String password) throws ExceptionService {
+  public void registerUser(String name, String email, String password) {
     repoUsers.registerUser(name, email, password);
 
   }
@@ -33,6 +33,20 @@ public class DBFacade {
   public int getUserId(User user) {
     return repoUsers.getUserId(user);
   }
+
+  public void editName(String name, User user) {
+    repoUsers.editName(name, getUserId(user));
+  }
+
+  public void editMail(String email, User user) {
+    repoUsers.editEmail(email, getUserId(user));
+  }
+
+  public void changePassword(String password, User user) {
+    repoUsers.editPassword(password, getUserId(user));
+  }
+
+
 
   //ProjectREPO
 
@@ -76,6 +90,8 @@ public class DBFacade {
   public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, String taskName, User user) {
     repoSubtask.createSubtask(subtaskName, startDate, finishDate, cost, getTaskId(taskName, getUserId(user)));
   }
+
+
 
 
   //SUbTASKREPO

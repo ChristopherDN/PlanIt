@@ -41,7 +41,7 @@ public class RepoUsers {
 
 
   //Do Something to Database
-  public void registerUser(String name, String email, String password) throws ExceptionService {
+  public void registerUser(String name, String email, String password) {
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     parameters.clear();
     parameters.add(name);
@@ -80,5 +80,29 @@ public class RepoUsers {
     parameters.add(user.getEmail());
     parameters.add(user.getPassword());
     return getId(dbMapper.load(sql, parameters));
+  }
+
+  public void editName(String newName, int userId) {
+    sql = "UPDATE PlanIt.Users SET username = ? WHERE id = ?";
+    parameters.clear();
+    parameters.add(newName);
+    parameters.add(String.valueOf(userId));
+    dbMapper.save(sql, parameters);
+  }
+
+  public void editEmail(String newEmail, int userId) {
+    sql = "UPDATE PlanIt.Users SET email = ? WHERE id = ?";
+    parameters.clear();
+    parameters.add(newEmail);
+    parameters.add(String.valueOf(userId));
+    dbMapper.save(sql, parameters);
+  }
+
+  public void editPassword(String newPassword, int userId) {
+    sql = "UPDATE PlanIt.Users SET password = ? WHERE id = ?";
+    parameters.clear();
+    parameters.add(newPassword);
+    parameters.add(String.valueOf(userId));
+    dbMapper.save(sql, parameters);
   }
 }

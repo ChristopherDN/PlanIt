@@ -41,7 +41,7 @@ public class RepoSubtask {
 
 
     public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, int taskId) {
-        sql=" insert into PlanIt.Subtasks (name, start, finish, cost, task_id ) values (?, ?, ?, ?, ?) ";
+        sql="insert into PlanIt.Subtasks (name, start, finish, cost, task_id) values (?, ?, ?, ?, ?)";
         parameters.clear();
         parameters.add(subtaskName);
         parameters.add(startDate);
