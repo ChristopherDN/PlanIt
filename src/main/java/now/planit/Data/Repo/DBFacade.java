@@ -100,8 +100,8 @@ public class DBFacade {
     repoSubtask.createSubtask(subtaskName, startDate, finishDate, cost, getTaskId(taskName, getUserId(user)));
   }
 
-  public int getSubtaskId(String subtaskName, int projectID){
-    return repoSubtask.getSubtaskId(subtaskName, projectID);
+  public int getSubtaskId(String subtaskName, int taskId){
+    return repoSubtask.getSubtaskId(subtaskName, taskId);
   }
 
 
