@@ -86,6 +86,13 @@ public class RepoTask {
     parameters.add(String.valueOf(projectId));
     return getId(dbMapper.load(sql,parameters));
   }
+
+  public int getProjectID(String taskName) {
+    sql ="select project_id from PlanIt.Tasks where name = ?";
+    parameters.clear();
+    parameters.add(taskName);
+    return getId(dbMapper.load(sql,parameters));
+  }
 }
 
 
