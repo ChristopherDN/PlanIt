@@ -58,7 +58,6 @@ public class RepoProject {
     parameters.add(projectName);
     parameters.add(String.valueOf(userId));
     return getId(dbMapper.load(sql,parameters));
-
     }
 
   public ArrayList<Project> getProjects(int userId) {
@@ -75,5 +74,13 @@ public class RepoProject {
     parameters.add(String.valueOf(projectId));
     parameters.add(String.valueOf(userId));
     dbMapper.save(sql, parameters);
+  }
+
+  public int getProjectId2(int taskId, int userId) {
+    sql ="select id from PlanIt.Projects where id = ? and user_id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(taskId));
+    parameters.add(String.valueOf(userId));
+    return getId(dbMapper.load(sql,parameters));
   }
 }
