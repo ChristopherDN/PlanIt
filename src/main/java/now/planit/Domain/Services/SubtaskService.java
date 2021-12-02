@@ -18,6 +18,6 @@ public class SubtaskService {
     }
 
     public void deleteTask(String taskName, String subtaskName, User user) {
-        dbFacade.deleteSubtask(taskName, subtaskName, user);
+        //dbFacade.deleteSubtask(taskName, subtaskName, user);
     }
 }

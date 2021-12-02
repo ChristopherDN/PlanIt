@@ -57,10 +57,6 @@ public class DBFacade {
     return repoProject.getProjectId(projectName, userId);
   }
 
-  public int getProjectId2(int taskId, int userId) {
-    return repoProject.getProjectId2(taskId, userId);
-  }
-
   public ArrayList<Project> getProjects(User user) {
     return repoProject.getProjects(repoUsers.getUserId(user));
   }
@@ -78,10 +74,6 @@ public class DBFacade {
     return repoTask.getTaskId(taskName, projectId);
   }
 
-  public int getTaskId2(int subtaskId, int projectId) {
-    return repoTask.getTaskId2(subtaskId, userId);
-  }
-
   public void createTask(String taskName, String startDate, String finishDate, int cost, String projectName, User user) {
     repoTask.createTask(taskName, startDate, finishDate, cost, getProjectId(projectName, getUserId(user)));
   }
@@ -95,21 +87,24 @@ public class DBFacade {
 
   public ArrayList<Subtask> getSubtask(String taskName, User user) {
     return repoSubtask.getSubtasks(getTaskId(taskName, getUserId(user)));
+  }
 
+ public int getProjectIDFromTasks(String taskName){
+    return repoTask.getProjectID(taskName);
   }
 
   public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, String taskName, User user) {
-    repoSubtask.createSubtask(subtaskName, startDate, finishDate, cost, getTaskId(taskName, getUserId(user)));
+    repoSubtask.createSubtask(subtaskName, startDate, finishDate, cost, getTaskId(taskName, getProjectIDFromTasks(taskName)));
   }
 
   public int getSubtaskId(String subtaskName, int taskId){
     return repoSubtask.getSubtaskId(subtaskName, taskId);
   }
 
-
+/*
   public void deleteSubtask(String taskName, String subtaskName, User user) {
     int taskId;
     int projectId;
     repoSubtask.deleteSubtask();
-  }
+  }*/
 }
