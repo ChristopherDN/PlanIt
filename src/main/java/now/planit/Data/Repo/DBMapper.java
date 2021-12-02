@@ -15,7 +15,7 @@ public class DBMapper {
   PreparedStatement ps;
   ResultSet rs;
 
-//Check connection with DBManager
+  //Check connection with DBManager
   public PreparedStatement checkConnection(String sqlCommand) {
     try {
       connection = DBManager.getConnection();

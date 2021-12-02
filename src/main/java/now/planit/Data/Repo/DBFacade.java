@@ -75,7 +75,6 @@ public class DBFacade {
 
   public int getTaskId(String taskName, int userId) {
     return repoTask.getTaskId(taskName, userId);
-
   }
 
   public int getTaskId2(int subtaskId, int projectId) {
@@ -93,8 +92,8 @@ public class DBFacade {
   //SUbTASKREPO
 
   public ArrayList<Subtask> getSubtask(String taskName, User user) {
-    System.out.println(getTaskId(taskName,getUserId(user)));
     return repoSubtask.getSubtasks(getTaskId(taskName, getUserId(user)));
+
   }
 
   public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, String taskName, User user) {
@@ -110,7 +109,7 @@ public class DBFacade {
     int subtaskId = getSubtaskId(subtaskName, getUserId(user));
     System.out.println(subtaskId);
     int taskId;
-        int projectId;
+    int projectId;
     //repoSubtask.deleteSubtask();
   }
 }
