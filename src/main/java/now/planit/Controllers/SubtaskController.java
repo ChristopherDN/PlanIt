@@ -56,7 +56,7 @@ public class SubtaskController {
     @GetMapping("/removeSubtask/{id}")
     public String deleteTask(@PathVariable(value = "id") String id, Model model) {
         System.out.println(id);
-        subtaskService.deleteTask(id, user);
+        subtaskService.deleteTask(taskName, id, user);
         subtasks = subtaskService.getSubtasks(id, user);
         model.addAttribute("subtasks", subtasks);
         return "redirect:/createTask";
