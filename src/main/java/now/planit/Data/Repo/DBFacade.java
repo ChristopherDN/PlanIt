@@ -23,7 +23,6 @@ public class DBFacade {
   //UserREPO
   public void registerUser(String name, String email, String password) {
     repoUsers.registerUser(name, email, password);
-
   }
 
   public User validateLogin(String email, String password) {
@@ -45,7 +44,6 @@ public class DBFacade {
   public void changePassword(String password, User user) {
     repoUsers.editPassword(password, getUserId(user));
   }
-
 
 
   //ProjectREPO
@@ -82,6 +80,8 @@ public class DBFacade {
     repoTask.createTask(taskName, startDate, finishDate, cost, getProjectId(projectName, getUserId(user)));
   }
 
+  //SUbTASKREPO
+
   public ArrayList<Subtask> getSubtask(String taskName, User user) {
     return repoSubtask.getSubtasks(getTaskId(taskName, getUserId(user)));
 
@@ -94,7 +94,7 @@ public class DBFacade {
 
 
 
-  //SUbTASKREPO
+
 
 
 }
