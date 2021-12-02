@@ -7,9 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * @author Christopher
- */
+
 public class RepoSubtask {
     DBMapper dbMapper = new DBMapper();
     ArrayList<String> parameters = new ArrayList<>();
@@ -43,9 +41,8 @@ public class RepoSubtask {
         return subtaskId;
     }
 
-    //Db Do something.
+    //Db Do something. TODO FIX DEN HER, TASKID som den modtager er altid 5
     public ArrayList<Subtask> getSubtasks(int taskId){
-        System.out.println(taskId);
         sql ="select name, start, finish, cost from PlanIt.Subtasks where task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
@@ -57,17 +54,17 @@ public class RepoSubtask {
         sql="insert into PlanIt.Subtasks (name, start, finish, cost, task_id) values (?, ?, ?, ?, ?)";
         parameters.clear();
         parameters.add(subtaskName);
-        parameters.add(startDate);
-        parameters.add(finishDate);
+        parameters.add(String.valueOf(startDate));
+        parameters.add(String.valueOf(finishDate));
         parameters.add(String.valueOf(cost));
         parameters.add(String.valueOf(taskId));
         dbMapper.save(sql,parameters);
     }
-    public int getSubtaskId(String subtaskName, int projectId) {
-        sql ="select id from PlanIt.Subtasks where name = ? and project_id = ?";
+    public int getSubtaskId(String subtaskName, int taskId) {
+        sql ="select id from PlanIt.Subtasks where name = ? and task_id = ?";
         parameters.clear();
         parameters.add(subtaskName);
-        parameters.add(String.valueOf(projectId));
+        parameters.add(String.valueOf(taskId));
         return getId(dbMapper.load(sql,parameters));
     }
 
