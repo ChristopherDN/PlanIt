@@ -62,7 +62,6 @@ public class RepoTask {
 
   //TODO Den her retunere så vidt jeg kan se altid 5.
     public int getTaskId(String taskName, int projectId) {
-      System.out.println(projectId + "Project ID i getTaskID metoden");
         sql ="select id from PlanIt.Tasks where name = ? and project_id = ?";
         parameters.clear();
         parameters.add(taskName);

@@ -10,14 +10,14 @@ public class SubtaskService {
     DBFacade dbFacade = new DBFacade();
 
     public ArrayList<Subtask> getSubtasks(String taskName, User user) {
-        return dbFacade.getSubtask(taskName, user);
+        return dbFacade.getSubtasks(taskName, user);
     }
 
     public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, String taskName, User user) {
         dbFacade.createSubtask(subtaskName, startDate, finishDate, cost, taskName, user);
     }
 
-    public void deleteTask(String taskName, String subtaskName, User user) {
-        //dbFacade.deleteSubtask(taskName, subtaskName, user);
+    public void deleteSubtask(String taskName, String subtaskName, User user) {
+        dbFacade.deleteSubtask(taskName, subtaskName, user);
     }
 }

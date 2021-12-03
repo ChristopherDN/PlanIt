@@ -19,19 +19,13 @@ public class ProjectController {
     User user;
     ProjectService projectService = new ProjectService();
     ArrayList<Project> projects = new ArrayList<>();
-    TaskService taskService = new TaskService();
-    ArrayList<Task> tasks = new ArrayList();
-    String projectName;
 
 
     @GetMapping("/myProjects")
     public String myProjects(Model model, WebRequest request) {
         user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         projects = projectService.getProjects(user);
-        tasks = taskService.getTasks(projectName, user);
-        model.addAttribute("tasks", tasks);
         model.addAttribute("loopList", projects);
-        // model.addAttribute("project", project); Den her er ikke nødvendig. Den kender til den igennem ArrayListen med Projects :)
         model.addAttribute("userName", user.getName());
         return "project/myProjects";// endpoint change
     }
@@ -45,7 +39,6 @@ public class ProjectController {
                 request.getParameter("finish"),
                 Integer.parseInt(request.getParameter("budget")), user);
         model.addAttribute("loopList", projects);
-        //model.addAttribute("userName", user.getName());
         return "redirect:/myProjects";
     }
 

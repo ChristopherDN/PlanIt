@@ -43,6 +43,7 @@ public class RepoSubtask {
 
     //Db Do something. TODO FIX DEN HER, TASKID som den modtager er altid 5
     public ArrayList<Subtask> getSubtasks(int taskId){
+        System.out.println(taskId + " This is TaskID Repo");
         sql ="select name, start, finish, cost from PlanIt.Subtasks where task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
@@ -69,6 +70,8 @@ public class RepoSubtask {
     }
 
     public void deleteSubtask(int taskId, int projectId) {
+        System.out.println(taskId + " This  is TaskID");
+        System.out.println(projectId + " This  is ProjectId");
         sql = "delete from PlanIt.Tasks where id = ? and project_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
