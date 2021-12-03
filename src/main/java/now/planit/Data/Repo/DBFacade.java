@@ -56,6 +56,7 @@ public class DBFacade {
   public int getProjectId(String projectName, int userId) {
     return repoProject.getProjectId(projectName, userId);
   }
+  public int getProjectId2(int taskId, int userId) {return repoProject.getProjectId2(taskId, userId);}
 
   public ArrayList<Project> getProjects(User user) {
     return repoProject.getProjects(repoUsers.getUserId(user));
@@ -85,8 +86,9 @@ public class DBFacade {
 
   //SUbTASKREPO
 
-  public ArrayList<Subtask> getSubtask(String taskName, User user) {
-    return repoSubtask.getSubtasks(getTaskId(taskName, getUserId(user)));
+  public ArrayList<Subtask> getSubtasks(String taskName, User user) {
+    //TODO FEJL HER Skal vi joine?
+    return repoSubtask.getSubtasks(getTaskId(taskName, getProjectId(getProjectName(taskName), getUserId(user))));
   }
 
  public int getProjectIDFromTasks(String taskName){
@@ -101,10 +103,17 @@ public class DBFacade {
     return repoSubtask.getSubtaskId(subtaskName, taskId);
   }
 
-/*
+
   public void deleteSubtask(String taskName, String subtaskName, User user) {
-    int taskId;
-    int projectId;
-    repoSubtask.deleteSubtask();
-  }*/
+    int taskId =  getTaskId(taskName, getProjectId(getProjectName(taskName),getUserId(user)));
+    int projectId = getProjectId(getProjectName(taskName), getUserId(user));
+    repoSubtask.deleteSubtask(taskId, projectId);
+  }
+
+  //Test
+  public String getProjectName(String taskName){
+    return repoProject.getProjectName(taskName);
+  }
+
+
 }

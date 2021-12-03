@@ -10,7 +10,9 @@
 <body>
 <center>
     <h1>Welcome <p th:text="${userName}"></p> <br>Here are your subtasks!<br> </h1>
-
+<form action="/createTask" method="get">
+    <button type="submit" >Back to Tasks</button>
+</form>
     <table style = "margin-top: 20px;">
         <tr>
             <th>Subtask Number:</th>
@@ -37,7 +39,7 @@
             <td th:text="${subtask.getStartDate()}"></td>
             <td th:text="${subtask.getFinishDate()}"></td>
             <td th:text="${subtask.getCost()}"></td>
-            <td><form>
+            <td><form th:action="@{/removeSubtask/{id}(id=${subtask.getSubtaskName()})}" th:object="${subTask}">
                 <button type="submit">Remove subtask</button>
             </form>
             </td>
