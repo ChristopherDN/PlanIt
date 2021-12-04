@@ -21,10 +21,8 @@ public class TaskController {
   //Endpoint to dynamic display(loop) all task and display user information
   @GetMapping("/createTask")
   public String createTasks(WebRequest request, Model model) {
-    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-    tasks = taskService.getTasks(projectName, user);
+    updateTasks(request, model, projectName);
     model.addAttribute("userName", user.getName());
-    model.addAttribute("tasks", tasks);
     return "/project/createTask";
   }
 
@@ -32,18 +30,13 @@ public class TaskController {
   @GetMapping("/update/{id}")
   public String updateProject(@PathVariable(value = "id") String id, WebRequest request, Model model) {
     projectName = id;
-    System.out.println(projectName);
-    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-    model.addAttribute("tasks", tasks);
-    tasks = taskService.getTasks(id, user);
+   updateTasks(request, model, projectName);
     return "redirect:/createTask";
   }
 
   //Endpoint that stores parameters from task and pass them down to the service.
   @PostMapping("/createTaskParam")
-  public String createTask(WebRequest request, Model model) {
-    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-    model.addAttribute("userName", user.getName());
+  public String createTask(WebRequest request) {
     taskService.createTask
             (request.getParameter("taskName"),
             request.getParameter("startDate"),
@@ -54,16 +47,15 @@ public class TaskController {
   }
 
   @GetMapping("/removeTask/{id}")
-  public String deleteTask(@PathVariable(value = "id") String id, Model model) {
-    System.out.println(id);
+  public String deleteTask(@PathVariable(value = "id") String id, Model model, WebRequest request) {
     taskService.deleteTask(projectName, id, user);
-    tasks = taskService.getTasks(id, user);
-    model.addAttribute("tasks", tasks);
+    updateTasks(request, model, projectName);
     return "redirect:/createTask";
   }
 
-
-
-
-
+  public void updateTasks(WebRequest request, Model model, String projectName){
+    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+    tasks = taskService.getTasks(projectName, user);
+    model.addAttribute("tasks", tasks);
+  }
 }

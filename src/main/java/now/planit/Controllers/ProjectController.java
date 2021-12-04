@@ -1,10 +1,8 @@
 package now.planit.Controllers;
 
 import now.planit.Domain.Models.Project;
-import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.ProjectService;
-import now.planit.Domain.Services.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +21,7 @@ public class ProjectController {
 
     @GetMapping("/myProjects")
     public String myProjects(Model model, WebRequest request) {
-        user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-        projects = projectService.getProjects(user);
-        model.addAttribute("loopList", projects);
+        updateProjects(request, model);
         model.addAttribute("userName", user.getName());
         return "project/myProjects";// endpoint change
     }
@@ -38,15 +34,23 @@ public class ProjectController {
                 request.getParameter("start"),
                 request.getParameter("finish"),
                 Integer.parseInt(request.getParameter("budget")), user);
-        model.addAttribute("loopList", projects);
+        model.addAttribute("loopList", projects); //Skal den add projects her igen?
+        // Er det nødvendigt, når den adder i /myProjects, skal den ikke bare opdatere ArrayListen?
         return "redirect:/myProjects";
     }
 
     @GetMapping("/removeProject/{id}")
-    public String deleteProject(@PathVariable(value = "id") String id, Model model) {
+    public String deleteProject(@PathVariable(value = "id") String id, Model model, WebRequest request) {
         projectService.deleteProject(id, user);
-        projects = projectService.getProjects(user);
-        model.addAttribute("loopList", projects);
+        updateProjects(request,model);
         return "redirect:/myProjects";
     }
+
+    //Bruges til at opdatere Projects og adder til Model
+    public void updateProjects(WebRequest request, Model model){
+        user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        projects = projectService.getProjects(user);
+        model.addAttribute("loopList", projects);
+    }
+
 }
