@@ -45,17 +45,14 @@ public class SubtaskController {
         model.addAttribute("userName", user.getName());
         subtaskService.createSubtask
                 (request.getParameter("subtaskName"),
-                        request.getParameter("startDate"),
-                        request.getParameter("finishDate"),
+                        request.getParameter("hours"),
                         Integer.parseInt(request.getParameter("cost")),
                         taskName, user);
-        System.out.println(taskName);
         return "redirect:/createSubtask";
     }
 
     @GetMapping("/removeSubtask/{id}")
     public String deleteTask(@PathVariable(value = "id") String id, Model model) {
-        System.out.println(id);
         subtaskService.deleteTask(taskName, id, user);
         subtasks = subtaskService.getSubtasks(id, user);
         model.addAttribute("subtasks", subtasks);

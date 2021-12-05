@@ -17,10 +17,10 @@
         <th>Task Name</th>
         <th>Start</th>
         <th>Finish</th>
+        <th>Estimated hours</th>
         <th>Estimated budget</th>
         <th>Update task</th>
         <th>Delete</th>
-        <th></th>
     </tr>
     <tr>
         <form action="/createTaskParam" method="post">
@@ -28,6 +28,7 @@
             <td><input type="text" name="taskName"></td>
             <td><input type="date" name="startDate"></td>
             <td><input type="date" name="finishDate"></td>
+            <td></td>
             <td><input type="text" name="cost"></td>
             <td><input type="submit" class="like" value="Add Task"></td>
             <td><input type="reset" class="like" value="Reset"></td>
@@ -39,7 +40,9 @@
         <td th:text="${task.getTaskName()}"></td>
         <td th:text="${task.getStartDate()}"></td>
         <td th:text="${task.getFinishDate()}"></td>
+        <td><p th:text="${task}"></p></td>
         <td th:text="${task.getCost()}"></td>
+
         <td><form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
             <button type="submit">Add subtask</button>
         </form>

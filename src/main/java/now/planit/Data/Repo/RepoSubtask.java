@@ -15,13 +15,14 @@ public class RepoSubtask {
     ArrayList<Subtask> subtasks = new ArrayList<>();
     int subtaskId;
 
+
     //Manipulate Resultset to data we can use
     public ArrayList<Subtask> loadSubtasks(ResultSet rs){
         try {
             subtasks.clear();
             while (rs.next()) {
-                subtasks.add(new Subtask(rs.getString(1), rs.getString(2),
-                        rs.getString(3), rs.getInt(4)));
+                subtasks.add(new Subtask(rs.getString(1), rs.getInt(2)
+                        , rs.getInt(3)));
 
             }
         } catch (SQLException ex) {
@@ -43,19 +44,19 @@ public class RepoSubtask {
 
     //Db Do something. TODO FIX DEN HER, TASKID som den modtager er altid 5
     public ArrayList<Subtask> getSubtasks(int taskId){
-        sql ="select name, start, finish, cost from PlanIt.Subtasks where task_id = ?";
+        sql ="select name, estimated_hours, cost from PlanIt.Subtasks where task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
         return loadSubtasks(dbMapper.load(sql,parameters));
     }
 
 
-    public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, int taskId) {
-        sql="insert into PlanIt.Subtasks (name, start, finish, cost, task_id) values (?, ?, ?, ?, ?)";
+
+    public void createSubtask(String subtaskName, String hours, int cost, int taskId) {
+        sql="insert into PlanIt.Subtasks (name, estimated_hours, cost, task_id) values (?, ?, ?, ?, ?)";
         parameters.clear();
         parameters.add(subtaskName);
-        parameters.add(String.valueOf(startDate));
-        parameters.add(String.valueOf(finishDate));
+        parameters.add(String.valueOf(hours));
         parameters.add(String.valueOf(cost));
         parameters.add(String.valueOf(taskId));
         dbMapper.save(sql,parameters);
@@ -75,6 +76,5 @@ public class RepoSubtask {
         parameters.add(String.valueOf(projectId));
         dbMapper.save(sql, parameters);
     }
-
 
 }

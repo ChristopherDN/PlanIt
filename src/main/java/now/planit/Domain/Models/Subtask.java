@@ -2,15 +2,13 @@ package now.planit.Domain.Models;
 
 public class Subtask {
     private String subtaskName;
-    private String startDate;
-    private String finishDate;
+    private int hours;
     private int cost;
 
 
-    public Subtask(String subtaskName, String startDate, String finishDate, int cost) {
+    public Subtask(String subtaskName, int hours, int cost) {
         this.subtaskName = subtaskName;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
+        this.hours = hours;
         this.cost = cost;
     }
 
@@ -22,20 +20,12 @@ public class Subtask {
         this.subtaskName = subtaskName;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public int getHours() {
+        return hours;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getFinishDate() {
-        return finishDate;
-    }
-
-    public void setFinishDate(String finishDate) {
-        this.finishDate = finishDate;
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 
     public int getCost() {

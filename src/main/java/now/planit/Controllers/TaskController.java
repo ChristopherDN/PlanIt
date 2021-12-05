@@ -1,5 +1,7 @@
 package now.planit.Controllers;
 
+import now.planit.Data.Repo.RepoTask;
+import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.TaskService;
@@ -16,12 +18,15 @@ public class TaskController {
   User user;
   String projectName;
   TaskService taskService = new TaskService();
+  RepoTask repoTask = new RepoTask();
   ArrayList<Task> tasks = new ArrayList();
 
   //Endpoint to dynamic display(loop) all task and display user information
   @GetMapping("/createTask")
   public String createTasks(WebRequest request, Model model) {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+    int hours =0;
+    model.addAttribute("hours", taskService.calculate(repoTask.calculate(hours)));
     tasks = taskService.getTasks(projectName, user);
     model.addAttribute("userName", user.getName());
     model.addAttribute("tasks", tasks);
@@ -49,6 +54,7 @@ public class TaskController {
             request.getParameter("finishDate"),
             Integer.parseInt(request.getParameter("cost")),
             projectName, user);
+
     return "redirect:/createTask";
   }
 
@@ -60,9 +66,5 @@ public class TaskController {
     model.addAttribute("tasks", tasks);
     return "redirect:/createTask";
   }
-
-
-
-
-
 }
+

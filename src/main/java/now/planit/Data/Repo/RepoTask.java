@@ -13,6 +13,8 @@ public class RepoTask {
   String sql;
   ArrayList<Task> tasks = new ArrayList<>();
   int taskId;
+  int hours;
+  int sum;
 
   //Manipulate Resultset to data we can use
   public ArrayList<Task> loadTasks(ResultSet rs){
@@ -62,7 +64,6 @@ public class RepoTask {
 
   //TODO Den her retunere så vidt jeg kan se altid 5.
     public int getTaskId(String taskName, int projectId) {
-      System.out.println(projectId + "Project ID i getTaskID metoden");
         sql ="select id from PlanIt.Tasks where name = ? and project_id = ?";
         parameters.clear();
         parameters.add(taskName);
@@ -93,6 +94,33 @@ public class RepoTask {
     parameters.add(taskName);
     return getId(dbMapper.load(sql,parameters));
   }
+
+    //Manipulate Resultset to data we can use
+    private int getHours(ResultSet rs) {
+        int sum =0;
+        try {
+            while (rs.next()) {
+                hours = rs.getInt(1);
+                sum += hours;
+                System.out.println(sum);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return sum;
+    }
+
+
+    public int calculate( int hours ) {
+        sql = "select estimated_hours from PlanIt.Subtasks where task_id = ?";
+        parameters.clear();
+        parameters.add(String.valueOf(taskId));
+        parameters.add(String.valueOf(hours));
+        System.out.println(getHours(dbMapper.load(sql,parameters))+hours);
+        return getHours(dbMapper.load(sql,parameters))+hours;
+    }
+
+
 }
 
 

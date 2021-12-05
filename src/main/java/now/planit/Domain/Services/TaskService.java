@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class TaskService {
     DBFacade dbFacade = new DBFacade();
 
+
     public ArrayList<Task> getTasks(String projectName, User user) {
         return dbFacade.getTasks(projectName, user);
     }
@@ -20,4 +21,10 @@ public class TaskService {
     public void deleteTask(String projectName, String taskName, User user) {
         dbFacade.deleteTask(projectName, taskName, user);
     }
+
+
+    public int calculate( int hours){
+    return dbFacade.calculateHours(hours);
+    }
+
 }
