@@ -21,7 +21,6 @@ public class UserController {
     return "register/register";
   }
 
-  //Hvor bliver denne brugt????
   @GetMapping("/logged")
   public String loggedIn() {
     return "login/logged";
@@ -30,17 +29,17 @@ public class UserController {
   @PostMapping("/register")
   public String register(WebRequest request) {
     userService.registerUser(
-        request.getParameter("name"),
-        request.getParameter("email"),
-        request.getParameter("password"));
+            request.getParameter("name"),
+            request.getParameter("email"),
+            request.getParameter("password"));
     return "login/login";
   }
 
   @PostMapping("/validateLogin")
   public String validateLogin(WebRequest request, HttpSession session, Model model) {
     user = userService.validateLogin(
-        request.getParameter("mail"),
-        request.getParameter("password"));
+            request.getParameter("mail"),
+            request.getParameter("password"));
 
     //Set Session to user, validate user is not null.
     if (session.getAttribute("user") == null) {
@@ -50,7 +49,7 @@ public class UserController {
         return "redirect:/myProjects";
       }
     }
-    return "login/login";
+    return "login/loginFailed";
   }
 
   @GetMapping("/logout")
@@ -61,26 +60,22 @@ public class UserController {
   }
 
   @GetMapping("/myPage")
-  public String myPage(Model model, WebRequest request) {
-    if (user == null){
-      return "login/login";
-    }
-    updatePage(request, model);
+  public String myPage(Model model) {
+    model.addAttribute("user", user);
     return "login/myPage";
   }
 
   @PostMapping("/updateUser")
   public String updateUser(WebRequest request, Model model) {
+    //Mangler noget for at sikre at Navn og email opdatere på siden MyPage, når man har ændret det.
+    //user = (User) request.getAttribute("user", WebRequest.SCOPE_REQUEST); Den her crasher programmet
     userService.editName(request.getParameter("name"), user);
     userService.editMail(request.getParameter("email"), user);
     userService.changePassword(request.getParameter("password"), user);
-   updatePage(request, model);
+    model.addAttribute("user", user);
     return "redirect:/myPage";
   }
 
-  public void updatePage(WebRequest request, Model model){
-    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-    model.addAttribute("user", user);
-  }
-}
 
+
+}

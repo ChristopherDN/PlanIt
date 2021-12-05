@@ -23,9 +23,6 @@ public class SubtaskController {
   //Endpoint to pass and connect data(id) from createTask site to createSubtask site.
   @GetMapping("/rerun/{id}")
   public String loadSubtasks(@PathVariable(value = "id") String id, WebRequest request, Model model) {
-    if (user == null){
-      return "login/login";
-    }
     taskName = id;
    updateSubtasks(request, model, taskName);
     return "redirect:/createSubtask";

@@ -21,10 +21,6 @@ public class Controller {
     return "login/login";
   }
 
-
-  //these are just endpoints ready to be used
-
-
   @GetMapping("/about")
   public String about() {
     return "info/about";

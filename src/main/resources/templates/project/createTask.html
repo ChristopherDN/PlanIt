@@ -9,51 +9,51 @@
 <th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
 <body>
 <center>
-        <h1>Welcome <p th:text="${userName}"></p> <br>Here are your Tasks!<br> </h1>
+    <h1>Welcome <p th:text="${userName}"></p> <br>Here are your Tasks!<br> </h1>
     <form action="/myProjects" method="get">
         <button type="submit" >Back to Projects</button>
     </form>
 
-<table style = "margin-top: 20px;">
-    <tr>
-        <th>Task Number:</th>
-        <th>Task Name</th>
-        <th>Start</th>
-        <th>Finish</th>
-        <th>Estimated budget</th>
-        <th>Update task</th>
-        <th>Delete</th>
-        <th></th>
-    </tr>
-    <tr>
-        <form action="/createTaskParam" method="post">
-            <td></td>
-            <td><input type="text" name="taskName" required></td>
-            <td><input type="date" name="startDate" required></td>
-            <td><input type="date" name="finishDate" required></td>
-            <td><input type="text" name="cost" required></td>
-            <td><input type="submit" class="like" value="Add Task"></td>
-            <td><input type="reset" class="like" value="Reset"></td>
-        </form>
-    </tr>
+    <table style = "margin-top: 20px;">
+        <tr>
+            <th>Task Number:</th>
+            <th>Task Name</th>
+            <th>Start</th>
+            <th>Finish</th>
+            <th>Estimated budget</th>
+            <th>Update task</th>
+            <th>Delete</th>
+            <th></th>
+        </tr>
+        <tr>
+            <form action="/createTaskParam" method="post">
+                <td></td>
+                <td><input type="text" name="taskName" required></td>
+                <td><input type="date" name="startDate" required></td>
+                <td><input type="date" name="finishDate" required></td>
+                <td><input type="number" name="cost" min="0" max="1000000000" required></td>
+                <td><input type="submit" class="like" value="Add Task"></td>
+                <td><input type="reset" class="like" value="Reset"></td>
+            </form>
+        </tr>
 
-    <tr id="tr1" th:border="1" th:each="task : ${tasks}">
-        <td></td>
-        <td th:text="${task.getTaskName()}"></td>
-        <td th:text="${task.getStartDate()}"></td>
-        <td th:text="${task.getFinishDate()}"></td>
-        <td th:text="${task.getCost()}"></td>
-        <td><form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
-            <button type="submit">Add subtask</button>
-           <!-- <input type="hidden" name="project_id" th:value="${project.getName()}"> -->
-        </form>
-        </td>
-        <td><form th:action="@{/removeTask/{id}(id=${task.getTaskName()})}" th:object="${task}">
-            <button type="submit">Delete</button>
-        </form>
-        </td>
-    </tr>
-</table>
+        <tr id="tr1" th:border="1" th:each="task : ${tasks}">
+            <td></td>
+            <td th:text="${task.getTaskName()}"></td>
+            <td th:text="${task.getStartDate()}"></td>
+            <td th:text="${task.getFinishDate()}"></td>
+            <td th:text="${task.getCost()}"></td>
+            <td><form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
+                <button type="submit">Add subtask</button>
+                <!-- <input type="hidden" name="project_id" th:value="${project.getName()}"> -->
+            </form>
+            </td>
+            <td><form th:action="@{/removeTask/{id}(id=${task.getTaskName()})}" th:object="${task}">
+                <button type="submit">Delete</button>
+            </form>
+            </td>
+        </tr>
+    </table>
 </center>
 </body>
 <th:block th:include="/htmlFragment/footer :: footer"></th:block>

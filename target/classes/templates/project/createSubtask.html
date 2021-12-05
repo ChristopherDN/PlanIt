@@ -10,9 +10,9 @@
 <body>
 <center>
     <h1>Welcome <p th:text="${userName}"></p> <br>Here are your subtasks!<br> </h1>
-<form action="/createTask" method="get">
-    <button type="submit" >Back to Tasks</button>
-</form>
+    <form action="/createTask" method="get">
+        <button type="submit" >Back to Tasks</button>
+    </form>
     <table style = "margin-top: 20px;">
         <tr>
             <th>Subtask Number:</th>
@@ -26,9 +26,9 @@
             <form action="/createSubtaskParam" method="post">
                 <td></td>
                 <td><input type="text" name="subtaskName" required></td>
-                <td><input type="text" name="startDate" required></td>
-                <td><input type="text" name="finishDate" required></td>
-                <td><input type="text" name="cost" required></td>
+                <td><input type="number" name="startDate" min="0" max="1000000000" required></td>
+                <td><input type="number" name="finishDate" min="0" max="1000000000" required></td>
+                <td><input type="number" name="cost" min="0" max="1000000000" required></td>
                 <td><input type="submit" class="like" value="Add Subtask"></td>
             </form>
         </tr>

@@ -21,9 +21,6 @@ public class ProjectController {
 
     @GetMapping("/myProjects")
     public String myProjects(Model model, WebRequest request) {
-        if (user == null){
-            return "login/login";
-        }
         updateProjects(request, model);
         model.addAttribute("userName", user.getName());
         return "project/myProjects";// endpoint change
@@ -44,9 +41,6 @@ public class ProjectController {
 
     @GetMapping("/removeProject/{id}")
     public String deleteProject(@PathVariable(value = "id") String id, Model model, WebRequest request) {
-        if (user == null){
-            return "login/login";
-        }
         projectService.deleteProject(id, user);
         updateProjects(request,model);
         return "redirect:/myProjects";
