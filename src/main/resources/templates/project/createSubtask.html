@@ -10,7 +10,9 @@
 <body>
 <center>
     <h1>Welcome <p th:text="${userName}"></p> <br>Here are your subtasks!<br> </h1>
-
+<form action="/createTask" method="get">
+    <button type="submit" >Back to Tasks</button>
+</form>
     <table style = "margin-top: 20px;">
         <tr>
             <th>Subtask Number:</th>
@@ -22,9 +24,9 @@
         <tr>
             <form action="/createSubtaskParam" method="post">
                 <td></td>
-                <td><input type="text" name="subtaskName"></td>
-                <td><input type="text" name="hours"></td>
-                <td><input type="text" name="cost"></td>
+                <td><input type="text" name="subtaskName" required></td>
+                <td><input type="text" name="hours" required></td>
+                <td><input type="text" name="cost" required></td>
                 <td><input type="submit" class="like" value="Add Subtask"></td>
             </form>
         </tr>
@@ -34,7 +36,7 @@
             <td th:text="${subtask.getSubtaskName()}"></td>
             <td th:text="${subtask.getHours()}"></td>
             <td th:text="${subtask.getCost()}"></td>
-            <td><form>
+            <td><form th:action="@{/removeSubtask/{id}(id=${subtask.getSubtaskName()})}" th:object="${subTask}">
                 <button type="submit">Remove subtask</button>
             </form>
             </td>

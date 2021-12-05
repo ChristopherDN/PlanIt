@@ -10,6 +10,9 @@
 <body>
 <center>
         <h1>Welcome <p th:text="${userName}"></p> <br>Here are your Tasks!<br> </h1>
+    <form action="/myProjects" method="get">
+        <button type="submit" >Back to Projects</button>
+    </form>
 
 <table style = "margin-top: 20px;">
     <tr>
@@ -21,15 +24,16 @@
         <th>Estimated budget</th>
         <th>Update task</th>
         <th>Delete</th>
+        <th></th>
     </tr>
     <tr>
         <form action="/createTaskParam" method="post">
             <td></td>
-            <td><input type="text" name="taskName"></td>
-            <td><input type="date" name="startDate"></td>
-            <td><input type="date" name="finishDate"></td>
+            <td><input type="text" name="taskName" required></td>
+            <td><input type="date" name="startDate" required></td>
+            <td><input type="date" name="finishDate" required></td>
             <td></td>
-            <td><input type="text" name="cost"></td>
+            <td><input type="text" name="cost" required></td>
             <td><input type="submit" class="like" value="Add Task"></td>
             <td><input type="reset" class="like" value="Reset"></td>
         </form>
@@ -42,9 +46,9 @@
         <td th:text="${task.getFinishDate()}"></td>
         <td><p th:text="${task}"></p></td>
         <td th:text="${task.getCost()}"></td>
-
         <td><form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
             <button type="submit">Add subtask</button>
+           <!-- <input type="hidden" name="project_id" th:value="${project.getName()}"> -->
         </form>
         </td>
         <td><form th:action="@{/removeTask/{id}(id=${task.getTaskName()})}" th:object="${task}">

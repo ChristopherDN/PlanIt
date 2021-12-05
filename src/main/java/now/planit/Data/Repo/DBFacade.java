@@ -17,8 +17,6 @@ public class DBFacade {
   RepoUsers repoUsers = new RepoUsers();
   RepoTask repoTask = new RepoTask();
   RepoSubtask repoSubtask = new RepoSubtask();
-  int userId;
-  int subtaskId;
 
 
   //UserREPO
@@ -56,6 +54,7 @@ public class DBFacade {
   public int getProjectId(String projectName, int userId) {
     return repoProject.getProjectId(projectName, userId);
   }
+  public int getProjectId2(int taskId, int userId) {return repoProject.getProjectId2(taskId, userId);}
 
   public ArrayList<Project> getProjects(User user) {
     return repoProject.getProjects(repoUsers.getUserId(user));
@@ -85,16 +84,17 @@ public class DBFacade {
 
   //SUbTASKREPO
 
-  public ArrayList<Subtask> getSubtask(String taskName, User user) {
-    return repoSubtask.getSubtasks(getTaskId(taskName, getUserId(user)));
+  public ArrayList<Subtask> getSubtasks(String taskName, User user) {
+    //TODO FEJL HER Skal vi joine?
+    return repoSubtask.getSubtasks(getTaskId(taskName, getProjectId(getProjectName(taskName), getUserId(user))));
   }
 
  public int getProjectIDFromTasks(String taskName){
     return repoTask.getProjectID(taskName);
   }
 
-  public void createSubtask(String subtaskName, String hours, int cost, String taskName, User user) {
-    repoSubtask.createSubtask(subtaskName, hours, cost, getTaskId(taskName, getProjectIDFromTasks(taskName)));
+  public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, String taskName, User user) {
+    repoSubtask.createSubtask(subtaskName, startDate, finishDate, cost, getTaskId(taskName, getProjectIDFromTasks(taskName)));
   }
 
   public int getSubtaskId(String subtaskName, int taskId){
@@ -105,10 +105,17 @@ public class DBFacade {
     return repoTask.calculate(hours);
   }
 
-/*
+
   public void deleteSubtask(String taskName, String subtaskName, User user) {
-    int taskId;
-    int projectId;
-    repoSubtask.deleteSubtask();
-  }*/
+    int subtaskID =  getSubtaskId(subtaskName, getTaskId(taskName, getProjectId(getProjectName(taskName) , getUserId(user))));
+    int taskId = getTaskId(taskName, getProjectId(getProjectName(taskName) , getUserId(user)));
+    repoSubtask.deleteSubtask(subtaskID, taskId);
+  }
+
+  //Test
+  public String getProjectName(String taskName){
+    return repoProject.getProjectName(taskName);
+  }
+
+
 }

@@ -13,6 +13,7 @@ public class RepoProject {
   ArrayList<String> parameters = new ArrayList<>();
   ArrayList<Project> projects = new ArrayList<>();
   int projectId;
+  String projectName;
 
 //Manipulate ResultSet to data we can use.
   public int getId(ResultSet rs){
@@ -82,5 +83,23 @@ public class RepoProject {
     parameters.add(String.valueOf(taskId));
     parameters.add(String.valueOf(userId));
     return getId(dbMapper.load(sql,parameters));
+  }
+
+  public String getProjectName(String taskName) {
+    sql = "SELECT planit.Projects.name from PlanIt.Projects JOIN planit.Tasks ON planit.Projects.id=planit.Tasks.project_id where planit.Tasks.name = ?";
+    parameters.clear();
+    parameters.add(taskName);
+    return getProjectname(dbMapper.load(sql, parameters));
+  }
+
+  private String getProjectname(ResultSet rs) {
+    try {
+      while (rs.next()) {
+            projectName = rs.getString(1);
+      }
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+    return projectName;
   }
 }
