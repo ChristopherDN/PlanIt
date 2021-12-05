@@ -21,6 +21,9 @@ public class TaskController {
   //Endpoint to dynamic display(loop) all task and display user information
   @GetMapping("/createTask")
   public String createTasks(WebRequest request, Model model) {
+    if (user == null){
+      return "login/login";
+    }
     updateTasks(request, model, projectName);
     model.addAttribute("userName", user.getName());
     return "/project/createTask";
@@ -29,6 +32,9 @@ public class TaskController {
   //Endpoint to pass and connect data(id) from myProjects site to createtask site.
   @GetMapping("/update/{id}")
   public String updateProject(@PathVariable(value = "id") String id, WebRequest request, Model model) {
+    if (user == null){
+      return "login/login";
+    }
     projectName = id;
    updateTasks(request, model, projectName);
     return "redirect:/createTask";
@@ -48,6 +54,9 @@ public class TaskController {
 
   @GetMapping("/removeTask/{id}")
   public String deleteTask(@PathVariable(value = "id") String id, Model model, WebRequest request) {
+    if (user == null){
+      return "login/login";
+    }
     taskService.deleteTask(projectName, id, user);
     updateTasks(request, model, projectName);
     return "redirect:/createTask";
