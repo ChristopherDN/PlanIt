@@ -17,8 +17,6 @@ public class DBFacade {
   RepoUsers repoUsers = new RepoUsers();
   RepoTask repoTask = new RepoTask();
   RepoSubtask repoSubtask = new RepoSubtask();
-  int userId;
-  int subtaskId;
 
 
   //UserREPO

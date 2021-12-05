@@ -61,24 +61,20 @@ public class UserController {
   }
 
   @GetMapping("/myPage")
-  public String myPage(Model model) {
+  public String myPage(Model model, WebRequest request) {
+    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     model.addAttribute("user", user);
     return "login/myPage";
   }
 
   @PostMapping("/updateUser")
   public String updateUser(WebRequest request, Model model) {
-    //Mangler noget for at sikre at Navn og email opdatere på siden MyPage, når man har ændret det.
-    //user = (User) request.getAttribute("user", WebRequest.SCOPE_REQUEST); Den her crasher programmet
-
     userService.editName(request.getParameter("name"), user);
     userService.editMail(request.getParameter("email"), user);
     userService.changePassword(request.getParameter("password"), user);
+    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     model.addAttribute("user", user);
     return "redirect:/myPage";
   }
-
-
-
 }
 
