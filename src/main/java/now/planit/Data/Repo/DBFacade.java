@@ -105,9 +105,9 @@ public class DBFacade {
 
 
   public void deleteSubtask(String taskName, String subtaskName, User user) {
-    int taskId =  getTaskId(taskName, getProjectId(getProjectName(taskName),getUserId(user)));
-    int projectId = getProjectId(getProjectName(taskName), getUserId(user));
-    repoSubtask.deleteSubtask(taskId, projectId);
+    int subtaskID =  getSubtaskId(subtaskName, getTaskId(taskName, getProjectId(getProjectName(taskName) , getUserId(user))));
+    int taskId = getTaskId(taskName, getProjectId(getProjectName(taskName) , getUserId(user)));
+    repoSubtask.deleteSubtask(subtaskID, taskId);
   }
 
   //Test

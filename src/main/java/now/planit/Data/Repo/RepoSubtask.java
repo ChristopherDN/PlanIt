@@ -52,13 +52,13 @@ public class RepoSubtask {
 
 
     public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, int taskId) {
-        sql="insert into PlanIt.Subtasks (name, start, finish, cost, task_id) values (?, ?, ?, ?, ?)";
+        sql="insert into PlanIt.Subtasks (task_id, name, start, finish, cost) values (?, ?, ?, ?, ?)";
         parameters.clear();
+        parameters.add(String.valueOf(taskId));
         parameters.add(subtaskName);
         parameters.add(String.valueOf(startDate));
         parameters.add(String.valueOf(finishDate));
         parameters.add(String.valueOf(cost));
-        parameters.add(String.valueOf(taskId));
         dbMapper.save(sql,parameters);
     }
     public int getSubtaskId(String subtaskName, int taskId) {
@@ -69,13 +69,13 @@ public class RepoSubtask {
         return getId(dbMapper.load(sql,parameters));
     }
 
-    public void deleteSubtask(int taskId, int projectId) {
-        System.out.println(taskId + " This  is TaskID");
-        System.out.println(projectId + " This  is ProjectId");
-        sql = "delete from PlanIt.Tasks where id = ? and project_id = ?";
+    public void deleteSubtask(int subtaskId, int taskId) {
+        System.out.println(subtaskId + " This  is TaskID");
+        System.out.println(taskId + " This  is ProjectId");
+        sql = "delete from PlanIt.subtasks where id = ? and task_id = ?";
         parameters.clear();
+        parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
-        parameters.add(String.valueOf(projectId));
         dbMapper.save(sql, parameters);
     }
 
