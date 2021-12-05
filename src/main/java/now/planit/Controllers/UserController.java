@@ -1,7 +1,6 @@
 package now.planit.Controllers;
 
 import now.planit.Domain.Models.User;
-import now.planit.Domain.Services.ExceptionService;
 import now.planit.Domain.Services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +21,7 @@ public class UserController {
     return "register/register";
   }
 
+  //Hvor bliver denne brugt????
   @GetMapping("/logged")
   public String loggedIn() {
     return "login/logged";
@@ -61,24 +61,26 @@ public class UserController {
   }
 
   @GetMapping("/myPage")
-  public String myPage(Model model) {
-    model.addAttribute("user", user);
+  public String myPage(Model model, WebRequest request) {
+    if (user == null){
+      return "login/login";
+    }
+    updatePage(request, model);
     return "login/myPage";
   }
 
   @PostMapping("/updateUser")
   public String updateUser(WebRequest request, Model model) {
-    //Mangler noget for at sikre at Navn og email opdatere på siden MyPage, når man har ændret det.
-    //user = (User) request.getAttribute("user", WebRequest.SCOPE_REQUEST); Den her crasher programmet
-
     userService.editName(request.getParameter("name"), user);
     userService.editMail(request.getParameter("email"), user);
     userService.changePassword(request.getParameter("password"), user);
-    model.addAttribute("user", user);
+   updatePage(request, model);
     return "redirect:/myPage";
   }
 
-
-
+  public void updatePage(WebRequest request, Model model){
+    user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+    model.addAttribute("user", user);
+  }
 }
 

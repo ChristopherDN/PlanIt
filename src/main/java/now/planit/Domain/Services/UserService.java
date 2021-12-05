@@ -25,18 +25,21 @@ public class UserService {
   public void editName(String newName, User user) {
     if (!newName.equals(user.getName()) && !newName.equals("")){
       dbFacade.editName(newName, user);
+      user.setName(newName);
     }
   }
 
   public void editMail(String newEmail, User user) {
     if (!newEmail.equals(user.getName()) && !newEmail.equals("")){
       dbFacade.editMail(newEmail, user);
+      user.setEmail(newEmail);
     }
   }
 
   public void changePassword(String newPassword, User user) {
     if (!newPassword.equals(user.getName()) && !newPassword.equals("")) {
       dbFacade.changePassword(newPassword, user);
+      user.setPassword(newPassword);
     }
   }
 }
