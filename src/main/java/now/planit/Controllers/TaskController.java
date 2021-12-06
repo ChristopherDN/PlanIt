@@ -31,7 +31,7 @@ public class TaskController {
 
   //Endpoint to pass and connect data(id) from myProjects site to createtask site.
   @GetMapping("/update/{id}")
-  public String updateProject(@PathVariable(value = "id") String id, WebRequest request, Model model) {
+  public String updateProject(@PathVariable(value = "id") String id, WebRequest request, Model model)  {
     projectName = id;
    updateTasks(request, model, projectName);
     return "redirect:/createTask";
@@ -39,7 +39,7 @@ public class TaskController {
 
   //Endpoint that stores parameters from task and pass them down to the service.
   @PostMapping("/createTaskParam")
-  public String createTask(WebRequest request) {
+  public String createTask(WebRequest request)  {
     taskService.createTask
             (request.getParameter("taskName"),
             request.getParameter("startDate"),
@@ -59,7 +59,7 @@ public class TaskController {
     return "redirect:/createTask";
   }
 
-  public void updateTasks(WebRequest request, Model model, String projectName){
+  public void updateTasks(WebRequest request, Model model, String projectName)  {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     tasks = taskService.getTasks(projectName, user);
     model.addAttribute("tasks", tasks);

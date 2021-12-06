@@ -3,7 +3,6 @@ package now.planit.Domain.Services;
 import now.planit.Data.Repo.DBFacade;
 import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.User;
-
 import java.util.ArrayList;
 
 public class ProjectService{
@@ -11,7 +10,7 @@ public class ProjectService{
     DBFacade dbFacade = new DBFacade();
 
 
-    public void createProject(String projectName, String start, String finish, int budget, User user) {
+    public void createProject(String projectName, String start, String finish, int budget, User user)  {
         dbFacade.createProject(projectName, start, finish,budget, user);
     }
 
@@ -20,7 +19,7 @@ public class ProjectService{
     }
 
 
-  public void deleteProject(String projectName, User user) {
+  public void deleteProject(String projectName, User user)  {
       dbFacade.deleteProject(projectName, user);
   }
 }

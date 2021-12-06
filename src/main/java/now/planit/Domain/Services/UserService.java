@@ -2,6 +2,7 @@ package now.planit.Domain.Services;
 
 import now.planit.Data.Repo.DBFacade;
 import now.planit.Domain.Models.User;
+import now.planit.Exceptions.UserNotExistException;
 
 public class UserService {
   DBFacade dbFacade = new DBFacade();
@@ -11,13 +12,11 @@ public class UserService {
     dbFacade.registerUser(name, email, password);
   }
 
-  public User validateLogin(String email, String password){
-    /*
-    try{
-
-
-    }catch(){
-
+  public User validateLogin(String email, String password) {
+    User user = dbFacade.validateLogin(email, password);
+    /*Not usefull, we allready have javascript validation.
+    if(user == null) {
+      throw new UserNotExistException("Sorry, this is not a correct user!!!");
     }
     */
    return dbFacade.validateLogin(email, password);
@@ -27,6 +26,7 @@ public class UserService {
       dbFacade.editName(newName, user);
       user.setName(newName);
     }
+    //TODO throw new exception, failed to change password redirect to errror page.
   }
 
   //TODO Mangler validering ift. om mail er i systemet...
@@ -35,6 +35,7 @@ public class UserService {
       dbFacade.editMail(newEmail, user);
       user.setEmail(newEmail);
     }
+    //TODO throw new exception, failed to change password redirect to errror page.
   }
 
   public void changePassword(String newPassword, User user) {
@@ -42,6 +43,8 @@ public class UserService {
       dbFacade.changePassword(newPassword, user);
       user.setPassword(newPassword);
     }
+
+    //TODO throw new exception, failed to change password redirect to errror page.
   }
 
   public void deleteUser(String email, String password) {

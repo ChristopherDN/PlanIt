@@ -1,8 +1,6 @@
 package now.planit.Data.Repo;
 
 import now.planit.Data.Utility.DBManager;
-import now.planit.Exceptions.DBConnFailedException;
-import now.planit.Exceptions.ResultsetFailException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,11 +17,12 @@ public class DBMapper {
   ResultSet rs;
 
   //Check connection with DBManager
-  public PreparedStatement checkConnection(String sqlCommand) throws DBConnFailedException {
+  public PreparedStatement checkConnection(String sqlCommand)  {
     try {
       connection = DBManager.getConnection();
       ps = connection.prepareStatement(sqlCommand);
     } catch (SQLException e) {
+      System.out.println("Database unavaiable for checkConnection method");
       e.printStackTrace();
     }
     return ps;
@@ -37,6 +36,7 @@ public class DBMapper {
         ps.setString(i + 1, parameters.get(i));
       }
     } catch (SQLException e) {
+      System.out.println("Database unavaiable for setParameters method");
       e.printStackTrace();
     }
     return ps;
@@ -47,12 +47,9 @@ public class DBMapper {
     try {
       ps = checkConnection(sqlCommand);
       setParameters(parameters).execute();
-    } catch (DBConnFailedException | SQLException e) {
-      //Eksempel : throw new exceptionsService("Database unavailable");
-      System.out.println(e.getMessage());
+    } catch (SQLException e) {
+      System.out.println("Database unavaiable for save method!");
       e.printStackTrace();
-    } catch(NullPointerException d){
-      System.out.println(d.getMessage());
     }
   }
 
@@ -61,11 +58,9 @@ public class DBMapper {
     try {
       ps = checkConnection(sqlCommand);
       rs = setParameters(parameters).executeQuery();
-    } catch (DBConnFailedException | SQLException e) {
+    } catch (SQLException e) {
+      System.out.println("Database unavaiable for load method!");
       e.printStackTrace();
-    } catch(NullPointerException d){
-      //throw ned ResultsetFailException here
-      // Exception must go to RepoUsers, DFFacade, UserService, Usercontroller.
     }
     return rs;
   }

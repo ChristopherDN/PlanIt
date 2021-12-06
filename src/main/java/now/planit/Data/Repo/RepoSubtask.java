@@ -2,7 +2,6 @@ package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.Task;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

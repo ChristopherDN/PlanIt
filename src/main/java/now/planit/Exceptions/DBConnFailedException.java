@@ -1,15 +1,10 @@
 package now.planit.Exceptions;
 
-public class DBConnFailedException extends Exception {
-
-    private String dbConnFailMessage = "Database unavaiable";
+public class DBConnFailedException extends RuntimeException {
 
     public DBConnFailedException(String DBConnFailMessage) {
-        this.dbConnFailMessage = dbConnFailMessage;
+        super(DBConnFailMessage);
     }
 
-    public String getDBConnFailMessage(){
-        return dbConnFailMessage;
-    }
 
 }
