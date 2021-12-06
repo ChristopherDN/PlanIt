@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class TaskService {
     DBFacade dbFacade = new DBFacade();
 
+
     public ArrayList<Task> getTasks(String projectName, User user) {
         return dbFacade.getTasks(projectName, user);
     }

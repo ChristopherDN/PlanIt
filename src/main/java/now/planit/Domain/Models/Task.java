@@ -5,12 +5,21 @@ public class Task {
   private String taskName;
   private String startDate;
   private String finishDate;
+  private int hours;
   private int cost;
 
   public Task(String taskName, String startDate, String finishDate, int cost) {
     this.taskName = taskName;
     this.startDate = startDate;
     this.finishDate = finishDate;
+    this.cost = cost;
+  }
+
+  public Task(String taskName, String startDate, String finishDate, int hours, int cost) {
+    this.taskName = taskName;
+    this.startDate = startDate;
+    this.finishDate = finishDate;
+    this.hours = hours;
     this.cost = cost;
   }
 
@@ -44,5 +53,13 @@ public class Task {
 
   public void setCost(int cost) {
     this.cost = cost;
+  }
+
+  public int getHours() {
+    return hours;
+  }
+
+  public void setHours(int hours) {
+    this.hours = hours;
   }
 }

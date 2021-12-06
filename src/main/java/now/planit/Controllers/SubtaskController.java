@@ -44,8 +44,7 @@ public class SubtaskController {
   public String createSubtask(WebRequest request, Model model) {
     subtaskService.createSubtask
         (request.getParameter("subtaskName"),
-            request.getParameter("startDate"),
-            request.getParameter("finishDate"),
+            request.getParameter("hours"),
             Integer.parseInt(request.getParameter("cost")),
             taskName, user);
     return "redirect:/createSubtask";

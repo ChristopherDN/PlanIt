@@ -93,13 +93,15 @@ public class DBFacade {
     return repoTask.getProjectID(taskName);
   }
 
-  public void createSubtask(String subtaskName, String startDate, String finishDate, int cost, String taskName, User user) {
-    repoSubtask.createSubtask(subtaskName, startDate, finishDate, cost, getTaskId(taskName, getProjectIDFromTasks(taskName)));
+  public void createSubtask(String subtaskName, String hours, int cost, String taskName, User user) {
+    repoSubtask.createSubtask(subtaskName, hours, cost, getTaskId(taskName, getProjectIDFromTasks(taskName)));
+    repoTask.addHours(hours, taskName, getProjectIDFromTasks(taskName));
   }
 
   public int getSubtaskId(String subtaskName, int taskId){
     return repoSubtask.getSubtaskId(subtaskName, taskId);
   }
+
 
 
   public void deleteSubtask(String taskName, String subtaskName, User user) {
