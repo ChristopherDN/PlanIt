@@ -24,7 +24,8 @@ public class DBMapper {
       connection = DBManager.getConnection();
       ps = connection.prepareStatement(sqlCommand);
     } catch (SQLException e) {
-      e.printStackTrace();
+      System.out.println("Connection to database unavaiable!");
+    e.printStackTrace();
     }
     return ps;
   }
