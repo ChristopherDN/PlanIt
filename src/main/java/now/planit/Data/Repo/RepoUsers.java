@@ -105,4 +105,12 @@ public class RepoUsers {
     parameters.add(String.valueOf(userId));
     dbMapper.save(sql, parameters);
   }
+
+  public void deleteUser(String email, String password) {
+    sql = "delete from PlanIt.Users where email = ? and password = ?";
+    parameters.clear();
+    parameters.add(email);
+    parameters.add(password);
+    dbMapper.save(sql, parameters);
+  }
 }
