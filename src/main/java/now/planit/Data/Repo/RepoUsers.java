@@ -1,7 +1,7 @@
 package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.User;
-import now.planit.Domain.Services.ExceptionService;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +12,9 @@ public class RepoUsers {
   User user;
   String sql;
   ArrayList<String> parameters = new ArrayList<>();
+  String userEmail;
   int userId;
+
 
   //Manipulate ResultSet to other type of data
   public int getId(ResultSet rs){
@@ -37,6 +39,19 @@ public class RepoUsers {
     }
     return user;
   }
+
+  public String getEmail(ResultSet rs){
+    try {
+      if (rs.next()) {
+        userEmail = rs.getString(1);
+      }
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+
+    return userEmail;
+  }
+
 
 
   //Do Something to Database
@@ -108,4 +123,12 @@ public class RepoUsers {
     parameters.add(password);
     dbMapper.save(sql, parameters);
   }
+
+    public String userExists(String email) {
+    sql = "Select email from PlanIt.Users where email = ?";
+    parameters.clear();
+    parameters.add(email);
+    return getEmail(dbMapper.load(sql, parameters));
+
+    }
 }

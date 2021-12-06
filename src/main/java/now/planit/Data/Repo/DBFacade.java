@@ -4,7 +4,6 @@ import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
-import now.planit.Domain.Services.ExceptionService;
 
 import java.util.ArrayList;
 
@@ -128,4 +127,10 @@ public class DBFacade {
   public void deleteUser(String email, String password) {
     repoUsers.deleteUser(email, password);
   }
+
+    public String userExists(String email) {
+
+    return repoUsers.userExists(email);
+
+    }
 }

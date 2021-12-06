@@ -50,4 +50,16 @@ public class UserService {
   public void deleteUser(String email, String password) {
     dbFacade.deleteUser(email, password);
   }
+
+    public String userExists(String email) {
+      return dbFacade.userExists(email);
+    }
+
+    public void validateLoginEmail(String email) throws UserNotExistException{
+      if(dbFacade.userExists(email) != null){
+        System.out.println("We enter this area");
+        throw new UserNotExistException("Sorry, the username was allready taken. Please create a user with another name");
+
+      }
+    }
 }
