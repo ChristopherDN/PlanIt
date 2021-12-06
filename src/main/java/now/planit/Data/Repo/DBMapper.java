@@ -73,7 +73,7 @@ public class DBMapper {
       ps = checkConnection(sqlCommand);
       rs = setParameters(parameters).executeQuery();
     } catch (DBConnFailedException | SQLException e) {
-      //Her bliver vores exception fanget i login, hvis databsen ikke har forbindelse
+      //Her bliver vores exception fanget i login, hvis databasen ikke har forbindelse
       System.out.println("Database unavaiable.. " + e.getMessage());
     } catch(NullPointerException d){
       System.out.println("The request could not be processed" + d.getMessage());

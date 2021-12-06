@@ -20,9 +20,7 @@ public class DBManager {
         try {
             connection = DriverManager.getConnection(url,user, password);
         } catch (SQLException e) {
-            System.out.println("This is the problem" + e.getMessage());// TODO: exception
-            throw new DBConnFailedException("Database unavaiable!");
-
+            System.out.println("Database are unavaiable. Reason = " + e.getMessage());// TODO: exception
         }
         return connection;
     }
