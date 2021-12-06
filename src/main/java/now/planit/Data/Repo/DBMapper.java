@@ -1,6 +1,9 @@
 package now.planit.Data.Repo;
 
 import now.planit.Data.Utility.DBManager;
+import now.planit.Exceptions.DBConnFailedException;
+import now.planit.Exceptions.ResultsetFailException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +19,7 @@ public class DBMapper {
   ResultSet rs;
 
   //Check connection with DBManager
-  public PreparedStatement checkConnection(String sqlCommand) {
+  public PreparedStatement checkConnection(String sqlCommand) throws DBConnFailedException {
     try {
       connection = DBManager.getConnection();
       ps = connection.prepareStatement(sqlCommand);
@@ -28,6 +31,7 @@ public class DBMapper {
 
   //Loads Parameters into Prepared statement
   public PreparedStatement setParameters(ArrayList<String> parameters) {
+  //Should we use ResultsetFailException here
     try {
       for (int i = 0; i < parameters.size(); i++) {
         ps.setString(i + 1, parameters.get(i));
@@ -43,9 +47,12 @@ public class DBMapper {
     try {
       ps = checkConnection(sqlCommand);
       setParameters(parameters).execute();
-    } catch (SQLException e) {
+    } catch (DBConnFailedException | SQLException e) {
       //Eksempel : throw new exceptionsService("Database unavailable");
+      System.out.println(e.getMessage());
       e.printStackTrace();
+    } catch(NullPointerException d){
+      System.out.println(d.getMessage());
     }
   }
 
@@ -54,8 +61,11 @@ public class DBMapper {
     try {
       ps = checkConnection(sqlCommand);
       rs = setParameters(parameters).executeQuery();
-    } catch (SQLException e) {
+    } catch (DBConnFailedException | SQLException e) {
       e.printStackTrace();
+    } catch(NullPointerException d){
+      //throw ned ResultsetFailException here
+      // Exception must go to RepoUsers, DFFacade, UserService, Usercontroller.
     }
     return rs;
   }
