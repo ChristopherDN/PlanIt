@@ -2,6 +2,7 @@ package now.planit.Controllers;
 
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.UserService;
+import now.planit.Exceptions.QueryDomainViewFailedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,7 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String register(WebRequest request) {
+  public String register(WebRequest request) throws QueryDomainViewFailedException {
     userService.registerUser(
             request.getParameter("name"),
             request.getParameter("email"),
@@ -36,7 +37,7 @@ public class UserController {
   }
 
   @PostMapping("/validateLogin")
-  public String validateLogin(WebRequest request, HttpSession session, Model model) {
+  public String validateLogin(WebRequest request, HttpSession session, Model model) throws QueryDomainViewFailedException {
     user = userService.validateLogin(
             request.getParameter("mail"),
             request.getParameter("password"));
@@ -66,7 +67,7 @@ public class UserController {
   }
 
   @PostMapping("/updateUser")
-  public String updateUser(WebRequest request, Model model) {
+  public String updateUser(WebRequest request, Model model) throws QueryDomainViewFailedException {
     //Mangler noget for at sikre at Navn og email opdatere på siden MyPage, når man har ændret det.
     //user = (User) request.getAttribute("user", WebRequest.SCOPE_REQUEST); Den her crasher programmet
     userService.editName(request.getParameter("name"), user);

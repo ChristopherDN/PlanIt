@@ -1,7 +1,8 @@
 package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.User;
-import now.planit.Domain.Services.ExceptionService;
+import now.planit.Exceptions.QueryDataFailException;
+import now.planit.Exceptions.QueryDomainViewFailedException;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,68 +42,110 @@ public class RepoUsers {
 
 
   //Do Something to Database
-  public void registerUser(String name, String email, String password) {
+  public void registerUser(String name, String email, String password) throws QueryDomainViewFailedException {
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     parameters.clear();
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
-    dbMapper.save(sql, parameters);
-    /* Eksempel på Exception
     try{
       dbMapper.save(sql, parameters);
-    }catch(ExceptionService e){
+    }catch(QueryDataFailException d){
 
-      try{
-        dbMapper.save(sql, parameters);
-      }catch(ExceptionService e){
-        throw new Exception("Database unavailable");
-
-      }
+    try{
+      dbMapper.save(sql, parameters);
+    }catch(QueryDataFailException e){
+      throw new QueryDomainViewFailedException("Query in domain layer failed");
     }
-
-     */
+    }
 
   }
 
-  public User validateLogin(String email, String password) {
+  public User validateLogin(String email, String password) throws QueryDomainViewFailedException {
     sql = "SELECT username, email, password FROM PlanIt.Users WHERE email = ? AND password = ?";
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
-   return getUser(dbMapper.load(sql, parameters));
+    try {
+      return getUser(dbMapper.load(sql, parameters));
+    } catch(QueryDataFailException d){
+      System.out.println("Could not process request" + d.getMessage());
+    }
+    try {
+      return getUser(dbMapper.load(sql, parameters));
+    } catch(QueryDataFailException d){
+      throw new QueryDomainViewFailedException("Query in domain layer failed");
+    }
   }
 
 
-  public int getUserId(User user) {
+  public int getUserId(User user) throws QueryDomainViewFailedException {
     sql = "Select id from PlanIt.Users where email = ? AND password = ?";
     parameters.clear();
     parameters.add(user.getEmail());
     parameters.add(user.getPassword());
-    return getId(dbMapper.load(sql, parameters));
-  }
+    try {
+      return getId(dbMapper.load(sql, parameters));
+    }catch(QueryDataFailException d){
+      System.out.println("Could not process request" + d.getMessage());
+    }
+    try {
+      return getId(dbMapper.load(sql, parameters));
+    }catch(QueryDataFailException d){
+      throw new QueryDomainViewFailedException("Query in domain layer failed");
+    }
 
-  public void editName(String newName, int userId) {
+    }
+
+
+  public void editName(String newName, int userId) throws QueryDomainViewFailedException {
     sql = "UPDATE PlanIt.Users SET username = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newName);
     parameters.add(String.valueOf(userId));
-    dbMapper.save(sql, parameters);
+    try{
+      dbMapper.save(sql, parameters);
+    }catch(QueryDataFailException d){
+
+      try{
+        dbMapper.save(sql, parameters);
+      }catch(QueryDataFailException e){
+        throw new QueryDomainViewFailedException("Query in domain layer failed");
+      }
+    }
   }
 
-  public void editEmail(String newEmail, int userId) {
+  public void editEmail(String newEmail, int userId) throws QueryDomainViewFailedException {
     sql = "UPDATE PlanIt.Users SET email = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newEmail);
     parameters.add(String.valueOf(userId));
-    dbMapper.save(sql, parameters);
+    try{
+      dbMapper.save(sql, parameters);
+    }catch(QueryDataFailException d){
+
+      try{
+        dbMapper.save(sql, parameters);
+      }catch(QueryDataFailException e){
+        throw new QueryDomainViewFailedException("Query in domain layer failed");
+      }
+    }
   }
 
-  public void editPassword(String newPassword, int userId) {
+  public void editPassword(String newPassword, int userId) throws QueryDomainViewFailedException {
     sql = "UPDATE PlanIt.Users SET password = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newPassword);
     parameters.add(String.valueOf(userId));
-    dbMapper.save(sql, parameters);
+    try{
+      dbMapper.save(sql, parameters);
+    }catch(QueryDataFailException d){
+
+      try{
+        dbMapper.save(sql, parameters);
+      }catch(QueryDataFailException e){
+        throw new QueryDomainViewFailedException("Query in domain layer failed");
+      }
+    }
   }
 }

@@ -3,6 +3,7 @@ package now.planit.Controllers;
 import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.ProjectService;
+import now.planit.Exceptions.QueryDomainViewFailedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class ProjectController {
 
 
     @GetMapping("/myProjects")
-    public String myProjects(Model model, WebRequest request) {
+    public String myProjects(Model model, WebRequest request) throws QueryDomainViewFailedException {
         updateProjects(request, model);
         model.addAttribute("userName", user.getName());
         return "project/myProjects";// endpoint change
@@ -28,7 +29,7 @@ public class ProjectController {
 
 
     @PostMapping("/createProject")
-    public String createProject(WebRequest request, Model model) {
+    public String createProject(WebRequest request, Model model) throws QueryDomainViewFailedException {
         user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         projectService.createProject(request.getParameter("name"),
                 request.getParameter("start"),
@@ -40,14 +41,14 @@ public class ProjectController {
     }
 
     @GetMapping("/removeProject/{id}")
-    public String deleteProject(@PathVariable(value = "id") String id, Model model, WebRequest request) {
+    public String deleteProject(@PathVariable(value = "id") String id, Model model, WebRequest request) throws QueryDomainViewFailedException {
         projectService.deleteProject(id, user);
         updateProjects(request,model);
         return "redirect:/myProjects";
     }
 
     //Bruges til at opdatere Projects og adder til Model
-    public void updateProjects(WebRequest request, Model model){
+    public void updateProjects(WebRequest request, Model model) throws QueryDomainViewFailedException {
         user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         projects = projectService.getProjects(user);
         model.addAttribute("loopList", projects);

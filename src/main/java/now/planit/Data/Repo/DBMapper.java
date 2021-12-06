@@ -2,7 +2,7 @@ package now.planit.Data.Repo;
 
 import now.planit.Data.Utility.DBManager;
 import now.planit.Exceptions.DBConnFailedException;
-import now.planit.Exceptions.ResultsetFailException;
+import now.planit.Exceptions.QueryDataFailException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,8 +24,16 @@ public class DBMapper {
       connection = DBManager.getConnection();
       ps = connection.prepareStatement(sqlCommand);
     } catch (SQLException e) {
+      e.printStackTrace();
+    } try {
+      connection = DBManager.getConnection();
+      ps = connection.prepareStatement(sqlCommand);
+    }
+    catch (SQLException e) {
       System.out.println("Connection to database unavaiable!");
-    e.printStackTrace();
+      e.printStackTrace();
+      throw new DBConnFailedException("Database unavaiable!");
+
     }
     return ps;
   }
@@ -38,13 +46,16 @@ public class DBMapper {
         ps.setString(i + 1, parameters.get(i));
       }
     } catch (SQLException e) {
+      System.out.println("Database unavaiable!");
       e.printStackTrace();
+    } catch(NullPointerException d){
+      System.out.println(d.getMessage());
     }
     return ps;
   }
 
   //Used to do something on the Database, Save or delete.
-  public void save(String sqlCommand, ArrayList<String> parameters) {
+  public void save(String sqlCommand, ArrayList<String> parameters) throws QueryDataFailException {
     try {
       ps = checkConnection(sqlCommand);
       setParameters(parameters).execute();
@@ -58,15 +69,14 @@ public class DBMapper {
   }
 
   //Used to recieve something from the database, will always return ResultSet.
-  public ResultSet load(String sqlCommand, ArrayList<String> parameters) {
+  public ResultSet load(String sqlCommand, ArrayList<String> parameters) throws QueryDataFailException {
     try {
       ps = checkConnection(sqlCommand);
       rs = setParameters(parameters).executeQuery();
     } catch (DBConnFailedException | SQLException e) {
-      e.printStackTrace();
+      System.out.println("Database unavaiable" + e.getMessage());
     } catch(NullPointerException d){
-      //throw ned ResultsetFailException here
-      // Exception must go to RepoUsers, DFFacade, UserService, Usercontroller.
+      System.out.println("The request could not be processed" + d.getMessage());
     }
     return rs;
   }
