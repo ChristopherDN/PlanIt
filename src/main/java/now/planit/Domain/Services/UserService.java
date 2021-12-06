@@ -29,6 +29,7 @@ public class UserService {
     }
   }
 
+  //TODO Mangler validering ift. om mail er i systemet...
   public void editMail(String newEmail, User user) {
     if (!newEmail.equals(user.getName()) && !newEmail.equals("")){
       dbFacade.editMail(newEmail, user);
@@ -41,5 +42,9 @@ public class UserService {
       dbFacade.changePassword(newPassword, user);
       user.setPassword(newPassword);
     }
+  }
+
+  public void deleteUser(String email, String password) {
+    dbFacade.deleteUser(email, password);
   }
 }

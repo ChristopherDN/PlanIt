@@ -52,9 +52,6 @@ public class SubtaskController {
 
   @GetMapping("/removeSubtask/{id}")
   public String deleteTask(@PathVariable(value = "id") String id, Model model, WebRequest request) {
-    if (user == null){
-      return "login/login";
-    }
     subtaskService.deleteSubtask(taskName, id, user);
     updateSubtasks(request, model, taskName);
     return "redirect:/createSubtask";
