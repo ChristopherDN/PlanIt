@@ -31,9 +31,12 @@ public class UserController {
 
   @PostMapping("/register")
   public String register(WebRequest request)throws UserNotExistException {
+
+     //TODO skal rettes til, så man kan logge ind uden nogen bruger i forvejen
     if(user == null){
       throw new UserNotExistException("Sorry, the username was allready taken. Please create a user with another name");
     }
+
     userService.registerUser(
             request.getParameter("name"),
             request.getParameter("email"),

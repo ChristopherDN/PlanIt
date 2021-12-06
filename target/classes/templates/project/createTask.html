@@ -44,7 +44,7 @@
         <td th:text="${task.getTaskName()}"></td>
         <td th:text="${task.getStartDate()}"></td>
         <td th:text="${task.getFinishDate()}"></td>
-        <td><p th:text="${task.getHours()}"></p></td>
+        <td th:text="${task.getHours()}"></td>
         <td th:text="${task.getCost()}"></td>
         <td><form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
             <button type="submit">Add subtask</button>
