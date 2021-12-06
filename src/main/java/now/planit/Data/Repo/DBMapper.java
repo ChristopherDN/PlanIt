@@ -30,9 +30,8 @@ public class DBMapper {
       ps = connection.prepareStatement(sqlCommand);
     }
     catch (SQLException e) {
-      System.out.println("Connection to database unavaiable!");
       e.printStackTrace();
-      throw new DBConnFailedException("Database unavaiable!");
+      throw new DBConnFailedException("Database unavaiable!\n" + "Status for connection= " + e.getMessage());
 
     }
     return ps;
@@ -74,7 +73,8 @@ public class DBMapper {
       ps = checkConnection(sqlCommand);
       rs = setParameters(parameters).executeQuery();
     } catch (DBConnFailedException | SQLException e) {
-      System.out.println("Database unavaiable" + e.getMessage());
+      //Her bliver vores exception fanget i login, hvis databsen ikke har forbindelse
+      System.out.println("Database unavaiable.. " + e.getMessage());
     } catch(NullPointerException d){
       System.out.println("The request could not be processed" + d.getMessage());
     }

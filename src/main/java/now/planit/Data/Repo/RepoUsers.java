@@ -24,7 +24,10 @@ public class RepoUsers {
       }
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
+    } catch (NullPointerException e){
+      System.out.println("Couldnt process resultset: " + "Resultset= " +e.getMessage());
     }
+    //Hvis databasen ikke har forbindelse catch Nullpointer exception, at vi ikke får vist en blank side.
     return userId;
   }
 
@@ -36,6 +39,9 @@ public class RepoUsers {
       }
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
+      //Hvis databasen ikke har forbindelse catch Nullpointer exception, at vi ikke får vist en blank side.
+    } catch (NullPointerException e){
+      System.out.println("Couldnt process resultset, beacause there the databse are unavaiable! ");
     }
     return user;
   }

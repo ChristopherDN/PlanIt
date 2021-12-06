@@ -13,14 +13,7 @@ public class UserService {
   }
 
   public User validateLogin(String email, String password) throws QueryDomainViewFailedException {
-    /*
-    try{
 
-
-    }catch(){
-
-    }
-    */
    return dbFacade.validateLogin(email, password);
   }
   public void editName(String newName, User user) throws QueryDomainViewFailedException {
