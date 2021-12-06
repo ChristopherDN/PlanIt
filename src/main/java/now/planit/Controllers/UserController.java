@@ -86,13 +86,13 @@ public class UserController {
   @ExceptionHandler(DBConnFailedException.class)
   public String exceptionMessageLogin(Model model, DBConnFailedException dbConnFailedException){
     model.addAttribute("exMessage", dbConnFailedException.getMessage());
-    return "error";
+    return "error/error";
 
   }
   @ExceptionHandler(UserNotExistException.class)
   public String exceptionMessageUserNotExist(Model model, UserNotExistException userNotExistException){
-    model.addAttribute("exMessage", "User not found");
-    return "error";
+    model.addAttribute("exMessage", "--->User allready exits. Please choose another name<--");
+    return "error/error";
 
   }
 
