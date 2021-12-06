@@ -32,7 +32,7 @@ public class RepoProject {
       projects.clear();
       while (rs.next()) {
         projects.add(new Project(rs.getString(1), rs.getString(2),
-            rs.getString(3), rs.getInt(4)));
+            rs.getString(3), rs.getInt(4),rs.getInt(5)));
       }
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
@@ -62,7 +62,7 @@ public class RepoProject {
     }
 
   public ArrayList<Project> getProjects(int userId) {
-      sql = "select name, start, finish, budget from PlanIt.Projects where User_id = ? ";
+      sql = "select name, start, finish, actual_hours, budget from PlanIt.Projects where User_id = ? ";
       parameters.clear();
       parameters.add(String.valueOf(userId));
       return loadProjects(dbMapper.load(sql, parameters));
@@ -101,5 +101,14 @@ public class RepoProject {
       System.out.println(ex.getMessage());
     }
     return projectName;
+  }
+
+  public void addActualhours(int hours, int projectId) {
+    sql = "update PlanIt.Projects set actual_hours = Projects.actual_hours + ?  where Projects.id = ? ";
+    parameters.clear();
+    parameters.add(String.valueOf(hours));
+    parameters.add(String.valueOf(projectId));
+    dbMapper.save(sql,parameters);
+
   }
 }
