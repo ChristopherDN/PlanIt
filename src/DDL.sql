@@ -18,61 +18,60 @@ alter table Users
 
 create table if not exists PlanIt.Projects
 (
-	id int auto_increment,
-	user_id int not null,
-	name varchar(100) not null,
-	start date not null,
-	finish date not null,
-	budget int not null,
-	constraint id_UNIQUE
-		unique (id),
-	constraint fkuser
-		foreign key (user_id) references Users (id)
-			on update cascade on delete cascade
-);
+    id int auto_increment,
+    user_id int not null,
+    name varchar(100) not null,
+    start date not null,
+    finish date not null,
+    budget int not null,
+    constraint id_UNIQUE
+    unique (id),
+    constraint fkuser
+    foreign key (user_id) references PlanIt.Users (id)
+    on update cascade on delete cascade
+    );
 
 create index fkuser_id_idx
-	on Projects (user_id);
+    on PlanIt.Projects (user_id);
 
-alter table Projects
-	add primary key (id);
+alter table PlanIt.Projects
+    add primary key (id);
 
 create table if not exists PlanIt.Tasks
 (
-	id int auto_increment,
-	project_id int not null,
-	name varchar(100) not null,
-	start date not null,
-	finish date not null,
-	cost int not null,
-	constraint id_UNIQUE
-		unique (id),
-	constraint fkprojectId
-		foreign key (project_id) references Projects (id)
-			on update cascade on delete cascade
+    id int auto_increment,
+    project_id int not null,
+    name varchar(100) not null,
+    start date not null,
+    finish date not null,
+    hours int null,
+    cost int not null,
+    constraint id_UNIQUE
+    unique (id),
+    constraint fkprojectId
+    foreign key (project_id) references PlanIt.Projects (id)
+    on update cascade on delete cascade
 );
 
-alter table Tasks
+alter table PlanIt.Tasks
 	add primary key (id);
 
 create table if not exists PlanIt.Subtasks
 (
-	id int auto_increment,
-	task_id int not null,
-	name varchar(100) not null,
-	start int not null,
-	finish int not null,
-	cost int not null,
-	constraint id_UNIQUE
-		unique (id),
-	constraint fktaskId
-		foreign key (task_id) references Tasks (id)
-			on update cascade on delete cascade
+    id int auto_increment,
+    task_id int not null,
+    name varchar(100) not null,
+    estimated_hours int not null,
+    cost int not null,
+    constraint id_UNIQUE
+    unique (id),
+    constraint fktaskId
+    foreign key (task_id) references PlanIt.Tasks (id)
+    on update cascade on delete cascade
 );
 
 create index fk_idx
 	on Subtasks (task_id);
 
-alter table Subtasks
+alter table PlanIt.Subtasks
 	add primary key (id);
-

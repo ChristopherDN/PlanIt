@@ -13,7 +13,7 @@ public class RepoTask {
   String sql;
   ArrayList<Task> tasks = new ArrayList<>();
   int taskId;
-  int hours;
+  int hoursInt;
 
 
   //Manipulate Resultset to data we can use
@@ -40,6 +40,17 @@ public class RepoTask {
             System.out.println(ex.getMessage());
         }
         return taskId;
+    }
+
+    private int hours(ResultSet rs) {
+        try {
+            while (rs.next()) {
+                hoursInt = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return hoursInt;
     }
 
   //Db Do something.
@@ -96,16 +107,23 @@ public class RepoTask {
   }
 
 
-
-
-
-    public void addHours(String hours, String taskName, int projectId) {
+    public void addHours(int hours, String taskName, int projectId) {
     sql = "update PlanIt.tasks set hours = hours + ? where name = ? and project_id = ?";
     parameters.clear();
-    parameters.add(hours);
+    parameters.add(String.valueOf(hours));
     parameters.add(taskName);
     parameters.add(String.valueOf(projectId));
     dbMapper.save(sql,parameters);
+    }
+
+
+    public int getHours(String taskName, int projectId) {
+      sql = "select Tasks.hours from PlanIt.tasks where name = ? and project_id = ?";
+      parameters.clear();
+      parameters.add(taskName);
+      parameters.add(String.valueOf(projectId));
+      return hours((dbMapper.load(sql,parameters)));
+
     }
 }
 
