@@ -32,9 +32,6 @@ public class TaskController {
   //Endpoint to pass and connect data(id) from myProjects site to createtask site.
   @GetMapping("/update/{id}")
   public String updateProject(@PathVariable(value = "id") String id, WebRequest request, Model model) {
-    if (user == null){
-      return "login/login";
-    }
     projectName = id;
    updateTasks(request, model, projectName);
     return "redirect:/createTask";

@@ -23,9 +23,6 @@ public class SubtaskController {
   //Endpoint to pass and connect data(id) from createTask site to createSubtask site.
   @GetMapping("/rerun/{id}")
   public String loadSubtasks(@PathVariable(value = "id") String id, WebRequest request, Model model) {
-    if (user == null){
-      return "login/login";
-    }
     taskName = id;
    updateSubtasks(request, model, taskName);
     return "redirect:/createSubtask";
@@ -47,8 +44,7 @@ public class SubtaskController {
   public String createSubtask(WebRequest request, Model model) {
     subtaskService.createSubtask
         (request.getParameter("subtaskName"),
-            request.getParameter("startDate"),
-            request.getParameter("finishDate"),
+            request.getParameter("hours"),
             Integer.parseInt(request.getParameter("cost")),
             taskName, user);
     return "redirect:/createSubtask";

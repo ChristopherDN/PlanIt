@@ -21,10 +21,4 @@ public class TaskService {
     public void deleteTask(String projectName, String taskName, User user) {
         dbFacade.deleteTask(projectName, taskName, user);
     }
-
-
-    public int calculate( int hours){
-    return dbFacade.calculateHours(hours);
-    }
-
 }

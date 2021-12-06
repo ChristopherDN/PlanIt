@@ -14,7 +14,7 @@ public class RepoTask {
   ArrayList<Task> tasks = new ArrayList<>();
   int taskId;
   int hours;
-  int sum;
+
 
   //Manipulate Resultset to data we can use
   public ArrayList<Task> loadTasks(ResultSet rs){
@@ -22,7 +22,7 @@ public class RepoTask {
       tasks.clear();
       while (rs.next()) {
         tasks.add(new Task(rs.getString(1), rs.getString(2),
-                rs.getString(3), rs.getInt(4)));
+                rs.getString(3),rs.getInt(4) , rs.getInt(5)));
 
       }
     } catch (SQLException ex) {
@@ -44,7 +44,7 @@ public class RepoTask {
 
   //Db Do something.
   public ArrayList<Task> getTasks(int projectId){
-    sql ="select name, start, finish, cost from PlanIt.Tasks where project_Id = ?";
+    sql ="select name, start, finish, hours, cost from PlanIt.Tasks where project_Id = ?";
     parameters.clear();
     parameters.add(String.valueOf(projectId));
     return loadTasks(dbMapper.load(sql,parameters));
@@ -52,11 +52,12 @@ public class RepoTask {
 
 
   public void createTask(String taskName, String startDate, String finishDate, int cost, int projectId) {
-      sql=" insert into PlanIt.Tasks ( name, start, finish, cost, project_id ) values (?, ?, ?, ?, ?) ";
+      sql=" insert into PlanIt.Tasks ( name, start, finish, hours, cost, project_id ) values (?, ?, ?, ?, ?, ?) ";
       parameters.clear();
       parameters.add(taskName);
       parameters.add(startDate);
       parameters.add(finishDate);
+      parameters.add("0");
       parameters.add(String.valueOf(cost));
       parameters.add(String.valueOf(projectId));
       dbMapper.save(sql,parameters);
@@ -69,7 +70,6 @@ public class RepoTask {
         parameters.add(taskName);
         parameters.add(String.valueOf(projectId));
         return getId(dbMapper.load(sql,parameters));
-
     }
 
   public void deleteTask(int taskId, int projectId) {
@@ -95,32 +95,18 @@ public class RepoTask {
     return getId(dbMapper.load(sql,parameters));
   }
 
-    //Manipulate Resultset to data we can use
-    private int getHours(ResultSet rs) {
-        int sum =0;
-        try {
-            while (rs.next()) {
-                hours = rs.getInt(1);
-                sum += hours;
-                System.out.println(sum);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return sum;
+
+
+
+
+    public void addHours(String hours, String taskName, int projectId) {
+    sql = "update PlanIt.tasks set hours = hours + ? where name = ? and project_id = ?";
+    parameters.clear();
+    parameters.add(hours);
+    parameters.add(taskName);
+    parameters.add(String.valueOf(projectId));
+    dbMapper.save(sql,parameters);
     }
-
-
-    public int calculate( int hours ) {
-        sql = "select estimated_hours from PlanIt.Subtasks where task_id = ?";
-        parameters.clear();
-        parameters.add(String.valueOf(taskId));
-        parameters.add(String.valueOf(hours));
-        System.out.println(getHours(dbMapper.load(sql,parameters))+hours);
-        return getHours(dbMapper.load(sql,parameters))+hours;
-    }
-
-
 }
 
 
