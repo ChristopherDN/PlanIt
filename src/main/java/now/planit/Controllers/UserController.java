@@ -1,10 +1,12 @@
 package now.planit.Controllers;
 
 import now.planit.Domain.Models.User;
+import now.planit.Exceptions.UserNotExistException;
 import now.planit.Domain.Services.UserService;
-import now.planit.Exceptions.QueryDomainViewFailedException;
+import now.planit.Exceptions.DBConnFailedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -28,7 +30,10 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String register(WebRequest request) throws QueryDomainViewFailedException {
+  public String register(WebRequest request)throws UserNotExistException {
+    if(user == null){
+      throw new UserNotExistException("Sorry, the username was allready taken. Please create a user with another name");
+    }
     userService.registerUser(
             request.getParameter("name"),
             request.getParameter("email"),
@@ -37,12 +42,13 @@ public class UserController {
   }
 
   @PostMapping("/validateLogin")
-  public String validateLogin(WebRequest request, HttpSession session, Model model) throws QueryDomainViewFailedException {
+  public String validateLogin(WebRequest request, HttpSession session, Model model) throws UserNotExistException {
     user = userService.validateLogin(
             request.getParameter("mail"),
             request.getParameter("password"));
 
     //Set Session to user, validate user is not null.
+
     if (session.getAttribute("user") == null) {
       if (user != null) {
         model.addAttribute("user", user);
@@ -67,7 +73,7 @@ public class UserController {
   }
 
   @PostMapping("/updateUser")
-  public String updateUser(WebRequest request, Model model) throws QueryDomainViewFailedException {
+  public String updateUser(WebRequest request, Model model)  {
     //Mangler noget for at sikre at Navn og email opdatere på siden MyPage, når man har ændret det.
     //user = (User) request.getAttribute("user", WebRequest.SCOPE_REQUEST); Den her crasher programmet
     userService.editName(request.getParameter("name"), user);
@@ -75,6 +81,19 @@ public class UserController {
     userService.changePassword(request.getParameter("password"), user);
     model.addAttribute("user", user);
     return "redirect:/myPage";
+  }
+
+  @ExceptionHandler(DBConnFailedException.class)
+  public String exceptionMessageLogin(Model model, DBConnFailedException dbConnFailedException){
+    model.addAttribute("exMessage", dbConnFailedException.getMessage());
+    return "error";
+
+  }
+  @ExceptionHandler(UserNotExistException.class)
+  public String exceptionMessageUserNotExist(Model model, UserNotExistException userNotExistException){
+    model.addAttribute("exMessage", "User not found");
+    return "error";
+
   }
 
 

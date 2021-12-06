@@ -12,7 +12,7 @@ public class DBManager {
     private static String url;
     private static Connection connection = null;
 
-    public static Connection getConnection() throws DBConnFailedException {
+    public static Connection getConnection() {
         if (connection != null) return connection;
             url = System.getenv("url");//properties.getProperty("url");
             user = System.getenv("user");//properties.getProperty("user");
@@ -20,7 +20,8 @@ public class DBManager {
         try {
             connection = DriverManager.getConnection(url,user, password);
         } catch (SQLException e) {
-            System.out.println("Database are unavaiable. Reason = " + e.getMessage());// TODO: exception
+            System.out.println("Database unavaiable DBmanager class.");
+            e.printStackTrace();
         }
         return connection;
     }

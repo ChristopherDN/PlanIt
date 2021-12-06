@@ -2,38 +2,48 @@ package now.planit.Domain.Services;
 
 import now.planit.Data.Repo.DBFacade;
 import now.planit.Domain.Models.User;
-import now.planit.Exceptions.QueryDomainViewFailedException;
+import now.planit.Exceptions.UserNotExistException;
 
 public class UserService {
   DBFacade dbFacade = new DBFacade();
 
 
-  public void registerUser(String name, String email, String password) throws QueryDomainViewFailedException {
+  public void registerUser(String name, String email, String password) {
     dbFacade.registerUser(name, email, password);
   }
 
-  public User validateLogin(String email, String password) throws QueryDomainViewFailedException {
-
-   return dbFacade.validateLogin(email, password);
+  public User validateLogin(String email, String password) {
+    User user = dbFacade.validateLogin(email, password);
+    /*Not usefull, we allready have javascript validation.
+    if(user == null) {
+      throw new UserNotExistException("Sorry, this is not a correct user!!!");
+    }
+    */
+    return user;
   }
-  public void editName(String newName, User user) throws QueryDomainViewFailedException {
+
+  public void editName(String newName, User user) {
     if (!newName.equals(user.getName()) && !newName.equals("")){
       dbFacade.editName(newName, user);
       user.setName(newName);
     }
+    //TODO throw new exception, failed to change password redirect to errror page.
   }
 
-  public void editMail(String newEmail, User user) throws QueryDomainViewFailedException {
+  public void editMail(String newEmail, User user)  {
     if (!newEmail.equals(user.getName()) && !newEmail.equals("")){
       dbFacade.editMail(newEmail, user);
       user.setEmail(newEmail);
     }
+    //TODO throw new exception, failed to change password redirect to errror page.
   }
 
-  public void changePassword(String newPassword, User user) throws QueryDomainViewFailedException {
+  public void changePassword(String newPassword, User user)  {
     if (!newPassword.equals(user.getName()) && !newPassword.equals("")) {
       dbFacade.changePassword(newPassword, user);
       user.setPassword(newPassword);
     }
+
+    //TODO throw new exception, failed to change password redirect to errror page.
   }
 }

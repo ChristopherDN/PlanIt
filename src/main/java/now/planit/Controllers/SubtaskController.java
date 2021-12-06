@@ -3,7 +3,6 @@ package now.planit.Controllers;
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.SubtaskService;
-import now.planit.Exceptions.QueryDomainViewFailedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,7 @@ public class SubtaskController {
 
   //Endpoint to pass and connect data(id) from createTask site to createSubtask site.
   @GetMapping("/rerun/{id}")
-  public String loadSubtasks(@PathVariable(value = "id") String id, WebRequest request, Model model) throws QueryDomainViewFailedException {
+  public String loadSubtasks(@PathVariable(value = "id") String id, WebRequest request, Model model)  {
     taskName = id;
    updateSubtasks(request, model, taskName);
     return "redirect:/createSubtask";
@@ -31,7 +30,7 @@ public class SubtaskController {
 
   //Endpoint to dynamic display(loop) all task and display user information
   @GetMapping("/createSubtask")
-  public String createSubtasks(WebRequest request, Model model) throws QueryDomainViewFailedException {
+  public String createSubtasks(WebRequest request, Model model)  {
     if (user == null){
       return "login/login";
     }
@@ -42,7 +41,7 @@ public class SubtaskController {
 
   //Endpoint that stores parameters from task and pass them down to the service.
   @PostMapping("/createSubtaskParam")
-  public String createSubtask(WebRequest request, Model model) throws QueryDomainViewFailedException {
+  public String createSubtask(WebRequest request, Model model)  {
     subtaskService.createSubtask
         (request.getParameter("subtaskName"),
             request.getParameter("hours"),
@@ -52,7 +51,7 @@ public class SubtaskController {
   }
 
   @GetMapping("/removeSubtask/{id}")
-  public String deleteTask(@PathVariable(value = "id") String id, Model model, WebRequest request) throws QueryDomainViewFailedException {
+  public String deleteTask(@PathVariable(value = "id") String id, Model model, WebRequest request)  {
     if (user == null){
       return "login/login";
     }
@@ -61,7 +60,7 @@ public class SubtaskController {
     return "redirect:/createSubtask";
   }
 
-  public void updateSubtasks(WebRequest request, Model model, String taskName) throws QueryDomainViewFailedException {
+  public void updateSubtasks(WebRequest request, Model model, String taskName)  {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     subtasks = subtaskService.getSubtasks(taskName, user);
     model.addAttribute("subtasks", subtasks);
