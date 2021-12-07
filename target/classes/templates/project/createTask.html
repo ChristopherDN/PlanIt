@@ -26,11 +26,11 @@
         <th>Delete</th>
     </tr>
     <tr>
-        <form action="/createTaskParam" method="post">
+        <form action="/createTaskParam" method="post" onsubmit="return change()">
             <td></td>
             <td><input type="text" name="taskName" required></td>
-            <td><input type="date" name="startDate" required></td>
-            <td><input type="date" name="finishDate" required></td>
+            <td><input type="date" name="startDate" id="ed_starttimedate" required></td>
+            <td><input type="date" name="finishDate" id="ed_endtimedate" required></td>
             <td></td>
             <td></td>
             <td><input type="submit" class="like" value="Add Task"></td>
@@ -58,6 +58,23 @@
 </table>
 </center>
 </body>
+
+<!--This function prevents adding projects with enddate before startdate, but throws a MysqlDataTruncation exception
+ due to the form is still submitted. The function does was it is supposed to do, but should we catch the exception???
+ The function is called on line 27 in the form.
+ -->
+<script>
+    function change() {
+        var startDate = document.getElementById("ed_starttimedate").value;
+        var endDate = document.getElementById("ed_endtimedate").value;
+
+        if ((Date.parse(endDate) <= Date.parse(startDate))) {
+            alert("End date should be greater than Start date");
+            document.getElementById("ed_endtimedate").value = "";
+        }
+    };
+</script>
+
 <div id="footerTabel" !important> <!--changes footer, so tabels are visable-->
     <th:block th:include="/htmlFragment/footer :: footer"></th:block>
 </div>
