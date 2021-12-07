@@ -4,7 +4,6 @@ import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
-import now.planit.Domain.Services.ExceptionService;
 
 import java.util.ArrayList;
 
@@ -85,7 +84,7 @@ public class DBFacade {
 
   private void calculateHours(int hours, String taskName, int projectId) {
     repoTask.addHours(hours, taskName, projectId);
-    repoProject.addActualhours(hours, projectId);
+    repoProject.addActualHours(hours, projectId);
    // repoProject.addActualhours(repoTask.getHours(taskName,getProjectId(projectName,getUserId(user))),//TODO change potition
          //   projectName, getProjectId(projectName,getUserId(user))); Todo skal dette slettes?
   }

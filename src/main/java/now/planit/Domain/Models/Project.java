@@ -9,21 +9,20 @@ public class Project {
   private int cost;
   private int budget;
 
-  public Project(String name, String start, String finish, int budget, int anInt, int rsInt) {
-
+  public Project(String name, String start, String finish, int budget) {
     this.name = name;
     this.start = start;
     this.finish = finish;
     this.budget = budget;
   }
 
-  public Project(String name, String start, String finish, int hours, int cost) {
+  public Project(String name, String start, String finish, int cost, int budget, int hours) {
     this.name = name;
     this.start = start;
     this.finish = finish;
-    this.hours = hours;
     this.cost = cost;
     this.budget = budget;
+    this.hours = hours;
   }
 
   public String getName() {

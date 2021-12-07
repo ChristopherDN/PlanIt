@@ -40,9 +40,20 @@ public class RepoProject {
     return projects;
   }
 
+  private String getProjectName(ResultSet rs) {
+    try {
+      while (rs.next()) {
+        projectName = rs.getString(1);
+      }
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+    return projectName;
+  }
+
   //DB do something
   public ArrayList<Project> getProjects(int userId) {
-    sql = "select name, start, finish, actual_hours, actual_cost, budget from PlanIt.Projects where User_id = ?";
+    sql = "select name, start, finish, actual_cost, budget, actual_hours from PlanIt.Projects where User_id = ?";
     parameters.clear();
     parameters.add(String.valueOf(userId));
     return loadProjects(dbMapper.load(sql, parameters));
@@ -67,8 +78,6 @@ public class RepoProject {
     return getId(dbMapper.load(sql,parameters));
   }
 
-
-
   public void deleteProject(int projectId, int userId) {
     sql = "delete from PlanIt.Projects where id = ? and User_id = ?";
     parameters.clear();
@@ -89,22 +98,11 @@ public class RepoProject {
     sql = "SELECT planit.Projects.name from PlanIt.Projects JOIN planit.Tasks ON planit.Projects.id=planit.Tasks.project_id where planit.Tasks.name = ?";
     parameters.clear();
     parameters.add(taskName);
-    return getProjectname(dbMapper.load(sql, parameters));
+    return getProjectName(dbMapper.load(sql, parameters));
   }
 
-  private String getProjectname(ResultSet rs) {
-    try {
-      while (rs.next()) {
-            projectName = rs.getString(1);
-      }
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-    }
-    return projectName;
-  }
-
-  public void addActualhours(int hours, int projectId) {
-    sql = "update PlanIt.Projects set actual_hours = Projects.actual_hours + ?  where Projects.id = ? ";
+  public void addActualHours(int hours, int projectId) {
+    sql = "update PlanIt.Projects set actual_hours = Projects.actual_hours + ?  where Projects.id = ?";
     parameters.clear();
     parameters.add(String.valueOf(hours));
     parameters.add(String.valueOf(projectId));
@@ -112,7 +110,7 @@ public class RepoProject {
   }
 
   public void addActualCost(int cost, int projectId){
-    sql = "update PlanIt.Projects set actual_cost = Projects.actual_cost + ?  where Projects.id = ? ";
+    sql = "update PlanIt.Projects set actual_cost = Projects.actual_cost + ?  where Projects.id = ?";
     parameters.clear();
     parameters.add(String.valueOf(cost));
     parameters.add(String.valueOf(projectId));

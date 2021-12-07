@@ -43,28 +43,6 @@ public class RepoTask {
         return taskId;
     }
 
-    private int hours(ResultSet rs) {
-        try {
-            while (rs.next()) {
-                hoursInt = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return hoursInt;
-    }
-
-    private int cost(ResultSet rs) {
-        try {
-            while (rs.next()) {
-                costInt = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return costInt;
-    }
-
   //Db Do something.
   public ArrayList<Task> getTasks(int projectId){
     sql ="select name, start, finish, hours, cost from PlanIt.Tasks where project_Id = ?";
@@ -125,16 +103,6 @@ public class RepoTask {
     parameters.add(String.valueOf(projectId));
     dbMapper.save(sql,parameters);
     }
-
-
-    public int getHours(String taskName, int projectId) {
-      sql = "select Tasks.hours from PlanIt.tasks where name = ? and project_id = ?";
-      parameters.clear();
-      parameters.add(taskName);
-      parameters.add(String.valueOf(projectId));
-      return hours((dbMapper.load(sql,parameters)));
-    }
-
 
     public void addActualCost(int cost, String taskName, int projectId){
         sql = "update PlanIt.Tasks set cost = Tasks.cost + ?  where Tasks.name = ? and Tasks.Project_id = ? ";

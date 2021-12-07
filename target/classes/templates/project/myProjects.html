@@ -39,14 +39,15 @@
             </form>
         </tr>
 
-    <tr id="tr1" th:border="1" th:each="project : ${loopList}">
+    <tr id="tr1" th:border="1" th:each="project : ${projects}">
         <td></td>
         <td th:text="${project.getName()}"></td>
         <td th:text="${project.getStart()}"></td>
         <td th:text="${project.getFinish()}"></td>
-        <td th:text="${project.getHours()}"></td>
-        <td th:text="${project.getBudget()}"></td>
         <td th:text="${project.getCost()}"></td>
+        <td th:text="${project.getBudget()}"></td>
+        <td th:text="${project.getHours()}"></td>
+
         <td><form th:action="@{/update/{id}(id=${project.getName()})}" th:object="${project}">
             <button type="submit">Update project</button>
         </form>

@@ -21,9 +21,7 @@ public class ProjectController {
 
     @GetMapping("/myProjects")
     public String myProjects(WebRequest request,Model model) {
-        model.addAttribute("project",projects);
         updateProjects(request, model);
-        model.addAttribute("userName", user.getName());
         return "project/myProjects";// endpoint change
     }
 
@@ -35,26 +33,24 @@ public class ProjectController {
                 request.getParameter("start"),
                 request.getParameter("finish"),
                 Integer.parseInt(request.getParameter("budget")), user);
-        model.addAttribute("loopList", projects); //Skal den add projects her igen?
         // Er det nødvendigt, når den adder i /myProjects, skal den ikke bare opdatere ArrayListen?
         return "redirect:/myProjects";
     }
 
     @GetMapping("/removeProject/{id}")
-    public String deleteProject(@PathVariable(value = "id") String id, Model model, WebRequest request) {
+    public String deleteProject(@PathVariable(value = "id") String id) {
         if (user == null){
             return "login/login";
         }
         projectService.deleteProject(id, user);
-        updateProjects(request,model);
         return "redirect:/myProjects";
     }
 
     //Bruges til at opdatere Projects og adder til Model
     public void updateProjects(WebRequest request, Model model){
         user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        model.addAttribute("userName", user.getName());
         projects = projectService.getProjects(user);
-        model.addAttribute("loopList", projects);
+        model.addAttribute("projects", projects);
     }
-
 }
