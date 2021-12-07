@@ -44,7 +44,6 @@ public class TaskController {
             (request.getParameter("taskName"),
             request.getParameter("startDate"),
             request.getParameter("finishDate"),
-            Integer.parseInt(request.getParameter("cost")),
             projectName, user);
     return "redirect:/createTask";
   }

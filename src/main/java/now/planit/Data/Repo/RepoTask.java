@@ -14,6 +14,7 @@ public class RepoTask {
   ArrayList<Task> tasks = new ArrayList<>();
   int taskId;
   int hoursInt;
+  int costInt;
 
 
   //Manipulate Resultset to data we can use
@@ -53,6 +54,17 @@ public class RepoTask {
         return hoursInt;
     }
 
+    private int cost(ResultSet rs) {
+        try {
+            while (rs.next()) {
+                costInt = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return costInt;
+    }
+
   //Db Do something.
   public ArrayList<Task> getTasks(int projectId){
     sql ="select name, start, finish, hours, cost from PlanIt.Tasks where project_Id = ?";
@@ -62,14 +74,12 @@ public class RepoTask {
   }
 
 
-  public void createTask(String taskName, String startDate, String finishDate, int cost, int projectId) {
-      sql=" insert into PlanIt.Tasks ( name, start, finish, hours, cost, project_id ) values (?, ?, ?, ?, ?, ?) ";
+  public void createTask(String taskName, String startDate, String finishDate,  int projectId) {
+      sql=" insert into PlanIt.Tasks ( name, start, finish, project_id ) values (?, ?, ?, ?) ";
       parameters.clear();
       parameters.add(taskName);
       parameters.add(startDate);
       parameters.add(finishDate);
-      parameters.add("0");
-      parameters.add(String.valueOf(cost));
       parameters.add(String.valueOf(projectId));
       dbMapper.save(sql,parameters);
   }
@@ -123,7 +133,16 @@ public class RepoTask {
       parameters.add(taskName);
       parameters.add(String.valueOf(projectId));
       return hours((dbMapper.load(sql,parameters)));
+    }
 
+
+    public void addActualCost(int cost, String taskName, int projectId){
+        sql = "update PlanIt.Tasks set cost = Tasks.cost + ?  where Tasks.name = ? and Tasks.Project_id = ? ";
+        parameters.clear();
+        parameters.add(String.valueOf(cost));
+        parameters.add(taskName);
+        parameters.add(String.valueOf(projectId));
+        dbMapper.save(sql,parameters);
     }
 }
 

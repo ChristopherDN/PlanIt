@@ -14,8 +14,8 @@ public class TaskService {
         return dbFacade.getTasks(projectName, user);
     }
 
-    public void createTask(String taskName, String startDate, String finishDate, int cost, String projectName, User user) {
-        dbFacade.createTask(taskName, startDate, finishDate, cost, projectName, user);
+    public void createTask(String taskName, String startDate, String finishDate,  String projectName, User user) {
+        dbFacade.createTask(taskName, startDate, finishDate,  projectName, user);
     }
 
     public void deleteTask(String projectName, String taskName, User user) {

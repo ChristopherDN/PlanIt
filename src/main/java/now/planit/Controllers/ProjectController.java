@@ -20,7 +20,8 @@ public class ProjectController {
 
 
     @GetMapping("/myProjects")
-    public String myProjects(Model model, WebRequest request) {
+    public String myProjects(WebRequest request,Model model) {
+        model.addAttribute("project",projects);
         updateProjects(request, model);
         model.addAttribute("userName", user.getName());
         return "project/myProjects";// endpoint change

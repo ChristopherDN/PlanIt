@@ -32,7 +32,7 @@ public class RepoProject {
       projects.clear();
       while (rs.next()) {
         projects.add(new Project(rs.getString(1), rs.getString(2),
-            rs.getString(3), rs.getInt(4),rs.getInt(5)));
+            rs.getString(3), rs.getInt(4), rs.getInt(5), rs.getInt(6)));
       }
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
@@ -40,10 +40,16 @@ public class RepoProject {
     return projects;
   }
 
-
   //DB do something
+  public ArrayList<Project> getProjects(int userId) {
+    sql = "select name, start, finish, actual_hours, actual_cost, budget from PlanIt.Projects where User_id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(userId));
+    return loadProjects(dbMapper.load(sql, parameters));
+  }
+
   public void createProject(String projectName, String start, String finish, int budget, int userId) {
-    sql = "insert into PlanIt.Projects(name, start, finish, budget, User_id) values(?,?,?,?,?) ";
+    sql = "insert into PlanIt.Projects(name, start, finish, budget, User_id) values(?,?,?,?,?)";
     parameters.clear();
     parameters.add(projectName);
     parameters.add(start);
@@ -53,20 +59,14 @@ public class RepoProject {
     dbMapper.save(sql, parameters);
   }
 
-    public int getProjectId(String projectName, int userId) {
+  public int getProjectId(String projectName, int userId) {
     sql ="select id from PlanIt.Projects where name = ? and user_id = ?";
     parameters.clear();
     parameters.add(projectName);
     parameters.add(String.valueOf(userId));
     return getId(dbMapper.load(sql,parameters));
-    }
+  }
 
-  public ArrayList<Project> getProjects(int userId) {
-      sql = "select name, start, finish, actual_hours, budget from PlanIt.Projects where User_id = ? ";
-      parameters.clear();
-      parameters.add(String.valueOf(userId));
-      return loadProjects(dbMapper.load(sql, parameters));
-    }
 
 
   public void deleteProject(int projectId, int userId) {
@@ -109,6 +109,13 @@ public class RepoProject {
     parameters.add(String.valueOf(hours));
     parameters.add(String.valueOf(projectId));
     dbMapper.save(sql,parameters);
+  }
 
+  public void addActualCost(int cost, int projectId){
+    sql = "update PlanIt.Projects set actual_cost = Projects.actual_cost + ?  where Projects.id = ? ";
+    parameters.clear();
+    parameters.add(String.valueOf(cost));
+    parameters.add(String.valueOf(projectId));
+    dbMapper.save(sql,parameters);
   }
 }
