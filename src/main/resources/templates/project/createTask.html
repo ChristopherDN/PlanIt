@@ -9,7 +9,7 @@
 <th:block th:include="/htmlFragment/headerLoggedIn :: header"></th:block>
 <body>
 <center>
-    <h1>Welcome <p th:text="${userName}"></p> <br>Here are your Tasks!<br> </h1>
+        <h1>Welcome <p th:text="${userName}"></p> <br>Here are your Tasks!<br> </h1>
     <form action="/myProjects" method="get">
         <button type="submit" >Back to Projects</button>
     </form>
@@ -24,7 +24,6 @@
         <th>Estimated budget</th>
         <th>Update task</th>
         <th>Delete</th>
-        <th></th>
     </tr>
     <tr>
         <form action="/createTaskParam" method="post">
@@ -33,7 +32,7 @@
             <td><input type="date" name="startDate" required></td>
             <td><input type="date" name="finishDate" required></td>
             <td></td>
-            <td><input type="number" name="cost" min="0" max="1000000000" required></td>
+            <td></td>
             <td><input type="submit" class="like" value="Add Task"></td>
             <td><input type="reset" class="like" value="Reset"></td>
         </form>

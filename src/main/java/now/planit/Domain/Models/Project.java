@@ -6,22 +6,23 @@ public class Project {
   private String start;
   private String finish;
   private int hours;
+  private int cost;
   private int budget;
 
-  public Project( String name, String start, String finish, int budget) {
-
+  public Project(String name, String start, String finish, int budget) {
     this.name = name;
     this.start = start;
     this.finish = finish;
     this.budget = budget;
   }
 
-  public Project(String name, String start, String finish, int hours, int budget) {
+  public Project(String name, String start, String finish, int cost, int budget, int hours) {
     this.name = name;
     this.start = start;
     this.finish = finish;
-    this.hours = hours;
+    this.cost = cost;
     this.budget = budget;
+    this.hours = hours;
   }
 
   public String getName() {
@@ -62,6 +63,14 @@ public class Project {
 
   public void setHours(int hours) {
     this.hours = hours;
+  }
+
+  public int getCost() {
+    return cost;
+  }
+
+  public void setCost(int cost) {
+    this.cost = cost;
   }
 
   @Override
