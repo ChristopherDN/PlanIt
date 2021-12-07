@@ -58,11 +58,13 @@ public class DBMapper {
     try {
       ps = checkConnection(sqlCommand);
       rs = setParameters(parameters).executeQuery();
-    } catch (SQLException e) {
+    }
+    catch (SQLException e) {
       System.out.println("Database unavaiable for load method!");
       e.printStackTrace();
     }
     return rs;
+
   }
 
   public void resetResultSet(){

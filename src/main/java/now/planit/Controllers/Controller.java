@@ -11,7 +11,7 @@ public class Controller {
   @GetMapping("/")
   public String index(HttpSession session) {
     if (session.getAttribute("user")!= null){
-      return "redirect:/frontpage";
+      return "redirect:/myProjects";
     }
     return "index";
   }

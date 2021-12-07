@@ -13,7 +13,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
 
-
 @Controller
 public class UserController {
   UserService userService = new UserService();
@@ -31,16 +30,13 @@ public class UserController {
 
   @PostMapping("/register")
   public String register(WebRequest request)throws UserNotExistException {
-
-     //TODO skal rettes til, så man kan logge ind uden nogen bruger i forvejen
-    if(user == null){
-      throw new UserNotExistException("Sorry, the username was allready taken. Please create a user with another name");
-    }
-
+    userService.validateLoginEmail(request.getParameter("email"));
+    //TODO skal rettes til, så man kan logge ind uden nogen bruger i forvejen
     userService.registerUser(
             request.getParameter("name"),
             request.getParameter("email"),
             request.getParameter("password"));
+
     return "login/login";
   }
 
