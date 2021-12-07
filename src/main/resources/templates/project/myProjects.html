@@ -24,11 +24,11 @@
             <th>Delete</th>
         </tr>
         <tr>
-            <form action="/createProject" method="post">
+            <form action="/createProject" method="post" onsubmit="return change()">
                 <td></td>
                 <td><input type="text" name="name" required></td>
-                <td><input type="date" name="start" id="txtFrom" required></td>
-                <td><input type="date" name="finish" required id="txtTo"></td>
+                <td><input type="date" name="start" id="ed_starttimedate" required></td>
+                <td><input type="date" name="finish" required id="ed_endtimedate"></td>
                 <td></td>
                 <td><input type="number" name="budget" min="0" max="1000000000" required></td>
                 <td><input type="submit" class="like" value="Add Project"></td>
@@ -55,6 +55,22 @@
 </table>
 </center>
 </body>
+
+<!--This function prevents adding projects with startdate before enddate, but throws a MysqlDataTruncation exception
+ due to the form is still submitted. The function does was it is supposed to do, but should we catch the exception???
+ The function is called on line 27 in the form.
+ -->
+<script>
+    function change() {
+        var startDate = document.getElementById("ed_starttimedate").value;
+        var endDate = document.getElementById("ed_endtimedate").value;
+
+        if ((Date.parse(endDate) <= Date.parse(startDate))) {
+            alert("End date should be greater than Start date");
+            document.getElementById("ed_endtimedate").value = "";
+        }
+    };
+</script>
 
 </div>
 <div id="footer">

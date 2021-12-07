@@ -129,8 +129,9 @@ public class RepoUsers {
     sql = "Select email from PlanIt.Users where email = ?";
     parameters.clear();
     parameters.add(email);
+    int i = 0; //
     String emailSout = getEmail(dbMapper.load(sql, parameters));
-    System.out.println("mail after clear " + emailSout);
+    System.out.println("mail after clear " + emailSout + " i =" + i);
     return emailSout;
     }
 }
