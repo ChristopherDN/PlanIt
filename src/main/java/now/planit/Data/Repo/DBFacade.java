@@ -19,8 +19,8 @@ public class DBFacade {
 
 
   //UserREPO
-  public void registerUser(String name, String email, String password) {
-    repoUsers.registerUser(name, email, password);
+  public int registerUser(String name, String email, String password) {
+   return repoUsers.registerUser(name, email, password);
   }
 
   public User validateLogin(String email, String password) {
@@ -43,11 +43,10 @@ public class DBFacade {
     repoUsers.editPassword(password, getUserId(user));
   }
 
-  public int userExists(String email) {
-    return repoUsers.userExists(email);
-  }
-
   //ProjectREPO
+  public ArrayList<Project> getProjects(User user) {
+    return repoProject.getProjects(repoUsers.getUserId(user));
+  }
 
   public void createProject(String name1, String start, String finish, int budget, User user) {
     repoProject.createProject(name1, start, finish, budget, getUserId(user));
@@ -57,9 +56,6 @@ public class DBFacade {
     return repoProject.getProjectId(projectName, userId);
   }
 
-  public ArrayList<Project> getProjects(User user) {
-    return repoProject.getProjects(repoUsers.getUserId(user));
-  }
 
   public void deleteProject(String projectName, User user) {
     repoProject.deleteProject(getProjectId(projectName, getUserId(user)), getUserId(user));
@@ -74,8 +70,8 @@ public class DBFacade {
     return repoTask.getTaskId(taskName, projectId);
   }
 
-  public void createTask(String taskName, String startDate, String finishDate, int cost, String projectName, User user) {
-    repoTask.createTask(taskName, startDate, finishDate, cost, getProjectId(projectName, getUserId(user)));
+  public void createTask(String taskName, String startDate, String finishDate, String projectName, User user) {
+    repoTask.createTask(taskName, startDate, finishDate, getProjectId(projectName, getUserId(user)));
   }
 
   public void deleteTask(String projectName, String taskName, User user) {
@@ -86,10 +82,15 @@ public class DBFacade {
 
   private void calculateHours(int hours, String taskName, int projectId) {
     repoTask.addHours(hours, taskName, projectId);
-    repoProject.addActualhours(hours, projectId);
+    repoProject.addActualHours(hours, projectId);
    // repoProject.addActualhours(repoTask.getHours(taskName,getProjectId(projectName,getUserId(user))),//TODO change potition
-         //   projectName, getProjectId(projectName,getUserId(user)));
+         //   projectName, getProjectId(projectName,getUserId(user))); Todo skal dette slettes?
   }
+  public void calculateCost(int cost, String taskName, int projectId){
+    repoTask.addActualCost(cost, taskName, projectId);
+    repoProject.addActualCost(cost, projectId);
+  }
+
   //SUbTASKREPO
 
   public ArrayList<Subtask> getSubtasks(String taskName, User user) {
@@ -104,14 +105,13 @@ public class DBFacade {
   public void createSubtask(String subtaskName, int hours, int cost, String taskName, User user) {
     repoSubtask.createSubtask(subtaskName, hours, cost, getTaskId(taskName, getProjectIDFromTasks(taskName)));
     calculateHours(hours, taskName,getProjectIDFromTasks(taskName));
+    calculateCost(cost, taskName, getProjectIDFromTasks(taskName));
   }
-
 
 
   public int getSubtaskId(String subtaskName, int taskId){
     return repoSubtask.getSubtaskId(subtaskName, taskId);
   }
-
 
 
   public void deleteSubtask(String taskName, String subtaskName, User user) {
