@@ -83,8 +83,6 @@ public class DBFacade {
   private void calculateHours(int hours, String taskName, int projectId) {
     repoTask.addHours(hours, taskName, projectId);
     repoProject.addActualHours(hours, projectId);
-   // repoProject.addActualhours(repoTask.getHours(taskName,getProjectId(projectName,getUserId(user))),//TODO change potition
-         //   projectName, getProjectId(projectName,getUserId(user))); Todo skal dette slettes?
   }
   public void calculateCost(int cost, String taskName, int projectId){
     repoTask.addActualCost(cost, taskName, projectId);
@@ -94,7 +92,6 @@ public class DBFacade {
   //SUbTASKREPO
 
   public ArrayList<Subtask> getSubtasks(String taskName, User user) {
-    //TODO FEJL HER Skal vi joine?
     return repoSubtask.getSubtasks(getTaskId(taskName, getProjectId(getProjectName(taskName), getUserId(user))));
   }
 

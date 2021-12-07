@@ -61,7 +61,6 @@ public class RepoTask {
       dbMapper.save(sql,parameters);
   }
 
-  //TODO Den her retunere så vidt jeg kan se altid 5.
     public int getTaskId(String taskName, int projectId) {
         sql ="select id from PlanIt.Tasks where name = ? and project_id = ?";
         parameters.clear();

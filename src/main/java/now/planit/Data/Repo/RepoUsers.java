@@ -55,7 +55,6 @@ public class RepoUsers {
 
 
 
-  //Do Something to Database TODO Skal omskrives, skal bare retunere kaldet
   public int registerUser(String name, String email, String password) {
     //Makes sure there is no shadow data in the ResultSet.
     dbMapper = new DBMapper();
