@@ -36,7 +36,7 @@
             <td th:text="${subtask.getSubtaskName()}"></td>
             <td th:text="${subtask.getHours()}"></td>
             <td th:text="${subtask.getCost()}"></td>
-            <td><form th:action="@{/removeSubtask/{id}(id=${subtask.getSubtaskName()})}" th:object="${subTask}">
+            <td><form th:action="@{/removeSubtask/{id}(id=${subtask.getSubtaskName()})}" th:object="${subtask}">
                 <button type="submit">Remove subtask</button>
             </form>
             </td>
