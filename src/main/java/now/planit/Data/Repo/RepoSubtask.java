@@ -68,8 +68,6 @@ public class RepoSubtask {
     }
 
     public void deleteSubtask(int subtaskId, int taskId) {
-        System.out.println(subtaskId + " This  is TaskID");
-        System.out.println(taskId + " This  is ProjectId");
         sql = "delete from PlanIt.subtasks where id = ? and task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
