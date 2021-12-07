@@ -21,7 +21,6 @@ public class ProjectController {
 
     @GetMapping("/myProjects")
     public String myProjects(Model model, WebRequest request) {
-      
         updateProjects(request, model);
         model.addAttribute("userName", user.getName());
         return "project/myProjects";// endpoint change

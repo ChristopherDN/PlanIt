@@ -5,6 +5,7 @@ public class Project {
   private String name;
   private String start;
   private String finish;
+  private int hours;
   private int budget;
 
   public Project( String name, String start, String finish, int budget) {
@@ -12,6 +13,14 @@ public class Project {
     this.name = name;
     this.start = start;
     this.finish = finish;
+    this.budget = budget;
+  }
+
+  public Project(String name, String start, String finish, int hours, int budget) {
+    this.name = name;
+    this.start = start;
+    this.finish = finish;
+    this.hours = hours;
     this.budget = budget;
   }
 
@@ -45,6 +54,14 @@ public class Project {
 
   public void setBudget(int budget) {
     this.budget = budget;
+  }
+
+  public int getHours() {
+    return hours;
+  }
+
+  public void setHours(int hours) {
+    this.hours = hours;
   }
 
   @Override

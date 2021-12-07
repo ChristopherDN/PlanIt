@@ -13,7 +13,7 @@ public class RepoTask {
   String sql;
   ArrayList<Task> tasks = new ArrayList<>();
   int taskId;
-  int hours;
+  int hoursInt;
 
 
   //Manipulate Resultset to data we can use
@@ -42,6 +42,17 @@ public class RepoTask {
         return taskId;
     }
 
+    private int hours(ResultSet rs) {
+        try {
+            while (rs.next()) {
+                hoursInt = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return hoursInt;
+    }
+
   //Db Do something.
   public ArrayList<Task> getTasks(int projectId){
     sql ="select name, start, finish, hours, cost from PlanIt.Tasks where project_Id = ?";
@@ -52,12 +63,11 @@ public class RepoTask {
 
 
   public void createTask(String taskName, String startDate, String finishDate, int cost, int projectId) {
-      sql=" insert into PlanIt.Tasks ( name, start, finish, hours, cost, project_id ) values (?, ?, ?, ?, ?, ?) ";
+      sql=" insert into PlanIt.Tasks ( name, start, finish, cost, project_id ) values (?, ?, ?, ?, ?) ";
       parameters.clear();
       parameters.add(taskName);
       parameters.add(startDate);
       parameters.add(finishDate);
-      parameters.add("0");
       parameters.add(String.valueOf(cost));
       parameters.add(String.valueOf(projectId));
       dbMapper.save(sql,parameters);
@@ -96,16 +106,23 @@ public class RepoTask {
   }
 
 
-
-
-
-    public void addHours(String hours, String taskName, int projectId) {
+    public void addHours(int hours, String taskName, int projectId) {
     sql = "update PlanIt.tasks set hours = hours + ? where name = ? and project_id = ?";
     parameters.clear();
-    parameters.add(hours);
+    parameters.add(String.valueOf(hours));
     parameters.add(taskName);
     parameters.add(String.valueOf(projectId));
     dbMapper.save(sql,parameters);
+    }
+
+
+    public int getHours(String taskName, int projectId) {
+      sql = "select Tasks.hours from PlanIt.tasks where name = ? and project_id = ?";
+      parameters.clear();
+      parameters.add(taskName);
+      parameters.add(String.valueOf(projectId));
+      return hours((dbMapper.load(sql,parameters)));
+
     }
 }
 

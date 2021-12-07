@@ -2,7 +2,6 @@ package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.ExceptionService;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -55,14 +54,10 @@ public class RepoUsers {
 
       try{
         dbMapper.save(sql, parameters);
-      }catch(ExceptionService e){
-        throw new Exception("Database unavailable");
 
-      }
-    }
-
+  }
+   }
      */
-
   }
 
   public User validateLogin(String email, String password) {

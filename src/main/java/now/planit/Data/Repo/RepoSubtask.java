@@ -2,7 +2,6 @@ package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.Task;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -51,7 +50,7 @@ public class RepoSubtask {
     }
 
 
-    public void createSubtask(String subtaskName, String hours, int cost, int taskId) {
+    public void createSubtask(String subtaskName, int hours, int cost, int taskId) {
         sql="insert into PlanIt.Subtasks (task_id, name, estimated_hours, cost) values (?, ?, ?, ?)";
         parameters.clear();
         parameters.add(String.valueOf(taskId));

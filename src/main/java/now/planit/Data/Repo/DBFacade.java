@@ -76,12 +76,19 @@ public class DBFacade {
   public void createTask(String taskName, String startDate, String finishDate, int cost, String projectName, User user) {
     repoTask.createTask(taskName, startDate, finishDate, cost, getProjectId(projectName, getUserId(user)));
   }
+
   public void deleteTask(String projectName, String taskName, User user) {
     int taskId = getTaskId(taskName, getProjectId(projectName, getUserId(user)));
         int projectID = getProjectId(projectName, getUserId(user));
     repoTask.deleteTask(taskId, projectID);
   }
 
+  private void calculateHours(int hours, String taskName, int projectId) {
+    repoTask.addHours(hours, taskName, projectId);
+    repoProject.addActualhours(hours, projectId);
+   // repoProject.addActualhours(repoTask.getHours(taskName,getProjectId(projectName,getUserId(user))),//TODO change potition
+         //   projectName, getProjectId(projectName,getUserId(user)));
+  }
   //SUbTASKREPO
 
   public ArrayList<Subtask> getSubtasks(String taskName, User user) {
@@ -93,10 +100,12 @@ public class DBFacade {
     return repoTask.getProjectID(taskName);
   }
 
-  public void createSubtask(String subtaskName, String hours, int cost, String taskName, User user) {
+  public void createSubtask(String subtaskName, int hours, int cost, String taskName, User user) {
     repoSubtask.createSubtask(subtaskName, hours, cost, getTaskId(taskName, getProjectIDFromTasks(taskName)));
-    repoTask.addHours(hours, taskName, getProjectIDFromTasks(taskName));
+    calculateHours(hours, taskName,getProjectIDFromTasks(taskName));
   }
+
+
 
   public int getSubtaskId(String subtaskName, int taskId){
     return repoSubtask.getSubtaskId(subtaskName, taskId);

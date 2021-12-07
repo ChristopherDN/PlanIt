@@ -1,6 +1,7 @@
 package now.planit.Data.Repo;
 
 import now.planit.Data.Utility.DBManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,11 +17,12 @@ public class DBMapper {
   ResultSet rs;
 
   //Check connection with DBManager
-  public PreparedStatement checkConnection(String sqlCommand) {
+  public PreparedStatement checkConnection(String sqlCommand)  {
     try {
       connection = DBManager.getConnection();
       ps = connection.prepareStatement(sqlCommand);
     } catch (SQLException e) {
+      System.out.println("Database unavaiable for checkConnection method");
       e.printStackTrace();
     }
     return ps;
@@ -28,11 +30,13 @@ public class DBMapper {
 
   //Loads Parameters into Prepared statement
   public PreparedStatement setParameters(ArrayList<String> parameters) {
+  //Should we use ResultsetFailException here
     try {
       for (int i = 0; i < parameters.size(); i++) {
         ps.setString(i + 1, parameters.get(i));
       }
     } catch (SQLException e) {
+      System.out.println("Database unavaiable for setParameters method");
       e.printStackTrace();
     }
     return ps;
@@ -44,7 +48,7 @@ public class DBMapper {
       ps = checkConnection(sqlCommand);
       setParameters(parameters).execute();
     } catch (SQLException e) {
-      //Eksempel : throw new exceptionsService("Database unavailable");
+      System.out.println("Database unavaiable for save method!");
       e.printStackTrace();
     }
   }
@@ -55,6 +59,7 @@ public class DBMapper {
       ps = checkConnection(sqlCommand);
       rs = setParameters(parameters).executeQuery();
     } catch (SQLException e) {
+      System.out.println("Database unavaiable for load method!");
       e.printStackTrace();
     }
     return rs;
