@@ -11,32 +11,33 @@
 
 <Body>
 <center>
-    <h1>Welcome <p th:text="${userName}"></p> <br>Here are your projects!!!<br> </h1>
+    <h4>Welcome <p th:text="${userName}"></p> <br>Here are your projects!<br> </h4>
 
-    <table style = "margin-top: 20px;">
-        <tr>
-            <th>Project Number:</th>
-            <th>Project Name</th>
-            <th>Start</th>
-            <th>Finish</th>
-            <th>Estimated budget</th>
-            <th>Update project</th>
-            <th>Delete</th>
-        </tr>
-        <tr>
-            <form action="/createProject" method="post">
-                <td></td>
-                <td><input type="text" name="name" required></td>
-                <td><input type="date" name="start" id="txtFrom" required></td>
-                <td><input type="date" name="finish" required id="txtTo"></td>
-                <td></td>
-                <td><input type="number" name="budget" min="0" max="1000000000" required></td>
-                <td><input type="submit" class="like" value="Add Project"></td>
-                <td><input type="reset" class="like" value="Clear"></td>
-            </form>
-        </tr>
+<table style = "margin-top: 20px;">
+    <tr>
+        <th>Project Number:</th>
+        <th>Project Name</th>
+        <th>Start</th>
+        <th>Finish</th>
+        <th>Actual hours</th>
+        <th>Estimated budget</th>
+        <th>Update project</th>
+        <th>Delete</th>
+    </tr>
+    <tr>
+        <form action="/createProject" method="post">
+            <td></td>
+            <td><input type="text" name="name" required></td>
+            <td><input type="date" name="start" required></td>
+            <td><input type="date" name="finish" required></td>
+            <td></td>
+            <td><input type="text" name="budget" required></td>
+            <td><input type="submit" class="like" value="Add Project"></td>
+            <td><input type="reset" class="like" value="Reset"></td>
+        </form>
+    </tr>
 
-    <tr id="tr1" th:border="1" th:each="project : ${loopList}">
+    <tr id="tr1" th:border="1" th:each="project : ${projects}">
         <td></td>
         <td th:text="${project.getName()}"></td>
         <td th:text="${project.getStart()}"></td>
@@ -57,7 +58,7 @@
 </body>
 
 </div>
-<div id="footer">
+<div id="footerTabel" !important> <!--changes footer, so tabels are visable-->
     <th:block th:include="/htmlFragment/footer :: footer"></th:block>
 </div>
 </html>

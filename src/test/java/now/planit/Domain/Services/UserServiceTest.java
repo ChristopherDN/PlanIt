@@ -1,6 +1,7 @@
 package now.planit.Domain.Services;
 
 import now.planit.Domain.Models.User;
+import now.planit.Exceptions.UserNotExistException;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.context.request.WebRequest;
 
@@ -39,7 +40,7 @@ class UserServiceTest {
 
 
   @Test
-  void registerUser() {
+  void registerUser() throws UserNotExistException {
     userService.deleteUser("user@testing.com", "testing");
     userService.registerUser("Jens", "user@testing.com", "testing");
     assertNotNull(userService.validateLogin("user@testing.com", "testing"));

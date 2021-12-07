@@ -1,7 +1,7 @@
 package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.User;
-import now.planit.Domain.Services.ExceptionService;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +12,10 @@ public class RepoUsers {
   User user;
   String sql;
   ArrayList<String> parameters = new ArrayList<>();
+  String userEmail;
   int userId;
+  int i = 0;
+
 
   //Manipulate ResultSet to other type of data
   public int getId(ResultSet rs){
@@ -38,26 +41,34 @@ public class RepoUsers {
     return user;
   }
 
+  public String getEmail(ResultSet rs){
+    try {
+      if (rs.next()) {
+        userEmail = rs.getString(1);
+      }
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
 
-  //Do Something to Database
-  public void registerUser(String name, String email, String password) {
+    return userEmail;
+  }
+
+
+
+  //Do Something to Database TODO Skal omskrives, skal bare retunere kaldet
+  public int registerUser(String name, String email, String password) {
+    //Makes sure there is no shadow data in the ResultSet.
+    dbMapper = new DBMapper();
+
+
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     parameters.clear();
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
-    dbMapper.save(sql, parameters);
-    /* Eksempel på Exception
-    try{
-      dbMapper.save(sql, parameters);
-    }catch(ExceptionService e){
-
-      try{
-        dbMapper.save(sql, parameters);
-
-  }
-   }
-     */
+    int test = dbMapper.saveUpdate(sql, parameters);
+    System.out.println(test);
+    return test;
   }
 
   public User validateLogin(String email, String password) {

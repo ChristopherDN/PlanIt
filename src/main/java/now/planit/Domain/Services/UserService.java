@@ -8,8 +8,11 @@ public class UserService {
   DBFacade dbFacade = new DBFacade();
 
 
-  public void registerUser(String name, String email, String password)  {
-    dbFacade.registerUser(name, email, password);
+  public void registerUser(String name, String email, String password) throws UserNotExistException {
+
+    if (dbFacade.registerUser(name, email, password) == 0){
+      throw new UserNotExistException("Email already excists");
+    }
   }
 
   public User validateLogin(String email, String password) {

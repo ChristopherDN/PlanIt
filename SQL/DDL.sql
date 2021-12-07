@@ -24,6 +24,7 @@ create table if not exists PlanIt.Projects
     start date not null,
     finish date not null,
 	actual_hours int default 0 null,
+    actual_cost  int default 0 null,
     budget int not null,
     constraint id_UNIQUE
     unique (id),
@@ -46,7 +47,7 @@ create table if not exists PlanIt.Tasks
     start date not null,
     finish date not null,
     hours      int default 0 null,
-    cost int not null,
+    cost        int default 0 null,
     constraint id_UNIQUE
     unique (id),
     constraint fkprojectId
