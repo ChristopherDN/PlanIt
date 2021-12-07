@@ -24,13 +24,15 @@ int expectedInt;
   }
 
 
-
-
   @Test
   void getHours() {
+    expectedInt = 10;
+        assertEquals(expected, subtask.getHours());
   }
 
   @Test
   void getCost() {
+    expectedInt = 1000;
+    assertEquals(expected, subtask.getCost());
   }
 }
