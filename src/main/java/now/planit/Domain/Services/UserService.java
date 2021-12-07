@@ -52,10 +52,6 @@ public class UserService {
     dbFacade.deleteUser(email, password);
   }
 
-    public int userExists(String email) {
-      return dbFacade.userExists(email);
-    }
-
     public int validateLoginEmail(String email) throws UserNotExistException{
     return dbFacade.userExists(email);
     }

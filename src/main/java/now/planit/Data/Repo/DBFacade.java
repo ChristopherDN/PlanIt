@@ -56,7 +56,6 @@ public class DBFacade {
   public int getProjectId(String projectName, int userId) {
     return repoProject.getProjectId(projectName, userId);
   }
-  public int getProjectId2(int taskId, int userId) {return repoProject.getProjectId2(taskId, userId);}
 
   public ArrayList<Project> getProjects(User user) {
     return repoProject.getProjects(repoUsers.getUserId(user));
