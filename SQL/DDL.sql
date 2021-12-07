@@ -23,6 +23,8 @@ create table if not exists PlanIt.Projects
     name varchar(100) not null,
     start date not null,
     finish date not null,
+	actual_hours int default 0 null,
+    actual_cost  int default 0 null,
     budget int not null,
     constraint id_UNIQUE
     unique (id),
@@ -44,7 +46,7 @@ create table if not exists PlanIt.Tasks
     name varchar(100) not null,
     start date not null,
     finish date not null,
-    hours int null,
+    hours      int default 0 null,
     cost int not null,
     constraint id_UNIQUE
     unique (id),
