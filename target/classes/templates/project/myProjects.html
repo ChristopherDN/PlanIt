@@ -56,6 +56,10 @@
 </center>
 </body>
 
+<!--This function prevents adding projects with enddate before startdate, but throws a MysqlDataTruncation exception
+ due to the form is still submitted. The function does was it is supposed to do, but should we catch the exception???
+ The function is called on line 27 in the form.
+ -->
 <script>
     function change() {
         var startDate = document.getElementById("ed_starttimedate").value;
