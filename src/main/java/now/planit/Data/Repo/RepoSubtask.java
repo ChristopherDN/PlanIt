@@ -12,7 +12,8 @@ public class RepoSubtask {
     ArrayList<String> parameters = new ArrayList<>();
     String sql;
     ArrayList<Subtask> subtasks = new ArrayList<>();
-    int subtaskId;
+    int getInt;
+
 
     //Manipulate Resultset to data we can use
     public ArrayList<Subtask> loadSubtasks(ResultSet rs){
@@ -29,15 +30,15 @@ public class RepoSubtask {
         return subtasks;
     }
 
-    private int getId(ResultSet rs) {
+    private int getInt(ResultSet rs) {
         try {
             while (rs.next()) {
-                subtaskId = rs.getInt(1);
+                getInt = rs.getInt(1);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return subtaskId;
+        return getInt;
     }
 
     //Db Do something. TODO FIX DEN HER, TASKID som den modtager er altid 5
@@ -64,7 +65,7 @@ public class RepoSubtask {
         parameters.clear();
         parameters.add(subtaskName);
         parameters.add(String.valueOf(taskId));
-        return getId(dbMapper.load(sql,parameters));
+        return getInt(dbMapper.load(sql,parameters));
     }
 
     public void deleteSubtask(int subtaskId, int taskId) {
@@ -75,5 +76,19 @@ public class RepoSubtask {
         dbMapper.save(sql, parameters);
     }
 
+    public int getHours(int subtaskId, int taskId){
+        sql = "select hours from PlanIt.Subtasks where id = ? and task_id = ?";
+        parameters.clear();
+        parameters.add(String.valueOf(subtaskId));
+        parameters.add(String.valueOf(taskId));
+       return getInt(dbMapper.load(sql,parameters));
+    }
 
+    public int getCost(int subtaskId, int taskId){
+        sql = "select cost from PlanIt.Subtasks where id = ? and task_id = ?";
+        parameters.clear();
+        parameters.add(String.valueOf(subtaskId));
+        parameters.add(String.valueOf(taskId));
+        return getInt(dbMapper.load(sql,parameters));
+    }
 }
