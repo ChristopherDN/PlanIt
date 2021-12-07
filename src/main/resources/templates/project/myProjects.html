@@ -13,41 +13,37 @@
 <center>
     <h4>Welcome <p th:text="${userName}"></p> <br>Here are your projects!!!<br> </h4>
 
-    <table style = "margin-top: 20px;">
-        <tr>
-            <th>Project Number:</th>
-            <th>Project Name</th>
-            <th>Start</th>
-            <th>Finish</th>
-            <th>Actual budget cost</th>
-            <th>Estimated budget</th>
-            <th>Expected hours</th>
-            <th>Update project</th>
-            <th>Delete</th>
-        </tr>
-        <tr>
-            <form action="/createProject" method="post">
-                <td></td>
-                <td><input type="text" name="name" required></td>
-                <td><input type="date" name="start" id="txtFrom" required></td>
-                <td><input type="date" name="finish" required id="txtTo"></td>
-                <td></td>
-                <td><input type="number" name="budget" min="0" max="1000000000" required></td>
-                <td></td>
-                <td><input type="submit" class="like" value="Add Project"></td>
-                <td><input type="reset" class="like" value="Reset"></td>
-            </form>
-        </tr>
+<table style = "margin-top: 20px;">
+    <tr>
+        <th>Project Number:</th>
+        <th>Project Name</th>
+        <th>Start</th>
+        <th>Finish</th>
+        <th>Actual hours</th>
+        <th>Estimated budget</th>
+        <th>Update project</th>
+        <th>Delete</th>
+    </tr>
+    <tr>
+        <form action="/createProject" method="post">
+            <td></td>
+            <td><input type="text" name="name" required></td>
+            <td><input type="date" name="start" required></td>
+            <td><input type="date" name="finish" required></td>
+            <td></td>
+            <td><input type="text" name="budget" required></td>
+            <td><input type="submit" class="like" value="Add Project"></td>
+            <td><input type="reset" class="like" value="Reset"></td>
+        </form>
+    </tr>
 
     <tr id="tr1" th:border="1" th:each="project : ${projects}">
         <td></td>
         <td th:text="${project.getName()}"></td>
         <td th:text="${project.getStart()}"></td>
         <td th:text="${project.getFinish()}"></td>
-        <td th:text="${project.getCost()}"></td>
-        <td th:text="${project.getBudget()}"></td>
         <td th:text="${project.getHours()}"></td>
-
+        <td th:text="${project.getBudget}"></td>
         <td><form th:action="@{/update/{id}(id=${project.getName()})}" th:object="${project}">
             <button type="submit">Update project</button>
         </form>
@@ -61,24 +57,8 @@
 </center>
 </body>
 
-<!--This function prevents adding projects with enddate before startdate, but throws a MysqlDataTruncation exception
- due to the form is still submitted. The function does was it is supposed to do, but should we catch the exception???
- The function is called on line 27 in the form.
- -->
-<script>
-    function change() {
-        var startDate = document.getElementById("ed_starttimedate").value;
-        var endDate = document.getElementById("ed_endtimedate").value;
-
-        if ((Date.parse(endDate) <= Date.parse(startDate))) {
-            alert("End date should be greater than Start date");
-            document.getElementById("ed_endtimedate").value = "";
-        }
-    };
-</script>
-
 </div>
-<div id="footer">
+<div id="footerTabel" !important> <!--changes footer, so tabels are visable-->
     <th:block th:include="/htmlFragment/footer :: footer"></th:block>
 </div>
 </html>
