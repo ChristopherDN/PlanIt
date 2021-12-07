@@ -29,16 +29,18 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String register(WebRequest request)throws UserNotExistException {
-    userService.validateLoginEmail(request.getParameter("email"));
+  public String register(WebRequest request) throws UserNotExistException {
     //TODO skal rettes til, så man kan logge ind uden nogen bruger i forvejen
-    userService.registerUser(
-            request.getParameter("name"),
-            request.getParameter("email"),
-            request.getParameter("password"));
-
-    return "login/login";
+    if (userService.validateLoginEmail(request.getParameter("email")) == 1) {
+      userService.registerUser(
+          request.getParameter("name"),
+          request.getParameter("email"),
+          request.getParameter("password"));
+      return "login/login";
+    }
+  return "error/error";
   }
+
 
   @PostMapping("/validateLogin")
   public String validateLogin(WebRequest request, HttpSession session, Model model) throws UserNotExistException {

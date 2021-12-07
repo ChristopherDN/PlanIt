@@ -14,6 +14,7 @@ public class RepoUsers {
   ArrayList<String> parameters = new ArrayList<>();
   String userEmail;
   int userId;
+  int i = 0;
 
 
   //Manipulate ResultSet to other type of data
@@ -124,13 +125,13 @@ public class RepoUsers {
     dbMapper.save(sql, parameters);
   }
 
-    public String userExists(String email) {
-    System.out.println("mail before clear " + email);
-    sql = "Select email from PlanIt.Users where email = ?";
-    parameters.clear();
-    parameters.add(email);
-    String emailSout = getEmail(dbMapper.load(sql, parameters));
-    System.out.println("mail after clear " + emailSout);
-    return emailSout;
+    public int userExists(String email) {
+      sql = "Select email from PlanIt.Users where email = ?";
+      parameters.clear();
+      parameters.add(email);
+      if (getEmail(dbMapper.load(sql, parameters)) == null) {
+        return 1;
+      }
+      return 0;
     }
 }

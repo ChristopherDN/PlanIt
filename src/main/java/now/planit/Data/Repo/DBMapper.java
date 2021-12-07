@@ -62,17 +62,8 @@ public class DBMapper {
     catch (SQLException e) {
       System.out.println("Database unavaiable for load method!");
       e.printStackTrace();
+      System.out.println(e.getMessage());
     }
     return rs;
-
-  }
-
-  public void resetResultSet(){
-   try {
-     ps.clearBatch();
-     rs.close();
-   }catch (SQLException e){
-     e.printStackTrace();
-   }
   }
 }

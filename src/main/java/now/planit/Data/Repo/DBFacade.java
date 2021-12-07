@@ -43,6 +43,9 @@ public class DBFacade {
     repoUsers.editPassword(password, getUserId(user));
   }
 
+  public int userExists(String email) {
+    return repoUsers.userExists(email);
+  }
 
   //ProjectREPO
 
@@ -128,9 +131,5 @@ public class DBFacade {
     repoUsers.deleteUser(email, password);
   }
 
-    public String userExists(String email) {
 
-    return repoUsers.userExists(email);
-
-    }
 }
