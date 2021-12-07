@@ -19,8 +19,8 @@ public class DBFacade {
 
 
   //UserREPO
-  public void registerUser(String name, String email, String password) {
-    repoUsers.registerUser(name, email, password);
+  public int registerUser(String name, String email, String password) {
+   return repoUsers.registerUser(name, email, password);
   }
 
   public User validateLogin(String email, String password) {
@@ -41,10 +41,6 @@ public class DBFacade {
 
   public void changePassword(String password, User user) {
     repoUsers.editPassword(password, getUserId(user));
-  }
-
-  public int userExists(String email) {
-    return repoUsers.userExists(email);
   }
 
   //ProjectREPO

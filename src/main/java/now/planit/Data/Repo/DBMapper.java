@@ -15,6 +15,7 @@ public class DBMapper {
   Connection connection;
   PreparedStatement ps;
   ResultSet rs;
+  int test = 0;
 
   //Check connection with DBManager
   public PreparedStatement checkConnection(String sqlCommand)  {
@@ -65,5 +66,18 @@ public class DBMapper {
       System.out.println(e.getMessage());
     }
     return rs;
+  }
+
+  public int saveUpdate(String sqlCommand, ArrayList<String> parameters) {
+    try {
+      ps = checkConnection(sqlCommand);
+      test = setParameters(parameters).executeUpdate();
+    }
+    catch (SQLException e) {
+      System.out.println("Database unavaiable for load method!");
+      e.printStackTrace();
+      System.out.println(e.getMessage());
+    }
+    return test;
   }
 }

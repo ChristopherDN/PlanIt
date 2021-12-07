@@ -55,25 +55,20 @@ public class RepoUsers {
 
 
 
-  //Do Something to Database
-  public void registerUser(String name, String email, String password) {
+  //Do Something to Database TODO Skal omskrives, skal bare retunere kaldet
+  public int registerUser(String name, String email, String password) {
+    //Makes sure there is no shadow data in the ResultSet.
+    dbMapper = new DBMapper();
+
+
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     parameters.clear();
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
-    dbMapper.save(sql, parameters);
-    /* Eksempel på Exception
-    try{
-      dbMapper.save(sql, parameters);
-    }catch(ExceptionService e){
-
-      try{
-        dbMapper.save(sql, parameters);
-
-  }
-   }
-     */
+    int test = dbMapper.saveUpdate(sql, parameters);
+    System.out.println(test);
+    return test;
   }
 
   public User validateLogin(String email, String password) {
@@ -124,31 +119,4 @@ public class RepoUsers {
     parameters.add(password);
     dbMapper.save(sql, parameters);
   }
-
-    public int userExists(String email) {
-      sql = "Select email from PlanIt.Users where email = ?";
-      parameters.clear();
-      parameters.add(email);
-      if (getEmail(dbMapper.load(sql, parameters)) == null) {
-        return 1;
-      }
-      return 0;
-    }
-
-    /* Test version
-    public String userExists(String email) {
-    System.out.println("mail before clear " + email);
-    sql = "Select email from PlanIt.Users where email = ?";
-    parameters.clear();
-    parameters.add(email);
-    int i = 0; //
-    String emailSout = getEmail(dbMapper.load(sql, parameters));
-    System.out.println("mail after clear " + emailSout + " i =" + i);
-    return emailSout;
-    }
-
-
-     */
-
-
 }

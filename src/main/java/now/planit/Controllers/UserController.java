@@ -31,14 +31,11 @@ public class UserController {
   @PostMapping("/register")
   public String register(WebRequest request) throws UserNotExistException {
     //TODO skal rettes til, så man kan logge ind uden nogen bruger i forvejen
-    if (userService.validateLoginEmail(request.getParameter("email")) == 1) {
       userService.registerUser(
           request.getParameter("name"),
           request.getParameter("email"),
           request.getParameter("password"));
       return "login/login";
-    }
-  return "error/error";
   }
 
 
