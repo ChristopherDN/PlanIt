@@ -125,10 +125,12 @@ public class RepoUsers {
   }
 
     public String userExists(String email) {
+    System.out.println("mail before clear " + email);
     sql = "Select email from PlanIt.Users where email = ?";
     parameters.clear();
     parameters.add(email);
-    return getEmail(dbMapper.load(sql, parameters));
-
+    String emailSout = getEmail(dbMapper.load(sql, parameters));
+    System.out.println("mail after clear " + emailSout);
+    return emailSout;
     }
 }

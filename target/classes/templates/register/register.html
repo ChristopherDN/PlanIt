@@ -14,7 +14,7 @@
     <h1>Register user </h1>
     <p>Please fill out your info </p>
     <br>
-    <form method="post" th:action="@{/register}">
+    <form method="post" th:action="@{/register}" onsubmit="return Validate()">
         <label>Name: </label>
         <br>
         <input type th:name="name"class="form-control" name="name" required>
@@ -25,10 +25,14 @@
         <br>
         <label>Password: </label>
         <br>
-        <input type="password" th:name="password"class="form-control" name="password" required>
+        <input type="password" th:name="password" class="form-control" name="password" id="txtPassword" required>
+        <br>
+        <label>Retype password: </label>
+        <br>
+        <input type="password" th:name="password" class="form-control" name="password" id="txtConfirmPassword" required>
         <br>
         <br>
-        <input type="submit" value="Register user"/>
+        <input type="submit" value="Register user" th:action="Validate"/>
         <br>
         <br>
         <a href="/"> <input type="button" value="Cancel">
@@ -37,6 +41,18 @@
     </div>
 </div>
 </body>
+
+<script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("txtPassword").value;
+        var confirmPassword = document.getElementById("txtConfirmPassword").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
 
 </div>
 <div id="footer">
