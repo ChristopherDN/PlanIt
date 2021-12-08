@@ -1,6 +1,8 @@
 package now.planit.Domain.Models;
 
 
+import java.util.ArrayList;
+
 public class Project {
   private String name;
   private String start;
@@ -8,6 +10,7 @@ public class Project {
   private int hours;
   private int cost;
   private int budget;
+  ArrayList<Task> tasks = new ArrayList<>();
 
   public Project(String name, String start, String finish, int budget) {
     this.name = name;
@@ -23,6 +26,16 @@ public class Project {
     this.cost = cost;
     this.budget = budget;
     this.hours = hours;
+  }
+
+  public Project(String name, String start, String finish, int hours, int cost, int budget, ArrayList<Task> tasks) {
+    this.name = name;
+    this.start = start;
+    this.finish = finish;
+    this.hours = hours;
+    this.cost = cost;
+    this.budget = budget;
+    this.tasks = tasks;
   }
 
   public String getName() {

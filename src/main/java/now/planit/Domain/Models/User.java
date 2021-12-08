@@ -1,16 +1,26 @@
 package now.planit.Domain.Models;
 
 
+import java.util.ArrayList;
+
 public class User {
   private  String name;
   private  String email;
   private  String password;
+  ArrayList<Project> projects = new ArrayList<>();
 
 
   public User(String name, String email, String password) {
     this.name = name;
     this.email = email;
     this.password = password;
+  }
+
+  public User(String name, String email, String password, ArrayList<Project> projects) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.projects = projects;
   }
 
   @Override

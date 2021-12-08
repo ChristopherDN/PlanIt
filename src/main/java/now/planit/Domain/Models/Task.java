@@ -1,12 +1,15 @@
 package now.planit.Domain.Models;
 
 
+import java.util.ArrayList;
+
 public class Task {
   private String taskName;
   private String startDate;
   private String finishDate;
   private int hours;
   private int cost;
+  ArrayList<Subtask> subtasks = new ArrayList<>();
 
   public Task(String taskName, String startDate, String finishDate, int cost) {
     this.taskName = taskName;
@@ -21,6 +24,15 @@ public class Task {
     this.finishDate = finishDate;
     this.hours = hours;
     this.cost = cost;
+  }
+
+  public Task(String taskName, String startDate, String finishDate, int hours, int cost, ArrayList<Subtask> subtasks) {
+    this.taskName = taskName;
+    this.startDate = startDate;
+    this.finishDate = finishDate;
+    this.hours = hours;
+    this.cost = cost;
+    this.subtasks = subtasks;
   }
 
   public String getTaskName() {
