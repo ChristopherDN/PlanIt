@@ -77,14 +77,17 @@ public class DBFacade {
   public void deleteTask(String projectName, String taskName, User user) {
     int taskId = getTaskId(taskName, getProjectId(projectName, getUserId(user)));
         int projectID = getProjectId(projectName, getUserId(user));
+
+        repoProject.subtractCost(repoTask.getCost(taskId, projectID), projectID );
+        repoProject.subtractHours(repoTask.getHours(taskId, projectID), projectID );
+
+
     repoTask.deleteTask(taskId, projectID);
   }
 
   private void calculateHours(int hours, String taskName, int projectId) {
     repoTask.addHours(hours, taskName, projectId);
     repoProject.addActualHours(hours, projectId);
-   // repoProject.addActualhours(repoTask.getHours(taskName,getProjectId(projectName,getUserId(user))),//TODO change potition
-         //   projectName, getProjectId(projectName,getUserId(user))); Todo skal dette slettes?
   }
   public void calculateCost(int cost, String taskName, int projectId){
     repoTask.addActualCost(cost, taskName, projectId);
@@ -94,7 +97,6 @@ public class DBFacade {
   //SUbTASKREPO
 
   public ArrayList<Subtask> getSubtasks(String taskName, User user) {
-    //TODO FEJL HER Skal vi joine?
     return repoSubtask.getSubtasks(getTaskId(taskName, getProjectId(getProjectName(taskName), getUserId(user))));
   }
 
@@ -115,8 +117,20 @@ public class DBFacade {
 
 
   public void deleteSubtask(String taskName, String subtaskName, User user) {
+    //Load up ID´s that we need
     int subtaskID =  getSubtaskId(subtaskName, getTaskId(taskName, getProjectId(getProjectName(taskName), getUserId(user))));
     int taskId = getTaskId(taskName, getProjectId(getProjectName(taskName) , getUserId(user)));
+    int projectID = getProjectIDFromTasks(taskName);
+
+    //Here we update hours and Cost in Tasks
+    repoTask.subtractHours(repoSubtask.getHours(subtaskID, taskId), taskName, getProjectIDFromTasks(taskName));
+    repoTask.subtractCost(repoSubtask.getCost(subtaskID, taskId), taskName, getProjectIDFromTasks(taskName));
+
+    //Here we update hours and Cost in Projects
+    repoProject.subtractCost(repoSubtask.getCost(subtaskID, taskId), projectID );
+    repoProject.subtractHours(repoSubtask.getHours(subtaskID, taskId), projectID );
+
+    //Here we delete subtask from a Task
     repoSubtask.deleteSubtask(subtaskID, taskId);
   }
 

@@ -18,16 +18,16 @@
         <tr>
             <th>Subtask Number:</th>
             <th>Subtask Name</th>
-            <th>Estimated hours</th>
-            <th>Estimated cost</th>
+            <th>Cost</th>
+            <th>Billable hours???</th>
             <th></th>
         </tr>
         <tr>
             <form action="/createSubtaskParam" method="post">
                 <td></td>
                 <td><input type="text" name="subtaskName" required></td>
-                <td><input type="number" name="hours" min="0" max="1000000000" required></td>
                 <td><input type="number" name="cost" min="0" max="1000000000" required></td>
+                <td><input type="number" name="hours" min="0" max="1000000000" required></td>
                 <td><input type="submit" class="like" value="Add Subtask"></td>
             </form>
         </tr>
@@ -35,8 +35,8 @@
         <tr id="tr1" th:border="1" th:each="subtask : ${subtasks}">
             <td></td>
             <td th:text="${subtask.getSubtaskName()}"></td>
+            <td th:text="${#numbers.formatCurrency(subtask.getCost())}"></td>
             <td th:text="${subtask.getHours()}"></td>
-            <td th:text="${subtask.getCost()}"></td>
             <td><form th:action="@{/removeSubtask/{id}(id=${subtask.getSubtaskName()})}" th:object="${subtask}">
                 <button type="submit">Remove subtask</button>
             </form>
