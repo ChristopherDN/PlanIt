@@ -116,4 +116,19 @@ public class RepoProject {
     parameters.add(String.valueOf(projectId));
     dbMapper.save(sql,parameters);
   }
+  public void subtractHours(int hours, int projectId) {
+    sql = "update PlanIt.projects set actual_hours = actual_hours - ? where id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(hours));
+    parameters.add(String.valueOf(projectId));
+    dbMapper.save(sql, parameters);
+  }
+
+  public void subtractCost(int cost, int projectId) {
+    sql = "update PlanIt.projects set actual_cost = actual_cost - ?  where id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(cost));
+    parameters.add(String.valueOf(projectId));
+    dbMapper.save(sql, parameters);
+  }
 }

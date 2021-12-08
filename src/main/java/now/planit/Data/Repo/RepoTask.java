@@ -1,10 +1,10 @@
 package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.Task;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 
 
 public class RepoTask {
@@ -12,17 +12,16 @@ public class RepoTask {
   ArrayList<String> parameters = new ArrayList<>();
   String sql;
   ArrayList<Task> tasks = new ArrayList<>();
-  int taskId;
-
+  int getInt;
 
 
   //Manipulate Resultset to data we can use
-  public ArrayList<Task> loadTasks(ResultSet rs){
+  public ArrayList<Task> loadTasks(ResultSet rs) {
     try {
       tasks.clear();
       while (rs.next()) {
         tasks.add(new Task(rs.getString(1), rs.getString(2),
-                rs.getString(3),rs.getInt(4) , rs.getInt(5)));
+            rs.getString(3), rs.getInt(4), rs.getInt(5)));
 
       }
     } catch (SQLException ex) {
@@ -31,43 +30,43 @@ public class RepoTask {
     return tasks;
   }
 
-    public int getId(ResultSet rs){
-        try {
-            while (rs.next()) {
-                taskId = rs.getInt(1);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return taskId;
+  public int getInt(ResultSet rs) {
+    try {
+      while (rs.next()) {
+        getInt = rs.getInt(1);
+      }
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
     }
+    return getInt;
+  }
 
   //Db Do something.
-  public ArrayList<Task> getTasks(int projectId){
-    sql ="select name, start, finish, hours, cost from PlanIt.Tasks where project_Id = ?";
+  public ArrayList<Task> getTasks(int projectId) {
+    sql = "select name, start, finish, hours, cost from PlanIt.Tasks where project_Id = ?";
     parameters.clear();
     parameters.add(String.valueOf(projectId));
-    return loadTasks(dbMapper.load(sql,parameters));
+    return loadTasks(dbMapper.load(sql, parameters));
   }
 
 
-  public void createTask(String taskName, String startDate, String finishDate,  int projectId) {
-      sql=" insert into PlanIt.Tasks ( name, start, finish, project_id ) values (?, ?, ?, ?) ";
-      parameters.clear();
-      parameters.add(taskName);
-      parameters.add(startDate);
-      parameters.add(finishDate);
-      parameters.add(String.valueOf(projectId));
-      dbMapper.save(sql,parameters);
+  public void createTask(String taskName, String startDate, String finishDate, int projectId) {
+    sql = " insert into PlanIt.Tasks ( name, start, finish, project_id ) values (?, ?, ?, ?) ";
+    parameters.clear();
+    parameters.add(taskName);
+    parameters.add(startDate);
+    parameters.add(finishDate);
+    parameters.add(String.valueOf(projectId));
+    dbMapper.save(sql, parameters);
   }
 
-    public int getTaskId(String taskName, int projectId) {
-        sql ="select id from PlanIt.Tasks where name = ? and project_id = ?";
-        parameters.clear();
-        parameters.add(taskName);
-        parameters.add(String.valueOf(projectId));
-        return getId(dbMapper.load(sql,parameters));
-    }
+  public int getTaskId(String taskName, int projectId) {
+    sql = "select id from PlanIt.Tasks where name = ? and project_id = ?";
+    parameters.clear();
+    parameters.add(taskName);
+    parameters.add(String.valueOf(projectId));
+    return getInt(dbMapper.load(sql, parameters));
+  }
 
   public void deleteTask(int taskId, int projectId) {
     sql = "delete from PlanIt.Tasks where id = ? and project_id = ?";
@@ -78,38 +77,71 @@ public class RepoTask {
   }
 
   public int getTaskId2(int subtaskId, int projectId) {
-    sql ="select id from PlanIt.Tasks where id = ? and project_id = ?";
+    sql = "select id from PlanIt.Tasks where id = ? and project_id = ?";
     parameters.clear();
     parameters.add(String.valueOf(subtaskId));
     parameters.add(String.valueOf(projectId));
-    return getId(dbMapper.load(sql,parameters));
+    return getInt(dbMapper.load(sql, parameters));
   }
 
   public int getProjectID(String taskName) {
-    sql ="select project_id from PlanIt.Tasks where name = ?";
+    sql = "select project_id from PlanIt.Tasks where name = ?";
     parameters.clear();
     parameters.add(taskName);
-    return getId(dbMapper.load(sql,parameters));
+    return getInt(dbMapper.load(sql, parameters));
   }
 
+  public int getHours(int taskId, int projectId){
+    sql = "select hours from PlanIt.tasks where id = ? and project_id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(taskId));
+    parameters.add(String.valueOf(projectId));
+    return getInt(dbMapper.load(sql,parameters));
+  }
 
-    public void addHours(int hours, String taskName, int projectId) {
-    sql = "update PlanIt.tasks set hours = hours + ? where name = ? and project_id = ?";
+  public int getCost(int taskId, int projectId){
+    sql = "select cost from PlanIt.tasks where id = ? and project_id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(taskId));
+    parameters.add(String.valueOf(projectId));
+    return getInt(dbMapper.load(sql,parameters));
+  }
+
+  public void addHours(int hours, String taskName, int projectId) {
+    sql = "update PlanIt.tasks set Tasks.hours = Tasks.hours + ? where name = ? and project_id = ?";
     parameters.clear();
     parameters.add(String.valueOf(hours));
     parameters.add(taskName);
     parameters.add(String.valueOf(projectId));
-    dbMapper.save(sql,parameters);
-    }
+    dbMapper.save(sql, parameters);
+  }
 
-    public void addActualCost(int cost, String taskName, int projectId){
-        sql = "update PlanIt.Tasks set cost = Tasks.cost + ?  where Tasks.name = ? and Tasks.Project_id = ? ";
-        parameters.clear();
-        parameters.add(String.valueOf(cost));
-        parameters.add(taskName);
-        parameters.add(String.valueOf(projectId));
-        dbMapper.save(sql,parameters);
-    }
+  public void addActualCost(int cost, String taskName, int projectId) {
+    sql = "update PlanIt.Tasks set Tasks.cost = Tasks.cost + ?  where Tasks.name = ? and Tasks.Project_id = ? ";
+    parameters.clear();
+    parameters.add(String.valueOf(cost));
+    parameters.add(taskName);
+    parameters.add(String.valueOf(projectId));
+    dbMapper.save(sql, parameters);
+  }
+
+  public void subtractHours(int hours, String taskName, int projectId) {
+    sql = "update PlanIt.tasks set Tasks.hours = Tasks.hours - ? where name = ? and Tasks.project_id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(hours));
+    parameters.add(taskName);
+    parameters.add(String.valueOf(projectId));
+    dbMapper.save(sql, parameters);
+  }
+
+  public void subtractCost(int cost, String taskName, int projectId) {
+    sql = "update PlanIt.Tasks set cost = Tasks.cost - ?  where Tasks.name = ? and Tasks.Project_id = ?";
+    parameters.clear();
+    parameters.add(String.valueOf(cost));
+    parameters.add(taskName);
+    parameters.add(String.valueOf(projectId));
+    dbMapper.save(sql, parameters);
+  }
 }
 
 
