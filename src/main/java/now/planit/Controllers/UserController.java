@@ -1,7 +1,7 @@
 package now.planit.Controllers;
 
 import now.planit.Domain.Models.User;
-import now.planit.Exceptions.UserNotExistException;
+import now.planit.Exceptions.UserAllreadyExistException;
 import now.planit.Domain.Services.UserService;
 import now.planit.Exceptions.DBConnFailedException;
 import org.springframework.stereotype.Controller;
@@ -29,8 +29,7 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String register(WebRequest request) throws UserNotExistException {
-    //TODO skal rettes til, så man kan logge ind uden nogen bruger i forvejen
+  public String register(WebRequest request) throws UserAllreadyExistException {
       userService.registerUser(
           request.getParameter("name"),
           request.getParameter("email"),
@@ -40,7 +39,7 @@ public class UserController {
 
 
   @PostMapping("/validateLogin")
-  public String validateLogin(WebRequest request, HttpSession session, Model model) throws UserNotExistException {
+  public String validateLogin(WebRequest request, HttpSession session, Model model) {
     user = userService.validateLogin(
             request.getParameter("mail"),
             request.getParameter("password"));
@@ -87,8 +86,8 @@ public class UserController {
     return "error/error";
 
   }
-  @ExceptionHandler(UserNotExistException.class)
-  public String exceptionMessageUserNotExist(Model model, UserNotExistException userNotExistException){
+  @ExceptionHandler(UserAllreadyExistException.class)
+  public String exceptionMessageUserNotExist(Model model, UserAllreadyExistException userAllreadyExistException){
     model.addAttribute("exMessage", "--->User allready exits. Please choose another name<--");
     return "error/error";
 

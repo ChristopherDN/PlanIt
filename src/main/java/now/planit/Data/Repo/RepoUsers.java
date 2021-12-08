@@ -58,15 +58,12 @@ public class RepoUsers {
   public int registerUser(String name, String email, String password) {
     //Makes sure there is no shadow data in the ResultSet.
     dbMapper = new DBMapper();
-
-
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     parameters.clear();
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
     int test = dbMapper.saveUpdate(sql, parameters);
-    System.out.println(test);
     return test;
   }
 

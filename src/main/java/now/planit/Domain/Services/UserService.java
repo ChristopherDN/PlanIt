@@ -2,16 +2,16 @@ package now.planit.Domain.Services;
 
 import now.planit.Data.Repo.DBFacade;
 import now.planit.Domain.Models.User;
-import now.planit.Exceptions.UserNotExistException;
+import now.planit.Exceptions.UserAllreadyExistException;
 
 public class UserService {
   DBFacade dbFacade = new DBFacade();
 
 
-  public void registerUser(String name, String email, String password) throws UserNotExistException {
+  public void registerUser(String name, String email, String password) throws UserAllreadyExistException {
 
     if (dbFacade.registerUser(name, email, password) == 0){
-      throw new UserNotExistException("Email already excists");
+      throw new UserAllreadyExistException("Email already excists");
     }
   }
 

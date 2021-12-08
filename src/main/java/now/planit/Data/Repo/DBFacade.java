@@ -19,6 +19,7 @@ public class DBFacade {
 
 
   //UserREPO
+  //Hvorfor returnerer denne ikke en int test???
   public int registerUser(String name, String email, String password) {
    return repoUsers.registerUser(name, email, password);
   }
