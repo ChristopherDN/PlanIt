@@ -20,8 +20,8 @@
         <th>Task Name</th>
         <th>Start</th>
         <th>Finish</th>
-        <th>Estimated hours</th>
-        <th>Estimated budget</th>
+        <th>Cost</th>
+        <th>Billable hours???</th>
         <th>Update task</th>
         <th>Delete</th>
     </tr>
@@ -43,8 +43,8 @@
         <td th:text="${task.getTaskName()}"></td>
         <td th:text="${task.getStartDate()}"></td>
         <td th:text="${task.getFinishDate()}"></td>
+        <td th:text="${#numbers.formatCurrency(task.getCost())}"></td>
         <td th:text="${task.getHours()}"></td>
-        <td th:text="${task.getCost()}"></td>
         <td><form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
             <button type="submit">Add subtask</button>
            <!-- <input type="hidden" name="project_id" th:value="${project.getName()}"> -->

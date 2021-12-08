@@ -77,7 +77,7 @@ public class RepoSubtask {
     }
 
     public int getHours(int subtaskId, int taskId){
-        sql = "select hours from PlanIt.Subtasks where id = ? and task_id = ?";
+        sql = "select estimated_hours from PlanIt.Subtasks where id = ? and task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
