@@ -23,11 +23,6 @@ public class User {
     this.projects = projects;
   }
 
-  @Override
-  public String toString() {
-    return name + " Email: " + email + "Password: " + password;
-  }
-
   public String getName() {
     return name;
   }
@@ -40,6 +35,10 @@ public class User {
     return password;
   }
 
+  public ArrayList<Project> getProjects() {
+    return projects;
+  }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -50,5 +49,14 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public void setProjects(ArrayList<Project> projects) {
+    this.projects = projects;
+  }
+
+  @Override
+  public String toString() {
+    return name + " Email: " + email + "Password: " + password;
   }
 }

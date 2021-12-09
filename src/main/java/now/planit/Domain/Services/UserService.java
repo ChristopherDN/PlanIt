@@ -1,8 +1,11 @@
 package now.planit.Domain.Services;
 
 import now.planit.Data.Repo.DBFacade;
+import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserNotExistException;
+
+import java.util.ArrayList;
 
 public class UserService {
   DBFacade dbFacade = new DBFacade();
@@ -16,7 +19,8 @@ public class UserService {
   }
 
   public User validateLogin(String email, String password) {
-    User user = dbFacade.validateLogin(email, password);
+
+
     /*Not usefull, we allready have javascript validation.
     if(user == null) {
       throw new UserNotExistException("Sorry, this is not a correct user!!!");

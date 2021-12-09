@@ -74,4 +74,19 @@ public class Task {
   public void setHours(int hours) {
     this.hours = hours;
   }
+
+  public ArrayList<Subtask> getSubtasks() {
+    return subtasks;
+  }
+
+  public void setSubtasks(ArrayList<Subtask> subtasks) {
+    this.subtasks = subtasks;
+  }
+
+  @Override
+  public String toString() {
+    return taskName + ", startDate: " + startDate + ", finishDate: " + finishDate +
+        ", hours: " + hours +
+        ", cost: " + cost;
+  }
 }

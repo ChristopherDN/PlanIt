@@ -42,48 +42,56 @@ public class Project {
     return name;
   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
-
   public String getStart() {
     return start;
-  }
-
-  public void setStart(String start) {
-    this.start = start;
   }
 
   public String getFinish() {
     return finish;
   }
 
-  public void setFinish(String finish) {
-    this.finish = finish;
-  }
-
   public int getBudget() {
     return budget;
-  }
-
-  public void setBudget(int budget) {
-    this.budget = budget;
   }
 
   public int getHours() {
     return hours;
   }
 
-  public void setHours(int hours) {
-    this.hours = hours;
-  }
-
   public int getCost() {
     return cost;
   }
 
+  public ArrayList<Task> getTasks() {
+    return tasks;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setStart(String start) {
+    this.start = start;
+  }
+
+  public void setFinish(String finish) {
+    this.finish = finish;
+  }
+
+  public void setBudget(int budget) {
+    this.budget = budget;
+  }
+
+  public void setHours(int hours) {
+    this.hours = hours;
+  }
+
   public void setCost(int cost) {
     this.cost = cost;
+  }
+
+  public void setTasks(ArrayList<Task> tasks) {
+    this.tasks = tasks;
   }
 
   @Override
