@@ -7,9 +7,6 @@ import now.planit.Domain.Models.User;
 
 import java.util.ArrayList;
 
-/**
- * @author Christopher
- */
 
 public class DBFacade {
   RepoProject repoProject = new RepoProject();
@@ -89,6 +86,7 @@ public class DBFacade {
     repoTask.addHours(hours, taskName, projectId);
     repoProject.addActualHours(hours, projectId);
   }
+
   public void calculateCost(int cost, String taskName, int projectId){
     repoTask.addActualCost(cost, taskName, projectId);
     repoProject.addActualCost(cost, projectId);
