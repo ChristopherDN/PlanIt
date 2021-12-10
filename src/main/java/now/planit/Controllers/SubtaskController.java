@@ -3,6 +3,7 @@ package now.planit.Controllers;
 import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Data.Repo.MapperDB;
 import now.planit.Data.Repo.ProjectRepo;
+import now.planit.Data.Repo.SubtaskRepo;
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.SubtaskService;
@@ -20,7 +21,7 @@ public class SubtaskController {
   User user;
   String taskName;
   //SubtaskService subtaskService = new SubtaskService();
-  SubtaskService subtaskService = new SubtaskService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
+  SubtaskService subtaskService = new SubtaskService(new FacadeMySQL(new SubtaskRepo(new MapperDB())));
   ArrayList<Subtask> subtasks = new ArrayList();
 
 
@@ -50,7 +51,7 @@ public class SubtaskController {
         (request.getParameter("subtaskName"),
             request.getParameter("hours"),
             Integer.parseInt(request.getParameter("cost")),
-            taskName, user);
+            taskName);
     return "redirect:/createSubtask";
   }
 

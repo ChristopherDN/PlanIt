@@ -18,23 +18,27 @@ public class FacadeMySQL {
   TaskRepo taskRepo = new TaskRepo(new MapperDB());
   SubtaskRepo subtaskRepo = new SubtaskRepo(new MapperDB());
 
+  //Dependency injection constructor.
   public FacadeMySQL(ProjectRepo projectRepo) {
     this.projectRepo = projectRepo;
   }
 
+  //Dependency injection constructor.
   public FacadeMySQL(UsersRepo usersRepo) {
     this.usersRepo = usersRepo;
   }
 
+  //Dependency injection constructor.
   public FacadeMySQL(TaskRepo taskRepo) {
     this.taskRepo = taskRepo;
   }
 
+  //Dependency injection constructor.
   public FacadeMySQL(SubtaskRepo subtaskRepo) {
     this.subtaskRepo = subtaskRepo;
   }
 
-  //UserREPO
+  //UserRepo
   public int registerUser(String name, String email, String password) {
     return usersRepo.registerUser(name, email, password);
   }
@@ -42,19 +46,22 @@ public class FacadeMySQL {
   public User validateLogin(String email, String password) {
     User user = usersRepo.validateLogin(email, password);
     return user;
-
   }
 
   public User loadUserData(User user){
     user.getProjects().clear();
 
+    //Here we set Users projects.
     user.setProjects(projectRepo.getProjects(getUserId(user)));
     String taskname;
+
+    //Here we load tasks into users projects.
     for (int i = 0; i < user.getProjects().size() ; i++) {
       user.getProjects().get(i).getTasks().addAll(getTasks(user.getProjects().get(i).getName(), user));
+
+      //Here we load subtasks into Users Tasks connected to individual projects.
       for (int j = 0; j < user.getProjects().get(i).getTasks().size(); j++) {
         taskname = user.getProjects().get(i).getTasks().get(j).getTaskName();
-        System.out.println(taskname);
         user.getProjects().get(i).getTasks().get(j).getSubtasks().addAll(getSubtasks(taskname, user));
       }
     }
@@ -90,7 +97,6 @@ public class FacadeMySQL {
     return projectRepo.getProjectId(projectName, userId);
   }
 
-
   public void deleteProject(String projectName, User user) {
     projectRepo.deleteProject(getProjectId(projectName, getUserId(user)), getUserId(user));
   }
@@ -101,8 +107,7 @@ public class FacadeMySQL {
 
   //TaskREPO
   public ArrayList<Task> getTasks(String projectName, User user) {
-    int projectId = getProjectId(projectName, getUserId(user));
-    return taskRepo.getTasks(projectId);
+    return taskRepo.getTasks(getProjectId(projectName, getUserId(user)));
   }
 
   public int getTaskId(String taskName, int projectId) {
@@ -117,10 +122,11 @@ public class FacadeMySQL {
     int taskId = getTaskId(taskName, getProjectId(projectName, getUserId(user)));
     int projectID = getProjectId(projectName, getUserId(user));
 
+    //Subtract hours and cost from Task and Project.
     projectRepo.subtractCost(taskRepo.getCost(taskId, projectID), projectID);
     projectRepo.subtractHours(taskRepo.getHours(taskId, projectID), projectID);
 
-
+    //Delete Task
     taskRepo.deleteTask(taskId, projectID);
   }
 
@@ -134,27 +140,25 @@ public class FacadeMySQL {
     projectRepo.addActualCost(cost, projectId);
   }
 
+  public int getProjectIDFromTasks(String taskName) {
+    return taskRepo.getProjectID(taskName);
+  }
+
   //SUbTASKREPO
 
   public ArrayList<Subtask> getSubtasks(String taskName, User user) {
     return subtaskRepo.getSubtasks(getTaskId(taskName, getProjectId(getProjectName(taskName), getUserId(user))));
   }
 
-  public int getProjectIDFromTasks(String taskName) {
-    return taskRepo.getProjectID(taskName);
-  }
-
-  public void createSubtask(String subtaskName, int hours, int cost, String taskName, User user) {
+  public void createSubtask(String subtaskName, int hours, int cost, String taskName) {
     subtaskRepo.createSubtask(subtaskName, hours, cost, getTaskId(taskName, getProjectIDFromTasks(taskName)));
     calculateHours(hours, taskName, getProjectIDFromTasks(taskName));
     calculateCost(cost, taskName, getProjectIDFromTasks(taskName));
   }
 
-
   public int getSubtaskId(String subtaskName, int taskId) {
     return subtaskRepo.getSubtaskId(subtaskName, taskId);
   }
-
 
   public void deleteSubtask(String taskName, String subtaskName, User user) {
     //Load up ID´s that we need
@@ -178,9 +182,4 @@ public class FacadeMySQL {
   public void deleteUser(String email, String password) {
     usersRepo.deleteUser(email, password);
   }
-
-
-  //Jeff viewPage
-
-
 }

@@ -1,8 +1,10 @@
 package now.planit.Controllers;
 
+
 import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Data.Repo.MapperDB;
 import now.planit.Data.Repo.ProjectRepo;
+import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserNotExistException;
 import now.planit.Domain.Services.UserService;
@@ -18,8 +20,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
-  UserService userService = new UserService();
-  //UserService userService = new UserService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
+  UserService userService = new UserService(new FacadeMySQL(new UsersRepo(new MapperDB())));
   User user;
 
   @GetMapping("/registerUser")
@@ -55,7 +56,8 @@ public class UserController {
       if (user != null) {
         model.addAttribute("user", user);
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        return "redirect:/myProjects";
+        userService.updateUserData(user);
+        return "project/projectOverview";
       }
     }
     return "login/loginFailed";

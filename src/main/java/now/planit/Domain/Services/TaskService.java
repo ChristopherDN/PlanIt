@@ -10,12 +10,11 @@ import now.planit.Domain.Models.User;
 import java.util.ArrayList;
 
 public class TaskService {
-    //FacadeMySQL facadeMySQL;
-    FacadeMySQL facadeMySQL = new FacadeMySQL(new ProjectRepo(new MapperDB()));
+    FacadeMySQL facadeMySQL;
 
-   /* public TaskService(FacadeMySQL facadeMySQL) {
+    public TaskService(FacadeMySQL facadeMySQL) {
         this.facadeMySQL = facadeMySQL;
-    }*/
+    }
 
     public ArrayList<Task> getTasks(String projectName, User user) {
         return facadeMySQL.getTasks(projectName, user);

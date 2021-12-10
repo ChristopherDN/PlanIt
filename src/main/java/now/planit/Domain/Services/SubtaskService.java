@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class SubtaskService {
     FacadeMySQL facadeMySQL;
-    //FacadeMySQL facadeMySQL = new FacadeMySQL(new ProjectRepo(new MapperDB()));
 
    public SubtaskService(FacadeMySQL facadeMySQL) {
         this.facadeMySQL = facadeMySQL;
@@ -21,8 +20,8 @@ public class SubtaskService {
         return facadeMySQL.getSubtasks(taskName, user);
     }
 
-    public void createSubtask(String subtaskName, String hours, int cost, String taskName, User user) {
-        facadeMySQL.createSubtask(subtaskName, Integer.parseInt(hours), cost, taskName, user);
+    public void createSubtask(String subtaskName, String hours, int cost, String taskName) {
+        facadeMySQL.createSubtask(subtaskName, Integer.parseInt(hours), cost, taskName);
     }
 
     public void deleteSubtask(String taskName, String subtaskName, User user) {

@@ -8,12 +8,13 @@ import java.util.ArrayList;
 
 
 public class SubtaskRepo {
+    MapperDB mapperDB;
     ArrayList<String> parameters = new ArrayList<>();
     String sql;
     ArrayList<Subtask> subtasks = new ArrayList<>();
     int getInt;
-    MapperDB mapperDB;
 
+    //Dependency injection constructor.
     public SubtaskRepo(MapperDB mapperDB) {
         this.mapperDB = mapperDB;
     }
@@ -46,13 +47,11 @@ public class SubtaskRepo {
 
     //Db Do something.
     public ArrayList<Subtask> getSubtasks(int taskId){
-        System.out.println(taskId);
         sql ="select name, estimated_hours, cost from PlanIt.Subtasks where task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
         return loadSubtasks(mapperDB.load(sql,parameters));
     }
-
 
     public void createSubtask(String subtaskName, int hours, int cost, int taskId) {
         sql="insert into PlanIt.Subtasks (task_id, name, estimated_hours, cost) values (?, ?, ?, ?)";

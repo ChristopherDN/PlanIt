@@ -1,19 +1,15 @@
 package now.planit.Domain.Services;
 
 import now.planit.Data.Repo.FacadeMySQL;
-import now.planit.Data.Repo.MapperDB;
-import now.planit.Data.Repo.ProjectRepo;
-import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserNotExistException;
 
 public class UserService {
-  //FacadeMySQL facadeMySQL;
-  FacadeMySQL facadeMySQL = new FacadeMySQL(new ProjectRepo(new MapperDB()));
+  FacadeMySQL facadeMySQL;
 
- /* public UserService(FacadeMySQL facadeMySQL) {
+  public UserService(FacadeMySQL facadeMySQL) {
     this.facadeMySQL = facadeMySQL;
-  }*/
+  }
 
   public void registerUser(String name, String email, String password) throws UserNotExistException {
 
@@ -23,15 +19,9 @@ public class UserService {
   }
 
   public User validateLogin(String email, String password) {
-
-
-    /*Not usefull, we allready have javascript validation.
-    if(user == null) {
-      throw new UserNotExistException("Sorry, this is not a correct user!!!");
-    }
-    */
    return facadeMySQL.validateLogin(email, password);
   }
+
   public void editName(String newName, User user) {
     if (!newName.equals(user.getName()) && !newName.equals("")){
       facadeMySQL.editName(newName, user);

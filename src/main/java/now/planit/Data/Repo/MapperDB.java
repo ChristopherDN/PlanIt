@@ -15,7 +15,7 @@ public class MapperDB {
   Connection connection;
   PreparedStatement ps;
   ResultSet rs;
-  int test = 0;
+  int validate = 0;
 
   //Check connection with DBManager
   public PreparedStatement checkConnection(String sqlCommand)  {
@@ -71,13 +71,13 @@ public class MapperDB {
   public int saveUpdate(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);
-      test = setParameters(parameters).executeUpdate();
+      validate = setParameters(parameters).executeUpdate();
     }
     catch (SQLException e) {
       System.out.println("Database unavaiable for load method!");
       e.printStackTrace();
       System.out.println(e.getMessage());
     }
-    return test;
+    return validate;
   }
 }

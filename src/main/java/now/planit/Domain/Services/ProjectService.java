@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class ProjectService{
  FacadeMySQL facadeMySQL;
- //FacadeMySQL facadeMySQL = new FacadeMySQL(new ProjectRepo(new MapperDB()));
 
  public ProjectService(FacadeMySQL facadeMySQL) {
     this.facadeMySQL = facadeMySQL;

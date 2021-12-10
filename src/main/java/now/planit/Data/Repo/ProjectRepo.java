@@ -8,13 +8,14 @@ import java.util.ArrayList;
 
 
 public class ProjectRepo {
+  MapperDB mapperDB;
   String query;
   ArrayList<String> parameters = new ArrayList<>();
   ArrayList<Project> projects = new ArrayList<>();
   int projectId;
   String projectName;
-  MapperDB mapperDB;
 
+  //Dependency injection constructor.
   public ProjectRepo(MapperDB mapperDB) {
     this.mapperDB = mapperDB;
   }

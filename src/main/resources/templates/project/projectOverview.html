@@ -16,8 +16,6 @@
 
 <style>
 
-    #id1 .collapsible{background-color: #35455D}
-
     .collapsible {
         background-color: #777;
         color: white;
@@ -56,7 +54,7 @@
 </style>
 
 <h4>Welcome <p th:text="${user.getName()}"></p> <br>Here are your projects!<br> </h4>
-<form action="//myProjects" method="get">
+<form action="/myProjects" method="get">
     <button type="submit" >Project Overview</button>
 </form>
 

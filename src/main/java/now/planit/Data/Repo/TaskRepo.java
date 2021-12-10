@@ -8,12 +8,14 @@ import java.util.ArrayList;
 
 
 public class TaskRepo {
+  MapperDB mapperDB;
   ArrayList<String> parameters = new ArrayList<>();
   String sql;
   ArrayList<Task> tasks = new ArrayList<>();
   int getInt;
-  MapperDB mapperDB;
 
+
+  //Dependency injection constructor.
   public TaskRepo(MapperDB mapperDB) {
     this.mapperDB = mapperDB;
   }
@@ -51,10 +53,8 @@ public class TaskRepo {
     parameters.clear();
     parameters.add(String.valueOf(projectId));
     tasks = loadTasks(mapperDB.load(sql, parameters));
-    System.out.println("This is size of Tasks in each Project: " + tasks.size());
     return tasks;
   }
-
 
   public void createTask(String taskName, String startDate, String finishDate, int projectId) {
     sql = " insert into PlanIt.Tasks ( name, start, finish, project_id ) values (?, ?, ?, ?) ";

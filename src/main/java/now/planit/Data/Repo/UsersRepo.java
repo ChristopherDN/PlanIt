@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 
 public class UsersRepo {
+  MapperDB mapperDB;
   User user;
   String sql;
   ArrayList<String> parameters = new ArrayList<>();
   String userEmail;
   int userId;
-  int i = 0;
-  MapperDB mapperDB;
 
+  //Dependency injection constructor.
   public UsersRepo(MapperDB mapperDB) {
     this.mapperDB = mapperDB;
   }
@@ -46,33 +46,17 @@ public class UsersRepo {
     return user;
   }
 
-  public String getEmail(ResultSet rs){
-    try {
-      if (rs.next()) {
-        userEmail = rs.getString(1);
-      }
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-    }
-
-    return userEmail;
-  }
-
-
 
   public int registerUser(String name, String email, String password) {
     //Makes sure there is no shadow data in the ResultSet.
     mapperDB = new MapperDB();
-
 
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
     parameters.clear();
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
-    int test = mapperDB.saveUpdate(sql, parameters);
-    System.out.println(test);
-    return test;
+    return mapperDB.saveUpdate(sql, parameters);
   }
 
   public User validateLogin(String email, String password) {
