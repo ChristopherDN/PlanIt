@@ -1,25 +1,30 @@
 package now.planit.Domain.Services;
 
-import now.planit.Data.Repo.DBFacade;
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.User;
 import java.util.ArrayList;
 
 public class ProjectService{
+ FacadeMySQL facadeMySQL;
+ //FacadeMySQL facadeMySQL = new FacadeMySQL(new ProjectRepo(new MapperDB()));
 
-    DBFacade dbFacade = new DBFacade();
+ public ProjectService(FacadeMySQL facadeMySQL) {
+    this.facadeMySQL = facadeMySQL;
+  }
 
-
-    public void createProject(String projectName, String start, String finish, int budget, User user)  {
-        dbFacade.createProject(projectName, start, finish,budget, user);
+  public void createProject(String projectName, String start, String finish, int budget, User user)  {
+        facadeMySQL.createProject(projectName, start, finish,budget, user);
     }
 
     public ArrayList<Project> getProjects(User user) {
-        return dbFacade.getProjects(user);
+        return facadeMySQL.getProjects(user);
     }
 
 
   public void deleteProject(String projectName, User user)  {
-      dbFacade.deleteProject(projectName, user);
+      facadeMySQL.deleteProject(projectName, user);
   }
 }

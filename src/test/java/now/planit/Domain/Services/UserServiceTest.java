@@ -1,5 +1,8 @@
 package now.planit.Domain.Services;
 
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserNotExistException;
 import org.junit.jupiter.api.Test;
@@ -11,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author roed
  */
 class UserServiceTest {
+  //UserService userService = new UserService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
   UserService userService = new UserService();
   User user = userService.validateLogin("test@test.com", "test");
   User wrongUser = userService.validateLogin("test@test.com", "21321");

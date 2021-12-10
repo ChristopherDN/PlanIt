@@ -1,5 +1,8 @@
 package now.planit.Controllers;
 
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.SubtaskService;
@@ -16,7 +19,8 @@ import java.util.ArrayList;
 public class SubtaskController {
   User user;
   String taskName;
-  SubtaskService subtaskService = new SubtaskService();
+  //SubtaskService subtaskService = new SubtaskService();
+  SubtaskService subtaskService = new SubtaskService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
   ArrayList<Subtask> subtasks = new ArrayList();
 
 

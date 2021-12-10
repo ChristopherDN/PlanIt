@@ -1,23 +1,31 @@
 package now.planit.Domain.Services;
 
-import now.planit.Data.Repo.DBFacade;
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
+import now.planit.Data.Repo.SubtaskRepo;
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.User;
 
 import java.util.ArrayList;
 
 public class SubtaskService {
-    DBFacade dbFacade = new DBFacade();
+    FacadeMySQL facadeMySQL;
+    //FacadeMySQL facadeMySQL = new FacadeMySQL(new ProjectRepo(new MapperDB()));
+
+   public SubtaskService(FacadeMySQL facadeMySQL) {
+        this.facadeMySQL = facadeMySQL;
+    }
 
     public ArrayList<Subtask> getSubtasks(String taskName, User user) {
-        return dbFacade.getSubtasks(taskName, user);
+        return facadeMySQL.getSubtasks(taskName, user);
     }
 
     public void createSubtask(String subtaskName, String hours, int cost, String taskName, User user) {
-        dbFacade.createSubtask(subtaskName, Integer.parseInt(hours), cost, taskName, user);
+        facadeMySQL.createSubtask(subtaskName, Integer.parseInt(hours), cost, taskName, user);
     }
 
     public void deleteSubtask(String taskName, String subtaskName, User user) {
-        dbFacade.deleteSubtask(taskName, subtaskName, user);
+        facadeMySQL.deleteSubtask(taskName, subtaskName, user);
     }
 }

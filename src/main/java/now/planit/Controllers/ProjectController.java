@@ -1,5 +1,8 @@
 package now.planit.Controllers;
 
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.ProjectService;
@@ -15,7 +18,9 @@ import java.util.ArrayList;
 @Controller
 public class ProjectController {
     User user;
-    ProjectService projectService = new ProjectService();
+    ProjectService projectService = new ProjectService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
+    //ProjectService projectService = new ProjectService(new FacadeMongoDB());
+    //ProjectService projectService = new ProjectService();
     ArrayList<Project> projects = new ArrayList<>();
 
 

@@ -7,13 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class RepoSubtask {
-    DBMapper dbMapper = new DBMapper();
+public class SubtaskRepo {
     ArrayList<String> parameters = new ArrayList<>();
     String sql;
     ArrayList<Subtask> subtasks = new ArrayList<>();
     int getInt;
+    MapperDB mapperDB;
 
+    public SubtaskRepo(MapperDB mapperDB) {
+        this.mapperDB = mapperDB;
+    }
 
     //Manipulate Resultset to data we can use
     public ArrayList<Subtask> loadSubtasks(ResultSet rs){
@@ -43,11 +46,11 @@ public class RepoSubtask {
 
     //Db Do something.
     public ArrayList<Subtask> getSubtasks(int taskId){
-
+        System.out.println(taskId);
         sql ="select name, estimated_hours, cost from PlanIt.Subtasks where task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
-        return loadSubtasks(dbMapper.load(sql,parameters));
+        return loadSubtasks(mapperDB.load(sql,parameters));
     }
 
 
@@ -58,14 +61,14 @@ public class RepoSubtask {
         parameters.add(subtaskName);
         parameters.add(String.valueOf(hours));
         parameters.add(String.valueOf(cost));
-        dbMapper.save(sql,parameters);
+        mapperDB.save(sql,parameters);
     }
     public int getSubtaskId(String subtaskName, int taskId) {
         sql ="select id from PlanIt.Subtasks where name = ? and task_id = ?";
         parameters.clear();
         parameters.add(subtaskName);
         parameters.add(String.valueOf(taskId));
-        return getInt(dbMapper.load(sql,parameters));
+        return getInt(mapperDB.load(sql,parameters));
     }
 
     public void deleteSubtask(int subtaskId, int taskId) {
@@ -73,7 +76,7 @@ public class RepoSubtask {
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
-        dbMapper.save(sql, parameters);
+        mapperDB.save(sql, parameters);
     }
 
     public int getHours(int subtaskId, int taskId){
@@ -81,7 +84,7 @@ public class RepoSubtask {
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
-       return getInt(dbMapper.load(sql,parameters));
+       return getInt(mapperDB.load(sql,parameters));
     }
 
     public int getCost(int subtaskId, int taskId){
@@ -89,6 +92,6 @@ public class RepoSubtask {
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
-        return getInt(dbMapper.load(sql,parameters));
+        return getInt(mapperDB.load(sql,parameters));
     }
 }

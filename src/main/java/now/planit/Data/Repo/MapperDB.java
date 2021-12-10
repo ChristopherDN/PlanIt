@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * @author roed
  */
-public class DBMapper {
+public class MapperDB {
   Connection connection;
   PreparedStatement ps;
   ResultSet rs;

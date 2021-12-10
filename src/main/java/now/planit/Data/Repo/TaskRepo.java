@@ -7,12 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class RepoTask {
-  DBMapper dbMapper = new DBMapper();
+public class TaskRepo {
   ArrayList<String> parameters = new ArrayList<>();
   String sql;
   ArrayList<Task> tasks = new ArrayList<>();
   int getInt;
+  MapperDB mapperDB;
+
+  public TaskRepo(MapperDB mapperDB) {
+    this.mapperDB = mapperDB;
+  }
 
 
   //Manipulate Resultset to data we can use
@@ -46,7 +50,9 @@ public class RepoTask {
     sql = "select name, start, finish, hours, cost from PlanIt.Tasks where project_Id = ?";
     parameters.clear();
     parameters.add(String.valueOf(projectId));
-    return loadTasks(dbMapper.load(sql, parameters));
+    tasks = loadTasks(mapperDB.load(sql, parameters));
+    System.out.println("This is size of Tasks in each Project: " + tasks.size());
+    return tasks;
   }
 
 
@@ -57,7 +63,7 @@ public class RepoTask {
     parameters.add(startDate);
     parameters.add(finishDate);
     parameters.add(String.valueOf(projectId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(sql, parameters);
   }
 
   public int getTaskId(String taskName, int projectId) {
@@ -65,7 +71,7 @@ public class RepoTask {
     parameters.clear();
     parameters.add(taskName);
     parameters.add(String.valueOf(projectId));
-    return getInt(dbMapper.load(sql, parameters));
+    return getInt(mapperDB.load(sql, parameters));
   }
 
   public void deleteTask(int taskId, int projectId) {
@@ -73,7 +79,7 @@ public class RepoTask {
     parameters.clear();
     parameters.add(String.valueOf(taskId));
     parameters.add(String.valueOf(projectId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(sql, parameters);
   }
 
   public int getTaskId2(int subtaskId, int projectId) {
@@ -81,14 +87,14 @@ public class RepoTask {
     parameters.clear();
     parameters.add(String.valueOf(subtaskId));
     parameters.add(String.valueOf(projectId));
-    return getInt(dbMapper.load(sql, parameters));
+    return getInt(mapperDB.load(sql, parameters));
   }
 
   public int getProjectID(String taskName) {
     sql = "select project_id from PlanIt.Tasks where name = ?";
     parameters.clear();
     parameters.add(taskName);
-    return getInt(dbMapper.load(sql, parameters));
+    return getInt(mapperDB.load(sql, parameters));
   }
 
   public int getHours(int taskId, int projectId){
@@ -96,7 +102,7 @@ public class RepoTask {
     parameters.clear();
     parameters.add(String.valueOf(taskId));
     parameters.add(String.valueOf(projectId));
-    return getInt(dbMapper.load(sql,parameters));
+    return getInt(mapperDB.load(sql,parameters));
   }
 
   public int getCost(int taskId, int projectId){
@@ -104,7 +110,7 @@ public class RepoTask {
     parameters.clear();
     parameters.add(String.valueOf(taskId));
     parameters.add(String.valueOf(projectId));
-    return getInt(dbMapper.load(sql,parameters));
+    return getInt(mapperDB.load(sql,parameters));
   }
 
   public void addHours(int hours, String taskName, int projectId) {
@@ -113,7 +119,7 @@ public class RepoTask {
     parameters.add(String.valueOf(hours));
     parameters.add(taskName);
     parameters.add(String.valueOf(projectId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(sql, parameters);
   }
 
   public void addActualCost(int cost, String taskName, int projectId) {
@@ -122,7 +128,7 @@ public class RepoTask {
     parameters.add(String.valueOf(cost));
     parameters.add(taskName);
     parameters.add(String.valueOf(projectId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(sql, parameters);
   }
 
   public void subtractHours(int hours, String taskName, int projectId) {
@@ -131,7 +137,7 @@ public class RepoTask {
     parameters.add(String.valueOf(hours));
     parameters.add(taskName);
     parameters.add(String.valueOf(projectId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(sql, parameters);
   }
 
   public void subtractCost(int cost, String taskName, int projectId) {
@@ -140,7 +146,7 @@ public class RepoTask {
     parameters.add(String.valueOf(cost));
     parameters.add(taskName);
     parameters.add(String.valueOf(projectId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(sql, parameters);
   }
 }
 

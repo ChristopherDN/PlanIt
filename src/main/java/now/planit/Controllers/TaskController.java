@@ -1,5 +1,8 @@
 package now.planit.Controllers;
 
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.TaskService;
@@ -16,6 +19,7 @@ public class TaskController {
   User user;
   String projectName;
   TaskService taskService = new TaskService();
+  //TaskService taskService = new TaskService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
   ArrayList<Task> tasks = new ArrayList();
 
   //Endpoint to dynamic display(loop) all task and display user information

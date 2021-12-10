@@ -7,14 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class RepoUsers {
-  DBMapper dbMapper = new DBMapper();
+public class UsersRepo {
   User user;
   String sql;
   ArrayList<String> parameters = new ArrayList<>();
   String userEmail;
   int userId;
   int i = 0;
+  MapperDB mapperDB;
+
+  public UsersRepo(MapperDB mapperDB) {
+    this.mapperDB = mapperDB;
+  }
 
 
   //Manipulate ResultSet to other type of data
@@ -29,6 +33,7 @@ public class RepoUsers {
     return userId;
   }
 
+  //Builder pattern, hvis der er mange attributter i en konstruktør.
   public User getUser(ResultSet rs) {
     try {
       user = null;
@@ -57,7 +62,7 @@ public class RepoUsers {
 
   public int registerUser(String name, String email, String password) {
     //Makes sure there is no shadow data in the ResultSet.
-    dbMapper = new DBMapper();
+    mapperDB = new MapperDB();
 
 
     sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
@@ -65,7 +70,7 @@ public class RepoUsers {
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
-    int test = dbMapper.saveUpdate(sql, parameters);
+    int test = mapperDB.saveUpdate(sql, parameters);
     System.out.println(test);
     return test;
   }
@@ -75,7 +80,7 @@ public class RepoUsers {
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
-   return getUser(dbMapper.load(sql, parameters));
+   return getUser(mapperDB.load(sql, parameters));
   }
 
 
@@ -84,7 +89,7 @@ public class RepoUsers {
     parameters.clear();
     parameters.add(user.getEmail());
     parameters.add(user.getPassword());
-    return getId(dbMapper.load(sql, parameters));
+    return getId(mapperDB.load(sql, parameters));
   }
 
   public void editName(String newName, int userId) {
@@ -92,7 +97,7 @@ public class RepoUsers {
     parameters.clear();
     parameters.add(newName);
     parameters.add(String.valueOf(userId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(sql, parameters);
   }
 
   public void editEmail(String newEmail, int userId) {
@@ -100,7 +105,7 @@ public class RepoUsers {
     parameters.clear();
     parameters.add(newEmail);
     parameters.add(String.valueOf(userId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(sql, parameters);
   }
 
   public void editPassword(String newPassword, int userId) {
@@ -108,7 +113,7 @@ public class RepoUsers {
     parameters.clear();
     parameters.add(newPassword);
     parameters.add(String.valueOf(userId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(sql, parameters);
   }
 
   public void deleteUser(String email, String password) {
@@ -116,6 +121,6 @@ public class RepoUsers {
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
-    dbMapper.save(sql, parameters);
+    mapperDB.save(sql, parameters);
   }
 }

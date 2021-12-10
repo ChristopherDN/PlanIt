@@ -1,5 +1,8 @@
 package now.planit.Controllers;
 
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserNotExistException;
 import now.planit.Domain.Services.UserService;
@@ -16,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
   UserService userService = new UserService();
+  //UserService userService = new UserService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
   User user;
 
   @GetMapping("/registerUser")

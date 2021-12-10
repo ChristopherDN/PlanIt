@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="javascript.js"></script>
+    <title>Index</title>
 </head>
+
+<th:block th:include="/Fragment/headerLoggedInFragment :: header"></th:block>
+
 <body>
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
+
+    #id1 .collapsible{background-color: #35455D}
+
     .collapsible {
         background-color: #777;
         color: white;
@@ -46,62 +55,76 @@
     }
 </style>
 
+<h4>Welcome <p th:text="${user.getName()}"></p> <br>Here are your projects!<br> </h4>
+<form action="//myProjects" method="get">
+    <button type="submit" >Project Overview</button>
+</form>
 
 
-<!--action="/createProject" method="post" onsubmit="return change()" Calls a function in the method. -->
-<!-- onsubmit="click" Project loop 1  -->
+
+
+
+<!-- loop 1 Projects  -->
 <div th:border="1" th:each="project, i : ${user.getProjects()}">
     <form  method="post" onclick="return func()">
-        <button type="button"  class="collapsible"><p th:text="${project.getName()}" th:class="${i.index}"></p></button>
+        <button type="button"  class="collapsible"><p th:text="${project.getName()}"></p></button>
         <div class="content">
+            <table style = "margin-top: 20px;">
+                <tr>
+                    <th>Start</th>
+                    <th>Finish</th>
+                    <th>Budget</th>
+                    <th>Remaining budget</th>
+                    <th>Billable hours</th>
+                </tr>
+                <tr >
+            <td th:text="${user.getProjects().get(i.index).getStart()}"></td>
+            <td th:text="${user.getProjects().get(i.index).getFinish()}"></td>
+            <td th:text="${#numbers.formatCurrency(user.getProjects().get(i.index).getBudget())}"></td>
+            <td th:text="${#numbers.formatCurrency(user.getProjects().get(i.index).getBudget() - user.getProjects().get(i.index).getCost())}"></td>
+            <td th:text="${user.getProjects().get(i.index).getHours()}"></td>
+                </tr>
+            </table>
+            <br>
 
+
+            <!-- loop 2 Tasks-->
             <div th:border="1" th:each="task, j : ${user.getProjects().get(i.index).getTasks()}">
                 <form  method="post" onsclick="return func()">
-                    <button type="button"  class="collapsible"><p th:text="${task.getTaskName()}"></p></button>
+                    <button id="id1" type="button"  class="collapsible"><p th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getTaskName()}"></p></button>
                     <div class="content">
-
-                        <div th:border="1" th:each="subtask, n : ${user.getProjects().get(j.index).getTasks().get(j.index).getSubtasks()}">
+                        <table style = "margin-top: 20px;">
+                            <tr>
+                                <th>Start</th>
+                                <th>Finish</th>
+                                <th>Cost</th>
+                                <th>Billable hours</th>
+                            </tr>
+                            <tr>
+                                <td th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getStartDate()}"></td>
+                                <td th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getFinishDate()}"></td>
+                                <td th:text="${#numbers.formatCurrency(user.getProjects().get(i.index).getTasks().get(j.index).getCost())}"></td>
+                                <td th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getHours()}"></td>
+                            </tr>
+                        </table>
+                        <br>
+                        <!-- loop 3 Subtasks-->
+                        <div th:border="1" th:each="subtask, n : ${user.getProjects().get(i.index).getTasks().get(j.index).getSubtasks()}">
                             <form  method="post" onsclick="return func()">
-                                <button type="button"  class="collapsible"><p th:text="${subtask.getSubtaskName()}"></p></button>
+                                <button type="button"  class="collapsible"><p th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getSubtasks().get(n.index).getSubtaskName()}"></p></button>
                                 <div class="content">
-
+                                    <table style = "margin-top: 20px;">
+                                        <tr>
+                                            <th>Cost</th>
+                                            <th>Billable hours???</th>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="${#numbers.formatCurrency(user.getProjects().get(i.index).getTasks().get(j.index).getSubtasks().get(n.index).getCost())}"></td>
+                                            <td th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getSubtasks().get(n.index).getHours()}"></td>
+                                        </tr>
+                                    </table>
+                                    <br>
                                 </div></form></div></div></form></div></div></form></div>
-
-                    <!-- Task loop 2-->
-
-<!--
-            <div th:border="1" th:each="task : ${tasks}">
-                <form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
-                    <button type="button" class="collapsible"><p th:text="${task.getTaskName()}"></p></button>
-                    <div class="content">
-                        <span> Task start: <span th:text="${task.getStartDate()}"></span></span>
-                        <br>
-                        <span> Task end: <span th:text="${task.getFinishDate()}"></span></span>
-                        <br>
-                        <span> Estimated cost: <span th:text="${task.getCost()}"></span></span>
-                    </div></form></div></div></form></div>
-
-
-                                               <div th:border="1" th:each="subtask : ${subtasks}">
-                                                   <button type="button" class="collapsible"><p th:text="${subtask.getSubtaskName()}"></p></button>
-                                                   <div class="content">
-                                                       <span> Subtask start: <span th:text="${subtask.getStartDate()}"></span></span>
-                                                       <br>
-                                                       <span> Subtask end: <span th:text="${project.getFinish()}"></span></span>
-                                                       <br>
-                                                       <span> Estimated cost: <span th:text="${project.getBudget()}"></span></span>
-                                                   </div></div></div></form></div></div></form></div>
-                       -->
-            <!-- SubTask loop 3-->
-<!-- Hvis vi bruger Button, kan vi ikke køre den form, hvis vi bruger submit, kan vi godt bruge form, som sender id videre.
- men så har den svært ved at komme tilbage på siden /endpoint. 3-->
-
-<!-- Hvis vi skal køre det på den her måde (hvilket ser ret nice ud) så skal
-vi ændre i vores flow i vores Controllere. Alle metoder skal nok laves om og klasserne skal merges en smule.-->
-
-<!-- Vi skal generelt tænke flowet anderledes, da "alt" data skal være tilgængelig fra start og der skal være
-mulighed for at tilføje mere data, hvilket er ret ligetil. -->
-
 
 
 
@@ -128,4 +151,8 @@ mulighed for at tilføje mere data, hvilket er ret ligetil. -->
 
 
 </body>
+</div>
+<div id="footerTabel" !important> <!--changes footer, so tabels are visable-->
+    <th:block th:include="/Fragment/footerFragment :: footer"></th:block>
+</div>
 </html>

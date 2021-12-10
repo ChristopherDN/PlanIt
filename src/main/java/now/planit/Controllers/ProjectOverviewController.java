@@ -1,5 +1,8 @@
 package now.planit.Controllers;
 
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.Task;
@@ -22,35 +25,23 @@ import java.util.ArrayList;
  */
 @Controller
 public class ProjectOverviewController {
-  ProjectService projectService = new ProjectService();
+  //ProjectService projectService = new ProjectService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
+  //SubtaskService subtaskService = new SubtaskService();
   TaskService taskService = new TaskService();
-  SubtaskService subtaskService = new SubtaskService();
-  UserService userService = new UserService();
+  //TaskService taskService = new TaskService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
+  //SubtaskService subtaskService = new SubtaskService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
+  SubtaskService subtaskService = new SubtaskService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
   User user;
-  ArrayList<Project> projects = new ArrayList<>();
   ArrayList<Task> tasks = new ArrayList<>();
   ArrayList<Subtask> subtasks = new ArrayList<>();
+  UserService userService = new UserService();
 
   @GetMapping("/projectOverview")
   public String index(HttpSession session, Model model, WebRequest request) {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-    model.addAttribute("projects", user.getProjects());
     model.addAttribute("user", user);
-
-   /* try {
-      for (int i = 0; i < user.getProjects().size(); i++) {
-        System.out.println(user.getProjects().get(i).getTasks().get(i).getTaskName());
-        for (int j = 0; j < user.getProjects().get(j).getTasks().size(); j++) {
-          System.out.println(user.getProjects().get(j).getTasks().get(j).getSubtasks().get(j).getSubtaskName());
-
-        }
-        System.out.println("End of Iteration");
-      }
-    }catch (Exception e){
-      e.getMessage();
-    }*/
-    if (session.getAttribute("user")!= null){
-
+    if (session.getAttribute("user") != null) {
+      userService.updateUserData(user);
       return "project/projectOverview";
     }
     return "index";
@@ -64,14 +55,13 @@ public class ProjectOverviewController {
   }
 
 
-
-  public void updateProjects(WebRequest request, Model model){
+  public void updateProjects(WebRequest request, Model model) {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     model.addAttribute("projects", user.getProjects());
     model.addAttribute("user", user);
   }
 
-  public void updateTasks(WebRequest request, Model model, String projectName)  {
+  public void updateTasks(WebRequest request, Model model, String projectName) {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     tasks = taskService.getTasks(projectName, user);
     model.addAttribute("tasks", tasks);
