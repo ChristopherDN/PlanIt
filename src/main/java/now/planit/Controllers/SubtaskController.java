@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class SubtaskController {
   User user;
   String taskName;
-  //SubtaskService subtaskService = new SubtaskService();
   SubtaskService subtaskService = new SubtaskService(new FacadeMySQL(new SubtaskRepo(new MapperDB())));
   ArrayList<Subtask> subtasks = new ArrayList();
 

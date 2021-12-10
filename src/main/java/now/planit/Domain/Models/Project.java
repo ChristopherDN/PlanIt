@@ -78,10 +78,6 @@ public class Project {
     this.finish = finish;
   }
 
-  public void setBudget(int budget) {
-    this.budget = budget;
-  }
-
   public void setHours(int hours) {
     this.hours = hours;
   }

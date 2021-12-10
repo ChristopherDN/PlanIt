@@ -17,10 +17,8 @@ import java.util.ArrayList;
 
 @Controller
 public class ProjectController {
-    User user;
     ProjectService projectService = new ProjectService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
-    //ProjectService projectService = new ProjectService(new FacadeMongoDB());
-    //ProjectService projectService = new ProjectService();
+    User user;
     ArrayList<Project> projects = new ArrayList<>();
 
 
