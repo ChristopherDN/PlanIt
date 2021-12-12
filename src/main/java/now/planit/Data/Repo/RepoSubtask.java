@@ -60,6 +60,7 @@ public class RepoSubtask {
         parameters.add(String.valueOf(cost));
         dbMapper.save(sql,parameters);
     }
+
     public int getSubtaskId(String subtaskName, int taskId) {
         sql ="select id from PlanIt.Subtasks where name = ? and task_id = ?";
         parameters.clear();
