@@ -7,28 +7,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class RepoUsers {
-  DBMapper dbMapper = new DBMapper();
+public class UsersRepo {
+  MapperDB mapperDB;
   User user;
-  String sql;
+  String query;
   ArrayList<String> parameters = new ArrayList<>();
-  String userEmail;
-  int userId;
-  int i = 0;
+  int getInt;
+
+  //Dependency injection constructor.
+  public UsersRepo(MapperDB mapperDB) {
+    this.mapperDB = mapperDB;
+  }
 
 
   //Manipulate ResultSet to other type of data
-  public int getId(ResultSet rs){
+  public int getInt(ResultSet rs) {
     try {
       while (rs.next()) {
-        userId = rs.getInt(1);
+        getInt = rs.getInt(1);
       }
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
     }
-    return userId;
+    return getInt;
   }
 
+  //Builder pattern, hvis der er mange attributter i en konstruktør.
   public User getUser(ResultSet rs) {
     try {
       user = null;
@@ -41,78 +45,67 @@ public class RepoUsers {
     return user;
   }
 
-  public String getEmail(ResultSet rs){
-    try {
-      if (rs.next()) {
-        userEmail = rs.getString(1);
-      }
-    } catch (SQLException ex) {
-      System.out.println(ex.getMessage());
-    }
-
-    return userEmail;
-  }
 
 
 
   public int registerUser(String name, String email, String password) {
     //Makes sure there is no shadow data in the ResultSet.
-    dbMapper = new DBMapper();
-    sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
+    mapperDB = new MapperDB();
+
+    query = "INSERT INTO planit.users(name, email, password) VALUES(?,?,?)";
     parameters.clear();
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
-    int test = dbMapper.saveUpdate(sql, parameters);
-    return test;
+    return mapperDB.saveUpdate(query, parameters);
   }
 
   public User validateLogin(String email, String password) {
-    sql = "SELECT username, email, password FROM PlanIt.Users WHERE email = ? AND password = ?";
+    query = "SELECT name, email, password FROM planit.users WHERE email = ? AND password = ?";
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
-   return getUser(dbMapper.load(sql, parameters));
+    return getUser(mapperDB.load(query, parameters));
   }
 
 
   public int getUserId(User user) {
-    sql = "Select id from PlanIt.Users where email = ? AND password = ?";
+    query = "SELECT id FROM planit.users WHERE email = ? AND password = ?";
     parameters.clear();
     parameters.add(user.getEmail());
     parameters.add(user.getPassword());
-    return getId(dbMapper.load(sql, parameters));
+    return getInt(mapperDB.load(query, parameters));
   }
 
   public void editName(String newName, int userId) {
-    sql = "UPDATE PlanIt.Users SET username = ? WHERE id = ?";
+    query = "UPDATE planit.users SET name = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newName);
     parameters.add(String.valueOf(userId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(query, parameters);
   }
 
   public void editEmail(String newEmail, int userId) {
-    sql = "UPDATE PlanIt.Users SET email = ? WHERE id = ?";
+    query = "UPDATE planit.users SET email = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newEmail);
     parameters.add(String.valueOf(userId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(query, parameters);
   }
 
   public void editPassword(String newPassword, int userId) {
-    sql = "UPDATE PlanIt.Users SET password = ? WHERE id = ?";
+    query = "UPDATE planit.users SET password = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newPassword);
     parameters.add(String.valueOf(userId));
-    dbMapper.save(sql, parameters);
+    mapperDB.save(query, parameters);
   }
 
   public void deleteUser(String email, String password) {
-    sql = "delete from PlanIt.Users where email = ? and password = ?";
+    query = "DELETE FROM planit.users WHERE email = ? AND password = ?";
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
-    dbMapper.save(sql, parameters);
+    mapperDB.save(query, parameters);
   }
 }

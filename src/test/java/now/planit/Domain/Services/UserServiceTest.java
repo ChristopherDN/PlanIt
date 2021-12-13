@@ -1,8 +1,13 @@
 package now.planit.Domain.Services;
 
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
+import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.User;
-import now.planit.Exceptions.UserAllreadyExistException;
+import now.planit.Exceptions.UserNotExistException;
 import org.junit.jupiter.api.Test;
+import org.springframework.web.context.request.WebRequest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author roed
  */
 class UserServiceTest {
-  UserService userService = new UserService();
-  User user = userService.validateLogin("test@test.com", "test");
-  User wrongUser = userService.validateLogin("test@test.com", "21321");
+  FacadeMySQL facadeMySQL = new FacadeMySQL(new UsersRepo(new MapperDB()));
+  User user = facadeMySQL.validateLogin("user@testing.com","testing");
+  User wrongUser = facadeMySQL.validateLogin("test@test.com", "21321");
   String expected;
 
   @Test
@@ -28,23 +33,26 @@ class UserServiceTest {
   @Test
   void validateLoginEmail() {
     expected = user.getEmail();
-    assertEquals(expected, userService.validateLogin("test@test.com", "test").getEmail());
+    assertEquals(expected, user.getEmail());
   }
 
   @Test
   void validateLoginPassword() {
     expected = user.getPassword();
-    assertEquals(expected, userService.validateLogin("test@test.com", "test").getPassword());
+    assertEquals(expected, user.getPassword());
   }
-
 
   @Test
-  void registerUser() throws UserAllreadyExistException {
-    userService.deleteUser("user@testing.com", "testing");
-    userService.registerUser("Jens", "user@testing.com", "testing");
-    assertNotNull(userService.validateLogin("user@testing.com", "testing"));
+  void registerUser() throws UserNotExistException {
+    //Arrange
+    facadeMySQL.deleteUser("user@testing.com", "testing");
+
+    //Act
+    facadeMySQL.registerUser("Junit test", "user@testing.com", "testing");
+
+    //Assert
+    assertNotNull(user);
+
+    //UNIT TEST pyramiden.... Cost curve ... Technical debt
   }
-
-
-
 }

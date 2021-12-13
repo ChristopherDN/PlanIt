@@ -7,13 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-public class RepoSubtask {
-    DBMapper dbMapper = new DBMapper();
+public class SubtaskRepo {
+    MapperDB mapperDB;
     ArrayList<String> parameters = new ArrayList<>();
-    String sql;
+    String query;
     ArrayList<Subtask> subtasks = new ArrayList<>();
     int getInt;
 
+    //Dependency injection constructor.
+    public SubtaskRepo(MapperDB mapperDB) {
+        this.mapperDB = mapperDB;
+    }
 
     //Manipulate Resultset to data we can use
     public ArrayList<Subtask> loadSubtasks(ResultSet rs){
@@ -43,53 +47,51 @@ public class RepoSubtask {
 
     //Db Do something.
     public ArrayList<Subtask> getSubtasks(int taskId){
-
-        sql ="select name, estimated_hours, cost from PlanIt.Subtasks where task_id = ?";
+        query ="SELECT name, estimated_hours, cost FROM planit.subtasks WHERE task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
-        return loadSubtasks(dbMapper.load(sql,parameters));
+        return loadSubtasks(mapperDB.load(query,parameters));
     }
 
-
     public void createSubtask(String subtaskName, int hours, int cost, int taskId) {
-        sql="insert into PlanIt.Subtasks (task_id, name, estimated_hours, cost) values (?, ?, ?, ?)";
+        query ="INSERT INTO planit.subtasks (task_id, name, estimated_hours, cost) VALUES (?, ?, ?, ?)";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
         parameters.add(subtaskName);
         parameters.add(String.valueOf(hours));
         parameters.add(String.valueOf(cost));
-        dbMapper.save(sql,parameters);
+        mapperDB.save(query,parameters);
     }
 
     public int getSubtaskId(String subtaskName, int taskId) {
-        sql ="select id from PlanIt.Subtasks where name = ? and task_id = ?";
+        query ="SELECT id FROM planit.subtasks WHERE name = ? AND task_id = ?";
         parameters.clear();
         parameters.add(subtaskName);
         parameters.add(String.valueOf(taskId));
-        return getInt(dbMapper.load(sql,parameters));
+        return getInt(mapperDB.load(query,parameters));
     }
 
     public void deleteSubtask(int subtaskId, int taskId) {
-        sql = "delete from PlanIt.subtasks where id = ? and task_id = ?";
+        query = "DELETE from planit.subtasks WHERE id = ? AND task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
-        dbMapper.save(sql, parameters);
+        mapperDB.save(query, parameters);
     }
 
     public int getHours(int subtaskId, int taskId){
-        sql = "select estimated_hours from PlanIt.Subtasks where id = ? and task_id = ?";
+        query = "SELECT estimated_hours FROM planit.subtasks WHERE id = ? AND task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
-       return getInt(dbMapper.load(sql,parameters));
+       return getInt(mapperDB.load(query,parameters));
     }
 
     public int getCost(int subtaskId, int taskId){
-        sql = "select cost from PlanIt.Subtasks where id = ? and task_id = ?";
+        query = "SELECT cost FROM planit.subtasks WHERE id = ? AND task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
-        return getInt(dbMapper.load(sql,parameters));
+        return getInt(mapperDB.load(query,parameters));
     }
 }

@@ -1,12 +1,15 @@
 package now.planit.Domain.Models;
 
 
+import java.util.ArrayList;
+
 public class Task {
   private String taskName;
   private String startDate;
   private String finishDate;
   private int hours;
   private int cost;
+  ArrayList<Subtask> subtasks = new ArrayList<>();
 
   public Task(String taskName, String startDate, String finishDate, int cost) {
     this.taskName = taskName;
@@ -23,28 +26,26 @@ public class Task {
     this.cost = cost;
   }
 
-  public String getTaskName() {
-    return taskName;
+  public Task(String taskName, String startDate, String finishDate, int hours, int cost, ArrayList<Subtask> subtasks) {
+    this.taskName = taskName;
+    this.startDate = startDate;
+    this.finishDate = finishDate;
+    this.hours = hours;
+    this.cost = cost;
+    this.subtasks = subtasks;
   }
 
-  public void setTaskName(String taskName) {
-    this.taskName = taskName;
+  public String getTaskName() {
+    return taskName;
   }
 
   public String getStartDate() {
     return startDate;
   }
 
-  public void setStartDate(String startDate) {
-    this.startDate = startDate;
-  }
 
   public String getFinishDate() {
     return finishDate;
-  }
-
-  public void setFinishDate(String finishDate) {
-    this.finishDate = finishDate;
   }
 
   public int getCost() {
@@ -61,5 +62,20 @@ public class Task {
 
   public void setHours(int hours) {
     this.hours = hours;
+  }
+
+  public ArrayList<Subtask> getSubtasks() {
+    return subtasks;
+  }
+
+  public void setSubtasks(ArrayList<Subtask> subtasks) {
+    this.subtasks = subtasks;
+  }
+
+  @Override
+  public String toString() {
+    return taskName + ", startDate: " + startDate + ", finishDate: " + finishDate +
+        ", hours: " + hours +
+        ", cost: " + cost;
   }
 }

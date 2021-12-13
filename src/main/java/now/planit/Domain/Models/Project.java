@@ -1,6 +1,8 @@
 package now.planit.Domain.Models;
 
 
+import java.util.ArrayList;
+
 public class Project {
   private String name;
   private String start;
@@ -8,6 +10,7 @@ public class Project {
   private int hours;
   private int cost;
   private int budget;
+  ArrayList<Task> tasks = new ArrayList<>();
 
   public Project(String name, String start, String finish, int budget) {
     this.name = name;
@@ -25,52 +28,66 @@ public class Project {
     this.hours = hours;
   }
 
-  public String getName() {
-    return name;
+  public Project(String name, String start, String finish, int hours, int cost, int budget, ArrayList<Task> tasks) {
+    this.name = name;
+    this.start = start;
+    this.finish = finish;
+    this.hours = hours;
+    this.cost = cost;
+    this.budget = budget;
+    this.tasks = tasks;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public String getName() {
+    return name;
   }
 
   public String getStart() {
     return start;
   }
 
-  public void setStart(String start) {
-    this.start = start;
-  }
-
   public String getFinish() {
     return finish;
-  }
-
-  public void setFinish(String finish) {
-    this.finish = finish;
   }
 
   public int getBudget() {
     return budget;
   }
 
-  public void setBudget(int budget) {
-    this.budget = budget;
-  }
-
   public int getHours() {
     return hours;
-  }
-
-  public void setHours(int hours) {
-    this.hours = hours;
   }
 
   public int getCost() {
     return cost;
   }
 
+  public ArrayList<Task> getTasks() {
+    return tasks;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setStart(String start) {
+    this.start = start;
+  }
+
+  public void setFinish(String finish) {
+    this.finish = finish;
+  }
+
+  public void setHours(int hours) {
+    this.hours = hours;
+  }
+
   public void setCost(int cost) {
     this.cost = cost;
+  }
+
+  public void setTasks(ArrayList<Task> tasks) {
+    this.tasks = tasks;
   }
 
   @Override

@@ -16,10 +16,6 @@ public class Subtask {
         return subtaskName;
     }
 
-    public void setSubtaskName(String subtaskName) {
-        this.subtaskName = subtaskName;
-    }
-
     public int getHours() {
         return hours;
     }
@@ -34,5 +30,10 @@ public class Subtask {
 
     public void setCost(int cost) {
         this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return subtaskName + ", hours: " + hours + ", cost: " + cost;
     }
 }

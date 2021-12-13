@@ -1,5 +1,10 @@
 package now.planit.Controllers;
 
+
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
+import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserAllreadyExistException;
 import now.planit.Domain.Services.UserService;
@@ -15,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
-  UserService userService = new UserService();
+  UserService userService = new UserService(new FacadeMySQL(new UsersRepo(new MapperDB())));
   User user;
 
   @GetMapping("/registerUser")
@@ -45,12 +50,13 @@ public class UserController {
             request.getParameter("password"));
 
     //Set Session to user, validate user is not null.
-
     if (session.getAttribute("user") == null) {
       if (user != null) {
         model.addAttribute("user", user);
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
-        return "redirect:/myProjects";
+        userService.updateUserData(user);
+
+        return "project/projectOverview";
       }
     }
     return "login/loginFailed";
@@ -71,8 +77,6 @@ public class UserController {
 
   @PostMapping("/updateUser")
   public String updateUser(WebRequest request, Model model)  {
-    //Mangler noget for at sikre at Navn og email opdatere på siden MyPage, når man har ændret det.
-    //user = (User) request.getAttribute("user", WebRequest.SCOPE_REQUEST); Den her crasher programmet
     userService.editName(request.getParameter("name"), user);
     userService.editMail(request.getParameter("email"), user);
     userService.changePassword(request.getParameter("password"), user);
@@ -92,7 +96,4 @@ public class UserController {
     return "error/error";
 
   }
-
-
-
 }
