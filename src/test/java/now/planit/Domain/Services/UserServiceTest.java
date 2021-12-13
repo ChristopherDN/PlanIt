@@ -15,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author roed
  */
 class UserServiceTest {
-  UserService userService = new UserService(new FacadeMySQL(new UsersRepo(new MapperDB())));
-  User user = userService.validateLogin("test@test.com", "test");
-  User wrongUser = userService.validateLogin("test@test.com", "21321");
+  FacadeMySQL facadeMySQL = new FacadeMySQL(new UsersRepo(new MapperDB()));
+  User user = facadeMySQL.validateLogin("test@test.com", "test");
+  User wrongUser = facadeMySQL.validateLogin("test@test.com", "21321");
   String expected;
 
   @Test
@@ -33,20 +33,20 @@ class UserServiceTest {
   @Test
   void validateLoginEmail() {
     expected = user.getEmail();
-    assertEquals(expected, userService.validateLogin("test@test.com", "test").getEmail());
+    assertEquals(expected, facadeMySQL.validateLogin("test@test.com", "test").getEmail());
   }
 
   @Test
   void validateLoginPassword() {
     expected = user.getPassword();
-    assertEquals(expected, userService.validateLogin("test@test.com", "test").getPassword());
+    assertEquals(expected, facadeMySQL.validateLogin("test@test.com", "test").getPassword());
   }
 
   @Test
   void registerUser() throws UserNotExistException {
-    userService.deleteUser("user@testing.com", "testing");
-    userService.registerUser("Junit test", "user@testing.com", "testing");
-    assertNotNull(userService.validateLogin("user@testing.com", "testing"));
+    facadeMySQL.deleteUser("user@testing.com", "testing");
+    facadeMySQL.registerUser("Junit test", "user@testing.com", "testing");
+    assertNotNull(facadeMySQL.validateLogin("user@testing.com", "testing"));
   }
 
 
