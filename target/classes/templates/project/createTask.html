@@ -6,6 +6,31 @@
     <title>Create Task</title>
 </head>
 
+<style>
+    #Tables {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #Tables td, #Tables th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #Tables tr:nth-child(even){background-color: #f2f2f2;}
+
+    #Tables tr:hover {background-color: #ddd;}
+
+    #Tables th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #35455D;
+        color: white;
+    }
+</style>
+
 <th:block th:include="/Fragment/headerLoggedInFragment :: header"></th:block>
 <body>
 <center>
@@ -14,7 +39,7 @@
         <button type="submit" >Back to Projects</button>
     </form>
 
-<table style = "margin-top: 20px;">
+<table id="Tables">
     <tr>
         <th>Task Number:</th>
         <th>Task Name</th>
