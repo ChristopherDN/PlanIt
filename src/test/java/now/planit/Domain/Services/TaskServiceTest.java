@@ -16,55 +16,55 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class TaskServiceTest {
   FacadeMySQL facadeMySQL = new FacadeMySQL(new TaskRepo(new MapperDB()));
-  User user = new User("Junit test", "user@testing.com", "testing");
-  ArrayList<Task> tasks = facadeMySQL.getTasks("Test project", user);
+  User user = facadeMySQL.validateLogin("user@testing.com", "testing");
+  ArrayList<Task> tasks = facadeMySQL.getTasks("Junit Project", user);
   String expected;
 
   @Test
   void createTaskName() {
-    facadeMySQL.createTask("Test Task","2021-12-13","2021-12-14", "Test project", user);
-  expected = "Test Task";
+    facadeMySQL.deleteTask("Junit Project", "Junit Task", user);
+    facadeMySQL.createTask("Junit Task","2021-12-13","2021-12-14", "Junit Project", user);
+  expected = "Junit Task";
     for (int i = 0; i < tasks.size(); i++) {
       if (tasks.get(i).getTaskName().equals(expected)){
         assertEquals(expected, tasks.get(i).getTaskName());
       }
-      facadeMySQL.deleteTask("Test project", expected, user);
     }
   }
 
   @Test
   void createTaskStart() {
-    facadeMySQL.createTask("Test Task","2021-12-13","2021-12-14", "Test project", user);
+    facadeMySQL.deleteTask("Junit Project", "Junit Task", user);
+    facadeMySQL.createTask("Junit Task","2021-12-13","2021-12-14", "Junit Project", user);
     expected = "2021-12-13";
     for (int i = 0; i < tasks.size(); i++) {
       if (tasks.get(i).getTaskName().equals(expected)){
         assertEquals(expected, tasks.get(i).getStartDate());
       }
-      facadeMySQL.deleteTask("Test project", expected, user);
     }
   }
 
   @Test
   void createTaskFinish() {
-    facadeMySQL.createTask("Test Task","2021-12-13","2021-12-14", "Test project", user);
+    facadeMySQL.deleteTask("Junit Project", "Junit Task", user);
+    facadeMySQL.createTask("Junit Task","2021-12-13","2021-12-14", "JUnit Project", user);
     expected = "2021-12-14";
     for (int i = 0; i < tasks.size(); i++) {
       if (tasks.get(i).getTaskName().equals(expected)){
         assertEquals(expected, tasks.get(i).getFinishDate());
       }
-      facadeMySQL.deleteTask("Test project", expected, user);
     }
   }
 
   @Test
   void deleteTask() {
-    facadeMySQL.createTask("Test Task","2021-12-13","2021-12-14", "Test project", user);
-    facadeMySQL.deleteTask("Test project", expected, user);
-    expected = "";
+    facadeMySQL.deleteTask("Junit Project", "Junit Task", user);
+    expected = "Junit Task";
     for (int i = 0; i < tasks.size(); i++) {
-      if (tasks.get(i).getTaskName().equals("Test Task")){
-        assertNotEquals(expected, tasks.get(i).getTaskName());
+      if (tasks.get(i).getTaskName().equals("Junit Task")){
+        assertEquals(expected, tasks.get(i).getTaskName());
       }
     }
+    facadeMySQL.createTask("Junit Task","2021-12-13","2021-12-14", "Junit Project", user);
   }
 }

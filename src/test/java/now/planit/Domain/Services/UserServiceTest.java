@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class UserServiceTest {
   FacadeMySQL facadeMySQL = new FacadeMySQL(new UsersRepo(new MapperDB()));
-  User user = facadeMySQL.validateLogin("test@test.com", "test");
+  User user = facadeMySQL.validateLogin("user@testing.com","testing");
   User wrongUser = facadeMySQL.validateLogin("test@test.com", "21321");
   String expected;
 
@@ -33,20 +33,20 @@ class UserServiceTest {
   @Test
   void validateLoginEmail() {
     expected = user.getEmail();
-    assertEquals(expected, facadeMySQL.validateLogin("test@test.com", "test").getEmail());
+    assertEquals(expected, user.getEmail());
   }
 
   @Test
   void validateLoginPassword() {
     expected = user.getPassword();
-    assertEquals(expected, facadeMySQL.validateLogin("test@test.com", "test").getPassword());
+    assertEquals(expected, user.getPassword());
   }
 
   @Test
   void registerUser() throws UserNotExistException {
     facadeMySQL.deleteUser("user@testing.com", "testing");
     facadeMySQL.registerUser("Junit test", "user@testing.com", "testing");
-    assertNotNull(facadeMySQL.validateLogin("user@testing.com", "testing"));
+    assertNotNull(user);
   }
 
 

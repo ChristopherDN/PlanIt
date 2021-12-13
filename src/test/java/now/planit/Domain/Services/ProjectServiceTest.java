@@ -16,25 +16,34 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ProjectServiceTest {
   FacadeMySQL facadeMySQL = new FacadeMySQL(new ProjectRepo(new MapperDB()));
-  User user = new User("UserForTests","test@test.com","test");
-Project project = new Project("Test Project", "2021-12-10", "2021-12-17", 20000);
-ArrayList<Project> actual = facadeMySQL.getProjects(user);
+  User user = facadeMySQL.validateLogin("user@testing.com","testing");
+  Project project = new Project("Junit Project", "2021-12-10", "2021-12-17", 20000);
+  ArrayList<Project> actual = facadeMySQL.getProjects(user);
+  String expected;
 
   @Test
   void createProject() {
+    facadeMySQL.deleteProject(project.getName(), user);
     //Expected
-    facadeMySQL.createProject("Test Project","2021-12-10", "2021-12-17", 20000, user);
+    facadeMySQL.createProject("Junit Project", "2021-12-10", "2021-12-17", 20000, user);
     for (int i = 0; i < actual.size(); i++) {
-      if (actual.get(i).equals(project)){
+      if (actual.get(i).equals(project)) {
         assertEquals(project, actual.get(i));
       }
     }
-    facadeMySQL.deleteProject(project.getName(), user);
   }
 
   @Test
   void deleteProject() {
-    facadeMySQL.createProject("Test Project","2021-12-10", "2021-12-17", 20000, user);
+    facadeMySQL.createProject("Junit Project", "2021-12-10", "2021-12-17", 20000, user);
     facadeMySQL.deleteProject(project.getName(), user);
+
+    expected = null;
+    for (int i = 0; i < actual.size(); i++) {
+      if (actual.get(i).getName().equals("Junit Project")) {
+        assertEquals(expected, actual.get(i).getName());
+      }
+    }
+    facadeMySQL.createProject("Junit Project", "2021-12-10", "2021-12-17", 20000, user);
   }
 }

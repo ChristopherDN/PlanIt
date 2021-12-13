@@ -80,7 +80,7 @@ public class SubtaskRepo {
     }
 
     public int getHours(int subtaskId, int taskId){
-        query = "SELECT estimated_hours FROM planit.Subtasks WHERE id = ? AND task_id = ?";
+        query = "SELECT estimated_hours FROM planit.subtasks WHERE id = ? AND task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
