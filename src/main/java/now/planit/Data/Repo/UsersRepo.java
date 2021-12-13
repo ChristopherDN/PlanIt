@@ -46,17 +46,6 @@ public class UsersRepo {
     return user;
   }
 
-  private ArrayList<User> users(ResultSet rs) {
-      try {
-        users.clear();
-        while (rs.next()) {
-          users.add(new User(rs.getString(1), rs.getString(2)));
-        }
-      } catch (SQLException ex) {
-        System.out.println(ex.getMessage());
-      }
-      return users;
-    }
 
 
 
