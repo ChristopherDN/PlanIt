@@ -14,7 +14,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-
     .collapsible {
         background-color: #777;
         color: white;
@@ -25,12 +24,13 @@
         text-align: center;
         outline: none;
         font-size: 15px;
-        border-top: 2px solid #6B7A99;
-        border-radius: 10px
+        border-top: 3px solid #f1f1f1;
+        border-radius: 15px
     }
 
     .active, .collapsible:hover {
-        background-color: #555;
+        background-color: #555 !important;
+        color: white
     }
 
     .content {
@@ -42,7 +42,7 @@
     }
 
     .collapsible:after {
-        content: '\02795'; /* Unicode character for "plus" sign (+) */
+        content: '\FF0B'; /* Unicode character for "plus" sign (+) */
         font-size: 13px;
         color: white;
         float: right;
@@ -50,13 +50,15 @@
     }
 
     .active:after {
-        content: "\2796"; /* Unicode character for "minus" sign (-) */
+        color:white ;content: "\FF0D"; /* Unicode character for "minus" sign (-) */
     }
 </style>
 
 <h4>Welcome <p th:text="${user.getName()}"></p> <br>Here are your projects!<br> </h4>
 <form action="/myProjects" method="get">
-    <button type="submit" >Project Overview</button>
+    <button type="submit" >Project Update</button>
+    <br>
+    <br>
 </form>
 
 
@@ -66,7 +68,7 @@
 <!-- loop 1 Projects  -->
 <div th:border="1" th:each="project, i : ${user.getProjects()}">
     <form  method="post" onclick="return func()">
-        <button type="button"  class="collapsible"><p th:text="${project.getName()}"></p></button>
+        <button style="background-color: #314152" type="button" class="collapsible"><p th:text="${project.getName()}"></p></button>
         <div class="content">
             <table style = "margin-top: 20px;">
                 <tr>
@@ -88,9 +90,9 @@
 
 
             <!-- loop 2 Tasks-->
-            <div th:border="1" th:each="task, j : ${user.getProjects().get(i.index).getTasks()}">
+            <div  th:border="1" th:each="task, j : ${user.getProjects().get(i.index).getTasks()}">
                 <form  method="post" onsclick="return func()">
-                    <button id="id1" type="button"  class="collapsible"><p th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getTaskName()}"></p></button>
+                    <button style="background-color: #15414f" type="button" class="collapsible"><p th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getTaskName()}"></p></button>
                     <div class="content">
                         <table style = "margin-top: 20px;">
                             <tr>
@@ -110,7 +112,7 @@
                         <!-- loop 3 Subtasks-->
                         <div th:border="1" th:each="subtask, n : ${user.getProjects().get(i.index).getTasks().get(j.index).getSubtasks()}">
                             <form  method="post" onsclick="return func()">
-                                <button type="button"  class="collapsible"><p th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getSubtasks().get(n.index).getSubtaskName()}"></p></button>
+                                <button style="background-color: #023449" type="button" class="collapsible"><p th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getSubtasks().get(n.index).getSubtaskName()}"></p></button>
                                 <div class="content">
                                     <table style = "margin-top: 20px;">
                                         <tr>

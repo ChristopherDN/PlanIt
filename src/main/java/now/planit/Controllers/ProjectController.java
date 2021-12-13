@@ -23,6 +23,7 @@ public class ProjectController {
     UserService userService = new UserService(new FacadeMySQL(new UsersRepo(new MapperDB())));
     User user;
     ArrayList<Project> projects = new ArrayList<>();
+    String finish;
 
 
     @GetMapping("/myProjects")
@@ -35,9 +36,13 @@ public class ProjectController {
     @PostMapping("/createProject")
     public String createProject(WebRequest request, Model model) {
         user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        if (request.getParameter("finish").equals("")){
+            finish = null;
+        } else{
+            finish = request.getParameter("finish");
+        }
         projectService.createProject(request.getParameter("name"),
-                request.getParameter("start"),
-                request.getParameter("finish"),
+                request.getParameter("start"),finish,
                 Integer.parseInt(request.getParameter("budget")), user);
         // Er det nødvendigt, når den adder i /myProjects, skal den ikke bare opdatere ArrayListen?
         return "redirect:/myProjects";
