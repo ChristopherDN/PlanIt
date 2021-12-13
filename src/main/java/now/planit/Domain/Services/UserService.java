@@ -4,6 +4,8 @@ import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserNotExistException;
 
+import java.util.ArrayList;
+
 public class UserService {
   FacadeMySQL facadeMySQL;
 

@@ -47,14 +47,14 @@ public class SubtaskRepo {
 
     //Db Do something.
     public ArrayList<Subtask> getSubtasks(int taskId){
-        sql ="select name, estimated_hours, cost from PlanIt.Subtasks where task_id = ?";
+        sql ="SELECT name, estimated_hours, cost FROM planit.subtasks WHERE task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
         return loadSubtasks(mapperDB.load(sql,parameters));
     }
 
     public void createSubtask(String subtaskName, int hours, int cost, int taskId) {
-        sql="insert into PlanIt.Subtasks (task_id, name, estimated_hours, cost) values (?, ?, ?, ?)";
+        sql="INSERT INTO planit.subtasks (task_id, name, estimated_hours, cost) VALUES (?, ?, ?, ?)";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
         parameters.add(subtaskName);
@@ -63,7 +63,7 @@ public class SubtaskRepo {
         mapperDB.save(sql,parameters);
     }
     public int getSubtaskId(String subtaskName, int taskId) {
-        sql ="select id from PlanIt.Subtasks where name = ? and task_id = ?";
+        sql ="SELECT id FROM planit.subtasks WHERE name = ? AND task_id = ?";
         parameters.clear();
         parameters.add(subtaskName);
         parameters.add(String.valueOf(taskId));
@@ -71,7 +71,7 @@ public class SubtaskRepo {
     }
 
     public void deleteSubtask(int subtaskId, int taskId) {
-        sql = "delete from PlanIt.subtasks where id = ? and task_id = ?";
+        sql = "DELETE from planit.subtasks WHERE id = ? AND task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
@@ -79,7 +79,7 @@ public class SubtaskRepo {
     }
 
     public int getHours(int subtaskId, int taskId){
-        sql = "select estimated_hours from PlanIt.Subtasks where id = ? and task_id = ?";
+        sql = "SELECT estimated_hours FROM planit.Subtasks WHERE id = ? AND task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
@@ -87,7 +87,7 @@ public class SubtaskRepo {
     }
 
     public int getCost(int subtaskId, int taskId){
-        sql = "select cost from PlanIt.Subtasks where id = ? and task_id = ?";
+        sql = "SELECT cost FROM planit.subtasks WHERE id = ? AND task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));

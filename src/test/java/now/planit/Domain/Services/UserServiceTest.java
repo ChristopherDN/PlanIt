@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author roed
  */
 class UserServiceTest {
-  //UserService userService = new UserService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
   UserService userService = new UserService(new FacadeMySQL(new UsersRepo(new MapperDB())));
   User user = userService.validateLogin("test@test.com", "test");
   User wrongUser = userService.validateLogin("test@test.com", "21321");
@@ -42,7 +41,6 @@ class UserServiceTest {
     expected = user.getPassword();
     assertEquals(expected, userService.validateLogin("test@test.com", "test").getPassword());
   }
-
 
   @Test
   void registerUser() throws UserNotExistException {

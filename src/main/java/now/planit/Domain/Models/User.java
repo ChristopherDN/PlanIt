@@ -7,8 +7,13 @@ public class User {
   private  String name;
   private  String email;
   private  String password;
-  ArrayList<Project> projects = new ArrayList<>();
+  private ArrayList<Project> projects = new ArrayList<>();
+  private String role;
 
+  public User(String name, String role) {
+    this.name = name;
+    this.role = role;
+  }
 
   public User(String name, String email, String password) {
     this.name = name;
@@ -37,6 +42,10 @@ public class User {
 
   public ArrayList<Project> getProjects() {
     return projects;
+  }
+
+  public String getRole() {
+    return role;
   }
 
   public void setName(String name) {
