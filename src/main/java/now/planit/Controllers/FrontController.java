@@ -3,7 +3,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpSession;
 
-//@org.springframework.stereotype.Controller
+//@org.springframework.stereotype.Controller Hvorfor er denne kommet på?
 @Controller
 public class FrontController {
 
