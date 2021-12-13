@@ -13,7 +13,7 @@ public class FrontController {
     if (session.getAttribute("user")!= null){
       return "redirect:/myProjects";
     }
-    return "index";
+    return "index2";
   }
 
   @GetMapping("/login")
