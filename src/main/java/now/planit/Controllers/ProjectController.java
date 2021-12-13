@@ -1,8 +1,13 @@
 package now.planit.Controllers;
 
+import now.planit.Data.Repo.FacadeMySQL;
+import now.planit.Data.Repo.MapperDB;
+import now.planit.Data.Repo.ProjectRepo;
+import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.ProjectService;
+import now.planit.Domain.Services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +19,9 @@ import java.util.ArrayList;
 
 @Controller
 public class ProjectController {
+    ProjectService projectService = new ProjectService(new FacadeMySQL(new ProjectRepo(new MapperDB())));
+    UserService userService = new UserService(new FacadeMySQL(new UsersRepo(new MapperDB())));
     User user;
-    ProjectService projectService = new ProjectService();
     ArrayList<Project> projects = new ArrayList<>();
 
 
