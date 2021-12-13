@@ -3,8 +3,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpSession;
 
-//@org.springframework.stereotype.Controller Hvorfor er denne kommet på?
-@Controller
+@org.springframework.stereotype.Controller
 public class FrontController {
 
 
@@ -13,7 +12,7 @@ public class FrontController {
     if (session.getAttribute("user")!= null){
       return "redirect:/myProjects";
     }
-    return "index2";
+    return "index";
   }
 
   @GetMapping("/login")
