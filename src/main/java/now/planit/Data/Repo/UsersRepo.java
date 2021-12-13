@@ -12,7 +12,7 @@ public class UsersRepo {
   User user;
   String sql;
   ArrayList<String> parameters = new ArrayList<>();
-  String userEmail;
+  ArrayList<User> users = new ArrayList<>();
   int userId;
 
   //Dependency injection constructor.
@@ -22,7 +22,7 @@ public class UsersRepo {
 
 
   //Manipulate ResultSet to other type of data
-  public int getId(ResultSet rs){
+  public int getId(ResultSet rs) {
     try {
       while (rs.next()) {
         userId = rs.getInt(1);
@@ -46,12 +46,25 @@ public class UsersRepo {
     return user;
   }
 
+  private ArrayList<User> users(ResultSet rs) {
+      try {
+        users.clear();
+        while (rs.next()) {
+          users.add(new User(rs.getString(1), rs.getString(2)));
+        }
+      } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+      }
+      return users;
+    }
+
+
 
   public int registerUser(String name, String email, String password) {
     //Makes sure there is no shadow data in the ResultSet.
     mapperDB = new MapperDB();
 
-    sql = "insert into PlanIt.Users(username, email, password) values(?,?,?)";
+    sql = "INSERT INTO planit.users(name, email, password) VALUES(?,?,?)";
     parameters.clear();
     parameters.add(name);
     parameters.add(email);
@@ -60,16 +73,16 @@ public class UsersRepo {
   }
 
   public User validateLogin(String email, String password) {
-    sql = "SELECT username, email, password FROM PlanIt.Users WHERE email = ? AND password = ?";
+    sql = "SELECT name, email, password FROM planit.users WHERE email = ? AND password = ?";
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
-   return getUser(mapperDB.load(sql, parameters));
+    return getUser(mapperDB.load(sql, parameters));
   }
 
 
   public int getUserId(User user) {
-    sql = "Select id from PlanIt.Users where email = ? AND password = ?";
+    sql = "SELECT id FROM planit.users WHERE email = ? AND password = ?";
     parameters.clear();
     parameters.add(user.getEmail());
     parameters.add(user.getPassword());
@@ -77,7 +90,7 @@ public class UsersRepo {
   }
 
   public void editName(String newName, int userId) {
-    sql = "UPDATE PlanIt.Users SET username = ? WHERE id = ?";
+    sql = "UPDATE planit.users SET name = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newName);
     parameters.add(String.valueOf(userId));
@@ -85,7 +98,7 @@ public class UsersRepo {
   }
 
   public void editEmail(String newEmail, int userId) {
-    sql = "UPDATE PlanIt.Users SET email = ? WHERE id = ?";
+    sql = "UPDATE planit.users SET email = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newEmail);
     parameters.add(String.valueOf(userId));
@@ -93,7 +106,7 @@ public class UsersRepo {
   }
 
   public void editPassword(String newPassword, int userId) {
-    sql = "UPDATE PlanIt.Users SET password = ? WHERE id = ?";
+    sql = "UPDATE planit.users SET password = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newPassword);
     parameters.add(String.valueOf(userId));
@@ -101,7 +114,7 @@ public class UsersRepo {
   }
 
   public void deleteUser(String email, String password) {
-    sql = "delete from PlanIt.Users where email = ? and password = ?";
+    sql = "DELETE FROM planit.users WHERE email = ? AND password = ?";
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
