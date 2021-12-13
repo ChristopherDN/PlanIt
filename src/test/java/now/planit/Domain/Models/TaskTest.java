@@ -15,12 +15,6 @@ class TaskTest {
   int expectedInt;
 
   @Test
-  void isTaskNull() {
-    Task taskNull = null;
-    assertNull(taskNull);
-  }
-
-  @Test
   void taskNotNull() {
     assertNotNull(task);
   }

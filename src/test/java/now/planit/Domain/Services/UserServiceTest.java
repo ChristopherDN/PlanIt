@@ -45,7 +45,7 @@ class UserServiceTest {
   @Test
   void registerUser() throws UserNotExistException {
     userService.deleteUser("user@testing.com", "testing");
-    userService.registerUser("Jens", "user@testing.com", "testing");
+    userService.registerUser("Junit test", "user@testing.com", "testing");
     assertNotNull(userService.validateLogin("user@testing.com", "testing"));
   }
 

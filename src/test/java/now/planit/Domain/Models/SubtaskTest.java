@@ -1,8 +1,4 @@
 package now.planit.Domain.Models;
-import now.planit.Data.Repo.FacadeMySQL;
-import now.planit.Data.Repo.MapperDB;
-import now.planit.Data.Repo.SubtaskRepo;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
