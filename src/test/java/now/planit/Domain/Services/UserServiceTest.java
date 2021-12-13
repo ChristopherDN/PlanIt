@@ -44,11 +44,15 @@ class UserServiceTest {
 
   @Test
   void registerUser() throws UserNotExistException {
+    //Arrange
     facadeMySQL.deleteUser("user@testing.com", "testing");
+
+    //Act
     facadeMySQL.registerUser("Junit test", "user@testing.com", "testing");
+
+    //Assert
     assertNotNull(user);
+
+    //UNIT TEST pyramiden.... Cost curve ... Technical debt
   }
-
-
-
 }
