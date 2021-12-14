@@ -293,4 +293,5 @@ table #tr1 td:first-child::before {
     text-align: left;
     background-color: #35455D;
     color: white;
+
 }
