@@ -6,6 +6,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class FrontController {
 
+  @GetMapping("/")
+  public String index2() {
+
+    return "info/about";
+  }
 
   @GetMapping("/index")
   public String index(HttpSession session) {
