@@ -11,12 +11,42 @@
 
 <Body>
 <center>
+    <!--
+    <style>
+        #Tables {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #Tables td, #Tables th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #Tables tr:nth-child(even){background-color: #f2f2f2;}
+
+        #Tables tr:hover {background-color: #ddd;}
+
+        #Tables th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #35455D;
+            color: white;
+        }
+    </style>
+-->
+
+
+
+
     <h4>Welcome <p th:text="${userName}"></p> <br>Here are your projects!<br> </h4>
     <form action="/projectOverview" method="get">
         <button type="submit" >Project Overview</button>
     </form>
 
-<table style = "margin-top: 20px;">
+<table id="Tables" >
     <tr>
         <th>Project Number:</th>
         <th>Project Name</th>

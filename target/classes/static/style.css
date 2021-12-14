@@ -215,48 +215,82 @@ table #tr1 td:first-child::before {
     margin-right: 0.5em;
 }
 
-/*Jeff tester
-body {
-    background: rgb(99, 39, 120)
-}
-
-.form-control:focus {
-    box-shadow: none;
-    border-color: #BA68C8
-}
-
-.profile-button {
-    background: rgb(99, 39, 120);
-    box-shadow: none;
-    border: none
-}
-
-.profile-button:hover {
-    background: #682773
-}
-
-.profile-button:focus {
-    background: #682773;
-    box-shadow: none
-}
-
-.profile-button:active {
-    background: #682773;
-    box-shadow: none
-}
-
-.back:hover {
-    color: #682773;
-    cursor: pointer
-}
-
-.labels {
-    font-size: 11px
-}
-
-.add-experience:hover {
-    background: #BA68C8;
-    color: #fff;
+/*Jeff tester*/
+.collapsible {
+    background-color:#385376FF;
     cursor: pointer;
-    border: solid 1px #BA68C8
-}*/
+    padding: 18px;
+    width: 90%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    border-top: 3px solid #f1f1f1;
+    border-radius: 15px;
+    overflow:hidden;
+    position:relative;
+}
+
+.collapsible:hover:before{
+    content:"";
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    position: absolute;
+    background-color:black;
+    opacity:0.2;
+}
+
+.collapsible.task {
+    background-color: lightslategray;
+    width: 80%;
+}
+
+.collapsible.subtask{
+    background-color: #35455D;
+    width: 70%;
+}
+
+.content {
+    padding: 0 18px;
+    width: 100%;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.collapsible:after {
+    content: '\FF0B'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    color:white ;content: "\FF0D"; /* Unicode character for "minus" sign (-) */
+}
+
+#Tables {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#Tables td, #Tables th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#Tables tr:nth-child(even){background-color: #f2f2f2;}
+
+#Tables tr:hover {background-color: #ddd;}
+
+#Tables th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #35455D;
+    color: white;
+}
