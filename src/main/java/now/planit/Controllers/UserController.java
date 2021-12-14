@@ -3,10 +3,9 @@ package now.planit.Controllers;
 
 import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Data.Repo.MapperDB;
-import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.User;
-import now.planit.Exceptions.UserAllreadyExistException;
+import now.planit.Exceptions.UserNotExistException;
 import now.planit.Domain.Services.UserService;
 import now.planit.Exceptions.DBConnFailedException;
 import org.springframework.stereotype.Controller;
@@ -34,7 +33,7 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String register(WebRequest request) throws UserAllreadyExistException {
+  public String register(WebRequest request) throws UserNotExistException {
       userService.registerUser(
           request.getParameter("name"),
           request.getParameter("email"),
@@ -90,8 +89,8 @@ public class UserController {
     return "error/error";
 
   }
-  @ExceptionHandler(UserAllreadyExistException.class)
-  public String exceptionMessageUserNotExist(Model model, UserAllreadyExistException userAllreadyExistException){
+  @ExceptionHandler(UserNotExistException.class)
+  public String exceptionMessageUserNotExist(Model model, UserNotExistException userAllreadyExistException){
     model.addAttribute("exMessage", "--->User allready exits. Please choose another name<--");
     return "error/error";
 

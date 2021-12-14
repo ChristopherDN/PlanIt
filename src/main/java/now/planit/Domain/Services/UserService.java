@@ -16,7 +16,7 @@ public class UserService {
   public void registerUser(String name, String email, String password) throws UserNotExistException {
 
     if (facadeMySQL.registerUser(name, email, password) == 0){
-      throw new UserNotExistException("Email already excists");
+      throw new UserNotExistException("Email already exists");
     }
   }
 
