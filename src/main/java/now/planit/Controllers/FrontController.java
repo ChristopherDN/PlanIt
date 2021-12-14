@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 public class FrontController {
 
 
-  @GetMapping("/")
+  @GetMapping("/index")
   public String index(HttpSession session) {
     if (session.getAttribute("user")!= null){
       return "redirect:/myProjects";
