@@ -1,7 +1,5 @@
 package now.planit.Data.Utility;
 
-import now.planit.Exceptions.DBConnFailedException;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

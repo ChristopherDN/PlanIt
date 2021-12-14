@@ -52,7 +52,5 @@ class UserServiceTest {
 
     //Assert
     assertNotNull(user);
-
-    //UNIT TEST pyramiden.... Cost curve ... Technical debt
   }
 }

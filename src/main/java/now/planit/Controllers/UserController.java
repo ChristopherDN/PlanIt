@@ -3,7 +3,6 @@ package now.planit.Controllers;
 
 import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Data.Repo.MapperDB;
-import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserNotExistException;
@@ -35,7 +34,6 @@ public class UserController {
 
   @PostMapping("/register")
   public String register(WebRequest request) throws UserNotExistException {
-    //TODO skal rettes til, så man kan logge ind uden nogen bruger i forvejen
       userService.registerUser(
           request.getParameter("name"),
           request.getParameter("email"),
@@ -45,7 +43,7 @@ public class UserController {
 
 
   @PostMapping("/validateLogin")
-  public String validateLogin(WebRequest request, HttpSession session, Model model) throws UserNotExistException {
+  public String validateLogin(WebRequest request, HttpSession session, Model model) {
     user = userService.validateLogin(
             request.getParameter("mail"),
             request.getParameter("password"));
@@ -92,7 +90,7 @@ public class UserController {
 
   }
   @ExceptionHandler(UserNotExistException.class)
-  public String exceptionMessageUserNotExist(Model model, UserNotExistException userNotExistException){
+  public String exceptionMessageUserNotExist(Model model, UserNotExistException userAllreadyExistException){
     model.addAttribute("exMessage", "--->User allready exits. Please choose another name<--");
     return "error/error";
 
