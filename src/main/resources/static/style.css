@@ -216,3 +216,113 @@ table #tr1 td:first-child::before {
 }
 
 /*Jeff tester*/
+.collapsible {
+    background-color:#385376FF;
+    cursor: pointer;
+    padding: 18px;
+    width: 90%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    border-top: 3px solid #f1f1f1;
+    border-radius: 15px;
+    overflow:hidden;
+    position:relative;
+}
+
+.collapsible:hover:before{
+    content:"";
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    position: absolute;
+    background-color:black;
+    opacity:0.2;
+}
+
+.collapsible.task {
+    background-color: lightslategray;
+    width: 80%;
+}
+
+.collapsible.subtask{
+    background-color: #35455D;
+    width: 70%;
+}
+
+.content {
+    padding: 0 18px;
+    width: 100%;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.collapsible:after {
+    content: '\FF0B'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    color:white ;content: "\FF0D"; /* Unicode character for "minus" sign (-) */
+}
+
+#Tables {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#Tables td, #Tables th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#Tables tr:nth-child(even){background-color: #f2f2f2;}
+
+#Tables tr:hover {background-color: #ddd;}
+
+#Tables th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #35455D;
+    color: white;
+}
+#pic{
+    background-image: url("img/IT project manager.png");
+}
+.pictureContainer {
+    position: relative;
+    text-align: center;
+    color: #15414f;
+}
+.centered {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.centeredTop {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.centeredBelow {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.centeredRight {
+    position: absolute;
+    top: 90%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+}
