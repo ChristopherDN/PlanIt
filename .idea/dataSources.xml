@@ -1,40 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="MySQL" uuid="f7f5a7bf-512e-4c7e-87fa-c3ad7af9884f">
+    <data-source source="LOCAL" name="planit@planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com" uuid="f7f5a7bf-512e-4c7e-87fa-c3ad7af9884f">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>[23.18] Jeffrey Mathias Roed jdbc:mysql://planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com:3306/planit?reconnect=true&amp;autoReconnect=true</jdbc-url>
-      <jdbc-additional-properties>
-        <property name="AWS.RdsSigningPort" value="3306" />
-        <property name="AWS.RegionId" value="eu-west-2" />
-        <property name="AWS.CredentialId" value="profile:default" />
-        <property name="AWS.RdsSigningHost" value="planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com" />
-      </jdbc-additional-properties>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="@planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com" uuid="22d24e0d-deca-47aa-af0f-2d07dd232e03">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com:3306/</jdbc-url>
-      <jdbc-additional-properties>
-        <property name="AWS.RdsSigningPort" value="3306" />
-        <property name="AWS.RegionId" value="eu-west-2" />
-        <property name="AWS.CredentialId" value="profile:default" />
-        <property name="AWS.RdsSigningHost" value="planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com" />
-      </jdbc-additional-properties>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="@planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com" uuid="25da347f-8d38-4918-bb0b-c10431b42198">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com:3306/</jdbc-url>
       <jdbc-additional-properties>
         <property name="AWS.RdsSigningPort" value="3306" />
         <property name="AWS.RegionId" value="eu-west-2" />
