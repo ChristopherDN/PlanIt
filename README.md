@@ -10,8 +10,9 @@ Guide for cloning this project and hosting your own version on Heruko is provide
 
 The application can be accessed directly from a web browser by providing the correct URL.
 
-Note: If you are a developer and knows how to handle SQL scripts, this application comes with two prepared SQL script, a DDL and DML. Please read " ##developer installing " below for instructions on how to run the scripts, set up the database structure and the testdata for your own local developer enviroment.
+https://planit-now.herokuapp.com
 
+Note: If you are a developer and knows how to handle SQL scripts, this application comes with two prepared SQL script, a DDL and DML. Please read " ##developer installing " below for instructions on how to run the scripts, set up the database structure and the testdata for your own local developer enviroment.
 
 
 ## Prerequisites
@@ -28,7 +29,6 @@ Developer install ekstra prerequisites:
 * You have version control installed ( GIT ).
 * You Have en Editor installed like IntelliJ or Eclipse.
 
-
 ## Installing
 
 To install PlanIt, follow these steps:
@@ -41,17 +41,17 @@ No installation requirements, but must meet the prerequisites as listed above.
 
 ## Developer Installing
 
-To install PlanIt with autocreating the database and testdata using SQL scripts, follow these steps:
+To install PlanIt running on localhost:8080 with autocreating the database and testdata using SQL scripts, follow these steps:
 
 1. Clone this Github repository to your local computer.
 2. Open the project in your prefered editor ( this guide is with IntelliJ ).
-3. Connect your local database opening the " application properties " and fill in the required informations:
-etc: 
-url=jdbc:mysql://localhost:3306/PlanIt?serverTimezone=UTC 
+3. Connect your local database in IntelliJ.
+--> Go to top menu: Run/Edit configurations/Environment variables 
+Then fill in your database info: 
+url=jdbc:mysql://localhost:3306/planit?serverTimezone=UTC
 user=<Yourname>
 password=<Yourpassword>
-server.port=8080 ( optional, because default port is 8080 )
-4. Run the DDL and DML script. ( The DDL script will create your database, schema, constraints, users, tables etc.. The DML script will create the testdata like  inserting, update or delete records ). Your can run the script in your MYSQL workbench by opening the script, and press the " execute all " button. You can also run the script in your editor like IntelliJ in your query console.
+4. Run the DDLFinal.sql and DML.sql script from the SQL folder in your project. The DDL script will create your database, schema, constraints, users, tables etc.. The DML script will create the testdata by and insert it into your database. Your can run the script in your MYSQL workbench or in the Query console in INtelliJ by opening the script, and press the " execute all " button. You can also run the script in your editor like IntelliJ in your query console.
 5. Once the script has created the database with testdata you can run the Spring application in your editor and then fill in this adress http://localhost:8080 in your browser to run the web application with your own local Database.
 6. Enjoy!
 
@@ -88,7 +88,6 @@ Host to Heruko guide:
 
 3. Provide a name for your app and your location and press " create app".
 <img width="1438" alt="Heruko guide 3  step" src="https://user-images.githubusercontent.com/82437282/143500898-4cdafb53-fdcf-4464-a9b4-35deb567fb0d.png">
-
 
 4. You created your app and you should get this picture. Press " connect to Github "
 <img width="1431" alt="Heruko guide 4  step" src="https://user-images.githubusercontent.com/82437282/143501095-478e0caa-4aa6-4b3b-b414-6b957b218477.png">
