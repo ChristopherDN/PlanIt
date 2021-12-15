@@ -102,7 +102,9 @@ Host to Heruko guide:
 <img width="1433" alt="Heruko guide 8  step" src="https://user-images.githubusercontent.com/82437282/143502342-735e307f-fbd2-411f-a809-98d6efaa0b30.png">
 
 Voila Your project are succesfully hosted and Heruko will display in your browser and you will get an URL that looks something like this: 
-https://herukotestguide.herokuapp.com
+https://planit-now.herokuapp.com
+
+Note: The above link is for our application. Yours will get the name you choose for your personal preferences.
 
 
 
