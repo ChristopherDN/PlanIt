@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="planit@planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com" uuid="f7f5a7bf-512e-4c7e-87fa-c3ad7af9884f">
+    <data-source source="LOCAL" name="@planit.cjfp4polnebk.eu-west-2.rds.amazonaws.com" uuid="cb1e87fa-4353-41cc-aa3d-2b31a360f223">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com:3306/planit?reconnect=true&amp;autoReconnect=true</jdbc-url>
+      <jdbc-url>jdbc:mysql://planit.cjfp4polnebk.eu-west-2.rds.amazonaws.com:3306/</jdbc-url>
       <jdbc-additional-properties>
         <property name="AWS.RdsSigningPort" value="3306" />
         <property name="AWS.RegionId" value="eu-west-2" />
         <property name="AWS.CredentialId" value="profile:default" />
-        <property name="AWS.RdsSigningHost" value="planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com" />
+        <property name="AWS.RdsSigningHost" value="planit.cjfp4polnebk.eu-west-2.rds.amazonaws.com" />
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
