@@ -30,7 +30,7 @@ public class TaskController {
     }
     updateTasks(request, model, projectName);
     model.addAttribute("userName", user.getName());
-    return "/project/createTask";
+    return "project/createTask";
   }
 
   //Endpoint to pass and connect data(id) from myProjects site to createtask site.

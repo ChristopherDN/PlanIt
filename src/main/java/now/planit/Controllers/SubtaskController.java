@@ -39,7 +39,7 @@ public class SubtaskController {
       return "login/login";
     }
     updateSubtasks(request, model, taskName);
-    return "/project/createSubtask";
+    return "project/createSubtask";
   }
 
 

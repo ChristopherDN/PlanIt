@@ -5,35 +5,8 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <title>Create Task</title>
 </head>
+<th:block th:include="Fragment/headerLoggedInFragment :: header"></th:block>
 
-<!--
-<style>
-    #Tables {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    #Tables td, #Tables th {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-
-    #Tables tr:nth-child(even){background-color: #f2f2f2;}
-
-    #Tables tr:hover {background-color: #ddd;}
-
-    #Tables th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #35455D;
-        color: white;
-    }
-</style>
--->
-
-<th:block th:include="/Fragment/headerLoggedInFragment :: header"></th:block>
 <body>
 <center>
         <h4>Welcome <p th:text="${userName}"></p> <br>Here are your Tasks!<br> </h4>
@@ -48,7 +21,7 @@
         <th>Start</th>
         <th>Finish</th>
         <th>Cost</th>
-        <th>Billable hours???</th>
+        <th>Billable hours</th>
         <th>Update task</th>
         <th>Delete</th>
     </tr>
@@ -74,7 +47,7 @@
         <td th:text="${task.getHours()}"></td>
         <td><form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
             <button type="submit">Add subtask</button>
-           <!-- <input type="hidden" name="project_id" th:value="${project.getName()}"> -->
+
         </form>
         </td>
         <td><form th:action="@{/removeTask/{id}(id=${task.getTaskName()})}" th:object="${task}">
@@ -103,6 +76,6 @@
 </script>
 
 <div id="footerTabel" !important> <!--changes footer, so tabels are visable-->
-    <th:block th:include="/Fragment/footerFragment :: footer"></th:block>
+    <th:block th:include="Fragment/footerFragment :: footer"></th:block>
 </div>
 </html>
