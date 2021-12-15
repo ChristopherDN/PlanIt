@@ -32,7 +32,7 @@
 </style>
 -->
 
-<th:block th:include="/Fragment/headerLoggedInFragment :: header"></th:block>
+<th:block th:include="Fragment/headerLoggedInFragment :: header"></th:block>
 <body>
 <center>
     <h4>Welcome <p th:text="${userName}"></p> <br>Here are your subtasks!<br> </h4>
@@ -72,6 +72,6 @@
 </center>
 </body>
 <div id="footerTabel" !important> <!--changes footer, so tabels are visable-->
-<th:block th:include="/Fragment/footerFragment :: footer"></th:block>
+<th:block th:include="Fragment/footerFragment :: footer"></th:block>
 </div>
 </html>

@@ -15,7 +15,7 @@ public class FrontController {
     if (session.getAttribute("user")!= null){
       return "redirect:/myProjects";
     }
-    return "index2";
+    return "index";
   }
 
   @GetMapping("/login")
