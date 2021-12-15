@@ -1,7 +1,7 @@
 drop schema if exists PLANIT;
 create schema if not exists planit collate utf8mb4_0900_ai_ci;
 use planit;
-CREATE TABLE IF NOT EXISTS planit.Users (
+CREATE TABLE IF NOT EXISTS planit.users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS planit.Users (
     CONSTRAINT idUsers_UNIQUE UNIQUE (id)
 );
 
-CREATE TABLE IF NOT EXISTS planit.Projects (
+CREATE TABLE IF NOT EXISTS planit.projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     name VARCHAR(100) NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS planit.Projects (
 create index fkuser_id_idx
     on Projects (user_id);
 
-CREATE TABLE IF NOT EXISTS planit.Tasks (
+CREATE TABLE IF NOT EXISTS planit.tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     project_id INT NOT NULL,
     name VARCHAR(100) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS planit.Tasks (
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS planit.Subtasks (
+CREATE TABLE IF NOT EXISTS planit.subtasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     task_id INT NOT NULL,
     name VARCHAR(100) NOT NULL,
