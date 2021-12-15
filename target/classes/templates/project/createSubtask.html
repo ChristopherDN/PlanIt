@@ -5,34 +5,8 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <title>Create Subtask</title>
 </head>
-<!--
-<style>
-    #Tables {
-        font-family: Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
 
-    #Tables td, #Tables th {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-
-    #Tables tr:nth-child(even){background-color: #f2f2f2;}
-
-    #Tables tr:hover {background-color: #ddd;}
-
-    #Tables th {
-        padding-top: 12px;
-        padding-bottom: 12px;
-        text-align: left;
-        background-color: #35455D;
-        color: white;
-    }
-</style>
--->
-
-<th:block th:include="/Fragment/headerLoggedInFragment :: header"></th:block>
+<th:block th:include="Fragment/headerLoggedInFragment :: header"></th:block>
 <body>
 <center>
     <h4>Welcome <p th:text="${userName}"></p> <br>Here are your subtasks!<br> </h4>
@@ -72,6 +46,6 @@
 </center>
 </body>
 <div id="footerTabel" !important> <!--changes footer, so tabels are visable-->
-<th:block th:include="/Fragment/footerFragment :: footer"></th:block>
+<th:block th:include="Fragment/footerFragment :: footer"></th:block>
 </div>
 </html>

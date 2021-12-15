@@ -6,7 +6,7 @@
       <synchronize>true</synchronize>
       <imported>true</imported>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>[23.18] Jeffrey Mathias Roed jdbc:mysql://planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com:3306/planit?reconnect=true&amp;autoReconnect=true</jdbc-url>
+      <jdbc-url>jdbc:mysql://planit.c1uovhpg5oeg.eu-west-2.rds.amazonaws.com:3306/planit?reconnect=true&amp;autoReconnect=true</jdbc-url>
       <jdbc-additional-properties>
         <property name="AWS.RdsSigningPort" value="3306" />
         <property name="AWS.RegionId" value="eu-west-2" />
