@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script src="javascript.js"></script>
+    <title>Index</title>
+
 </head>
+
 <body>
 <p>HELLO WORLD!</p>
 </body>
+<div id="footer">
+    <th:block th:include="/Fragment/footerFragment :: footer"></th:block>
+</div>
 </html>
