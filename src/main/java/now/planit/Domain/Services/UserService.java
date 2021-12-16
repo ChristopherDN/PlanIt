@@ -24,27 +24,30 @@ public class UserService {
    return facadeMySQL.validateLogin(email, password);
   }
 
-  public void editName(String newName, User user) {
+  public void editName(String newName, User user) throws UserNotExistException {
     if (!newName.equals(user.getName()) && !newName.equals("")){
       facadeMySQL.editName(newName, user);
       user.setName(newName);
+      throw new UserNotExistException("Failed to change name");
     }
     //TODO throw new exception, failed to change password redirect to errror page.
   }
 
   //TODO Mangler validering ift. om mail er i systemet...
-  public void editMail(String newEmail, User user) {
+  public void editMail(String newEmail, User user) throws UserNotExistException {
     if (!newEmail.equals(user.getName()) && !newEmail.equals("")){
       facadeMySQL.editMail(newEmail, user);
       user.setEmail(newEmail);
+      throw new UserNotExistException("Failed to change email");
     }
     //TODO throw new exception, failed to change password redirect to errror page.
   }
 
-  public void changePassword(String newPassword, User user) {
+  public void changePassword(String newPassword, User user) throws UserNotExistException {
     if (!newPassword.equals(user.getName()) && !newPassword.equals("")) {
       facadeMySQL.changePassword(newPassword, user);
       user.setPassword(newPassword);
+      throw new UserNotExistException("Failed to change password");
     }
 
     //TODO throw new exception, failed to change password redirect to errror page.

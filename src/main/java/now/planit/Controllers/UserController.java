@@ -75,7 +75,7 @@ public class UserController {
   }
 
   @PostMapping("/updateUser")
-  public String updateUser(WebRequest request, Model model)  {
+  public String updateUser(WebRequest request, Model model) throws UserNotExistException  {
     userService.editName(request.getParameter("name"), user);
     userService.editMail(request.getParameter("email"), user);
     userService.changePassword(request.getParameter("password"), user);
