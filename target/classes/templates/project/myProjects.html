@@ -13,9 +13,9 @@
 <center>
     <h4>Welcome <p th:text="${userName}"></p> <br>Here are your projects!<br> </h4>
     <form action="/projectOverview" method="get">
-        <button type="submit" >Project Overview</button>
+        <button type="submit" class="b2">Project Overview</button>
     </form>
-
+    <br>
 <table id="Tables" >
     <tr>
         <th>Project Number:</th>
@@ -37,8 +37,8 @@
             <td><input type="text" name="budget" required></td>
             <td></td>
             <td></td>
-            <td><input type="submit" class="like" value="Add Task"></td>
-            <td><input type="reset" class="like" value="Reset"></td>
+            <td><input type="submit" class="b2" value="Add Project"></td>
+            <td><input type="reset" class="b2" value="Reset"></td>
         </form>
     </tr>
 
@@ -51,11 +51,11 @@
         <td th:text="${#numbers.formatCurrency(project.getBudget() - project.getCost())}"></td>
         <td th:text="${project.getHours()}"></td>
         <td><form th:action="@{/update/{id}(id=${project.getName()})}" th:object="${project}">
-            <button type="submit">Update project</button>
+            <button type="submit" class="b2">Add Task</button>
         </form>
         </td>
         <td><form th:action="@{/removeProject/{id}(id=${project.getName()})}" th:object="${project}">
-        <button type="submit">Delete</button>
+        <button type="submit" class="b2">Delete</button>
             </form>
         </td>
     </tr>

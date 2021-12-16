@@ -43,6 +43,22 @@ hr.rounded {
     margin: auto;
 }
 
+.button-hover{
+    color: #314152;
+    font-size: 30px;
+    position: center;
+}
+
+.b2{
+    background-color: #7591c9;
+    color:black;
+    border-radius: 25px;
+}
+.b2:hover{
+    box-shadow : 0 8px 16px 0 black,
+    0 6px 20px  0 rgba(0, 0, 0, 0.19);
+}
+
 footer {
     position: fixed;
     left: 0;
@@ -118,7 +134,7 @@ footer {
     clear: both;
     border-radius: 4px;
     border: 3px solid #AAAAAA;
-    padding: 50px;
+    padding: 20px;
 }
 
 .form-manager {
@@ -167,9 +183,6 @@ footer {
     border-radius: 15px 15px 15px 15px;
 }
 
-h1 {
-
-}
 
 a:link {
     color: white;
@@ -294,48 +307,32 @@ table #tr1 td:first-child::before {
     background-color: #35455D;
     color: white;
 }
-div.picture {
-    width:100px; /*width of your image*/
-    height:100px; /*height of your image*/
-    background-image:url("img/IT project manager.png");
-    margin:0; /* If you want no margin */
-    padding:0; /*if your want to padding */
-}
+
 div.image {
-    width:80%; /*width of your image*/
-    height:80%; /*height of your image*/
+    width:65%; /*width of your image*/
+    height:65%; /*height of your image*/
     margin-left: auto;
     margin-right: auto;
+
     content:url("img/IT project manager.png");
 }
-#pic{
-    background-image: url("img/IT project manager.png");
-}
+
 .pictureContainer {
     position: relative;
     text-align: center;
     color: #15414f;
 }
 .centered {
-    position: absolute;
-    top: 90%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
 }
 .centeredTop {
-
-    top: 0%;
+    font-family: "Rockwell" ;
+    font-size:60px ;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
 }
 .centeredBelow {
     top: 5%;
     left: 50%;
-    transform: translate(-50%, -50%);
-}
-.centeredRight {
-    position: absolute;
-    top: 90%;
-    left: 70%;
-    transform: translate(-50%, -50%);
 }
