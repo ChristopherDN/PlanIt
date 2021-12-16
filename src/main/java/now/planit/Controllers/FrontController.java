@@ -24,8 +24,10 @@ public class FrontController {
   }
 
   @GetMapping("/about")
-  public String about() {
-    return "info/about";
+  public String about(HttpSession session) {
+    if (session.getAttribute("user") != null) {
+      return "info/aboutLogin";
+    }
+    return "info/aboutLogout";
   }
-
 }

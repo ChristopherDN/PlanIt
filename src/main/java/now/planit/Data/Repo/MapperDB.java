@@ -1,6 +1,7 @@
 package now.planit.Data.Repo;
 
 import now.planit.Data.Utility.DBManager;
+import now.planit.Exceptions.DBConnFailedException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,6 +26,7 @@ public class MapperDB {
     } catch (SQLException e) {
       System.out.println("Database unavaiable for checkConnection method");
       e.printStackTrace();
+      throw new DBConnFailedException("Please contact support on the  \"Mail us\" on the bottom of this page ");
     }
     return ps;
   }

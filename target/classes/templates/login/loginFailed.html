@@ -10,31 +10,29 @@
 </head>
 <th:block th:include="Fragment/headerFragment :: header"></th:block>
 <body>
-
-
 <div id="container">
-
   <div id="input-form">
     <form action="/validateLogin" method="POST" >
-      <h2>Welcome to the PlanIt the project management tool</h2>
+      <h2>Welcome to PlanIt - the project management tool</h2>
+      <br>
+      <p>  Login or sign up</p>
       <br>
       <label>Email: </label>
       <br>
-      <input type="email" class="form-control" name="mail" required>
-      <br>
+      <input type="email" class="form-control" name="mail" placeholder="📧 e-mail" required>      <br>
       <label>Password: </label>
       <br>
-      <input type="password" class="form-control" name="password" required>
+      <input type="password" class="form-control" name="password"  placeholder="🔐 password" required>
       <br>
       <div class="button">
         <br>
-        <input type="Submit" class="submit-button" value="  Log in!  ">
+        <input type="Submit" class="b2" value="  Log in!  ">
       </div>
     </form>
 
     <p>
       <a href="/registerUser">
-        <input type="Submit" class="submit-button" value="  Create new user  ">
+        <input type="Submit" class="b2" value="  Create new user  ">
       </a>
       <br>
   </div>
@@ -45,7 +43,6 @@
     alert('Wrong username or password!!!')}, 100);
 </script>
 </body>
-
 
 <th:block th:include="Fragment/footerFragment :: footer"></th:block>
 </html>

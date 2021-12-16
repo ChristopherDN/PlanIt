@@ -5,6 +5,7 @@ import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Data.Repo.MapperDB;
 import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.User;
+import now.planit.Exceptions.UserEditException;
 import now.planit.Exceptions.UserNotExistException;
 import now.planit.Domain.Services.UserService;
 import now.planit.Exceptions.DBConnFailedException;
@@ -33,7 +34,7 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String register(WebRequest request) throws UserNotExistException {
+  public String register(WebRequest request) throws UserNotExistException, DBConnFailedException{
       userService.registerUser(
           request.getParameter("name"),
           request.getParameter("email"),
@@ -75,7 +76,7 @@ public class UserController {
   }
 
   @PostMapping("/updateUser")
-  public String updateUser(WebRequest request, Model model)  {
+  public String updateUser(WebRequest request, Model model) throws UserEditException {
     userService.editName(request.getParameter("name"), user);
     userService.editMail(request.getParameter("email"), user);
     userService.changePassword(request.getParameter("password"), user);
@@ -85,7 +86,8 @@ public class UserController {
 
   @ExceptionHandler(DBConnFailedException.class)
   public String exceptionMessageLogin(Model model, DBConnFailedException dbConnFailedException){
-    model.addAttribute("exMessage", dbConnFailedException.getMessage());
+    String message = "No connection to the database: -->Please contact support by pressing the \"Mail us\" button on this page!";//Test
+    model.addAttribute("exMessage", message );
     return "error/error";
 
   }
@@ -95,4 +97,13 @@ public class UserController {
     return "error/error";
 
   }
+
+  @ExceptionHandler(UserEditException.class)
+  public String exceptionMessageEditException(Model model, UserEditException userEditException){
+    model.addAttribute("exMessage", "--->Allready exits!! Please choose another.<--");
+    return "error/error";
+
+  }
+
+
 }
