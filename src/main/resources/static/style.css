@@ -308,3 +308,35 @@ div.image {
     margin-right: auto;
     content:url("img/IT project manager.png");
 }
+#pic{
+    background-image: url("img/IT project manager.png");
+}
+.pictureContainer {
+    position: relative;
+    text-align: center;
+    color: #15414f;
+}
+.centered {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.centeredTop {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.centeredBelow {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.centeredRight {
+    position: absolute;
+    top: 90%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+}
