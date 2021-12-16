@@ -293,5 +293,18 @@ table #tr1 td:first-child::before {
     text-align: left;
     background-color: #35455D;
     color: white;
-
+}
+div.picture {
+    width:100px; /*width of your image*/
+    height:100px; /*height of your image*/
+    background-image:url("img/IT project manager.png");
+    margin:0; /* If you want no margin */
+    padding:0; /*if your want to padding */
+}
+div.image {
+    width:80%; /*width of your image*/
+    height:80%; /*height of your image*/
+    margin-left: auto;
+    margin-right: auto;
+    content:url("img/IT project manager.png");
 }
