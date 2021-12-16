@@ -86,8 +86,7 @@ public class UserController {
 
   @ExceptionHandler(DBConnFailedException.class)
   public String exceptionMessageLogin(Model model, DBConnFailedException dbConnFailedException){
-    String message = "No connection to the database.\n "+
-            "Please contact support by pressing the \"Mail us\" button on this page";//Test
+    String message = "No connection to the database: -->Please contact support by pressing the \"Mail us\" button on this page!";//Test
     model.addAttribute("exMessage", message );
     return "error/error";
 
