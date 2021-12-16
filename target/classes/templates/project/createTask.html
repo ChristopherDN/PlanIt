@@ -13,6 +13,7 @@
     <form action="/myProjects" method="get">
         <button type="submit" >Back to Projects</button>
     </form>
+    <br>
 
 <table id="Tables">
     <tr>
@@ -33,8 +34,8 @@
             <td><input type="date" name="finishDate" id="ed_endtimedate" required></td>
             <td></td>
             <td></td>
-            <td><input type="submit" class="like" value="Add Task"></td>
-            <td><input type="reset" class="like" value="Reset"></td>
+            <td><input type="submit" class="b2" value="Add Task"></td>
+            <td><input type="reset" class="b2" value="Reset"></td>
         </form>
     </tr>
 
@@ -46,12 +47,12 @@
         <td th:text="${#numbers.formatCurrency(task.getCost())}"></td>
         <td th:text="${task.getHours()}"></td>
         <td><form th:action="@{/rerun/{id}(id=${task.getTaskName()})}" th:object="${task}">
-            <button type="submit">Add subtask</button>
+            <button type="submit" class="b2">Add subtask</button>
 
         </form>
         </td>
         <td><form th:action="@{/removeTask/{id}(id=${task.getTaskName()})}" th:object="${task}">
-            <button type="submit">Delete</button>
+            <button type="submit" class="b2">Delete</button>
         </form>
         </td>
     </tr>

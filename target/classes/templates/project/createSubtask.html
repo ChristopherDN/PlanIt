@@ -11,9 +11,9 @@
 <center>
     <h4>Welcome <p th:text="${userName}"></p> <br>Here are your subtasks!<br> </h4>
     <form action="/createTask" method="get">
-        <button type="submit" >Back to Tasks</button>
+        <button type="submit" class="b2" >Back to Tasks</button>
     </form>
-
+<br>
     <table id="Tables" >
         <tr>
             <th>Subtask Number:</th>
@@ -28,7 +28,7 @@
                 <td><input type="text" name="subtaskName" required></td>
                 <td><input type="number" name="cost" min="0" max="1000000000" required></td>
                 <td><input type="number" name="hours" min="0" max="1000000000" required></td>
-                <td><input type="submit" class="like" value="Add Subtask"></td>
+                <td><input type="submit" class="b2" value="Add Subtask"></td>
             </form>
         </tr>
 
@@ -38,7 +38,7 @@
             <td th:text="${#numbers.formatCurrency(subtask.getCost())}"></td>
             <td th:text="${subtask.getHours()}"></td>
             <td><form th:action="@{/removeSubtask/{id}(id=${subtask.getSubtaskName()})}" th:object="${subtask}">
-                <button type="submit">Remove subtask</button>
+                <button type="submit" class="b2">Remove subtask</button>
             </form>
             </td>
         </tr>
