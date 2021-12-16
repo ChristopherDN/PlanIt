@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class UserControllerTest {
   UserService userService = new UserService(new FacadeMySQL(new UsersRepo(new MapperDB())));
-  User user = userService.validateLogin("test@test.com", "test");
+  User user = userService.validateLogin("user@testing.com","testing");
   User wrongUser = userService.validateLogin("test@test.com", "21321");
   String expected;
 
