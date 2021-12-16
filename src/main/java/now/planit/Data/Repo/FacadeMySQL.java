@@ -4,7 +4,6 @@ import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  */
 
 public class FacadeMySQL {
-  ProjectRepo projectRepo = new ProjectRepo(new MapperDB());
+  InterfaceProjectRepo projectRepo = new ProjectRepo(new MapperDB());
   UsersRepo usersRepo = new UsersRepo(new MapperDB());
   TaskRepo taskRepo = new TaskRepo(new MapperDB());
   SubtaskRepo subtaskRepo = new SubtaskRepo(new MapperDB());
@@ -52,7 +51,7 @@ public class FacadeMySQL {
     user.getProjects().clear();
 
     //Here we set Users projects.
-    user.setProjects(projectRepo.getProjects(getUserId(user)));
+    user.setProjects(projectRepo.loadProjects(getUserId(user)));
     String taskname;
 
     //Here we load tasks into users projects.
@@ -86,7 +85,7 @@ public class FacadeMySQL {
 
   //ProjectREPO
   public ArrayList<Project> getProjects(User user) {
-    return projectRepo.getProjects(usersRepo.getUserId(user));
+    return projectRepo.loadProjects(usersRepo.getUserId(user));
   }
 
   public void createProject(String name1, String start, String finish, int budget, User user) {
@@ -102,7 +101,7 @@ public class FacadeMySQL {
   }
 
   public String getProjectName(String taskName) {
-    return projectRepo.getProjectName(taskName);
+    return projectRepo.loadProjectName(taskName);
   }
 
   //TaskREPO

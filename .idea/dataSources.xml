@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@planit.cjfp4polnebk.eu-west-2.rds.amazonaws.com" uuid="cb1e87fa-4353-41cc-aa3d-2b31a360f223">
+    <data-source source="LOCAL" name="@planit.cjfp4polnebk.eu-west-2.rds.amazonaws.com [2]" uuid="c487cd0c-5492-432a-b903-35f942e2985b">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>

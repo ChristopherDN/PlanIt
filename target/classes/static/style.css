@@ -215,7 +215,9 @@ table #tr1 td:first-child::before {
     margin-right: 0.5em;
 }
 
-/*Jeff tester*/
+
+
+/*ProjectOverview page*/
 .collapsible {
     background-color:#385376FF;
     cursor: pointer;
@@ -272,6 +274,9 @@ table #tr1 td:first-child::before {
     color:white ;content: "\FF0D"; /* Unicode character for "minus" sign (-) */
 }
 
+
+
+/*Table design in CreateTask, Create Subtask and projectOverview*/
 #Tables {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
