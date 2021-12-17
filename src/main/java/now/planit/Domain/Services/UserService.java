@@ -3,19 +3,20 @@ package now.planit.Domain.Services;
 import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserEditException;
-import now.planit.Exceptions.UserNotExistException;
+import now.planit.Exceptions.UserAlreadyExistException;
 
 public class UserService {
   FacadeMySQL facadeMySQL;
 
+  //Dependency injection constructor
   public UserService(FacadeMySQL facadeMySQL) {
     this.facadeMySQL = facadeMySQL;
   }
 
-  public void registerUser(String name, String email, String password) throws UserNotExistException {
+  public void registerUser(String name, String email, String password) throws UserAlreadyExistException {
 
     if (facadeMySQL.registerUser(name, email, password) == 0){
-      throw new UserNotExistException("Email already exists");
+      throw new UserAlreadyExistException("Email already exists");
     }
   }
 

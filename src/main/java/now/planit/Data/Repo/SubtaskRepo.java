@@ -43,7 +43,6 @@ public class SubtaskRepo {
         return getInt;
     }
 
-    //Db Do something.
     public ArrayList<Subtask> loadSubtasks(int taskId){
         query ="SELECT name, estimated_hours, cost FROM planit.subtasks WHERE task_id = ?";
         parameters.clear();

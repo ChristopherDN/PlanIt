@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
-
 public class ProjectRepo implements InterfaceProjectRepo {
   MapperDB mapperDB;
   String query;
@@ -59,7 +57,6 @@ public class ProjectRepo implements InterfaceProjectRepo {
     return projects;
   }
 
-  //DB do something
   @Override
   public ArrayList<Project> loadProjects(int userId) {
     query = "SELECT name, start, finish, actual_cost, budget, actual_hours FROM planit.projects WHERE User_id = ?";

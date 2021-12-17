@@ -5,7 +5,7 @@ import now.planit.Data.Repo.MapperDB;
 import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.User;
 import now.planit.Domain.Services.UserService;
-import now.planit.Exceptions.UserNotExistException;
+import now.planit.Exceptions.UserAlreadyExistException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,7 +42,7 @@ class UserControllerTest {
   }
 
   @Test
-  void registerUser() throws UserNotExistException {
+  void registerUser() throws UserAlreadyExistException {
     userService.deleteUser("user@testing.com", "testing");
     userService.registerUser("Junit test", "user@testing.com", "testing");
     assertNotNull(userService.validateLogin("user@testing.com", "testing"));

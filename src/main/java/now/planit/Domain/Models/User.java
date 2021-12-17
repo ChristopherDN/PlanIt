@@ -9,7 +9,6 @@ public class User {
   private  String password;
   private ArrayList<Project> projects = new ArrayList<>();
 
-  //TODO Bruger vi begge constructore?
   public User(String name, String email, String password) {
     this.name = name;
     this.email = email;

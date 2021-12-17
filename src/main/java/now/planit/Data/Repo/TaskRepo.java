@@ -35,7 +35,6 @@ public class TaskRepo {
     return tasks;
   }
 
-  //Kan de her getmetoder smides ind i MapperDB???
   public int getInt(ResultSet rs) {
     try {
       while (rs.next()) {
@@ -47,7 +46,6 @@ public class TaskRepo {
     return getInt;
   }
 
-  //Db Do something.
   public ArrayList<Task> loadTasks(int projectId) {
     query = "SELECT name, start, finish, hours, cost FROM planit.tasks WHERE project_Id = ?";
     parameters.clear();

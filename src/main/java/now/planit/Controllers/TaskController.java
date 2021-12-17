@@ -21,7 +21,7 @@ public class TaskController {
   TaskService taskService = new TaskService(new FacadeMySQL(new TaskRepo(new MapperDB())));
   ArrayList<Task> tasks = new ArrayList();
 
-  //Endpoint to dynamic display(loop) all task and display user information
+
   @GetMapping("/createTask")
   public String createTasks(WebRequest request, Model model) {
     if (user == null){
@@ -32,7 +32,6 @@ public class TaskController {
     return "project/createTask";
   }
 
-  //Endpoint to pass and connect data(id) from myProjects site to createtask site.
   @GetMapping("/update/{id}")
   public String updateProject(@PathVariable(value = "id") String id, WebRequest request, Model model)  {
     projectName = id;
@@ -40,7 +39,6 @@ public class TaskController {
     return "redirect:/createTask";
   }
 
-  //Endpoint that stores parameters from task and pass them down to the service.
   @PostMapping("/createTaskParam")
   public String createTask(WebRequest request)  {
     taskService.createTask
@@ -61,7 +59,6 @@ public class TaskController {
     return "redirect:/createTask";
   }
 
-  //TODO Kan vi lave flere af disse metoder for at samle, undgå redundant kode.
   public void updateTasks(WebRequest request, Model model, String projectName)  {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     tasks = taskService.getTasks(projectName, user);

@@ -6,7 +6,7 @@ import now.planit.Data.Repo.MapperDB;
 import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserEditException;
-import now.planit.Exceptions.UserNotExistException;
+import now.planit.Exceptions.UserAlreadyExistException;
 import now.planit.Domain.Services.UserService;
 import now.planit.Exceptions.DBConnFailedException;
 import org.springframework.stereotype.Controller;
@@ -23,9 +23,6 @@ public class UserController {
   UserService userService = new UserService(new FacadeMySQL(new UsersRepo(new MapperDB())));
   User user;
 
-  //TODO Hvad er navngivnings conventionen for getter og PostMapping? Vi blander get og Post ret meget sammen med vores java
-  //Dette er gældende for alle controllere, jeg retter dem ikke.
-  //TODO KAN vi lave metoder som samler noget af det der sker i de enkelte Get og Post Mappings?
   @GetMapping("/registerUser")
   public String createUser() {
     return "register/register";
@@ -37,7 +34,7 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String register(WebRequest request) throws UserNotExistException, DBConnFailedException{
+  public String register(WebRequest request) throws UserAlreadyExistException, DBConnFailedException{
       userService.registerUser(
           request.getParameter("name"),
           request.getParameter("email"),
@@ -93,8 +90,8 @@ public class UserController {
     return "error/error";
   }
 
-  @ExceptionHandler(UserNotExistException.class)
-  public String exceptionMessageUserNotExist(Model model, UserNotExistException userAllreadyExistException){
+  @ExceptionHandler(UserAlreadyExistException.class)
+  public String exceptionMessageUserNotExist(Model model, UserAlreadyExistException userAlreadyExistException){
     model.addAttribute("exMessage", "--->User allready exits. Please choose another name<--");
     return "error/error";
   }

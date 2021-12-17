@@ -30,7 +30,6 @@ public class UsersRepo {
     return getInt;
   }
 
-  //Builder pattern, hvis der er mange attributter i en konstruktør.
   public User getUser(ResultSet rs) {
     try {
       user = null;

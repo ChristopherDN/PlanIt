@@ -2,12 +2,10 @@ package now.planit.Domain.Services;
 
 import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Data.Repo.MapperDB;
-import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Data.Repo.UsersRepo;
 import now.planit.Domain.Models.User;
-import now.planit.Exceptions.UserNotExistException;
+import now.planit.Exceptions.UserAlreadyExistException;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.context.request.WebRequest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,7 +41,7 @@ class UserServiceTest {
   }
 
   @Test
-  void registerUser() throws UserNotExistException {
+  void registerUser() throws UserAlreadyExistException {
     //Arrange
     facadeMySQL.deleteUser("user@testing.com", "testing");
 

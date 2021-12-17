@@ -12,9 +12,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
 
-/**
- * @author roed
- */
 @Controller
 public class ProjectOverviewController {
   UserService userService = new UserService(new FacadeMySQL(new UsersRepo(new MapperDB())));

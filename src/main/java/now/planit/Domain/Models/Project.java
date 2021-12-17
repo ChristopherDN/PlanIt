@@ -12,7 +12,6 @@ public class Project {
   private int budget;
   ArrayList<Task> tasks = new ArrayList<>();
 
-  //TODO BRUGER VI ALLE 3 CONSTRUCTORS???????
   public Project(String name, String start, String finish, int budget) {
     this.name = name;
     this.start = start;

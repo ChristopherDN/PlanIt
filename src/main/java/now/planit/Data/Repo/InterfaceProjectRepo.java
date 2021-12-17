@@ -4,9 +4,6 @@ import now.planit.Domain.Models.Project;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-/**
- * @author roed
- */
 public interface InterfaceProjectRepo {
 
   int getInt(ResultSet rs);

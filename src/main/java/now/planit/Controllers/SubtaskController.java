@@ -2,7 +2,6 @@ package now.planit.Controllers;
 
 import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Data.Repo.MapperDB;
-import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Data.Repo.SubtaskRepo;
 import now.planit.Domain.Models.Subtask;
 import now.planit.Domain.Models.User;
@@ -24,7 +23,6 @@ public class SubtaskController {
   ArrayList<Subtask> subtasks = new ArrayList();
 
 
-  //Endpoint to pass and connect data(id) from createTask site to createSubtask site.
   @GetMapping("/rerun/{id}")
   public String loadSubtasks(@PathVariable(value = "id") String id, WebRequest request, Model model) {
     taskName = id;
@@ -32,7 +30,6 @@ public class SubtaskController {
     return "redirect:/createSubtask";
   }
 
-  //Endpoint to dynamic display(loop) all task and display user information
   @GetMapping("/createSubtask")
   public String createSubtasks(WebRequest request, Model model) {
     if (user == null){
@@ -42,8 +39,6 @@ public class SubtaskController {
     return "project/createSubtask";
   }
 
-
-  //Endpoint that stores parameters from task and pass them down to the service.
   @PostMapping("/createSubtaskParam")
   public String createSubtask(WebRequest request, Model model) {
     subtaskService.createSubtask

@@ -148,13 +148,12 @@ public class FacadeMySQL {
     projectRepo.addActualCost(cost, projectId);
   }
 
-  //DEN her skal laves om
   public int getProjectId(String taskName) {
     return taskRepo.getProjectID(taskName);
   }
 
 
-  //SUbtask Repository
+  //Subtask Repository
   public ArrayList<Subtask> getSubtasks(String taskName, User user) {
     return subtaskRepo.loadSubtasks(getTaskId(taskName, getProjectId(getProjectName(taskName, getUserId(user)), getUserId(user))));
   }
