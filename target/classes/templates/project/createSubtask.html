@@ -34,10 +34,10 @@
 
         <tr id="tr1" th:border="1" th:each="subtask : ${subtasks}">
             <td></td>
-            <td th:text="${subtask.getSubtaskName()}"></td>
+            <td th:text="${subtask.getName()}"></td>
             <td th:text="${#numbers.formatCurrency(subtask.getCost())}"></td>
             <td th:text="${subtask.getHours()}"></td>
-            <td><form th:action="@{/removeSubtask/{id}(id=${subtask.getSubtaskName()})}" th:object="${subtask}">
+            <td><form th:action="@{/removeSubtask/{id}(id=${subtask.getName()})}" th:object="${subtask}">
                 <button type="submit" class="b2">Remove subtask</button>
             </form>
             </td>

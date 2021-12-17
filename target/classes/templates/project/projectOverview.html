@@ -49,7 +49,7 @@
             <!-- loop 2 Tasks-->
             <div  th:border="1" th:each="task, j : ${user.getProjects().get(i.index).getTasks()}">
                 <form  method="post" onsclick="return func()">
-                    <button  type="button" class="collapsible task"><p th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getTaskName()}"></p></button>
+                    <button  type="button" class="collapsible task"><p th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getName()}"></p></button>
                     <div class="content">
                         <table style = "margin-top: 20px;">
                             <tr>
@@ -69,7 +69,7 @@
                         <!-- loop 3 Subtasks-->
                         <div th:border="1" th:each="subtask, n : ${user.getProjects().get(i.index).getTasks().get(j.index).getSubtasks()}">
                             <form  method="post" onsclick="return func()">
-                                <button type="button" class="collapsible subtask"><p th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getSubtasks().get(n.index).getSubtaskName()}"></p></button>
+                                <button type="button" class="collapsible subtask"><p th:text="${user.getProjects().get(i.index).getTasks().get(j.index).getSubtasks().get(n.index).getName()}"></p></button>
                                 <div class="content">
                                     <table style = "margin-top: 20px;">
                                         <tr>

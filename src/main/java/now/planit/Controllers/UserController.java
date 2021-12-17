@@ -91,19 +91,17 @@ public class UserController {
     String message = "No connection to the database: -->Please contact support by pressing the \"Mail us\" button on this page!";//Test
     model.addAttribute("exMessage", message );
     return "error/error";
-
   }
+
   @ExceptionHandler(UserNotExistException.class)
   public String exceptionMessageUserNotExist(Model model, UserNotExistException userAllreadyExistException){
     model.addAttribute("exMessage", "--->User allready exits. Please choose another name<--");
     return "error/error";
-
   }
 
   @ExceptionHandler(UserEditException.class)
   public String exceptionMessageEditException(Model model, UserEditException userEditException){
     model.addAttribute("exMessage", "--->Allready exits!! Please choose another.<--");
     return "error/error";
-
   }
 }
