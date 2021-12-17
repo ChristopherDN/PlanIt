@@ -23,6 +23,9 @@ public class UserController {
   UserService userService = new UserService(new FacadeMySQL(new UsersRepo(new MapperDB())));
   User user;
 
+  //TODO Hvad er navngivnings conventionen for getter og PostMapping? Vi blander get og Post ret meget sammen med vores java
+  //Dette er gældende for alle controllere, jeg retter dem ikke.
+  //TODO KAN vi lave metoder som samler noget af det der sker i de enkelte Get og Post Mappings?
   @GetMapping("/registerUser")
   public String createUser() {
     return "register/register";
@@ -41,7 +44,6 @@ public class UserController {
           request.getParameter("password"));
       return "login/login";
   }
-
 
   @PostMapping("/validateLogin")
   public String validateLogin(WebRequest request, HttpSession session, Model model) {
@@ -77,9 +79,9 @@ public class UserController {
 
   @PostMapping("/updateUser")
   public String updateUser(WebRequest request, Model model) throws UserEditException {
-    userService.editName(request.getParameter("name"), user);
-    userService.editMail(request.getParameter("email"), user);
-    userService.changePassword(request.getParameter("password"), user);
+    userService.updateName(request.getParameter("name"), user);
+    userService.updateEmail(request.getParameter("email"), user);
+    userService.updatePassword(request.getParameter("password"), user);
     model.addAttribute("user", user);
     return "redirect:/myPage";
   }
@@ -104,6 +106,4 @@ public class UserController {
     return "error/error";
 
   }
-
-
 }

@@ -2,8 +2,6 @@ package now.planit.Domain.Models;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Supplier;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -22,13 +20,13 @@ class TaskTest {
   @Test
   void getTaskName() {
     expected = "New Task";
-    assertEquals(expected, task.getTaskName());
+    assertEquals(expected, task.getName());
   }
 
   @Test
   void wrongGetTaskName() {
     expected = "New";
-    assertNotEquals(expected, task.getTaskName());
+    assertNotEquals(expected, task.getName());
   }
 
   @Test

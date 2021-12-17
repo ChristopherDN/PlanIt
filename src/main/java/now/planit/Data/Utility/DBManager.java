@@ -21,7 +21,7 @@ public class DBManager {
             connection = DriverManager.getConnection(url,user, password);
         }
         catch (SQLException e) {
-            System.out.println("Developer info: There is no connection to the database!!!");
+            System.out.println("Developer info: There is no connection to the database! INSERT PANIC HERE _______!");
             e.printStackTrace();
             throw new DBConnFailedException("Please contact support on the  \"Mail us\" on the bottom of this page ");
 

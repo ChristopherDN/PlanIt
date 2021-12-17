@@ -26,8 +26,8 @@ class TaskServiceTest {
     facadeMySQL.createTask("Junit Task","2021-12-13","2021-12-14", "Junit Project", user);
   expected = "Junit Task";
     for (int i = 0; i < tasks.size(); i++) {
-      if (tasks.get(i).getTaskName().equals(expected)){
-        assertEquals(expected, tasks.get(i).getTaskName());
+      if (tasks.get(i).getName().equals(expected)){
+        assertEquals(expected, tasks.get(i).getName());
       }
     }
   }
@@ -38,7 +38,7 @@ class TaskServiceTest {
     facadeMySQL.createTask("Junit Task","2021-12-13","2021-12-14", "Junit Project", user);
     expected = "2021-12-13";
     for (int i = 0; i < tasks.size(); i++) {
-      if (tasks.get(i).getTaskName().equals(expected)){
+      if (tasks.get(i).getName().equals(expected)){
         assertEquals(expected, tasks.get(i).getStartDate());
       }
     }
@@ -50,7 +50,7 @@ class TaskServiceTest {
     facadeMySQL.createTask("Junit Task","2021-12-13","2021-12-14", "JUnit Project", user);
     expected = "2021-12-14";
     for (int i = 0; i < tasks.size(); i++) {
-      if (tasks.get(i).getTaskName().equals(expected)){
+      if (tasks.get(i).getName().equals(expected)){
         assertEquals(expected, tasks.get(i).getFinishDate());
       }
     }
@@ -61,8 +61,8 @@ class TaskServiceTest {
     facadeMySQL.deleteTask("Junit Project", "Junit Task", user);
     expected = "Junit Task";
     for (int i = 0; i < tasks.size(); i++) {
-      if (tasks.get(i).getTaskName().equals("Junit Task")){
-        assertEquals(expected, tasks.get(i).getTaskName());
+      if (tasks.get(i).getName().equals("Junit Task")){
+        assertEquals(expected, tasks.get(i).getName());
       }
     }
     facadeMySQL.createTask("Junit Task","2021-12-13","2021-12-14", "Junit Project", user);

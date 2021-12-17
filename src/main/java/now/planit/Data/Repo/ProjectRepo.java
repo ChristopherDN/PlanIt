@@ -65,7 +65,7 @@ public class ProjectRepo implements InterfaceProjectRepo {
     query = "SELECT name, start, finish, actual_cost, budget, actual_hours FROM planit.projects WHERE User_id = ?";
     parameters.clear();
     parameters.add(String.valueOf(userId));
-    return getProjects(mapperDB.load(query, parameters));
+    return getProjects(mapperDB.select(query, parameters));
   }
 
   @Override
@@ -77,7 +77,7 @@ public class ProjectRepo implements InterfaceProjectRepo {
     parameters.add(finish);
     parameters.add(String.valueOf(budget));
     parameters.add(String.valueOf(userId));
-    mapperDB.save(query, parameters);
+    mapperDB.insert(query, parameters);
   }
 
   @Override
@@ -86,7 +86,7 @@ public class ProjectRepo implements InterfaceProjectRepo {
     parameters.clear();
     parameters.add(projectName);
     parameters.add(String.valueOf(userId));
-    return getInt(mapperDB.load(query,parameters));
+    return getInt(mapperDB.select(query,parameters));
   }
 
   @Override
@@ -95,15 +95,15 @@ public class ProjectRepo implements InterfaceProjectRepo {
     parameters.clear();
     parameters.add(String.valueOf(projectId));
     parameters.add(String.valueOf(userId));
-    mapperDB.save(query, parameters);
+    mapperDB.insert(query, parameters);
   }
 
   @Override
-  public String loadProjectName(String taskName) {
+  public String getProjectName(String taskName) {
     query = "SELECT planit.projects.name from planit.projects JOIN planit.tasks ON planit.projects.id=planit.tasks.project_id WHERE planit.tasks.name = ?";
     parameters.clear();
     parameters.add(taskName);
-    return getString(mapperDB.load(query, parameters));
+    return getString(mapperDB.select(query, parameters));
   }
 
   @Override
@@ -112,7 +112,7 @@ public class ProjectRepo implements InterfaceProjectRepo {
     parameters.clear();
     parameters.add(String.valueOf(hours));
     parameters.add(String.valueOf(projectId));
-    mapperDB.save(query,parameters);
+    mapperDB.insert(query,parameters);
   }
 
   @Override
@@ -121,7 +121,7 @@ public class ProjectRepo implements InterfaceProjectRepo {
     parameters.clear();
     parameters.add(String.valueOf(cost));
     parameters.add(String.valueOf(projectId));
-    mapperDB.save(query,parameters);
+    mapperDB.insert(query,parameters);
   }
   @Override
   public void subtractHours(int hours, int projectId) {
@@ -129,7 +129,7 @@ public class ProjectRepo implements InterfaceProjectRepo {
     parameters.clear();
     parameters.add(String.valueOf(hours));
     parameters.add(String.valueOf(projectId));
-    mapperDB.save(query, parameters);
+    mapperDB.insert(query, parameters);
   }
 
   @Override
@@ -138,6 +138,6 @@ public class ProjectRepo implements InterfaceProjectRepo {
     parameters.clear();
     parameters.add(String.valueOf(cost));
     parameters.add(String.valueOf(projectId));
-    mapperDB.save(query, parameters);
+    mapperDB.insert(query, parameters);
   }
 }

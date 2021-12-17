@@ -1,9 +1,6 @@
 package now.planit.Domain.Services;
 
 import now.planit.Data.Repo.FacadeMySQL;
-import now.planit.Data.Repo.MapperDB;
-import now.planit.Data.Repo.ProjectRepo;
-import now.planit.Data.Repo.TaskRepo;
 import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
 
@@ -12,6 +9,7 @@ import java.util.ArrayList;
 public class TaskService {
     FacadeMySQL facadeMySQL;
 
+    //Dependency injection constructor
     public TaskService(FacadeMySQL facadeMySQL) {
         this.facadeMySQL = facadeMySQL;
     }

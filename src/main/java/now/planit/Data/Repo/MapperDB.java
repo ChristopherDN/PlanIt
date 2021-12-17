@@ -2,7 +2,6 @@ package now.planit.Data.Repo;
 
 import now.planit.Data.Utility.DBManager;
 import now.planit.Exceptions.DBConnFailedException;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,7 +45,7 @@ public class MapperDB {
   }
 
   //Used to do something on the Database, Save or delete.
-  public void save(String sqlCommand, ArrayList<String> parameters) {
+  public void insert(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);
       setParameters(parameters).execute();
@@ -57,7 +56,7 @@ public class MapperDB {
   }
 
   //Used to recieve something from the database, will always return ResultSet.
-  public ResultSet load(String sqlCommand, ArrayList<String> parameters) {
+  public ResultSet select(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);
       rs = setParameters(parameters).executeQuery();
@@ -70,7 +69,7 @@ public class MapperDB {
     return rs;
   }
 
-  public int saveUpdate(String sqlCommand, ArrayList<String> parameters) {
+  public int insertUpdate(String sqlCommand, ArrayList<String> parameters) {
     try {
       ps = checkConnection(sqlCommand);
       validate = setParameters(parameters).executeUpdate();
