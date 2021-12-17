@@ -108,8 +108,8 @@ public class FacadeMySQL {
     projectRepo.deleteProject(getProjectId(projectName, getUserId(user)), getUserId(user));
   }
 
-  public String getProjectName(String taskName) {
-    return projectRepo.getProjectName(taskName);
+  public String getProjectName(String taskName, int userId) {
+    return projectRepo.getProjectName(taskName, userId);
   }
 
 
@@ -156,7 +156,7 @@ public class FacadeMySQL {
 
   //SUbtask Repository
   public ArrayList<Subtask> getSubtasks(String taskName, User user) {
-    return subtaskRepo.loadSubtasks(getTaskId(taskName, getProjectId(getProjectName(taskName), getUserId(user))));
+    return subtaskRepo.loadSubtasks(getTaskId(taskName, getProjectId(getProjectName(taskName, getUserId(user)), getUserId(user))));
   }
 
   public void createSubtask(String subtaskName, int hours, int cost, String taskName) {
@@ -171,8 +171,8 @@ public class FacadeMySQL {
 
   public void deleteSubtask(String taskName, String subtaskName, User user) {
     //Load up ID´s that we need
-    int subtaskID = getSubtaskId(subtaskName, getTaskId(taskName, getProjectId(getProjectName(taskName), getUserId(user))));
-    int taskId = getTaskId(taskName, getProjectId(getProjectName(taskName), getUserId(user)));
+    int subtaskID = getSubtaskId(subtaskName, getTaskId(taskName, getProjectId(getProjectName(taskName, getUserId(user)), getUserId(user))));
+    int taskId = getTaskId(taskName, getProjectId(getProjectName(taskName, getUserId(user)), getUserId(user)));
     int projectID = getProjectId(taskName);
 
     //Here we update hours and Cost in Tasks

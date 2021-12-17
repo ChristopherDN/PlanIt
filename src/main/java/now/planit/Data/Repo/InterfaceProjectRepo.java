@@ -16,7 +16,7 @@ public interface InterfaceProjectRepo {
   void createProject(String projectName, String start, String finish, int budget, int userId);
   int getProjectId(String projectName, int userId);
   void deleteProject(int projectId, int userId);
-  String getProjectName(String taskName);
+  String getProjectName(String taskName, int userId);
   void addActualHours(int hours, int projectId);
   void addActualCost(int cost, int projectId);
   void subtractHours(int hours, int projectId);

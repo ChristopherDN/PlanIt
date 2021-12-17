@@ -36,7 +36,7 @@ public class ProjectRepo implements InterfaceProjectRepo {
   @Override
   public String getString(ResultSet rs) {
     try {
-      while (rs.next()) {
+      if (rs.next()) {
         string = rs.getString(1);
       }
     } catch (SQLException ex) {
@@ -99,10 +99,12 @@ public class ProjectRepo implements InterfaceProjectRepo {
   }
 
   @Override
-  public String getProjectName(String taskName) {
-    query = "SELECT planit.projects.name from planit.projects JOIN planit.tasks ON planit.projects.id=planit.tasks.project_id WHERE planit.tasks.name = ?";
+  public String getProjectName(String taskName, int userID) {
+    //Validates even tho there are many tasks with same name.
+    query = "SELECT planit.projects.name from planit.projects JOIN planit.tasks ON planit.projects.id=planit.tasks.project_id WHERE planit.tasks.name = ? and  planit.projects.user_id = ?";
     parameters.clear();
     parameters.add(taskName);
+    parameters.add(String.valueOf(userID));
     return getString(mapperDB.select(query, parameters));
   }
 
