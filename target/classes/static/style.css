@@ -50,9 +50,10 @@ hr.rounded {
 }
 
 .b2{
-    background-color: #7591c9;
-    color:black;
-    border-radius: 25px;
+    background-color: #35455D;
+    color: #ffffff;
+    height: 25px;
+    border-radius: 5px;
 }
 .b2:hover{
     box-shadow : 0 8px 16px 0 black,
