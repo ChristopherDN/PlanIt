@@ -12,7 +12,7 @@ public class Subtask {
         this.cost = cost;
     }
 
-    public String getSubtaskName() {
+    public String getName() {
         return subtaskName;
     }
 

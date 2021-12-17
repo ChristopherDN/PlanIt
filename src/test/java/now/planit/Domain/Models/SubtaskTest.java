@@ -15,13 +15,13 @@ class SubtaskTest {
   @Test
   void getSubtaskName() {
     expected = "Test";
-    assertEquals(expected, subtask.getSubtaskName());
+    assertEquals(expected, subtask.getName());
   }
 
   @Test
   void wrongGetSubtaskName() {
     expected = "est";
-    assertNotEquals(expected, subtask.getSubtaskName());
+    assertNotEquals(expected, subtask.getName());
   }
 
 

@@ -22,7 +22,7 @@ class SubtaskServiceTest {
   void createSubtask() {
     facadeMySQL.createSubtask("Junit Subtask", 10, 5000, "Junit Task");
     expected = "Junit Subtask";
-    assertEquals(expected, facadeMySQL.getSubtasks("Junit task", user).get(0).getSubtaskName());
+    assertEquals(expected, facadeMySQL.getSubtasks("Junit task", user).get(0).getName());
     facadeMySQL.deleteSubtask("Junit test", "Junit Subtask", user);
   }
 

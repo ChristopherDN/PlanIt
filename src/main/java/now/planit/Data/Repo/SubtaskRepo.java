@@ -1,7 +1,6 @@
 package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.Subtask;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,13 +19,12 @@ public class SubtaskRepo {
     }
 
     //Manipulate Resultset to data we can use
-    public ArrayList<Subtask> loadSubtasks(ResultSet rs){
+    public ArrayList<Subtask> getSubtasks(ResultSet rs){
         try {
             subtasks.clear();
             while (rs.next()) {
                 subtasks.add(new Subtask(rs.getString(1), rs.getInt(2)
                         , rs.getInt(3)));
-
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -46,11 +44,11 @@ public class SubtaskRepo {
     }
 
     //Db Do something.
-    public ArrayList<Subtask> getSubtasks(int taskId){
+    public ArrayList<Subtask> loadSubtasks(int taskId){
         query ="SELECT name, estimated_hours, cost FROM planit.subtasks WHERE task_id = ?";
         parameters.clear();
         parameters.add(String.valueOf(taskId));
-        return loadSubtasks(mapperDB.load(query,parameters));
+        return getSubtasks(mapperDB.select(query,parameters));
     }
 
     public void createSubtask(String subtaskName, int hours, int cost, int taskId) {
@@ -60,7 +58,7 @@ public class SubtaskRepo {
         parameters.add(subtaskName);
         parameters.add(String.valueOf(hours));
         parameters.add(String.valueOf(cost));
-        mapperDB.save(query,parameters);
+        mapperDB.insert(query,parameters);
     }
 
     public int getSubtaskId(String subtaskName, int taskId) {
@@ -68,7 +66,7 @@ public class SubtaskRepo {
         parameters.clear();
         parameters.add(subtaskName);
         parameters.add(String.valueOf(taskId));
-        return getInt(mapperDB.load(query,parameters));
+        return getInt(mapperDB.select(query,parameters));
     }
 
     public void deleteSubtask(int subtaskId, int taskId) {
@@ -76,7 +74,7 @@ public class SubtaskRepo {
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
-        mapperDB.save(query, parameters);
+        mapperDB.insert(query, parameters);
     }
 
     public int getHours(int subtaskId, int taskId){
@@ -84,7 +82,7 @@ public class SubtaskRepo {
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
-       return getInt(mapperDB.load(query,parameters));
+       return getInt(mapperDB.select(query,parameters));
     }
 
     public int getCost(int subtaskId, int taskId){
@@ -92,6 +90,6 @@ public class SubtaskRepo {
         parameters.clear();
         parameters.add(String.valueOf(subtaskId));
         parameters.add(String.valueOf(taskId));
-        return getInt(mapperDB.load(query,parameters));
+        return getInt(mapperDB.select(query,parameters));
     }
 }

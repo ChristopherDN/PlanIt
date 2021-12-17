@@ -3,12 +3,12 @@ package now.planit.Domain.Services;
 import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Domain.Models.Project;
 import now.planit.Domain.Models.User;
-
 import java.util.ArrayList;
 
 public class ProjectService {
   FacadeMySQL facadeMySQL;
 
+  //Dependency Injection Constructor
   public ProjectService(FacadeMySQL facadeMySQL) {
     this.facadeMySQL = facadeMySQL;
   }
@@ -20,7 +20,6 @@ public class ProjectService {
   public ArrayList<Project> getProjects(User user) {
     return facadeMySQL.getProjects(user);
   }
-
 
   public void deleteProject(String projectName, User user) {
     facadeMySQL.deleteProject(projectName, user);

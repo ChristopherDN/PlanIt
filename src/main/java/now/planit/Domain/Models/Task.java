@@ -35,14 +35,13 @@ public class Task {
     this.subtasks = subtasks;
   }
 
-  public String getTaskName() {
+  public String getName() {
     return taskName;
   }
 
   public String getStartDate() {
     return startDate;
   }
-
 
   public String getFinishDate() {
     return finishDate;
@@ -52,20 +51,20 @@ public class Task {
     return cost;
   }
 
-  public void setCost(int cost) {
-    this.cost = cost;
-  }
-
   public int getHours() {
     return hours;
   }
 
-  public void setHours(int hours) {
-    this.hours = hours;
-  }
-
   public ArrayList<Subtask> getSubtasks() {
     return subtasks;
+  }
+
+  public void setCost(int cost) {
+    this.cost = cost;
+  }
+
+  public void setHours(int hours) {
+    this.hours = hours;
   }
 
   public void setSubtasks(ArrayList<Subtask> subtasks) {

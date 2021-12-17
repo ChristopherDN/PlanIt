@@ -2,7 +2,6 @@ package now.planit.Controllers;
 
 import now.planit.Data.Repo.FacadeMySQL;
 import now.planit.Data.Repo.MapperDB;
-import now.planit.Data.Repo.ProjectRepo;
 import now.planit.Data.Repo.TaskRepo;
 import now.planit.Domain.Models.Task;
 import now.planit.Domain.Models.User;
@@ -62,6 +61,7 @@ public class TaskController {
     return "redirect:/createTask";
   }
 
+  //TODO Kan vi lave flere af disse metoder for at samle, undgå redundant kode.
   public void updateTasks(WebRequest request, Model model, String projectName)  {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     tasks = taskService.getTasks(projectName, user);

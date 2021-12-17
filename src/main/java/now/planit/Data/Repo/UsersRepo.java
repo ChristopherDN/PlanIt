@@ -1,7 +1,6 @@
 package now.planit.Data.Repo;
 
 import now.planit.Domain.Models.User;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ public class UsersRepo {
   public UsersRepo(MapperDB mapperDB) {
     this.mapperDB = mapperDB;
   }
-
 
   //Manipulate ResultSet to other type of data
   public int getInt(ResultSet rs) {
@@ -45,9 +43,6 @@ public class UsersRepo {
     return user;
   }
 
-
-
-
   public int registerUser(String name, String email, String password) {
     //Makes sure there is no shadow data in the ResultSet.
     mapperDB = new MapperDB();
@@ -57,7 +52,7 @@ public class UsersRepo {
     parameters.add(name);
     parameters.add(email);
     parameters.add(password);
-    return mapperDB.saveUpdate(query, parameters);
+    return mapperDB.insertUpdate(query, parameters);
   }
 
   public User validateLogin(String email, String password) {
@@ -65,40 +60,39 @@ public class UsersRepo {
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
-    return getUser(mapperDB.load(query, parameters));
+    return getUser(mapperDB.select(query, parameters));
   }
-
 
   public int getUserId(User user) {
     query = "SELECT id FROM planit.users WHERE email = ? AND password = ?";
     parameters.clear();
     parameters.add(user.getEmail());
     parameters.add(user.getPassword());
-    return getInt(mapperDB.load(query, parameters));
+    return getInt(mapperDB.select(query, parameters));
   }
 
-  public void editName(String newName, int userId) {
+  public void updateName(String newName, int userId) {
     query = "UPDATE planit.users SET name = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newName);
     parameters.add(String.valueOf(userId));
-    mapperDB.save(query, parameters);
+    mapperDB.insert(query, parameters);
   }
 
-  public void editEmail(String newEmail, int userId) {
+  public void updateEmail(String newEmail, int userId) {
     query = "UPDATE planit.users SET email = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newEmail);
     parameters.add(String.valueOf(userId));
-    mapperDB.save(query, parameters);
+    mapperDB.insert(query, parameters);
   }
 
-  public void editPassword(String newPassword, int userId) {
+  public void updatePassword(String newPassword, int userId) {
     query = "UPDATE planit.users SET password = ? WHERE id = ?";
     parameters.clear();
     parameters.add(newPassword);
     parameters.add(String.valueOf(userId));
-    mapperDB.save(query, parameters);
+    mapperDB.insert(query, parameters);
   }
 
   public void deleteUser(String email, String password) {
@@ -106,6 +100,6 @@ public class UsersRepo {
     parameters.clear();
     parameters.add(email);
     parameters.add(password);
-    mapperDB.save(query, parameters);
+    mapperDB.insert(query, parameters);
   }
 }

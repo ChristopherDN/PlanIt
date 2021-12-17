@@ -5,8 +5,6 @@ import now.planit.Domain.Models.User;
 import now.planit.Exceptions.UserEditException;
 import now.planit.Exceptions.UserNotExistException;
 
-import java.util.ArrayList;
-
 public class UserService {
   FacadeMySQL facadeMySQL;
 
@@ -25,19 +23,18 @@ public class UserService {
    return facadeMySQL.validateLogin(email, password);
   }
 
-  public void editName(String newName, User user) throws UserEditException {
+  public void updateName(String newName, User user) throws UserEditException {
     if (!newName.equals(user.getName()) && !newName.equals("")){
-      facadeMySQL.editName(newName, user);
+      facadeMySQL.updateName(newName, user);
       user.setName(newName);
     }
     throw new UserEditException("Failed to change name");
 
   }
 
-
-  public void editMail(String newEmail, User user) throws UserEditException {
+  public void updateEmail(String newEmail, User user) throws UserEditException {
     if (!newEmail.equals(user.getName()) && !newEmail.equals("")){
-      facadeMySQL.editMail(newEmail, user);
+      facadeMySQL.updateEmail(newEmail, user);
       user.setEmail(newEmail);
 
     }
@@ -45,9 +42,9 @@ public class UserService {
 
   }
 
-  public void changePassword(String newPassword, User user) throws UserEditException {
+  public void updatePassword(String newPassword, User user) throws UserEditException {
     if (!newPassword.equals(user.getName()) && !newPassword.equals("")) {
-      facadeMySQL.changePassword(newPassword, user);
+      facadeMySQL.updatePassword(newPassword, user);
       user.setPassword(newPassword);
     }
     throw new UserEditException("Failed to change password");
@@ -59,6 +56,6 @@ public class UserService {
   }
 
   public void updateUserData(User user) {
-    facadeMySQL.loadUserData(user);
+    facadeMySQL.getUserProjects(user);
   }
 }
