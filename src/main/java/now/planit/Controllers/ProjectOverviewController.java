@@ -18,7 +18,7 @@ public class ProjectOverviewController {
   User user;
 
   @GetMapping("/projectOverview")
-  public String index(HttpSession session, Model model, WebRequest request) {
+  public String projectOverview(HttpSession session, Model model, WebRequest request) {
     user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     model.addAttribute("user", user);
 

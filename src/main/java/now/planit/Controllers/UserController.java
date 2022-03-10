@@ -54,7 +54,6 @@ public class UserController {
         model.addAttribute("user", user);
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         userService.updateUserData(user);
-
         return "project/projectOverview";
       }
     }
