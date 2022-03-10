@@ -20,7 +20,7 @@ class ProjectServiceTest {
   Project project = new Project("Junit Project", "2021-12-10", "2021-12-17", 20000);
   ArrayList<Project> actual = facadeMySQL.getProjects(user);
   String expected;
-
+/*
   @Test
   void createProject() {
     facadeMySQL.deleteProject(project.getName(), user);
@@ -45,5 +45,5 @@ class ProjectServiceTest {
       }
     }
     facadeMySQL.createProject("Junit Project", "2021-12-10", "2021-12-17", 20000, user);
-  }
+  }*/
 }

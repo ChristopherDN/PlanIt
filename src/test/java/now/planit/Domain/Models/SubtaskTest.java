@@ -10,7 +10,7 @@ class SubtaskTest {
   Subtask subtask = new Subtask("Test", 10, 1000);
   String expected;
   int expectedInt;
-
+/*
 
   @Test
   void getSubtaskName() {
@@ -35,5 +35,5 @@ class SubtaskTest {
   void getCost() {
     expectedInt = 1000;
     assertEquals(expectedInt, subtask.getCost());
-  }
+  }*/
 }

@@ -17,7 +17,7 @@ class SubtaskServiceTest {
   User user = facadeMySQL.validateLogin("user@testing.com", "testing");
   Subtask subtask = new Subtask("Junit Subtask", 10, 5000);
   String expected;
-
+/*
   @Test
   void createSubtask() {
     facadeMySQL.createSubtask("Junit Subtask", 10, 5000, "Junit Task");
@@ -31,5 +31,5 @@ class SubtaskServiceTest {
     facadeMySQL.createSubtask("Junit Subtask", 10, 5000, "Junit Task");
 facadeMySQL.deleteSubtask("Junit Task", "Junit Subtask", user);
 assertFalse(facadeMySQL.getSubtasks("Junit Task", user).contains(subtask));
-  }
+  }*/
 }

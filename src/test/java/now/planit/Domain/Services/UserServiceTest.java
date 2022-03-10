@@ -17,7 +17,7 @@ class UserServiceTest {
   User user = facadeMySQL.validateLogin("user@testing.com","testing");
   User wrongUser = facadeMySQL.validateLogin("test@test.com", "21321");
   String expected;
-
+/*
   @Test
   void ValidateCorrectLogin() {
     assertNotNull(user);
@@ -50,5 +50,5 @@ class UserServiceTest {
 
     //Assert
     assertNotNull(user);
-  }
+  }*/
 }
