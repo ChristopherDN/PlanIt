@@ -15,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author roed
  */
 class ProjectServiceTest {
-  FacadeMySQL facadeMySQL = new FacadeMySQL(new ProjectRepo(new MapperDB()));
+  /*FacadeMySQL facadeMySQL = new FacadeMySQL(new ProjectRepo(new MapperDB()));
   User user = facadeMySQL.validateLogin("user@testing.com","testing");
   Project project = new Project("Junit Project", "2021-12-10", "2021-12-17", 20000);
   ArrayList<Project> actual = facadeMySQL.getProjects(user);
   String expected;
-/*
+
   @Test
   void createProject() {
     facadeMySQL.deleteProject(project.getName(), user);

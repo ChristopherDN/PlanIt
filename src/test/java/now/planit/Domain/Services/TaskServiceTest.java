@@ -15,11 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author roed
  */
 class TaskServiceTest {
-  FacadeMySQL facadeMySQL = new FacadeMySQL(new TaskRepo(new MapperDB()));
+/*  FacadeMySQL facadeMySQL = new FacadeMySQL(new TaskRepo(new MapperDB()));
   User user = facadeMySQL.validateLogin("user@testing.com", "testing");
   ArrayList<Task> tasks = facadeMySQL.getTasks("Junit Project", user);
   String expected;
-/*
+
   @Test
   void createTaskName() {
     facadeMySQL.deleteTask("Junit Project", "Junit Task", user);

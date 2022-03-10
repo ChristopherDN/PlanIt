@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author roed
  */
 class SubtaskServiceTest {
-  FacadeMySQL facadeMySQL = new FacadeMySQL(new SubtaskRepo(new MapperDB()));
+/*  FacadeMySQL facadeMySQL = new FacadeMySQL(new SubtaskRepo(new MapperDB()));
   User user = facadeMySQL.validateLogin("user@testing.com", "testing");
   Subtask subtask = new Subtask("Junit Subtask", 10, 5000);
   String expected;
-/*
+
   @Test
   void createSubtask() {
     facadeMySQL.createSubtask("Junit Subtask", 10, 5000, "Junit Task");
