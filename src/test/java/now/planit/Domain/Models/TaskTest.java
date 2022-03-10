@@ -8,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author roed
  */
 class TaskTest {
-  Task task = new Task("New Task", "2021-12-07", "2021-12-08", 8, 1000);
+  /*Task task = new Task("New Task", "2021-12-07", "2021-12-08", 8, 1000);
   String expected;
   int expectedInt;
-/*
+
   @Test
   void taskNotNull() {
     assertNotNull(task);

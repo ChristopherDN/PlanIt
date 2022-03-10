@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author roed
  */
 class SubtaskTest {
-  Subtask subtask = new Subtask("Test", 10, 1000);
+ /* Subtask subtask = new Subtask("Test", 10, 1000);
   String expected;
   int expectedInt;
-/*
+
 
   @Test
   void getSubtaskName() {

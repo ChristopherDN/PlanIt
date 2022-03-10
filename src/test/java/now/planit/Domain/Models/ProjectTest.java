@@ -8,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author roed
  */
 class ProjectTest {
-  Project project = new Project("Test","2021-11-29","2021-12-16", 10000);
+ /* Project project = new Project("Test","2021-11-29","2021-12-16", 10000);
   String expected;
   int expectedInt;
-/*
+
 
   @Test
   void getProjectName() {
